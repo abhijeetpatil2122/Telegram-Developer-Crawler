@@ -37,9 +37,9 @@ TEST_DCS = ("1-test", "2-test", "3-test")
 # TDC_TEST_DC_ENDPOINTS can override these values when Telegram changes
 # the endpoint used by a specific test environment.
 DEFAULT_TEST_DC_ENDPOINTS: dict[str, tuple[str, int]] = {
-    "1-test": ("149.154.175.10", 443),
-    "2-test": ("149.154.167.40", 443),
-    "3-test": ("149.154.175.117", 443),
+    "1-test": ("149.154.175.10", 80),
+    "2-test": ("149.154.167.40", 80),
+    "3-test": ("149.154.175.117", 80),
 }
 
 
@@ -165,46 +165,61 @@ async def collect_dc(
     api_hash: str,
 ) -> None:
     # Test DCs must always use a fresh in-memory session. Do not reuse a
-    # production authorization key on the test network.
-    session = MemorySession()
-    dc_id = int(dc.replace("-test", ""))
-    session.set_dc(dc_id, endpoint[0], endpoint[1])
+    # production authorization key on the test network. Telethon's current
+    # test-server guidance notes that port 443 may not work, so if a default
+    # 443 endpoint is supplied, retry the same host on port 80.
+    endpoints = [endpoint]
+    if test_mode and endpoint[1] == 443:
+        endpoints.append((endpoint[0], 80))
 
-    client = TelegramClient(
-        session,
-        api_id,
-        api_hash,
-        device_model="Telegram Developer Crawler",
-        system_version="1.0",
-        app_version="0.1",
-    )
-
-    await client.connect()
-    try:
-        config = await client(GetConfigRequest())
-        countries = await client(GetCountriesListRequest(lang_code="en", hash=0))
-        app_config = await client(GetAppConfigRequest(0))
-
-        network = "test" if test_mode else "production"
-        dc_name = f"dc{dc.replace('-test', '')}"
-
-        # Keep distinct Telegram datasets in distinct top-level categories.
-        # help.getConfig is server/MTProto configuration, while
-        # help.getAppConfig is client-specific application configuration.
-        write_snapshot(
-            DATA_ROOT / "config" / network / dc_name / "config.json",
-            normalize_config(config),
+    last_error: BaseException | None = None
+    for server_address, port in endpoints:
+        session = MemorySession()
+        dc_id = int(dc.replace("-test", ""))
+        session.set_dc(dc_id, server_address, port)
+        client = TelegramClient(
+            session,
+            api_id,
+            api_hash,
+            device_model="Telegram Developer Crawler",
+            system_version="1.0",
+            app_version="0.1",
         )
-        write_snapshot(
-            DATA_ROOT / "countries-list" / network / dc_name / "countries-list.json",
-            json_safe(countries.to_dict()),
-        )
-        write_snapshot(
-            DATA_ROOT / "app-config" / network / dc_name / "app-config.json",
-            normalize_app_config(app_config),
-        )
-    finally:
-        await client.disconnect()
+
+        try:
+            await client.connect()
+            config = await client(GetConfigRequest())
+            countries = await client(GetCountriesListRequest(lang_code="en", hash=0))
+            app_config = await client(GetAppConfigRequest(0))
+
+            network = "test" if test_mode else "production"
+            dc_name = f"dc{dc.replace('-test', '')}"
+
+            # Keep distinct Telegram datasets in distinct top-level categories.
+            # help.getConfig is server/MTProto configuration, while
+            # help.getAppConfig is client-specific application configuration.
+            write_snapshot(
+                DATA_ROOT / "config" / network / dc_name / "config.json",
+                normalize_config(config),
+            )
+            write_snapshot(
+                DATA_ROOT / "countries-list" / network / dc_name / "countries-list.json",
+                json_safe(countries.to_dict()),
+            )
+            write_snapshot(
+                DATA_ROOT / "app-config" / network / dc_name / "app-config.json",
+                normalize_app_config(app_config),
+            )
+            return
+        except (OSError, asyncio.TimeoutError, ConnectionError) as exc:
+            last_error = exc
+            if len(endpoints) == 1:
+                raise
+        finally:
+            await client.disconnect()
+
+    assert last_error is not None
+    raise last_error
 
 
 async def collect_bot_global_config() -> None:
