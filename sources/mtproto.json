@@ -11,7 +11,8 @@
     "core.telegram.org/schema",
     "core.telegram.org/schema/json",
     "core.telegram.org/schema/mtproto",
-    "core.telegram.org/schema/mtproto-json"
+    "core.telegram.org/schema/mtproto-json",
+    "github.com/tdlib/td:td/generate/scheme/td_api.tl"
   ],
   "scope": {
     "per_dc": [
@@ -19,9 +20,7 @@
       "help.getCountriesList",
       "help.getAppConfig"
     ],
-    "global_bot": [
-      "help.getCdnConfig"
-    ],
+    "global_bot": ["help.getCdnConfig"],
     "global_user": [
       "messages.getAvailableReactions",
       "help.getPremiumPromo"
@@ -31,37 +30,42 @@
       "app_config": "data/mtproto/app-config/",
       "countries_list": "data/mtproto/countries-list/",
       "global": "data/mtproto/global/",
-      "tl": "data/mtproto/tl/"
+      "tl": "data/mtproto/tl/",
+      "tdlib": "data/tdlib/schema/"
     },
     "tl_schema": [
       "core.telegram.org/schema",
       "core.telegram.org/schema/json",
       "core.telegram.org/schema/mtproto",
       "core.telegram.org/schema/mtproto-json"
-    ]
+    ],
+    "tdlib_schema": {
+      "repository": "https://github.com/tdlib/td",
+      "path": "td/generate/scheme/td_api.tl",
+      "raw": "https://raw.githubusercontent.com/tdlib/td/master/td/generate/scheme/td_api.tl"
+    }
   },
   "normalization": {
     "config": ["date", "expires", "dc_options", "autologin_token"],
     "app_config": ["hash", "ton_usd_rate"],
     "premium_promo": ["users", "status_text", "status_entities", "period_options"],
-    "tl_schema": [
-      "line endings",
-      "trailing whitespace",
-      "JSON key ordering"
-    ]
+    "tl_schema": ["line endings", "trailing whitespace", "JSON key ordering"],
+    "tdlib_schema": ["line endings", "trailing whitespace", "JSON key ordering"]
   },
   "endpoint_discovery": {
     "production": "help.getConfig",
-    "test": "built-in Telegram test DC endpoints; optional override: TDC_TEST_DC_ENDPOINTS"
+    "test": "built-in Telegram test DC endpoints; optional override: TDC_TEST_DC_ENDPOINTS",
+    "tdlib": "official tdlib/td master branch"
   },
   "authentication": {
     "production_and_test": "TG_API_ID + TG_API_HASH",
     "global_bot": "TG_BOT_TOKEN",
-    "global_user": "TG_USER_SESSION",
-    "tl_schema": "public HTTPS sources"
+    "tl_schema": "public HTTPS sources",
+    "tdlib_schema": "public GitHub source"
   },
   "safety": {
     "max_leaf_removal_ratio": 0.1,
-    "tl_schema_max_definition_removal_ratio": 0.1
+    "tl_schema_max_definition_removal_ratio": 0.1,
+    "tdlib_schema_max_definition_removal_ratio": 0.1
   }
 }
