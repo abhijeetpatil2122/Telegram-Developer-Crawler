@@ -1,0 +1,23 @@
+{
+  "counts": {
+    "constructors": 2192,
+    "functions": 1022,
+    "total": 3214
+  },
+  "safety": {
+    "max_definition_removal_ratio": 0.1
+  },
+  "sha256": {
+    "json": "6fdd349b2f40633a72135b059ba9c7d6631af238d6f199ca8848aa2158a6cad5",
+    "tl": "bc998a2c6dd7e0a8a250dd732ac64d7a7d5e8efdc47760c899cf1aa4660037d0"
+  },
+  "source": "https://raw.githubusercontent.com/tdlib/td/master/td/generate/scheme/td_api.tl",
+  "source_path": "td/generate/scheme/td_api.tl",
+  "source_repository": "https://github.com/tdlib/td",
+  "upstream": {
+    "branch": "master",
+    "commit": "42e6a5259551178d1dab54a22ad96d14bd906e20",
+    "commit_url": "https://github.com/tdlib/td/commit/42e6a5259551178d1dab54a22ad96d14bd906e20",
+    "message": "Ignore duplicate quick reply messages."
+  }
+}
