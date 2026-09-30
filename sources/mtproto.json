@@ -26,7 +26,14 @@
       "messages.getAvailableReactions",
       "help.getPremiumPromo"
     ],
-    "paths": {\n      "config": "data/mtproto/config/",\n      "app_config": "data/mtproto/app-config/",\n      "countries_list": "data/mtproto/countries-list/",\n      "global": "data/mtproto/global/",\n      "tl": "data/mtproto/tl/"\n    },\n    "tl_schema": [
+    "paths": {
+      "config": "data/mtproto/config/",
+      "app_config": "data/mtproto/app-config/",
+      "countries_list": "data/mtproto/countries-list/",
+      "global": "data/mtproto/global/",
+      "tl": "data/mtproto/tl/"
+    },
+    "tl_schema": [
       "core.telegram.org/schema",
       "core.telegram.org/schema/json",
       "core.telegram.org/schema/mtproto",
