@@ -1,0 +1,24 @@
+{
+  "api": {
+    "constructors": 1573,
+    "layer": null,
+    "methods": 783,
+    "sha256_json": "987ca9bacea483659fad522c6384d5f07c56bcc8c44d094bc20fcf92b5fd2165",
+    "sha256_tl": "2a96b10894fc0f20152acee19f7c9149abb948b51ed9e271b8f71aa2fb434002"
+  },
+  "mtproto": {
+    "constructors": 38,
+    "methods": 10,
+    "sha256_json": "f9738abeb2b12fc2e753165431516a2067c7ac35ac3e310304178493ee00470d",
+    "sha256_tl": "b3ef6a9533b772fdcf2a6d8dd236092f799ad8907ab4ca2615e42bded246da4c"
+  },
+  "safety": {
+    "max_object_removal_ratio": 0.1
+  },
+  "sources": {
+    "api_json": "https://core.telegram.org/schema/json",
+    "api_tl": "https://core.telegram.org/schema",
+    "mtproto_json": "https://core.telegram.org/schema/mtproto-json",
+    "mtproto_tl": "https://core.telegram.org/schema/mtproto"
+  }
+}
