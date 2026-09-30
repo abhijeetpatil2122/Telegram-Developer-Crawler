@@ -15,6 +15,7 @@ concurrency:
 jobs:
   collect:
     runs-on: ubuntu-latest
+    environment: appConfig
     timeout-minutes: 15
 
     steps:
@@ -30,6 +31,31 @@ jobs:
 
       - name: Install dependencies
         run: pip install -r requirements.txt
+
+      - name: Validate required credentials
+        env:
+          TG_API_ID: ${{ secrets.TG_API_ID }}
+          TG_API_HASH: ${{ secrets.TG_API_HASH }}
+          TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
+        run: |
+          set -euo pipefail
+
+          missing=0
+
+          for name in TG_API_ID TG_API_HASH TG_BOT_TOKEN; do
+            if [ -z "${!name:-}" ]; then
+              echo "::error::Missing required environment secret: $name"
+              missing=1
+            fi
+          done
+
+          if [ "$missing" -ne 0 ]; then
+            echo "The collect job is connected to the GitHub Environment 'appConfig'."
+            echo "Check that TG_API_ID, TG_API_HASH, and TG_BOT_TOKEN are secrets in that environment."
+            exit 1
+          fi
+
+          echo "Required Telegram credentials are present."
 
       - name: Collect Telegram configuration
         env:
