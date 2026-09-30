@@ -126,7 +126,7 @@ def balanced_block(text: str, brace_start: int) -> str:
         if in_string:
             if escape:
                 escape = False
-            elif ch == "\":
+            elif ch == "\\":
                 escape = True
             elif ch == quote:
                 in_string = False
