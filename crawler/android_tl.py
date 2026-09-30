@@ -419,7 +419,7 @@ def run_jadx(jadx_bin: Path, apk: Path, output: Path) -> None:
     output.mkdir(parents=True, exist_ok=True)
     cmd = [
         str(jadx_bin), "-r", "-j", str(max(1, min(os.cpu_count() or 2, 4))),
-        "--no-imports", "--no-deobf", "--comments-level", "none",
+        "--no-imports", "--comments-level", "none",
         "-d", str(output), str(apk),
     ]
     process = subprocess.run(cmd, text=True, stdout=subprocess.PIPE,
