@@ -33,7 +33,7 @@
     "test": "built-in Telegram test DC endpoints; optional override: TDC_TEST_DC_ENDPOINTS"
   },
   "authentication": {
-    "public": "TG_API_ID + TG_API_HASH",
+    "production_and_test": "TG_API_ID + TG_API_HASH",
     "global_bot": "TG_BOT_TOKEN",
     "global_user": "TG_USER_SESSION"
   },
