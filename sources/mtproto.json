@@ -8,5 +8,12 @@
   "normalization": {
     "config": ["date", "expires", "dc_options"],
     "app_config": ["ton_usd_rate"]
+  },
+  "endpoint_discovery": {
+    "production": "help.getConfig",
+    "test": "environment:TDC_TEST_DC_ENDPOINTS"
+  },
+  "safety": {
+    "max_leaf_removal_ratio": 0.1
   }
 }
