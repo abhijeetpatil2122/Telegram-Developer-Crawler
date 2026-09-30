@@ -66,6 +66,8 @@ jobs:
         run: python -m crawler.tdesktop_schema
       - name: Collect Android stable and public beta
         run: python -m crawler.android_client
+      - name: Extract Android TL schemas
+        run: python -m crawler.android_tl
       - name: Save generated snapshots
         run: |
           rm -rf /tmp/telegram-developer-data
