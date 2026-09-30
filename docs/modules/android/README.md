@@ -25,7 +25,7 @@ The APK itself is temporary and is never committed to the data branch.
 
 Stable and Public Beta are different observations. A Beta snapshot must never overwrite Stable, and a failed Beta extraction must not affect the Stable snapshot.
 
-The later TL extraction stage will decompile the APK's `org.telegram.tgnet` classes and produce a normalized TL schema for each channel independently. Stable-vs-Beta comparison will be added after both extraction pipelines are validated.
+Stage 5B produces the normalized TL schema for each channel independently. Stable-vs-Beta comparison belongs to Stage 5C and will consume these canonical snapshots.
 
 ## Safety
 
@@ -42,6 +42,6 @@ No APK bytes are stored in Git.
 
 ## Module 5B — Android TL extraction
 
-Stage 5B downloads each recorded APK into a temporary workspace, decompiles `org.telegram.tgnet` with a pinned JADX release, reconstructs TL constructors/methods from generated serialization code, and records the embedded layer. Only normalized `tl.tl`, structured `tl.json`, and extraction metadata are published; APKs and decompiled Java sources are never committed.
+Stage 5B downloads each recorded APK into a temporary workspace, decompiles `org.telegram.tgnet` with a pinned JADX release, reconstructs TL constructors/methods from generated serialization code, and records the embedded layer. The raw Android Java class names are then canonicalized into a developer-facing TL scheme: `TL_` prefixes are removed, namespace separators become `.`, historical `_layerNNN`/`_old` classes are filtered, type references are normalized, and the output uses the standard `---types---` / `---functions---` layout with a `// LAYER N` footer. Only `tl.tl`, structured `tl.json`, and extraction metadata are published; APKs and decompiled Java sources are never committed.
 
 Safety checks require at least 500 constructors and 200 methods, reject duplicate definition keys, and reject historical definition loss above 10%. Stable and Public Beta are processed independently.
