@@ -79,6 +79,7 @@ jobs:
       - name: Publish snapshots to data branch
         run: |
           git fetch origin data:data
+          rm -rf data
           git checkout data
 
           # The data branch is data-only. Keep only the generated data tree.
