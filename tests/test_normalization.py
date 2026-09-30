@@ -1,6 +1,12 @@
+import datetime as dt
 from types import SimpleNamespace
 
-from crawler.mtproto_config import normalize_app_config, normalize_config, normalize_premium_promo
+from crawler.mtproto_config import json_safe, normalize_app_config, normalize_config, normalize_premium_promo
+
+
+def test_json_safe_serializes_datetime_values():
+    value = {"created": dt.datetime(2026, 9, 30, 12, 34, 56)}
+    assert json_safe(value) == {"created": "2026-09-30T12:34:56"}
 
 
 def test_config_normalization_removes_volatile_fields():
