@@ -3,15 +3,36 @@
   "test_dcs": ["1-test", "2-test", "3-test"],
   "collectors": [
     "help.getConfig",
-    "help.getAppConfig"
+    "help.getCdnConfig",
+    "help.getCountriesList",
+    "help.getAppConfig",
+    "messages.getAvailableReactions",
+    "help.getPremiumPromo"
   ],
+  "scope": {
+    "per_dc": [
+      "help.getConfig",
+      "help.getCdnConfig",
+      "help.getCountriesList",
+      "help.getAppConfig"
+    ],
+    "global_user": [
+      "messages.getAvailableReactions",
+      "help.getPremiumPromo"
+    ]
+  },
   "normalization": {
-    "config": ["date", "expires", "dc_options"],
-    "app_config": ["ton_usd_rate"]
+    "config": ["date", "expires", "dc_options", "autologin_token"],
+    "app_config": ["hash", "ton_usd_rate"],
+    "premium_promo": ["users", "status_text", "status_entities", "period_options"]
   },
   "endpoint_discovery": {
     "production": "help.getConfig",
     "test": "environment:TDC_TEST_DC_ENDPOINTS"
+  },
+  "authentication": {
+    "public": "TG_API_ID + TG_API_HASH",
+    "user_only": "TG_USER_SESSION"
   },
   "safety": {
     "max_leaf_removal_ratio": 0.1
