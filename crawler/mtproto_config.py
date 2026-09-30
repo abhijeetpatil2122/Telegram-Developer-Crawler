@@ -1,7 +1,8 @@
 """Collect MTProto configuration snapshots from Telegram.
 
 Production DC endpoints are discovered from Telegram through help.getConfig.
-Test DCs use separate optional credentials and explicitly configured endpoints.
+Test DCs use the same application API credentials with separate test-network
+endpoints and fresh in-memory sessions.
 """
 
 from __future__ import annotations
@@ -163,13 +164,12 @@ async def collect_dc(
     api_id: int,
     api_hash: str,
 ) -> None:
+    # Test DCs must always use a fresh in-memory session. Do not reuse a
+    # production authorization key on the test network.
     session = MemorySession()
     dc_id = int(dc.replace("-test", ""))
     session.set_dc(dc_id, endpoint[0], endpoint[1])
 
-    # Telethon selects the target DC from the session. Current Telethon
-    # does not accept a `test_mode` constructor argument; test-server
-    # connections use session.set_dc(...) instead.
     client = TelegramClient(
         session,
         api_id,
@@ -185,7 +185,9 @@ async def collect_dc(
         countries = await client(GetCountriesListRequest(lang_code="en", hash=0))
         app_config = await client(GetAppConfigRequest(0))
 
-        target = DATA_ROOT / ("test" if test_mode else "production") / f"dc{dc.replace('-test', '')}"
+        target = DATA_ROOT / (
+            "test" if test_mode else "production"
+        ) / f"dc{dc.replace('-test', '')}"
         write_snapshot(target / "config.json", normalize_config(config))
         write_snapshot(target / "countries-list.json", json_safe(countries.to_dict()))
         write_snapshot(target / "app-config.json", normalize_app_config(app_config))
@@ -263,38 +265,40 @@ async def collect_user_only_config() -> None:
 
 async def collect_all() -> None:
     production = await discover_production_endpoints()
-    production_api_id = int(os.environ["TG_API_ID"])
-    production_api_hash = os.environ["TG_API_HASH"]
+    api_id = int(os.environ["TG_API_ID"])
+    api_hash = os.environ["TG_API_HASH"]
+
     jobs = [
         collect_dc(
             dc,
             False,
             production[dc],
-            production_api_id,
-            production_api_hash,
+            api_id,
+            api_hash,
         )
         for dc in PRODUCTION_DCS
     ]
 
+    # Telegram's test environment uses the same application api_id/api_hash.
+    # Only the DC endpoints and fresh MTProto session differ.
     test_endpoints = load_test_endpoints()
-    test_api_id = os.getenv("TG_TEST_API_ID")
-    test_api_hash = os.getenv("TG_TEST_API_HASH")
-    if test_endpoints and test_api_id and test_api_hash:
-        jobs.extend(
-            collect_dc(
-                dc,
-                True,
-                test_endpoints[dc],
-                int(test_api_id),
-                test_api_hash,
-            )
-            for dc in TEST_DCS
-            if dc in test_endpoints
+    jobs.extend(
+        collect_dc(
+            dc,
+            True,
+            test_endpoints[dc],
+            api_id,
+            api_hash,
         )
-    else:
-        print("Test DC collection skipped: TG_TEST_API_ID and TG_TEST_API_HASH are not configured.")
+        for dc in TEST_DCS
+        if dc in test_endpoints
+    )
 
-    await asyncio.gather(*jobs, collect_bot_global_config(), collect_user_only_config())
+    await asyncio.gather(
+        *jobs,
+        collect_bot_global_config(),
+        collect_user_only_config(),
+    )
 
 
 def main() -> None:
