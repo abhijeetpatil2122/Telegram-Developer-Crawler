@@ -1,44 +1,42 @@
 # Telegram Developer Crawler
 
-Developer-focused crawler for tracking meaningful changes across Telegram's official developer surfaces.
+Developer-focused crawler for meaningful changes across Telegram's official developer surfaces.
 
-The project follows a Git-based snapshot model inspired by the architecture of MarshalX's Telegram crawler:
+## Architecture
 
-- `main` contains crawler code, source definitions, normalizers, filters, and workflows.
-- `data` contains generated snapshots and historical observations.
-- Git commits provide the change history and diff URLs used by alerts.
+- `main`: crawler code, source manifests, normalization, validation and workflows.
+- `data`: generated snapshots and historical observations.
+- Git history: the source of truth for changes and diff links.
+- Telegram: notification layer.
 
-## Planned sources
+## First collector
 
-- Bot API and Mini Apps documentation
-- MTProto / TL schemas
-- TDLib schemas
-- Telegram Desktop schemas
-- Android stable and beta client signals
-- iOS stable and beta client signals
-- Desktop/macOS client signals
-- MTProto production and test configuration
-- Selected developer-relevant Telegram resources
+The initial collector observes MTProto configuration through:
 
-## Design principles
+- `help.getConfig`
+- `help.getAppConfig`
 
-1. Prefer official Telegram sources.
-2. Preserve evidence and link alerts back to exact snapshots/diffs.
-3. Normalize volatile values before committing.
-4. Treat client/beta observations as observations, not official announcements.
-5. Guard against broken crawls and accidental mass deletions.
-6. Keep the first version Git-native: no database or Redis.
+It keeps separate production/test DC snapshots and removes known volatile values before writing JSON.
 
-## Branches
+The collector uses a fresh in-memory MTProto session per DC. Credentials are supplied through environment variables and are never committed.
 
-### main
+## Planned collectors
 
-The crawler and its configuration.
+1. MTProto configuration
+2. MTProto/TL schemas
+3. TDLib schemas
+4. Telegram Desktop schemas
+5. Android stable/beta schema and developer resources
+6. iOS stable/beta developer resources
+7. Desktop/macOS developer resources
+8. Bot API and Mini Apps documentation
+9. Diff classification and Telegram alerts
 
-### data
+## Safety principles
 
-Generated snapshots. This branch is the project's historical data store.
-
-## Status
-
-Initial repository bootstrap. Collectors will be added incrementally, starting with the repository/data model and MTProto configuration collector.
+- Prefer official sources.
+- Preserve exact evidence and source URLs.
+- Normalize volatile values before committing.
+- Reject suspicious mass disappearance from extractors.
+- Treat beta/client observations as observations, not official announcements.
+- No database or Redis for the first version.
