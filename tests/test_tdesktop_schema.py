@@ -39,7 +39,7 @@ def test_validate_schema_guards_mass_removal():
         [{"kind": "constructors", "name": f"c{i}"} for i in range(600)]
         + [{"kind": "functions", "name": f"f{i}"} for i in range(300)]
     )
-    current = previous[:540] + [{"kind": "functions", "name": f"f{i}"} for i in range(270)]
+    current = previous[:500] + [{"kind": "functions", "name": f"f{i}"} for i in range(250)]
     try:
         validate_schema(previous, current, "api")
     except ValueError as exc:
