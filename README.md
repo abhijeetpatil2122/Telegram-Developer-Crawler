@@ -13,10 +13,21 @@ The design intentionally avoids a database or Redis. The generated `data` branch
 
 ## First collector: MTProto configuration
 
-The first collector observes:
+The first collector observes the MTProto server configuration surface, following the server-data approach used by MarshalX's Telegram crawler.
 
-- `help.getConfig`
-- `help.getAppConfig`
+Per production/test DC:
+
+- `help.getConfig` — core MTProto/server configuration and DC options
+- `help.getCdnConfig` — CDN public-key configuration
+- `help.getCountriesList` — country names, ISO codes and phone-code patterns
+- `help.getAppConfig` — rapidly changing graphical-client configuration
+
+Globally, when an authorized user StringSession is configured:
+
+- `messages.getAvailableReactions` — available reaction metadata and animations
+- `help.getPremiumPromo` — Premium promotion configuration
+
+Telegram documents `getConfig` and `getAppConfig` as runtime configuration sources; `getCdnConfig` and `getCountriesList` are additional server/client configuration datasets tracked by the crawler. The latter two user-only datasets require a user session. citeturn1search6turn1search1turn1search0turn4search3turn1search9
 
 For production:
 
@@ -24,7 +35,8 @@ For production:
 2. Call `help.getConfig`.
 3. Discover the current production DC endpoints from Telegram's response.
 4. Create a fresh in-memory MTProto session for each DC.
-5. Collect `help.getConfig` and `help.getAppConfig` independently.
+5. Collect the four per-DC datasets independently.
+6. If `TG_USER_SESSION` is configured, collect the two user-only datasets into the global snapshot.
 
 For test DCs, endpoints and separate test-network credentials are optional because the test network is separate from production.
 
