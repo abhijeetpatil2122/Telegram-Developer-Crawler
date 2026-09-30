@@ -110,3 +110,23 @@ def test_validate_tl_text_accepts_small_valid_schema_without_previous_snapshot()
         ]
     )
     validate_tl_text(None, current, required_markers=("---functions---",))
+
+
+def test_extract_tl_text_from_html():
+    from crawler.tl_schema import extract_tl_text
+
+    html = """<html><body><pre>resPQ#05162463 nonce:int128 = ResPQ;
+---functions---
+req_pq_multi#be7e8ef1 nonce:int128 = ResPQ;
+</pre></body></html>"""
+    text = extract_tl_text(html)
+    assert "resPQ#05162463" in text
+    assert "---functions---" in text
+    assert len(definition_keys(text)) == 2
+
+
+def test_extract_tl_text_plain_text_fallback():
+    from crawler.tl_schema import extract_tl_text
+
+    text = extract_tl_text("resPQ#05162463 nonce:int128 = ResPQ;\n")
+    assert "resPQ#05162463" in text
