@@ -491,7 +491,13 @@ def collect() -> None:
         unpack = root / "jadx"
         with zipfile.ZipFile(archive) as zf:
             zf.extractall(unpack)
-        bins = list(unpack.glob("*/bin/jadx")) + list(unpack.glob("*/bin/jadx.bat"))
+        bins = [
+            path for path in unpack.rglob("jadx")
+            if path.is_file() and path.parent.name == "bin"
+        ] + [
+            path for path in unpack.rglob("jadx.bat")
+            if path.is_file() and path.parent.name == "bin"
+        ]
         if not bins:
             raise RuntimeError("JADX archive contains no executable bin/jadx")
         jadx_bin = bins[0]
