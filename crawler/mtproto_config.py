@@ -7,6 +7,7 @@ Test DCs use separate optional credentials and explicitly configured endpoints.
 from __future__ import annotations
 
 import asyncio
+import datetime as dt
 import json
 import os
 from pathlib import Path
@@ -35,6 +36,8 @@ TEST_DCS = ("1-test", "2-test", "3-test")
 def json_safe(value: Any) -> Any:
     if isinstance(value, bytes):
         return {"__bytes__": value.hex()}
+    if isinstance(value, (dt.datetime, dt.date, dt.time)):
+        return value.isoformat()
     if isinstance(value, dict):
         return {str(k): json_safe(v) for k, v in value.items()}
     if isinstance(value, (list, tuple)):
