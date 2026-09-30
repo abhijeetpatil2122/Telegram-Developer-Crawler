@@ -13,8 +13,15 @@ from pathlib import Path
 from typing import Any
 
 from telethon import TelegramClient
-from telethon.sessions import MemorySession
-from telethon.tl.functions.help import GetAppConfigRequest, GetConfigRequest
+from telethon.sessions import MemorySession, StringSession
+from telethon.tl.functions.help import (
+    GetAppConfigRequest,
+    GetCdnConfigRequest,
+    GetConfigRequest,
+    GetCountriesListRequest,
+    GetPremiumPromoRequest,
+)
+from telethon.tl.functions.messages import GetAvailableReactionsRequest
 
 from .safety import validate_snapshot
 
@@ -45,6 +52,7 @@ def normalize_config(value: Any) -> Any:
 
 def normalize_app_config(value: Any) -> Any:
     data = json_safe(value.to_dict())
+    data["hash"] = 0
     data.pop("ton_usd_rate", None)
     return data
 
@@ -152,11 +160,56 @@ async def collect_dc(
     await client.connect()
     try:
         config = await client(GetConfigRequest())
+        cdn_config = await client(GetCdnConfigRequest())
+        countries = await client(GetCountriesListRequest(lang_code="en", hash=0))
         app_config = await client(GetAppConfigRequest(0))
 
         target = DATA_ROOT / ("test" if test_mode else "production") / f"dc{dc.replace('-test', '')}"
         write_snapshot(target / "config.json", normalize_config(config))
+        write_snapshot(target / "cdn-config.json", json_safe(cdn_config.to_dict()))
+        write_snapshot(target / "countries-list.json", json_safe(countries.to_dict()))
         write_snapshot(target / "app-config.json", normalize_app_config(app_config))
+    finally:
+        await client.disconnect()
+
+
+async def collect_user_only_config() -> None:
+    session_string = os.getenv("TG_USER_SESSION", "").strip()
+    if not session_string:
+        print(
+            "User-only MTProto datasets skipped: TG_USER_SESSION is not configured. "
+            "This is required for messages.getAvailableReactions and help.getPremiumPromo."
+        )
+        return
+
+    api_id = int(os.environ["TG_API_ID"])
+    api_hash = os.environ["TG_API_HASH"]
+    client = TelegramClient(
+        StringSession(session_string),
+        api_id,
+        api_hash,
+        device_model="Telegram Developer Crawler",
+        system_version="1.0",
+        app_version="0.1",
+    )
+
+    await client.connect()
+    try:
+        if not await client.is_user_authorized():
+            raise RuntimeError("TG_USER_SESSION is not authorized")
+
+        reactions = await client(GetAvailableReactionsRequest(hash=0))
+        premium = await client(GetPremiumPromoRequest())
+
+        target = DATA_ROOT / "global"
+        write_snapshot(
+            target / "available-reactions.json",
+            json_safe(reactions.to_dict()),
+        )
+        write_snapshot(
+            target / "premium-promo.json",
+            normalize_premium_promo(premium),
+        )
     finally:
         await client.disconnect()
 
@@ -194,7 +247,7 @@ async def collect_all() -> None:
     else:
         print("Test DC collection skipped: test credentials/endpoints are not configured.")
 
-    await asyncio.gather(*jobs)
+    await asyncio.gather(*jobs, collect_user_only_config())
 
 
 def main() -> None:
