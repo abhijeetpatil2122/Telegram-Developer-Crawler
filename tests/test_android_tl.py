@@ -91,4 +91,4 @@ def test_to_tl():
     text = to_tl(defs, 123)
     assert "---functions---" in text
     assert "z#00000001 = Z;" in text
-    assert "a#00000002  = X;" in text
+    assert "a#00000002 = X;" in text
