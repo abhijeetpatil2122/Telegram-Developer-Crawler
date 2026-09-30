@@ -12,26 +12,22 @@
     "core.telegram.org/schema/json",
     "core.telegram.org/schema/mtproto",
     "core.telegram.org/schema/mtproto-json",
-    "github.com/tdlib/td:td/generate/scheme/td_api.tl"
+    "github.com/tdlib/td:td/generate/scheme/td_api.tl",
+    "github.com/telegramdesktop/tdesktop:Telegram/SourceFiles/mtproto/scheme/api.tl",
+    "github.com/telegramdesktop/tdesktop:Telegram/SourceFiles/mtproto/scheme/mtproto.tl"
   ],
   "scope": {
-    "per_dc": [
-      "help.getConfig",
-      "help.getCountriesList",
-      "help.getAppConfig"
-    ],
+    "per_dc": ["help.getConfig", "help.getCountriesList", "help.getAppConfig"],
     "global_bot": ["help.getCdnConfig"],
-    "global_user": [
-      "messages.getAvailableReactions",
-      "help.getPremiumPromo"
-    ],
+    "global_user": ["messages.getAvailableReactions", "help.getPremiumPromo"],
     "paths": {
       "config": "data/mtproto/config/",
       "app_config": "data/mtproto/app-config/",
       "countries_list": "data/mtproto/countries-list/",
       "global": "data/mtproto/global/",
       "tl": "data/mtproto/tl/",
-      "tdlib": "data/tdlib/schema/"
+      "tdlib": "data/tdlib/schema/",
+      "tdesktop": "data/tdesktop/schema/"
     },
     "tl_schema": [
       "core.telegram.org/schema",
@@ -43,6 +39,14 @@
       "repository": "https://github.com/tdlib/td",
       "path": "td/generate/scheme/td_api.tl",
       "raw": "https://raw.githubusercontent.com/tdlib/td/master/td/generate/scheme/td_api.tl"
+    },
+    "tdesktop_schema": {
+      "repository": "https://github.com/telegramdesktop/tdesktop",
+      "branch": "dev",
+      "api_path": "Telegram/SourceFiles/mtproto/scheme/api.tl",
+      "api_raw": "https://raw.githubusercontent.com/telegramdesktop/tdesktop/dev/Telegram/SourceFiles/mtproto/scheme/api.tl",
+      "mtproto_path": "Telegram/SourceFiles/mtproto/scheme/mtproto.tl",
+      "mtproto_raw": "https://raw.githubusercontent.com/telegramdesktop/tdesktop/dev/Telegram/SourceFiles/mtproto/scheme/mtproto.tl"
     }
   },
   "normalization": {
@@ -50,22 +54,26 @@
     "app_config": ["hash", "ton_usd_rate"],
     "premium_promo": ["users", "status_text", "status_entities", "period_options"],
     "tl_schema": ["line endings", "trailing whitespace", "JSON key ordering"],
-    "tdlib_schema": ["line endings", "trailing whitespace", "JSON key ordering"]
+    "tdlib_schema": ["line endings", "trailing whitespace", "JSON key ordering"],
+    "tdesktop_schema": ["line endings", "trailing whitespace", "JSON key ordering"]
   },
   "endpoint_discovery": {
     "production": "help.getConfig",
     "test": "built-in Telegram test DC endpoints; optional override: TDC_TEST_DC_ENDPOINTS",
-    "tdlib": "official tdlib/td master branch"
+    "tdlib": "official tdlib/td master branch",
+    "tdesktop": "official telegramdesktop/tdesktop dev branch"
   },
   "authentication": {
     "production_and_test": "TG_API_ID + TG_API_HASH",
     "global_bot": "TG_BOT_TOKEN",
     "tl_schema": "public HTTPS sources",
-    "tdlib_schema": "public GitHub source"
+    "tdlib_schema": "public GitHub source",
+    "tdesktop_schema": "public GitHub source"
   },
   "safety": {
     "max_leaf_removal_ratio": 0.1,
     "tl_schema_max_definition_removal_ratio": 0.1,
-    "tdlib_schema_max_definition_removal_ratio": 0.1
+    "tdlib_schema_max_definition_removal_ratio": 0.1,
+    "tdesktop_schema_max_definition_removal_ratio": 0.1
   }
 }
