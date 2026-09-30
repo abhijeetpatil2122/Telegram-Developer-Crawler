@@ -140,11 +140,13 @@ async def collect_dc(
     dc_id = int(dc.replace("-test", ""))
     session.set_dc(dc_id, endpoint[0], endpoint[1])
 
+    # Telethon selects the target DC from the session. Current Telethon
+    # does not accept a `test_mode` constructor argument; test-server
+    # connections use session.set_dc(...) instead.
     client = TelegramClient(
         session,
         api_id,
         api_hash,
-        test_mode=test_mode,
         device_model="Telegram Developer Crawler",
         system_version="1.0",
         app_version="0.1",
