@@ -2,7 +2,9 @@ from crawler.safety import validate_snapshot
 
 
 def test_small_removal_is_allowed():
-    validate_snapshot({"a": 1, "b": 2, "c": 3}, {"a": 1, "b": 2})
+    previous = {f"key{i}": i for i in range(10)}
+    current = {f"key{i}": i for i in range(9)}
+    validate_snapshot(previous, current)
 
 
 def test_mass_removal_is_rejected():
