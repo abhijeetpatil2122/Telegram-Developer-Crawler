@@ -419,13 +419,20 @@ def run_jadx(jadx_bin: Path, apk: Path, output: Path) -> None:
     output.mkdir(parents=True, exist_ok=True)
     cmd = [
         str(jadx_bin), "-r", "-j", str(max(1, min(os.cpu_count() or 2, 4))),
-        "--no-imports", "--comments-level", "none",
+        "--no-imports", "--show-bad-code", "--no-inline-anonymous",
+        "--comments-level", "none",
         "-d", str(output), str(apk),
     ]
     process = subprocess.run(cmd, text=True, stdout=subprocess.PIPE,
                              stderr=subprocess.STDOUT, timeout=1200, check=False)
     if process.returncode != 0:
-        raise RuntimeError(f"jadx failed ({process.returncode}):\n{process.stdout[-6000:]}")
+        # JADX may return nonzero when unrelated classes fail to decompile.
+        # The reference extractor continues and validates the extracted TL set.
+        if not output.exists() or not any(output.rglob("TLRPC*.java")):
+            raise RuntimeError(
+                f"jadx failed ({process.returncode}) without usable tgnet output:\n"
+                f"{process.stdout[-6000:]}"
+            )
 
 
 def extract_channel(channel: str, jadx_bin: Path) -> dict[str, Any]:
