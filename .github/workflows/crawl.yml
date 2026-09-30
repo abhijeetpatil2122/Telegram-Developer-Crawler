@@ -60,6 +60,7 @@ jobs:
         env:
           TG_API_ID: ${{ secrets.TG_API_ID }}
           TG_API_HASH: ${{ secrets.TG_API_HASH }}
+          TG_USER_SESSION: ${{ secrets.TG_USER_SESSION }}
           TG_TEST_API_ID: ${{ secrets.TG_TEST_API_ID }}
           TG_TEST_API_HASH: ${{ secrets.TG_TEST_API_HASH }}
           TG_TEST_BOT_TOKEN: ${{ secrets.TG_TEST_BOT_TOKEN }}
