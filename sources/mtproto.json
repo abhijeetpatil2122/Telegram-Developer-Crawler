@@ -1,6 +1,16 @@
 {
-  "production_dcs": ["1", "2", "3", "4", "5"],
-  "test_dcs": ["1-test", "2-test", "3-test"],
+  "production_dcs": [
+    "1",
+    "2",
+    "3",
+    "4",
+    "5"
+  ],
+  "test_dcs": [
+    "1-test",
+    "2-test",
+    "3-test"
+  ],
   "collectors": [
     "help.getConfig",
     "help.getCdnConfig",
@@ -16,12 +26,22 @@
     "github.com/telegramdesktop/tdesktop:Telegram/SourceFiles/mtproto/scheme/api.tl",
     "github.com/telegramdesktop/tdesktop:Telegram/SourceFiles/mtproto/scheme/mtproto.tl",
     "telegram.org/dl/android/apk",
-    "telegram.org/dl/android/apk-public-beta"
+    "telegram.org/dl/android/apk-public-beta",
+    "Telegram Android embedded org.telegram.tgnet TL schema"
   ],
   "scope": {
-    "per_dc": ["help.getConfig", "help.getCountriesList", "help.getAppConfig"],
-    "global_bot": ["help.getCdnConfig"],
-    "global_user": ["messages.getAvailableReactions", "help.getPremiumPromo"],
+    "per_dc": [
+      "help.getConfig",
+      "help.getCountriesList",
+      "help.getAppConfig"
+    ],
+    "global_bot": [
+      "help.getCdnConfig"
+    ],
+    "global_user": [
+      "messages.getAvailableReactions",
+      "help.getPremiumPromo"
+    ],
     "paths": {
       "config": "data/mtproto/config/",
       "app_config": "data/mtproto/app-config/",
@@ -30,7 +50,8 @@
       "tl": "data/mtproto/tl/",
       "tdlib": "data/tdlib/schema/",
       "tdesktop": "data/tdesktop/schema/",
-      "android": "data/android/"
+      "android": "data/android/",
+      "android_tl": "data/android/"
     },
     "tl_schema": [
       "core.telegram.org/schema",
@@ -57,13 +78,49 @@
     }
   },
   "normalization": {
-    "config": ["date", "expires", "dc_options", "autologin_token"],
-    "app_config": ["hash", "ton_usd_rate"],
-    "premium_promo": ["users", "status_text", "status_entities", "period_options"],
-    "tl_schema": ["line endings", "trailing whitespace", "JSON key ordering"],
-    "tdlib_schema": ["line endings", "trailing whitespace", "JSON key ordering"],
-    "tdesktop_schema": ["line endings", "trailing whitespace", "JSON key ordering"],
-    "android_client": ["APK SHA-256", "decoded manifest metadata", "strings.xml", "public.xml"]
+    "config": [
+      "date",
+      "expires",
+      "dc_options",
+      "autologin_token"
+    ],
+    "app_config": [
+      "hash",
+      "ton_usd_rate"
+    ],
+    "premium_promo": [
+      "users",
+      "status_text",
+      "status_entities",
+      "period_options"
+    ],
+    "tl_schema": [
+      "line endings",
+      "trailing whitespace",
+      "JSON key ordering"
+    ],
+    "tdlib_schema": [
+      "line endings",
+      "trailing whitespace",
+      "JSON key ordering"
+    ],
+    "tdesktop_schema": [
+      "line endings",
+      "trailing whitespace",
+      "JSON key ordering"
+    ],
+    "android_client": [
+      "APK SHA-256",
+      "decoded manifest metadata",
+      "strings.xml",
+      "public.xml"
+    ],
+    "android_tl": [
+      "line endings",
+      "trailing whitespace",
+      "definition ordering",
+      "structured JSON key ordering"
+    ]
   },
   "endpoint_discovery": {
     "production": "help.getConfig",
@@ -71,7 +128,8 @@
     "tdlib": "official tdlib/td master branch",
     "tdesktop": "official telegramdesktop/tdesktop dev branch",
     "android_stable": "telegram.org/dl/android/apk",
-    "android_beta": "telegram.org/dl/android/apk-public-beta"
+    "android_beta": "telegram.org/dl/android/apk-public-beta",
+    "android_tl": "Telegram Android APKs resolved by Module 5A"
   },
   "authentication": {
     "production_and_test": "TG_API_ID + TG_API_HASH",
@@ -79,7 +137,8 @@
     "tl_schema": "public HTTPS sources",
     "tdlib_schema": "public GitHub source",
     "tdesktop_schema": "public GitHub source",
-    "android_client": "public HTTPS APK sources"
+    "android_client": "public HTTPS APK sources",
+    "android_tl": "public HTTPS APK sources"
   },
   "safety": {
     "max_leaf_removal_ratio": 0.1,
@@ -88,8 +147,20 @@
     "tdesktop_schema_max_definition_removal_ratio": 0.1,
     "android_client": {
       "apktool_required": true,
-      "required_resources": ["AndroidManifest.xml", "res/values/strings.xml", "res/values/public.xml"],
-      "apk_min_bytes": 1048576
+      "required_resources": [
+        "AndroidManifest.xml",
+        "res/values/strings.xml",
+        "res/values/public.xml"
+      ],
+      "apk_min_bytes": 1048576,
+      "tl_extraction": {
+        "target_package": "org.telegram.tgnet",
+        "minimum_constructors": 500,
+        "minimum_methods": 200,
+        "max_definition_removal_ratio": 0.1,
+        "apk_binaries_committed": false,
+        "decompiled_sources_committed": false
+      }
     }
   }
 }
