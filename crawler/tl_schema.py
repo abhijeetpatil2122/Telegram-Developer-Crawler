@@ -15,8 +15,10 @@ from __future__ import annotations
 
 import asyncio
 import hashlib
+import html
 import json
 import re
+from html.parser import HTMLParser
 from pathlib import Path
 from typing import Any
 
@@ -30,7 +32,38 @@ API_JSON_URL = "https://core.telegram.org/schema/json"
 MTPROTO_TL_URL = "https://core.telegram.org/schema/mtproto"
 MTPROTO_JSON_URL = "https://core.telegram.org/schema/mtproto-json"
 
-DEFINITION_RE = re.compile(r"^\s*([A-Za-z0-9_.]+)(?:#([0-9a-fA-F]+))?.*\s=\s*[A-Za-z0-9_.<>]+;\s*$")
+DEFINITION_RE = re.compile(r"^\s*([A-Za-z0-9_.]+)(?:#([0-9a-fA-F]+))?.*\s=\s*[^;]+;\s*$")
+
+
+class _PreTextParser(HTMLParser):
+    """Extract text from the schema page's <pre> block."""
+
+    def __init__(self) -> None:
+        super().__init__(convert_charrefs=True)
+        self.in_pre = False
+        self.parts: list[str] = []
+
+    def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+        if tag.lower() == "pre":
+            self.in_pre = True
+
+    def handle_endtag(self, tag: str) -> None:
+        if tag.lower() == "pre":
+            self.in_pre = False
+
+    def handle_data(self, data: str) -> None:
+        if self.in_pre:
+            self.parts.append(data)
+
+
+def extract_tl_text(response_text: str) -> str:
+    """Extract the actual TL source from Telegram's HTML schema page."""
+    parser = _PreTextParser()
+    parser.feed(response_text)
+    parser.close()
+    if parser.parts:
+        return normalize_tl(html.unescape("".join(parser.parts)))
+    return normalize_tl(response_text)
 
 
 def normalize_json(value: Any) -> Any:
@@ -181,9 +214,9 @@ async def fetch_sources() -> tuple[str, dict[str, Any], str, dict[str, Any]]:
         for response in responses:
             response.raise_for_status()
 
-        api_tl = normalize_tl(responses[0].text)
+        api_tl = extract_tl_text(responses[0].text)
         api_json = responses[1].json()
-        mtproto_tl = normalize_tl(responses[2].text)
+        mtproto_tl = extract_tl_text(responses[2].text)
         mtproto_json = responses[3].json()
 
     return api_tl, api_json, mtproto_tl, mtproto_json
