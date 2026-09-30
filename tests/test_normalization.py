@@ -55,3 +55,22 @@ def test_premium_promo_normalization_removes_personal_and_volatile_fields():
         "period_options": [],
         "videos": [],
     }
+
+
+def test_default_test_dc_endpoints_use_telethon_compatible_port():
+    from crawler.mtproto_config import DEFAULT_TEST_DC_ENDPOINTS
+
+    assert {port for _, port in DEFAULT_TEST_DC_ENDPOINTS.values()} == {80}
+
+
+def test_test_dc_endpoint_override(monkeypatch):
+    from crawler.mtproto_config import load_test_endpoints
+
+    monkeypatch.setenv(
+        "TDC_TEST_DC_ENDPOINTS",
+        '{"1-test":["1.1.1.1",443],"2-test":["2.2.2.2",80]}',
+    )
+    endpoints = load_test_endpoints()
+    assert endpoints["1-test"] == ("1.1.1.1", 443)
+    assert endpoints["2-test"] == ("2.2.2.2", 80)
+    assert endpoints["3-test"] == ("149.154.175.117", 80)
