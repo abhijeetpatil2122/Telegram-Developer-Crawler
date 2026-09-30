@@ -13,10 +13,19 @@ The design intentionally avoids a database or Redis. The generated `data` branch
 
 ## Current collectors
 
-1. **MTProto configuration**
-2. **MTProto/TL schemas**
+1. **MTProto configuration** — production/test DC configuration and related global datasets
+2. **MTProto/TL schemas** — official Telegram API and MTProto schemas
+3. **TDLib schema** — official TDLib API schema and structured definition index
 
-The planned roadmap continues with TDLib schemas, Telegram Desktop schemas, Android/iOS/desktop developer resources, Bot API/Mini Apps documentation, and finally diff classification and Telegram alerts.
+The roadmap continues with Telegram Desktop schemas, Android/iOS/desktop developer resources, Bot API/Mini Apps documentation, change classification, and Telegram alerts.
+
+### TDLib schema
+
+The crawler tracks the official TDLib schema from:
+- `https://github.com/tdlib/td`
+- `td/generate/scheme/td_api.tl`
+
+The raw normalized TL source and a deterministic structured definition index are stored under `data/tdlib/schema/`. Metadata records the upstream TDLib commit used for the snapshot.
 
 ### MTProto configuration
 
