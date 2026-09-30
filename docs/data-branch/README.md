@@ -8,22 +8,15 @@ It is intentionally separate from `main` so consumers can inspect Telegram devel
 
 ### MTProto
 
-- `data/mtproto/config/` — runtime configuration snapshots.
+The MTProto data is split by dataset so server configuration, client application configuration, country metadata, global datasets, and TL schemas do not get mixed together.
+
+- `data/mtproto/config/` — `help.getConfig` server/MTProto configuration.
+- `data/mtproto/app-config/` — `help.getAppConfig` client-specific application configuration.
+- `data/mtproto/countries-list/` — `help.getCountriesList` country metadata.
+- `data/mtproto/global/` — global datasets such as CDN configuration, available reactions and Premium promo.
 - `data/mtproto/tl/` — official API and MTProto TL schemas, in text and JSON.
 
-The MTProto configuration collector tracks:
-- `help.getConfig`
-- `help.getCountriesList`
-- `help.getAppConfig`
-- `help.getCdnConfig`
-- `messages.getAvailableReactions`
-- `help.getPremiumPromo`
-
-The TL collector tracks:
-- `https://core.telegram.org/schema`
-- `https://core.telegram.org/schema/json`
-- `https://core.telegram.org/schema/mtproto`
-- `https://core.telegram.org/schema/mtproto-json`
+Telegram documents `help.getConfig` as MTProto/server configuration and `help.getAppConfig` as rapidly evolving client-specific configuration, so they are intentionally stored as separate categories. citeturn1search0turn1search2
 
 ## Directory structure
 
@@ -31,7 +24,6 @@ The TL collector tracks:
 data/
 └── mtproto/
     ├── config/
-    │   ├── global/
     │   ├── production/
     │   │   ├── dc1/
     │   │   ├── dc2/
@@ -42,6 +34,24 @@ data/
     │       ├── dc1/
     │       ├── dc2/
     │       └── dc3/
+    ├── app-config/
+    │   ├── production/
+    │   │   ├── dc1/
+    │   │   ├── dc2/
+    │   │   ├── dc3/
+    │   │   ├── dc4/
+    │   │   └── dc5/
+    │   └── test/
+    │       ├── dc1/
+    │       ├── dc2/
+    │       └── dc3/
+    ├── countries-list/
+    │   ├── production/
+    │   └── test/
+    ├── global/
+    │   ├── available-reactions.json
+    │   ├── cdn-config.json
+    │   └── premium-promo.json
     └── tl/
         ├── api.json
         ├── api.tl
