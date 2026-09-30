@@ -17,9 +17,9 @@ The design intentionally avoids a database or Redis. The generated `data` branch
 2. **MTProto/TL schemas** — official Telegram API and MTProto schemas
 3. **TDLib schema** — official TDLib API schema and structured definition index
 4. **Telegram Desktop schemas** — official Desktop API and MTProto schemas
-5. **Telegram Android client** — stable and public-beta APK metadata/resources (Stage 5A)
+5. **Telegram Android client** — stable and public-beta APK metadata/resources plus embedded TL extraction (Stages 5A–5B)
 
-Roadmap next: Android TL extraction/comparison, iOS/desktop developer resources, Bot API/Mini Apps documentation, change classification, and Telegram alerts.
+Roadmap next: Android Stable/Beta schema comparison, iOS/desktop developer resources, Bot API/Mini Apps documentation, change classification, and Telegram alerts.
 
 ### Telegram Android client
 
