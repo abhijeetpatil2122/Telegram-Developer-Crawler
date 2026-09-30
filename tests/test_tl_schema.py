@@ -95,3 +95,18 @@ def test_validate_tl_text_guards_mass_removal():
 
 def test_definition_keys_extracts_constructor_ids():
     assert definition_keys("foo#1234 x:int = Foo;") == {"foo#1234"}
+
+
+def test_validate_tl_text_accepts_small_valid_schema_without_previous_snapshot():
+    current = "\n".join(
+        [
+            "a#00000001 = A;",
+            "b#00000002 = B;",
+            "c#00000003 = C;",
+            "d#00000004 = D;",
+            "e#00000005 = E;",
+            "---functions---",
+            "method#00000006 = Result;",
+        ]
+    )
+    validate_tl_text(None, current, required_markers=("---functions---",))
