@@ -110,8 +110,6 @@ def write_snapshot(path: Path, value: Any) -> None:
 async def discover_production_endpoints() -> dict[str, tuple[str, int]]:
     api_id = int(os.environ["TG_API_ID"])
     api_hash = os.environ["TG_API_HASH"]
-    bot_token = os.environ["TG_BOT_TOKEN"]
-
     client = TelegramClient(
         MemorySession(),
         api_id,
@@ -120,7 +118,7 @@ async def discover_production_endpoints() -> dict[str, tuple[str, int]]:
         system_version="1.0",
         app_version="0.1",
     )
-    await client.start(bot_token=bot_token)
+    await client.connect()
     try:
         config = await client(GetConfigRequest())
         return parse_dc_options(config)
@@ -134,7 +132,6 @@ async def collect_dc(
     endpoint: tuple[str, int],
     api_id: int,
     api_hash: str,
-    bot_token: str,
 ) -> None:
     session = MemorySession()
     dc_id = int(dc.replace("-test", ""))
@@ -152,10 +149,10 @@ async def collect_dc(
         app_version="0.1",
     )
 
-    await client.start(bot_token=bot_token)
+    await client.connect()
     try:
         config = await client(GetConfigRequest())
-        app_config = await client(GetAppConfigRequest())
+        app_config = await client(GetAppConfigRequest(0))
 
         target = DATA_ROOT / ("test" if test_mode else "production") / f"dc{dc.replace('-test', '')}"
         write_snapshot(target / "config.json", normalize_config(config))
@@ -168,8 +165,6 @@ async def collect_all() -> None:
     production = await discover_production_endpoints()
     production_api_id = int(os.environ["TG_API_ID"])
     production_api_hash = os.environ["TG_API_HASH"]
-    production_bot_token = os.environ["TG_BOT_TOKEN"]
-
     jobs = [
         collect_dc(
             dc,
@@ -177,7 +172,6 @@ async def collect_all() -> None:
             production[dc],
             production_api_id,
             production_api_hash,
-            production_bot_token,
         )
         for dc in PRODUCTION_DCS
     ]
@@ -185,9 +179,7 @@ async def collect_all() -> None:
     test_endpoints = load_test_endpoints()
     test_api_id = os.getenv("TG_TEST_API_ID")
     test_api_hash = os.getenv("TG_TEST_API_HASH")
-    test_bot_token = os.getenv("TG_TEST_BOT_TOKEN")
-
-    if test_endpoints and test_api_id and test_api_hash and test_bot_token:
+    if test_endpoints and test_api_id and test_api_hash:
         jobs.extend(
             collect_dc(
                 dc,
@@ -195,7 +187,6 @@ async def collect_all() -> None:
                 test_endpoints[dc],
                 int(test_api_id),
                 test_api_hash,
-                test_bot_token,
             )
             for dc in TEST_DCS
             if dc in test_endpoints
