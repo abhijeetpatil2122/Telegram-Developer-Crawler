@@ -47,6 +47,7 @@ def normalize_config(value: Any) -> Any:
     data["date"] = 0
     data["expires"] = 0
     data["dc_options"] = []
+    data["autologin_token"] = None
     return data
 
 
