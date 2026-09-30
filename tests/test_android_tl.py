@@ -43,6 +43,13 @@ def test_normalize_tl():
     assert normalize_tl("a  \r\nb  \n") == "a\nb\n"
 
 
+def test_parse_layer_from_tlrpc():
+    source = "public class TLRPC { public TLRPC() { this.layer = 226; } }"
+    definitions, layer = parse_java_source(source, "sources/org/telegram/tgnet/TLRPC.java")
+    assert definitions == []
+    assert layer == 226
+
+
 def test_parse_constructor_and_method():
     definitions, layer = parse_java_source(JAVA, "TLRPC.java")
     assert layer is None
