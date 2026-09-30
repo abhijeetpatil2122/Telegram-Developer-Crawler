@@ -1,0 +1,12 @@
+{
+  "production_dcs": ["1", "2", "3", "4", "5"],
+  "test_dcs": ["1-test", "2-test", "3-test"],
+  "collectors": [
+    "help.getConfig",
+    "help.getAppConfig"
+  ],
+  "normalization": {
+    "config": ["date", "expires", "dc_options"],
+    "app_config": ["ton_usd_rate"]
+  }
+}
