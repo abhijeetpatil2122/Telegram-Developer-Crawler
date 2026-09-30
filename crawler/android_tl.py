@@ -62,7 +62,18 @@ ASSIGN_VECTOR_RE = re.compile(
 CAST_VECTOR_RE = re.compile(
     r"\((?P<type>[A-Za-z0-9_.$<>]+)\)\s*Vector(?:Legacy)?\."
 )
-FLAG_IF_RE = re.compile(r"\(flags\s*&\s*(?P<mask>0x[0-9a-fA-F]+|\d+)\)\s*!=\s*0")
+FLAG_IF_RE = re.compile(r"\(flags\s*&\s*(?P<mask>0x[0-9a-fA-F]+|\d+)\)\s*!=\s*0")\n\nFIELD_RE = re.compile(
+    r"(?:public|protected|private)\\s+(?:static\\s+)?(?:final\\s+)?"
+    r"(?P<type>[A-Za-z0-9_.$<>\\[\\]]+)\\s+(?P<name>[A-Za-z_$][\\w$]*)\\s*;"
+)
+WRITE_RE = re.compile(
+    r"stream\\.(?P<writer>writeInt32|writeInt64|writeDouble|writeString|"
+    r"writeByteBuffer|writeByteArray|writeBool)\\s*\\(\\s*(?P<field>[A-Za-z_$][\\w$]*)"
+)
+OBJECT_WRITE_RE = re.compile(
+    r"(?P<field>[A-Za-z_$][\\w$]*)\\.serializeToStream\\s*\\(\\s*stream"
+)
+
 
 
 def render_json(value: Any) -> str:
@@ -211,6 +222,58 @@ def parse_params(read_body: str) -> list[dict[str, str]]:
     return params
 
 
+def parse_method_params(class_body: str) -> list[dict[str, str]]:
+    fields = {m.group("name"): m.group("type") for m in FIELD_RE.finditer(class_body)}
+    body = extract_method_body(class_body, "serializeToStream") or ""
+    params: list[dict[str, str]] = []
+    seen: set[str] = set()
+    active_bit: int | None = None
+
+    for line in body.splitlines():
+        flag = FLAG_IF_RE.search(line)
+        if flag:
+            active_bit = mask_to_bit(flag.group("mask"))
+
+        match = WRITE_RE.search(line)
+        if match:
+            field = match.group("field")
+            if field not in fields or field == "constructor" or field in seen:
+                if "}" in line:
+                    active_bit = None
+                continue
+            writer = match.group("writer")
+            type_map = {
+                "writeInt32": "# " if field == "flags" else "int",
+                "writeInt64": "long",
+                "writeDouble": "double",
+                "writeString": "string",
+                "writeByteBuffer": "bytes",
+                "writeByteArray": "bytes",
+                "writeBool": "Bool",
+            }
+            typ = type_map[writer].strip()
+            if field == "flags":
+                typ = "#"
+            elif active_bit is not None and active_bit >= 0:
+                typ = f"flags.{active_bit}?{typ}"
+            params.append({"name": field, "type": typ})
+            seen.add(field)
+
+        obj = OBJECT_WRITE_RE.search(line)
+        if obj:
+            field = obj.group("field")
+            if field in fields and field not in seen:
+                typ = fields[field].split(".")[-1]
+                if active_bit is not None and active_bit >= 0:
+                    typ = f"flags.{active_bit}?{typ}"
+                params.append({"name": field, "type": typ})
+                seen.add(field)
+
+        if "}" in line:
+            active_bit = None
+
+    return params
+
 def infer_return_type(body: str) -> str | None:
     match = RETURN_TL_RE.search(body)
     if match:
@@ -254,7 +317,7 @@ def parse_java_source(text: str, source_name: str) -> tuple[list[dict[str, Any]]
         )
         if is_method and not read_body:
             read_body = extract_method_body(body, "serializeToStream") or ""
-        params = parse_params(read_body)
+        params = parse_method_params(body) if is_method else parse_params(read_body)
         if is_method:
             response_body = (
                 extract_method_body(body, "deserializeResponse")
@@ -362,7 +425,9 @@ def extract_channel(channel: str, jadx_bin: Path) -> dict[str, Any]:
                 java_file.relative_to(sources).as_posix(),
             )
             definitions.extend(parsed)
-            if layer is None and found_layer is not None:
+            if found_layer is not None and (
+                java_file.name == "TLRPC.java" or java_file.name.startswith("TLRPC$")
+            ):
                 layer = found_layer
 
     names = [definition_key(x) for x in definitions]
