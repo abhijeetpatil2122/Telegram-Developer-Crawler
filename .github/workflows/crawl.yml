@@ -73,6 +73,7 @@ jobs:
         run: |
           rm -rf /tmp/telegram-developer-data
           cp -a data /tmp/telegram-developer-data
+          cp docs/data-branch/README.md /tmp/telegram-developer-data-branch-README.md
 
       - name: Publish snapshots to data branch
         run: |
@@ -80,11 +81,11 @@ jobs:
           rm -rf data
           git checkout data
 
-          # The data branch is data-only. Keep only the generated data tree.
-          find . -mindepth 1 -maxdepth 1 ! -name .git ! -name data -exec rm -rf {} +
+          # The data branch contains generated data plus one branch-level README.
+          find . -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf {} +
 
-          rm -rf data
           cp -a /tmp/telegram-developer-data data
+          cp /tmp/telegram-developer-data-branch-README.md README.md
 
           git config user.name "telegram-developer-crawler[bot]"
           git config user.email "telegram-developer-crawler[bot]@users.noreply.github.com"
