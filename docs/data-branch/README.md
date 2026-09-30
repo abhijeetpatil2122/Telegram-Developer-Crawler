@@ -39,9 +39,9 @@ data/
             └── dc3/
 ```
 
-The `test/` tree is present only when the test-network credentials and endpoints are configured.
+The `test/` tree is present when the test-network API credentials are configured. The crawler has standard Telegram test DC endpoints built in and supports `TDC_TEST_DC_ENDPOINTS` as an override.
 
-Read the README inside each directory for the exact datasets and collection scope.
+Read the README inside each module directory for its collection scope.
 
 ## How history works
 
