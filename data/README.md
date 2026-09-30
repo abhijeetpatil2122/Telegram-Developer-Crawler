@@ -1,41 +1,36 @@
 # Generated Telegram developer data
 
-This directory is the generated snapshot store for the crawler.
+This directory is the generated snapshot tree published by the crawler.
 
-The repository's main branch contains crawler code and source definitions. The data branch contains only this data/ tree and its Git history.
+The repository's **main** branch contains crawler code, source definitions, tests and workflow configuration. The **data** branch is the historical archive of generated snapshots.
 
-## MTProto server data
+## Directory layout
 
-The first collector tracks these datasets:
+- `mtproto/` — MTProto/API runtime data.
+- `mtproto/config/` — configuration datasets collected from Telegram.
+- `mtproto/config/global/` — global datasets that are not stored once per production DC.
+- `mtproto/config/production/` — production DC snapshots.
+- `mtproto/config/test/` — test-network DC snapshots, when test credentials and endpoints are configured.
 
-### Per data center
+Each logical folder contains its own README describing the datasets stored there.
 
-- config.json — help.getConfig
-- cdn-config.json — help.getCdnConfig
-- countries-list.json — help.getCountriesList
-- app-config.json — help.getAppConfig
+## Snapshot rules
 
-These are stored under:
+Generated JSON files are normalized before they enter Git history. Volatile, account-specific or transport-specific fields are removed or neutralized where appropriate so that Git changes represent meaningful Telegram data changes rather than timestamps, hashes or session-specific values.
 
-data/mtproto/config/{production,test}/dcN/
+Before replacing an existing snapshot, the crawler applies a structural safety guard. A snapshot is rejected if more than 10% of previously observed leaf paths disappear.
 
-### Global user datasets
+## History
 
-When TG_USER_SESSION is configured:
+The data branch is intentionally used as the historical snapshot store. A crawler run writes a new commit only when generated data changes.
 
-- available-reactions.json — messages.getAvailableReactions
-- premium-promo.json — help.getPremiumPromo
+Do not edit generated JSON snapshots manually. Changes should come from the crawler on the main branch.
 
-These are stored under:
+## Authentication
 
-data/mtproto/config/global/
+Some datasets are public and can be collected with the API ID/hash. Other datasets require the corresponding Telegram authorization:
 
-User-only datasets are intentionally normalized to remove account-specific or volatile fields before they enter Git history.
+- Bot-only global data uses `TG_BOT_TOKEN`.
+- User-only global data uses `TG_USER_SESSION`.
 
-## Git history
-
-Do not edit generated snapshots manually.
-
-Every crawler run compares the newly generated snapshots with the previous data-branch version. Git history therefore acts as the historical change detector and evidence store.
-
-The data branch is data-only by design; crawler source code, workflows, tests and source manifests belong on main.
+A user StringSession is a credential and must never be committed to this repository or included in generated data.
