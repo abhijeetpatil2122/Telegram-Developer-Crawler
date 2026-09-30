@@ -76,13 +76,17 @@ jobs:
         run: |
           git fetch origin data:data
           git checkout data
+
+          # The data branch is data-only. Keep only the generated data tree.
+          find . -mindepth 1 -maxdepth 1 ! -name .git ! -name data -exec rm -rf {} +
+
           rm -rf data
           cp -a /tmp/telegram-developer-data data
 
           git config user.name "telegram-developer-crawler[bot]"
           git config user.email "telegram-developer-crawler[bot]@users.noreply.github.com"
 
-          git add data
+          git add -A
           if git diff --cached --quiet; then
             echo "No data changes."
             exit 0
