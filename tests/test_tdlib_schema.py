@@ -49,10 +49,10 @@ def test_validate_schema_rejects_tiny_schema():
 
 def test_validate_schema_guards_mass_removal():
     previous = (
-        [{"kind": "constructors", "name": f"c{i}"} for i in range(100)]
-        + [{"kind": "functions", "name": f"f{i}"} for i in range(100)]
+        [{"kind": "constructors", "name": f"c{i}"} for i in range(200)]
+        + [{"kind": "functions", "name": f"f{i}"} for i in range(200)]
     )
-    current = previous[:10] + [{"kind": "functions", "name": "f0"}]
+    current = previous[:150] + [{"kind": "functions", "name": "f0"}]
 
     try:
         validate_schema(previous, current)
