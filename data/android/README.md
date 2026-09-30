@@ -39,3 +39,9 @@ Stage 5A refuses to publish an artifact when:
 - version metadata cannot be parsed.
 
 No APK bytes are stored in Git.
+
+## Module 5B — Android TL extraction
+
+Stage 5B downloads each recorded APK into a temporary workspace, decompiles `org.telegram.tgnet` with a pinned JADX release, reconstructs TL constructors/methods from generated serialization code, and records the embedded layer. Only normalized `tl.tl`, structured `tl.json`, and extraction metadata are published; APKs and decompiled Java sources are never committed.
+
+Safety checks require at least 500 constructors and 200 methods, reject duplicate definition keys, and reject historical definition loss above 10%. Stable and Public Beta are processed independently.
