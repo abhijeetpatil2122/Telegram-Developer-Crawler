@@ -65,8 +65,6 @@ jobs:
           TG_USER_SESSION: ${{ secrets.TG_USER_SESSION }}
           TG_TEST_API_ID: ${{ secrets.TG_TEST_API_ID }}
           TG_TEST_API_HASH: ${{ secrets.TG_TEST_API_HASH }}
-          TG_TEST_BOT_TOKEN: ${{ secrets.TG_TEST_BOT_TOKEN }}
-          TDC_TEST_DC_ENDPOINTS: ${{ secrets.TDC_TEST_DC_ENDPOINTS }}
         run: python -m crawler.mtproto_config
 
       - name: Save generated snapshots
@@ -74,6 +72,7 @@ jobs:
           rm -rf /tmp/telegram-developer-data
           cp -a data /tmp/telegram-developer-data
           cp docs/data-branch/README.md /tmp/telegram-developer-data-branch-README.md
+          cp docs/modules/mtproto/README.md /tmp/telegram-developer-mtproto-README.md
 
       - name: Publish snapshots to data branch
         run: |
@@ -86,6 +85,8 @@ jobs:
 
           cp -a /tmp/telegram-developer-data data
           cp /tmp/telegram-developer-data-branch-README.md README.md
+          mkdir -p data/mtproto
+          cp /tmp/telegram-developer-mtproto-README.md data/mtproto/README.md
 
           git config user.name "telegram-developer-crawler[bot]"
           git config user.email "telegram-developer-crawler[bot]@users.noreply.github.com"
