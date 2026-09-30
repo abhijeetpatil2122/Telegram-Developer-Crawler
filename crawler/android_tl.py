@@ -376,13 +376,43 @@ def find_previous(channel: str) -> dict[str, Any] | None:
         return None
 
 
-def download_file(url: str, destination: Path) -> None:
-    with httpx.Client(timeout=180.0, follow_redirects=True) as client:
-        with client.stream("GET", url, headers={"User-Agent": "Telegram-Developer-Crawler/0.1"}) as r:
-            r.raise_for_status()
-            with destination.open("wb") as f:
-                for chunk in r.iter_bytes():
-                    f.write(chunk)
+def download_file(url: str, destination: Path, attempts: int = 5) -> None:
+    last_error: Exception | None = None
+    for attempt in range(1, attempts + 1):
+        try:
+            with httpx.Client(timeout=180.0, follow_redirects=True) as client:
+                with client.stream(
+                    "GET",
+                    url,
+                    params={"tdcNoCache": os.urandom(8).hex()} if "telegram.org/dl/" in url else None,
+                    headers={"User-Agent": "Telegram-Developer-Crawler/0.1"},
+                ) as r:
+                    if r.status_code >= 500:
+                        r.raise_for_status()
+                    r.raise_for_status()
+                    with destination.open("wb") as f:
+                        for chunk in r.iter_bytes():
+                            f.write(chunk)
+            return
+        except httpx.HTTPStatusError as exc:
+            if exc.response.status_code < 500 or attempt == attempts:
+                raise
+            last_error = exc
+        except (httpx.TimeoutException, httpx.NetworkError, httpx.ProtocolError) as exc:
+            if attempt == attempts:
+                raise
+            last_error = exc
+        import time
+        time.sleep(min(2 ** (attempt - 1), 8))
+    raise RuntimeError(f"download failed: {last_error}")
+
+
+def sha256_file(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as f:
+        for chunk in iter(lambda: f.read(1024 * 1024), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
 
 
 def run_jadx(jadx_bin: Path, apk: Path, output: Path) -> None:
@@ -401,12 +431,19 @@ def run_jadx(jadx_bin: Path, apk: Path, output: Path) -> None:
 def extract_channel(channel: str, jadx_bin: Path) -> dict[str, Any]:
     metadata_path = DATA_ROOT / channel / "metadata.json"
     metadata = json.loads(metadata_path.read_text(encoding="utf-8"))
-    apk_url = metadata["resolved_url"]
+    apk_url = metadata["source_url"]
     with tempfile.TemporaryDirectory(prefix=f"tdc-android-tl-{channel}-") as temp:
         root = Path(temp)
         apk = root / "app.apk"
         sources = root / "jadx"
         download_file(apk_url, apk)
+        actual_sha256 = sha256_file(apk)
+        expected_sha256 = metadata["artifact"]["sha256"]
+        if actual_sha256 != expected_sha256:
+            raise RuntimeError(
+                f"{channel} APK changed between Module 5A and 5B: "
+                f"expected {expected_sha256}, got {actual_sha256}"
+            )
         run_jadx(jadx_bin, apk, sources)
 
         package_root = sources / "sources" / Path(*PACKAGE_PREFIX.split("."))
