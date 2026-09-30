@@ -601,10 +601,11 @@ def extract_channel(channel: str, jadx_bin: Path) -> dict[str, Any]:
 
     canonical_definitions: list[dict[str, Any]] = []
     for key, candidates in by_name.items():
-        candidates.sort(key=lambda pair: (pair[1], pair[0]["id"]))
-        chosen = candidates[0][0]
-        if any(item["id"] != chosen["id"] for item, _ in candidates[1:]):
-            raise ValueError(f"Android TL canonicalization found conflicting IDs for {key[1]}")
+        canonical_candidates_for_name = [item for item, historical in candidates if not historical]
+        chosen = sorted(
+            canonical_candidates_for_name or [item for item, _ in candidates],
+            key=lambda item: item["id"],
+        )[0]
         canonical_definitions.append(chosen)
 
     names = [definition_key(x) for x in canonical_definitions]
