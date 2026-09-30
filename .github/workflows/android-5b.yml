@@ -51,4 +51,9 @@ jobs:
               assert data["counts"]["constructors"] >= 500
               assert data["counts"]["methods"] >= 200
               assert data["layer"] is not None
+              tl = Path(f"data/android/{channel}/tl.tl").read_text()
+              assert "---types---" in tl
+              assert "---functions---" in tl
+              assert f"// LAYER {data['layer']}" in tl
+              assert "TL_" not in tl
           PY
