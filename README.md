@@ -20,6 +20,8 @@ The planned roadmap continues with TDLib schemas, Telegram Desktop schemas, Andr
 
 ### MTProto configuration
 
+Data is separated by dataset: `config/` for `help.getConfig`, `app-config/` for `help.getAppConfig`, `countries-list/` for `help.getCountriesList`, and `global/` for DC-independent datasets.
+
 Per production/test DC:
 - `help.getConfig`
 - `help.getCountriesList`
@@ -40,7 +42,7 @@ The crawler collects the official API and MTProto TL schemas from:
 - `https://core.telegram.org/schema/mtproto`
 - `https://core.telegram.org/schema/mtproto-json`
 
-Both the human-readable TL form and JSON form are stored. The API layer is read from the live schema instead of hard-coded.
+Both the human-readable TL form and JSON form are stored under `data/mtproto/tl/`. The API layer is read from the live schema instead of hard-coded.
 
 ## Credentials
 
