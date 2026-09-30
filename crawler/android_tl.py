@@ -41,32 +41,32 @@ TYPE_READERS = {
 }
 
 CLASS_RE = re.compile(
-    r"(?:public\\s+)?(?:static\\s+)?(?:final\\s+)?class\\s+"
-    r"(?P<name>[A-Za-z_$][\\w$]*)(?:\\s+extends\\s+(?P<extends>[A-Za-z0-9_.$<>]+))?"
+    r"(?:public\s+)?(?:static\s+)?(?:final\s+)?class\s+"
+    r"(?P<name>[A-Za-z_$][\w$]*)(?:\s+extends\s+(?P<extends>[A-Za-z0-9_.$<>]+))?"
 )
-CONSTRUCTOR_RE = re.compile(r"\\bconstructor\\s*=\\s*(?P<id>-?0x[0-9a-fA-F]+|-?\\d+)\\s*;")
-LAYER_RE = re.compile(r"\\b(?:this\\.)?layer\\s*=\\s*(\\d+)\\s*;")
-RETURN_TL_RE = re.compile(r"return\\s+([A-Za-z0-9_.$]+)\\.TLdeserialize\\s*\\(")
-RETURN_READ_RE = re.compile(r"return\\s+stream\\.([A-Za-z0-9_]+)\\s*\\(")
+CONSTRUCTOR_RE = re.compile(r"\bconstructor\s*=\s*(?P<id>-?0x[0-9a-fA-F]+|-?\d+)\s*;")
+LAYER_RE = re.compile(r"\b(?:this\.)?layer\s*=\s*(\d+)\s*;")
+RETURN_TL_RE = re.compile(r"return\s+([A-Za-z0-9_.$]+)\.TLdeserialize\s*\(")
+RETURN_READ_RE = re.compile(r"return\s+stream\.([A-Za-z0-9_]+)\s*\(")
 ASSIGN_TL_RE = re.compile(
-    r"(?P<field>[A-Za-z_$][\\w$]*)\\s*=\\s*(?:\\([^)]+\\)\\s*)?"
-    r"(?P<type>[A-Za-z0-9_.$]+)\\.TLdeserialize\\s*\\("
+    r"(?P<field>[A-Za-z_$][\w$]*)\s*=\s*(?:\([^)]+\)\s*)?"
+    r"(?P<type>[A-Za-z0-9_.$]+)\.TLdeserialize\s*\("
 )
 ASSIGN_READ_RE = re.compile(
-    r"(?P<field>[A-Za-z_$][\\w$]*)\\s*=\\s*stream\\.(?P<reader>[A-Za-z0-9_]+)\\s*\\("
+    r"(?P<field>[A-Za-z_$][\w$]*)\s*=\s*stream\.(?P<reader>[A-Za-z0-9_]+)\s*\("
 )
 ASSIGN_VECTOR_RE = re.compile(
-    r"(?P<field>[A-Za-z_$][\\w$]*)\\s*=\\s*(?:\\([^)]+\\)\\s*)?"
-    r"Vector(?:Legacy)?\\.(?:deserialize|deserializeVector)\\s*\\("
+    r"(?P<field>[A-Za-z_$][\w$]*)\s*=\s*(?:\([^)]+\)\s*)?"
+    r"Vector(?:Legacy)?\.(?:deserialize|deserializeVector)\s*\("
 )
 CAST_VECTOR_RE = re.compile(
-    r"\\((?P<type>[A-Za-z0-9_.$<>]+)\\)\\s*Vector(?:Legacy)?\\."
+    r"\((?P<type>[A-Za-z0-9_.$<>]+)\)\s*Vector(?:Legacy)?\."
 )
-FLAG_IF_RE = re.compile(r"\\(flags\\s*&\\s*(?P<mask>0x[0-9a-fA-F]+|\\d+)\\)\\s*!=\\s*0")
+FLAG_IF_RE = re.compile(r"\(flags\s*&\s*(?P<mask>0x[0-9a-fA-F]+|\d+)\)\s*!=\s*0")
 
 
 def render_json(value: Any) -> str:
-    return json.dumps(value, indent=2, ensure_ascii=False, sort_keys=True) + "\\n"
+    return json.dumps(value, indent=2, ensure_ascii=False, sort_keys=True) + "\n"
 
 
 def sha256_text(value: str) -> str:
@@ -74,9 +74,9 @@ def sha256_text(value: str) -> str:
 
 
 def normalize_tl(text: str) -> str:
-    text = text.replace("\\r\\n", "\\n").replace("\\r", "\\n")
+    text = text.replace("\r\n", "\n").replace("\r", "\n")
     lines = [line.rstrip() for line in text.splitlines()]
-    return "\\n".join(lines).strip() + "\\n"
+    return "\n".join(lines).strip() + "\n"
 
 
 def definition_key(item: dict[str, Any]) -> str:
@@ -126,7 +126,7 @@ def balanced_block(text: str, brace_start: int) -> str:
         if in_string:
             if escape:
                 escape = False
-            elif ch == "\\":
+            elif ch == "\":
                 escape = True
             elif ch == quote:
                 in_string = False
@@ -145,7 +145,7 @@ def balanced_block(text: str, brace_start: int) -> str:
 
 
 def extract_method_body(text: str, method: str) -> str | None:
-    match = re.search(rf"\\b{re.escape(method)}\\s*\\([^)]*\\)\\s*\\{{", text)
+    match = re.search(rf"\b{re.escape(method)}\s*\([^)]*\)\s*\{{", text)
     if not match:
         return None
     brace = text.find("{", match.start())
@@ -164,7 +164,7 @@ def parse_params(read_body: str) -> list[dict[str, str]]:
     seen: set[str] = set()
 
     # The flags integer itself is a TL flags field.
-    if re.search(r"\\bflags\\s*=\\s*stream\\.readInt32\\s*\\(", read_body):
+    if re.search(r"\bflags\s*=\s*stream\.readInt32\s*\(", read_body):
         params.append({"name": "flags", "type": "#"})
         seen.add("flags")
 
@@ -291,7 +291,7 @@ def to_tl(definitions: list[dict[str, Any]], layer: int | None) -> str:
     for item in sorted(methods, key=lambda x: (x["name"], x["id"])):
         params = " ".join(f"{p['name']}:{p['type']}" for p in item["params"])
         lines.append(f"{item['name']}#{item['id'] & 0xffffffff:08x} {params} = {item['result']};".replace("  ", " ").strip())
-    return normalize_tl("\\n".join(lines))
+    return normalize_tl("\n".join(lines))
 
 
 def find_previous(channel: str) -> dict[str, Any] | None:
@@ -323,7 +323,7 @@ def run_jadx(jadx_bin: Path, apk: Path, output: Path) -> None:
     process = subprocess.run(cmd, text=True, stdout=subprocess.PIPE,
                              stderr=subprocess.STDOUT, timeout=1200, check=False)
     if process.returncode != 0:
-        raise RuntimeError(f"jadx failed ({process.returncode}):\\n{process.stdout[-6000:]}")
+        raise RuntimeError(f"jadx failed ({process.returncode}):\n{process.stdout[-6000:]}")
 
 
 def extract_channel(channel: str, jadx_bin: Path) -> dict[str, Any]:
