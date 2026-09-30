@@ -2,24 +2,24 @@
   "channels": {
     "beta": {
       "counts": {
-        "constructors": 1946,
+        "constructors": 1885,
         "methods": 726,
-        "total": 2672
+        "total": 2611
       },
       "json": "beta/tl.json",
       "layer": 229,
-      "sha256": "aa61b2805d363076a4054679c653ffc7166d410f81b013a02c8151cdf20438a8",
+      "sha256": "231dfc4ef952e579b849de34a084666dbdcc7a6ba92b83ef1b1120560748e17b",
       "tl": "beta/tl.tl"
     },
     "stable": {
       "counts": {
-        "constructors": 1947,
+        "constructors": 1886,
         "methods": 730,
-        "total": 2677
+        "total": 2616
       },
       "json": "stable/tl.json",
       "layer": 229,
-      "sha256": "2a7840dfe11594b48ac2fc542cd29ab8a4d968a8c324d0584a00b954ea6bffc3",
+      "sha256": "82ebebcf18bd098273156abd27d9927d9ae70fd24ee4a0cdd9692143098254a2",
       "tl": "stable/tl.tl"
     }
   },

@@ -24,14 +24,14 @@
   "source_url": "https://telegram.org/dl/android/apk",
   "tl_extraction": {
     "counts": {
-      "constructors": 1947,
+      "constructors": 1886,
       "methods": 730,
-      "total": 2677
+      "total": 2616
     },
     "jadx": "https://github.com/skylot/jadx/releases/download/v1.5.6/jadx-1.5.6.zip",
     "json": "tl.json",
     "layer": 229,
-    "sha256": "2a7840dfe11594b48ac2fc542cd29ab8a4d968a8c324d0584a00b954ea6bffc3",
+    "sha256": "82ebebcf18bd098273156abd27d9927d9ae70fd24ee4a0cdd9692143098254a2",
     "stage": "5B",
     "target_package": "org.telegram.tgnet",
     "tl": "tl.tl"
