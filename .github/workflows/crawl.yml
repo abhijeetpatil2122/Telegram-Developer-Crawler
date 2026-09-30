@@ -2,8 +2,7 @@ name: Crawl Telegram developer data
 
 on:
   push:
-    branches:
-      - main
+    branches: [main]
   workflow_dispatch:
   schedule:
     - cron: "*/30 * * * *"
@@ -20,21 +19,17 @@ jobs:
     runs-on: ubuntu-latest
     environment: appConfig
     timeout-minutes: 15
-
     steps:
       - name: Checkout crawler
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-
       - name: Install dependencies
         run: pip install -r requirements.txt
-
       - name: Validate required credentials
         env:
           TG_API_ID: ${{ secrets.TG_API_ID }}
@@ -49,13 +44,7 @@ jobs:
               missing=1
             fi
           done
-          if [ "$missing" -ne 0 ]; then
-            echo "The collect job is connected to the GitHub Environment 'appConfig'."
-            echo "Check that TG_API_ID, TG_API_HASH, and TG_BOT_TOKEN are secrets in that environment."
-            exit 1
-          fi
-          echo "Required Telegram credentials are present."
-
+          if [ "$missing" -ne 0 ]; then exit 1; fi
       - name: Collect Telegram configuration
         env:
           TG_API_ID: ${{ secrets.TG_API_ID }}
@@ -64,13 +53,12 @@ jobs:
           TG_USER_SESSION: ${{ secrets.TG_USER_SESSION }}
           TDC_TEST_DC_ENDPOINTS: ${{ secrets.TDC_TEST_DC_ENDPOINTS }}
         run: python -m crawler.mtproto_config
-
       - name: Collect MTProto TL schemas
         run: python -m crawler.tl_schema
-
       - name: Collect TDLib schema
         run: python -m crawler.tdlib_schema
-
+      - name: Collect Telegram Desktop schemas
+        run: python -m crawler.tdesktop_schema
       - name: Save generated snapshots
         run: |
           rm -rf /tmp/telegram-developer-data
@@ -78,30 +66,22 @@ jobs:
           cp docs/data-branch/README.md /tmp/telegram-developer-data-branch-README.md
           cp docs/modules/mtproto/README.md /tmp/telegram-developer-mtproto-README.md
           cp docs/modules/tdlib/README.md /tmp/telegram-developer-tdlib-README.md
-
+          cp docs/modules/tdesktop/README.md /tmp/telegram-developer-tdesktop-README.md
       - name: Publish snapshots to data branch
         run: |
           git fetch origin data:data
           rm -rf data
           git checkout data
-
-          # The data branch contains generated data plus one branch-level README.
           find . -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf {} +
-
           cp -a /tmp/telegram-developer-data data
           cp /tmp/telegram-developer-data-branch-README.md README.md
-          mkdir -p data/mtproto data/tdlib
+          mkdir -p data/mtproto data/tdlib data/tdesktop
           cp /tmp/telegram-developer-mtproto-README.md data/mtproto/README.md
           cp /tmp/telegram-developer-tdlib-README.md data/tdlib/README.md
-
+          cp /tmp/telegram-developer-tdesktop-README.md data/tdesktop/README.md
           git config user.name "telegram-developer-crawler[bot]"
           git config user.email "telegram-developer-crawler[bot]@users.noreply.github.com"
-
           git add -A
-          if git diff --cached --quiet; then
-            echo "No data changes."
-            exit 0
-          fi
-
+          if git diff --cached --quiet; then echo "No data changes."; exit 0; fi
           git commit -m "chore(data): update Telegram developer snapshots"
           git push origin data
