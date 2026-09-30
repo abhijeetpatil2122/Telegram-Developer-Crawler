@@ -57,6 +57,15 @@ def normalize_app_config(value: Any) -> Any:
     return data
 
 
+def normalize_premium_promo(value: Any) -> Any:
+    data = json_safe(value.to_dict())
+    data["users"] = []
+    data["status_text"] = "crawler"
+    data["status_entities"] = []
+    data["period_options"] = []
+    return data
+
+
 def parse_dc_options(config: Any) -> dict[str, tuple[str, int]]:
     endpoints: dict[str, tuple[str, int]] = {}
 
