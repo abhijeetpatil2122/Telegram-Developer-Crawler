@@ -38,7 +38,7 @@ For production:
 5. Collect the four per-DC datasets independently.
 6. If `TG_USER_SESSION` is configured, collect the two user-only datasets into the global snapshot.
 
-For test DCs, endpoints and separate test-network credentials are optional because the test network is separate from production.
+For test DCs, the collector uses Telegram's standard test-network endpoints and separate test-network API credentials. The endpoints can be overridden with TDC_TEST_DC_ENDPOINTS when necessary.
 
 Known volatile values are normalized before snapshots are written:
 
@@ -56,9 +56,10 @@ main
 ├── crawler/              # collectors, normalization, validation
 ├── sources/              # source manifests and collector configuration
 ├── .github/workflows/    # scheduled collection and data-branch publishing
-└── data/                 # local working tree for generated snapshots
+├── docs/                 # data-branch and module README templates
+└── tests/                # collector and safety tests
 
-data
+data branch
 └── data/                 # generated historical snapshots
 ```
 
@@ -88,7 +89,7 @@ cp .env.example .env
 
 Then fill in the values. The MTProto configuration collector requires `TG_API_ID` and `TG_API_HASH`. It connects without logging in, which allows `help.getConfig` and `help.getAppConfig` to be collected without using a bot account. `TG_BOT_TOKEN` is optional and is reserved for the future Telegram alerting layer.
 
-Test collection additionally requires `TG_TEST_API_ID`, `TG_TEST_API_HASH`, and `TDC_TEST_DC_ENDPOINTS`. `TG_TEST_BOT_TOKEN` is optional and reserved for future bot-based collectors or alerts.
+Test collection additionally requires `TG_TEST_API_ID` and `TG_TEST_API_HASH`. Telegram's standard test DC endpoints are built in; `TDC_TEST_DC_ENDPOINTS` is an optional override.
 
 GitHub Actions reads these secrets from the `appConfig` environment.
 
