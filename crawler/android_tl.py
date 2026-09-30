@@ -585,11 +585,27 @@ def extract_channel(channel: str, jadx_bin: Path) -> dict[str, Any]:
     # The Android package contains historical TL classes for compatibility.
     # Canonicalize only after the layer has been discovered so _layerNNN/_old
     # classes can be filtered consistently against the current layer.
-    canonical_definitions: list[dict[str, Any]] = []
+    canonical_candidates: list[tuple[dict[str, Any], bool]] = []
     for definition in definitions:
         canonical = canonicalize_definition(definition, layer)
-        if canonical is not None:
-            canonical_definitions.append(canonical)
+        if canonical is None:
+            continue
+        _, _, historical = canonical_name(definition["name"])
+        canonical_candidates.append((canonical, historical))
+
+    # If Android ships both a canonical class and a generated historical
+    # _layerNNN/_old variant with the same TL name, prefer the canonical class.
+    by_name: dict[tuple[str, str], list[tuple[dict[str, Any], bool]]] = {}
+    for item, historical in canonical_candidates:
+        by_name.setdefault((item["kind"], item["name"]), []).append((item, historical))
+
+    canonical_definitions: list[dict[str, Any]] = []
+    for key, candidates in by_name.items():
+        candidates.sort(key=lambda pair: (pair[1], pair[0]["id"]))
+        chosen = candidates[0][0]
+        if any(item["id"] != chosen["id"] for item, _ in candidates[1:]):
+            raise ValueError(f"Android TL canonicalization found conflicting IDs for {key[1]}")
+        canonical_definitions.append(chosen)
 
     names = [definition_key(x) for x in canonical_definitions]
     if len(names) != len(set(names)):
