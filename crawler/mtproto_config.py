@@ -15,6 +15,7 @@ from pathlib import Path
 from typing import Any
 
 from telethon import TelegramClient
+from telethon.sessions import MemorySession
 from telethon.tl.functions.help import GetAppConfigRequest, GetConfigRequest
 
 
@@ -25,8 +26,18 @@ PRODUCTION_DCS = ("1", "2", "3", "4", "5")
 TEST_DCS = ("1-test", "2-test", "3-test")
 
 
+def json_safe(value: Any) -> Any:
+    if isinstance(value, bytes):
+        return {"__bytes__": value.hex()}
+    if isinstance(value, dict):
+        return {str(k): json_safe(v) for k, v in value.items()}
+    if isinstance(value, (list, tuple)):
+        return [json_safe(v) for v in value]
+    return value
+
+
 def normalize_config(value: Any) -> Any:
-    data = value.to_dict()
+    data = json_safe(value.to_dict())
     data["date"] = 0
     data["expires"] = 0
     data["dc_options"] = []
@@ -34,26 +45,22 @@ def normalize_config(value: Any) -> Any:
 
 
 def normalize_app_config(value: Any) -> Any:
-    data = value.to_dict()
+    data = json_safe(value.to_dict())
     # This value changes independently of the configuration itself.
     data.pop("ton_usd_rate", None)
     return data
 
 
-def session_name(dc: str) -> str:
-    safe = dc.replace("-", "_")
-    return os.path.join(
-        os.environ.get("TDC_SESSION_DIR", str(ROOT / ".sessions")),
-        f"dc_{safe}",
-    )
-
-
-async def collect_dc(dc: str, test_mode: bool) -> None:
+async def collect_dc(dc: str, test_mode: bool, endpoint: tuple[str, int]) -> None:
     api_id = int(os.environ["TG_API_ID"])
     api_hash = os.environ["TG_API_HASH"]
 
+    session = MemorySession()
+    dc_id = int(dc.replace("-test", ""))
+    session.set_dc(dc_id, endpoint[0], endpoint[1])
+
     client = TelegramClient(
-        session_name(dc),
+        session,
         api_id,
         api_hash,
         test_mode=test_mode,
@@ -62,7 +69,7 @@ async def collect_dc(dc: str, test_mode: bool) -> None:
         app_version="0.1",
     )
 
-    await client.start()
+    await client.start(bot_token=os.environ["TG_BOT_TOKEN"])
     try:
         config = await client(GetConfigRequest())
         app_config = await client(GetAppConfigRequest())
@@ -83,11 +90,12 @@ async def collect_dc(dc: str, test_mode: bool) -> None:
 
 
 async def collect_all() -> None:
-    jobs = [
-        collect_dc(dc, False) for dc in PRODUCTION_DCS
-    ] + [
-        collect_dc(dc, True) for dc in TEST_DCS
-    ]
+    endpoints = json.loads(os.environ["TDC_DC_ENDPOINTS"])
+    jobs = []
+    for dc in PRODUCTION_DCS:
+        jobs.append(collect_dc(dc, False, tuple(endpoints[dc])))
+    for dc in TEST_DCS:
+        jobs.append(collect_dc(dc, True, tuple(endpoints[dc])))
     await asyncio.gather(*jobs)
 
 
