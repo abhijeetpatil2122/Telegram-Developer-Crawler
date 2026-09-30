@@ -1,4 +1,7 @@
 from crawler.android_tl import (
+    canonical_name,
+    canonical_type,
+    canonicalize_definition,
     definition_key,
     normalize_tl,
     parse_java_source,
@@ -101,3 +104,42 @@ def test_to_tl():
     assert "---functions---" in text
     assert "z#00000001 = Z;" in text
     assert "a#00000002 = X;" in text
+
+
+def test_canonical_android_names():
+    assert canonical_name("TL_auth_authorization")[0] == "auth.authorization"
+    assert canonical_name("TL_attachMenuBot_layer140") == ("attachMenuBot", 140, True)
+    assert canonical_name("TL_audio_old2") == ("audio", None, True)
+    assert canonical_name("TL_channel")[0] == "channel"
+
+
+def test_canonical_types():
+    assert canonical_type("TL_auth_authorization") == "auth.authorization"
+    assert canonical_type("TL_help_termsOfService") == "help.termsOfService"
+    assert canonical_type("Vector<TL_User>") == "Vector<User>"
+    assert canonical_type("flags.3?TL_messages_messages") == "flags.3?messages.messages"
+
+
+def test_canonicalize_historical_definition():
+    current = {
+        "kind": "constructor",
+        "name": "TL_attachMenuBot_layer140",
+        "id": 1,
+        "type": "TL_AttachMenuBot",
+        "params": [{"name": "x", "type": "TL_auth_authorization"}],
+    }
+    assert canonicalize_definition(current, 229) is None
+
+
+def test_canonicalize_current_definition():
+    current = {
+        "kind": "constructor",
+        "name": "TL_auth_authorization",
+        "id": 1,
+        "type": "TL_auth_Authorization",
+        "params": [{"name": "user", "type": "TL_User"}],
+    }
+    normalized = canonicalize_definition(current, 229)
+    assert normalized["name"] == "auth.authorization"
+    assert normalized["type"] == "auth.Authorization"
+    assert normalized["params"] == [{"name": "user", "type": "User"}]
