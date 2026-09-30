@@ -45,11 +45,13 @@ CLASS_RE = re.compile(
     r"(?P<name>[A-Za-z_$][\w$]*)(?:\s+extends\s+(?P<extends>[A-Za-z0-9_.$<>]+))?"
 )
 CONSTRUCTOR_RE = re.compile(r"\bconstructor\s*=\s*(?P<id>-?0x[0-9a-fA-F]+|-?\d+)\s*;")
-LAYER_RE = re.compile(
-    r"\bLAYER\s*=\s*(?P<constant>\d+)\s*;"
-    r"|\b(?:this\.)?layer\s*=\s*(?P<field>\d+)\s*;"
-    r"|\bcurrentLayer\s*=\s*(?P<current>\d+)\s*;"
+LAYER_PATTERNS = (
+    re.compile(r"\b(?:this\.)?layer\s*=\s*(?P<value>\d+)\s*;"),
+    re.compile(r"\b(?:static\s+)?(?:final\s+)?(?:int|long)\s+LAYER\s*=\s*(?P<value>\d+)\s*;"),
+    re.compile(r"\bcurrentLayer\s*=\s*(?P<value>\d+)\s*;"),
+    re.compile(r"\bgetLayer\s*\([^)]*\)\s*\{\s*return\s+(?P<value>\d+)\s*;"),
 )
+
 RETURN_TL_RE = re.compile(r"return\s+([A-Za-z0-9_.$]+)\.TLdeserialize\s*\(")
 RETURN_READ_RE = re.compile(r"return\s+stream\.([A-Za-z0-9_]+)\s*\(")
 ASSIGN_TL_RE = re.compile(
@@ -288,16 +290,25 @@ def infer_return_type(body: str) -> str | None:
     return None
 
 
+def extract_layer_from_java(text: str, source_name: str = "") -> int | None:
+    """Extract the Android API layer from JADX output."""
+    preferred = Path(source_name).name == "TLRPC.java"
+    candidates: list[tuple[tuple[int, int], int]] = []
+    for index, pattern in enumerate(LAYER_PATTERNS):
+        match = pattern.search(text)
+        if match:
+            value = int(match.group("value"))
+            if 200 <= value <= 400:
+                candidates.append(((0 if preferred else 1, index), value))
+    if not candidates:
+        return None
+    candidates.sort(key=lambda item: item[0])
+    return candidates[0][1]
+
+
 def parse_java_source(text: str, source_name: str) -> tuple[list[dict[str, Any]], int | None]:
     definitions: list[dict[str, Any]] = []
-    layer_match = LAYER_RE.search(text)
-    layer = None
-    if layer_match:
-        for group in ("constant", "field", "current"):
-            value = layer_match.group(group)
-            if value is not None and 200 <= int(value) <= 400:
-                layer = int(value)
-                break
+    layer = extract_layer_from_java(text, source_name)
 
     for match in CLASS_RE.finditer(text):
         name = match.group("name")
