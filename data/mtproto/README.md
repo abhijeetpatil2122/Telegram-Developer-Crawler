@@ -8,11 +8,11 @@ The module is designed to track developer-relevant server and client configurati
 
 - `config/` — configuration and related server datasets.
 
-The README inside `config/` documents the individual datasets and authentication scope.
+The generated `config/` tree contains the collected datasets, grouped by scope and data center.
 
 ## Collection model
 
-The crawler uses Telethon to call the relevant MTProto methods. Production DC endpoints are discovered from `help.getConfig`; test-network endpoints are explicitly configured through the crawler environment.
+The crawler uses Telethon to call the relevant MTProto methods. Production DC endpoints are discovered from `help.getConfig`; test-network endpoints use Telegram's standard test DC endpoints with the same application API credentials; an optional environment override can replace those endpoints.
 
 Data is normalized before publication and protected by the snapshot safety guard.
 

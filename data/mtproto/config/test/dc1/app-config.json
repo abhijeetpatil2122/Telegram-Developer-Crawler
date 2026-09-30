@@ -28,189 +28,6 @@
             {
               "_": "JsonString",
               "value": "\ud83c\udfb2"
-            },
-            {
-              "_": "JsonString",
-              "value": "\ud83c\udfaf"
-            },
-            {
-              "_": "JsonString",
-              "value": "\ud83c\udfc0"
-            },
-            {
-              "_": "JsonString",
-              "value": "\u26bd"
-            },
-            {
-              "_": "JsonString",
-              "value": "\u26bd\ufe0f"
-            },
-            {
-              "_": "JsonString",
-              "value": "\ud83c\udfb0"
-            },
-            {
-              "_": "JsonString",
-              "value": "\ud83c\udfb3"
-            }
-          ]
-        }
-      },
-      {
-        "_": "JsonObjectValue",
-        "key": "emojies_send_dice_success",
-        "value": {
-          "_": "JsonObject",
-          "value": [
-            {
-              "_": "JsonObjectValue",
-              "key": "\ud83c\udfaf",
-              "value": {
-                "_": "JsonObject",
-                "value": [
-                  {
-                    "_": "JsonObjectValue",
-                    "key": "value",
-                    "value": {
-                      "_": "JsonNumber",
-                      "value": 6.0
-                    }
-                  },
-                  {
-                    "_": "JsonObjectValue",
-                    "key": "frame_start",
-                    "value": {
-                      "_": "JsonNumber",
-                      "value": 62.0
-                    }
-                  }
-                ]
-              }
-            },
-            {
-              "_": "JsonObjectValue",
-              "key": "\ud83c\udfc0",
-              "value": {
-                "_": "JsonObject",
-                "value": [
-                  {
-                    "_": "JsonObjectValue",
-                    "key": "value",
-                    "value": {
-                      "_": "JsonNumber",
-                      "value": 5.0
-                    }
-                  },
-                  {
-                    "_": "JsonObjectValue",
-                    "key": "frame_start",
-                    "value": {
-                      "_": "JsonNumber",
-                      "value": 110.0
-                    }
-                  }
-                ]
-              }
-            },
-            {
-              "_": "JsonObjectValue",
-              "key": "\u26bd",
-              "value": {
-                "_": "JsonObject",
-                "value": [
-                  {
-                    "_": "JsonObjectValue",
-                    "key": "value",
-                    "value": {
-                      "_": "JsonNumber",
-                      "value": 5.0
-                    }
-                  },
-                  {
-                    "_": "JsonObjectValue",
-                    "key": "frame_start",
-                    "value": {
-                      "_": "JsonNumber",
-                      "value": 110.0
-                    }
-                  }
-                ]
-              }
-            },
-            {
-              "_": "JsonObjectValue",
-              "key": "\u26bd\ufe0f",
-              "value": {
-                "_": "JsonObject",
-                "value": [
-                  {
-                    "_": "JsonObjectValue",
-                    "key": "value",
-                    "value": {
-                      "_": "JsonNumber",
-                      "value": 5.0
-                    }
-                  },
-                  {
-                    "_": "JsonObjectValue",
-                    "key": "frame_start",
-                    "value": {
-                      "_": "JsonNumber",
-                      "value": 110.0
-                    }
-                  }
-                ]
-              }
-            },
-            {
-              "_": "JsonObjectValue",
-              "key": "\ud83c\udfb0",
-              "value": {
-                "_": "JsonObject",
-                "value": [
-                  {
-                    "_": "JsonObjectValue",
-                    "key": "value",
-                    "value": {
-                      "_": "JsonNumber",
-                      "value": 64.0
-                    }
-                  },
-                  {
-                    "_": "JsonObjectValue",
-                    "key": "frame_start",
-                    "value": {
-                      "_": "JsonNumber",
-                      "value": 110.0
-                    }
-                  }
-                ]
-              }
-            },
-            {
-              "_": "JsonObjectValue",
-              "key": "\ud83c\udfb3",
-              "value": {
-                "_": "JsonObject",
-                "value": [
-                  {
-                    "_": "JsonObjectValue",
-                    "key": "value",
-                    "value": {
-                      "_": "JsonNumber",
-                      "value": 6.0
-                    }
-                  },
-                  {
-                    "_": "JsonObjectValue",
-                    "key": "frame_start",
-                    "value": {
-                      "_": "JsonNumber",
-                      "value": 110.0
-                    }
-                  }
-                ]
-              }
             }
           ]
         }
@@ -293,7 +110,7 @@
         "key": "groupcall_video_participants_max",
         "value": {
           "_": "JsonNumber",
-          "value": 1000.0
+          "value": 10000.0
         }
       },
       {
@@ -398,7 +215,7 @@
         "key": "ringtone_saved_count_max",
         "value": {
           "_": "JsonNumber",
-          "value": 100.0
+          "value": 5.0
         }
       },
       {
@@ -476,7 +293,7 @@
         "key": "topics_pinned_limit",
         "value": {
           "_": "JsonNumber",
-          "value": 5.0
+          "value": 3.0
         }
       },
       {
@@ -484,7 +301,7 @@
         "key": "telegram_antispam_user_id",
         "value": {
           "_": "JsonString",
-          "value": "5434988373"
+          "value": "2200583762"
         }
       },
       {
@@ -492,7 +309,7 @@
         "key": "telegram_antispam_group_size_min",
         "value": {
           "_": "JsonNumber",
-          "value": 200.0
+          "value": 1.0
         }
       },
       {
@@ -513,7 +330,7 @@
         "key": "hidden_members_group_size_min",
         "value": {
           "_": "JsonNumber",
-          "value": 100.0
+          "value": 1.0
         }
       },
       {
@@ -530,6 +347,81 @@
         "value": {
           "_": "JsonBool",
           "value": false
+        }
+      },
+      {
+        "_": "JsonObjectValue",
+        "key": "lite_battery_min_pct",
+        "value": {
+          "_": "JsonNumber",
+          "value": 20.0
+        }
+      },
+      {
+        "_": "JsonObjectValue",
+        "key": "lite_device_class",
+        "value": {
+          "_": "JsonNumber",
+          "value": 3.0
+        }
+      },
+      {
+        "_": "JsonObjectValue",
+        "key": "lite_app_options",
+        "value": {
+          "_": "JsonObject",
+          "value": [
+            {
+              "_": "JsonObjectValue",
+              "key": "chat_open_animation_enabled",
+              "value": {
+                "_": "JsonArray",
+                "value": [
+                  {
+                    "_": "JsonBool",
+                    "value": true
+                  },
+                  {
+                    "_": "JsonBool",
+                    "value": false
+                  },
+                  {
+                    "_": "JsonBool",
+                    "value": true
+                  },
+                  {
+                    "_": "JsonBool",
+                    "value": true
+                  }
+                ]
+              }
+            },
+            {
+              "_": "JsonObjectValue",
+              "key": "video_autoplay_enabled",
+              "value": {
+                "_": "JsonArray",
+                "value": [
+                  {
+                    "_": "JsonBool",
+                    "value": false
+                  },
+                  {
+                    "_": "JsonBool",
+                    "value": false
+                  },
+                  {
+                    "_": "JsonBool",
+                    "value": false
+                  },
+                  {
+                    "_": "JsonBool",
+                    "value": true
+                  }
+                ]
+              }
+            }
+          ]
         }
       },
       {
@@ -553,7 +445,7 @@
         "key": "chatlist_update_period",
         "value": {
           "_": "JsonNumber",
-          "value": 300.0
+          "value": 60.0
         }
       },
       {
@@ -577,7 +469,7 @@
         "key": "ephemeral_welcome_messages_max",
         "value": {
           "_": "JsonNumber",
-          "value": 3.0
+          "value": 5.0
         }
       },
       {
@@ -665,7 +557,7 @@
         "key": "stories_sent_weekly_limit_default",
         "value": {
           "_": "JsonNumber",
-          "value": 3.0
+          "value": 4.0
         }
       },
       {
@@ -673,7 +565,7 @@
         "key": "stories_sent_weekly_limit_premium",
         "value": {
           "_": "JsonNumber",
-          "value": 700.0
+          "value": 40.0
         }
       },
       {
@@ -681,7 +573,7 @@
         "key": "stories_sent_monthly_limit_default",
         "value": {
           "_": "JsonNumber",
-          "value": 10.0
+          "value": 5.0
         }
       },
       {
@@ -689,7 +581,7 @@
         "key": "stories_sent_monthly_limit_premium",
         "value": {
           "_": "JsonNumber",
-          "value": 3000.0
+          "value": 50.0
         }
       },
       {
@@ -697,7 +589,7 @@
         "key": "stories_venue_search_username",
         "value": {
           "_": "JsonString",
-          "value": "foursquare"
+          "value": "foursquarebot"
         }
       },
       {
@@ -769,7 +661,7 @@
         "key": "giveaway_add_peers_max",
         "value": {
           "_": "JsonNumber",
-          "value": 10.0
+          "value": 3.0
         }
       },
       {
@@ -777,7 +669,7 @@
         "key": "giveaway_countries_max",
         "value": {
           "_": "JsonNumber",
-          "value": 10.0
+          "value": 3.0
         }
       },
       {
@@ -801,7 +693,7 @@
         "key": "boosts_channel_level_max",
         "value": {
           "_": "JsonNumber",
-          "value": 100.0
+          "value": 10.0
         }
       },
       {
@@ -825,7 +717,7 @@
         "key": "channel_color_level_min",
         "value": {
           "_": "JsonNumber",
-          "value": 5.0
+          "value": 1.0
         }
       },
       {
@@ -865,7 +757,7 @@
         "key": "channel_bg_icon_level_min",
         "value": {
           "_": "JsonNumber",
-          "value": 4.0
+          "value": 1.0
         }
       },
       {
@@ -873,7 +765,7 @@
         "key": "channel_profile_bg_icon_level_min",
         "value": {
           "_": "JsonNumber",
-          "value": 7.0
+          "value": 1.0
         }
       },
       {
@@ -881,7 +773,7 @@
         "key": "channel_emoji_status_level_min",
         "value": {
           "_": "JsonNumber",
-          "value": 8.0
+          "value": 2.0
         }
       },
       {
@@ -889,7 +781,7 @@
         "key": "channel_wallpaper_level_min",
         "value": {
           "_": "JsonNumber",
-          "value": 9.0
+          "value": 3.0
         }
       },
       {
@@ -897,7 +789,7 @@
         "key": "channel_custom_wallpaper_level_min",
         "value": {
           "_": "JsonNumber",
-          "value": 10.0
+          "value": 4.0
         }
       },
       {
@@ -905,7 +797,7 @@
         "key": "saved_dialogs_pinned_limit_default",
         "value": {
           "_": "JsonNumber",
-          "value": 5.0
+          "value": 4.0
         }
       },
       {
@@ -913,7 +805,7 @@
         "key": "saved_dialogs_pinned_limit_premium",
         "value": {
           "_": "JsonNumber",
-          "value": 100.0
+          "value": 6.0
         }
       },
       {
@@ -929,7 +821,7 @@
         "key": "group_transcribe_level_min",
         "value": {
           "_": "JsonNumber",
-          "value": 6.0
+          "value": 4.0
         }
       },
       {
@@ -937,7 +829,7 @@
         "key": "group_emoji_stickers_level_min",
         "value": {
           "_": "JsonNumber",
-          "value": 4.0
+          "value": 1.0
         }
       },
       {
@@ -945,7 +837,7 @@
         "key": "group_profile_bg_icon_level_min",
         "value": {
           "_": "JsonNumber",
-          "value": 5.0
+          "value": 1.0
         }
       },
       {
@@ -953,7 +845,7 @@
         "key": "group_emoji_status_level_min",
         "value": {
           "_": "JsonNumber",
-          "value": 8.0
+          "value": 2.0
         }
       },
       {
@@ -961,7 +853,7 @@
         "key": "group_wallpaper_level_min",
         "value": {
           "_": "JsonNumber",
-          "value": 9.0
+          "value": 3.0
         }
       },
       {
@@ -969,7 +861,7 @@
         "key": "group_custom_wallpaper_level_min",
         "value": {
           "_": "JsonNumber",
-          "value": 10.0
+          "value": 4.0
         }
       },
       {
@@ -977,7 +869,7 @@
         "key": "quick_replies_limit",
         "value": {
           "_": "JsonNumber",
-          "value": 100.0
+          "value": 10.0
         }
       },
       {
@@ -1009,7 +901,7 @@
         "key": "upload_premium_speedup_notify_period",
         "value": {
           "_": "JsonNumber",
-          "value": 3600.0
+          "value": 30.0
         }
       },
       {
@@ -1033,7 +925,7 @@
         "key": "business_chat_links_limit",
         "value": {
           "_": "JsonNumber",
-          "value": 100.0
+          "value": 5.0
         }
       },
       {
@@ -1041,7 +933,7 @@
         "key": "channel_restrict_sponsored_level_min",
         "value": {
           "_": "JsonNumber",
-          "value": 50.0
+          "value": 5.0
         }
       },
       {
@@ -1073,7 +965,7 @@
         "key": "stars_revenue_withdrawal_min",
         "value": {
           "_": "JsonNumber",
-          "value": 1000.0
+          "value": 10.0
         }
       },
       {
@@ -1122,7 +1014,7 @@
         "key": "weather_search_username",
         "value": {
           "_": "JsonString",
-          "value": "StoryWeatherBot"
+          "value": "izweatherbot"
         }
       },
       {
@@ -1194,7 +1086,7 @@
         "key": "stargifts_convert_period_max",
         "value": {
           "_": "JsonNumber",
-          "value": 604800.0
+          "value": 300.0
         }
       },
       {
@@ -1295,7 +1187,7 @@
         "key": "conference_call_size_limit",
         "value": {
           "_": "JsonNumber",
-          "value": 200.0
+          "value": 5.0
         }
       },
       {
@@ -1327,7 +1219,7 @@
         "key": "channel_autotranslation_level_min",
         "value": {
           "_": "JsonNumber",
-          "value": 3.0
+          "value": 1.0
         }
       },
       {
@@ -1367,7 +1259,7 @@
         "key": "todo_items_max",
         "value": {
           "_": "JsonNumber",
-          "value": 30.0
+          "value": 10.0
         }
       },
       {
@@ -1423,7 +1315,7 @@
         "key": "stars_suggested_post_age_min",
         "value": {
           "_": "JsonNumber",
-          "value": 86400.0
+          "value": 120.0
         }
       },
       {
@@ -1471,7 +1363,7 @@
         "key": "stars_revenue_withdrawal_max",
         "value": {
           "_": "JsonNumber",
-          "value": 25000000.0
+          "value": 100.0
         }
       },
       {
@@ -1511,7 +1403,7 @@
         "key": "stories_albums_limit",
         "value": {
           "_": "JsonNumber",
-          "value": 100.0
+          "value": 20.0
         }
       },
       {
@@ -1519,7 +1411,7 @@
         "key": "stories_album_stories_limit",
         "value": {
           "_": "JsonNumber",
-          "value": 1000.0
+          "value": 200.0
         }
       },
       {
@@ -1535,7 +1427,7 @@
         "key": "ton_stargift_resale_amount_min",
         "value": {
           "_": "JsonNumber",
-          "value": 7000000000.0
+          "value": 50000000000.0
         }
       },
       {
@@ -1558,11 +1450,11 @@
             },
             {
               "_": "JsonNumber",
-              "value": 93372553.0
+              "value": 3593.0
             },
             {
               "_": "JsonNumber",
-              "value": 417160374.0
+              "value": 61567.0
             },
             {
               "_": "JsonNumber",
@@ -1570,7 +1462,7 @@
             },
             {
               "_": "JsonNumber",
-              "value": 8591891104.0
+              "value": 5001525638.0
             }
           ]
         }
@@ -2178,7 +2070,7 @@
         "key": "no_forwards_request_expire_period",
         "value": {
           "_": "JsonNumber",
-          "value": 86400.0
+          "value": 300.0
         }
       },
       {
@@ -2234,7 +2126,7 @@
         "key": "aicompose_tone_saved_limit_premium",
         "value": {
           "_": "JsonNumber",
-          "value": 20.0
+          "value": 7.0
         }
       },
       {
@@ -2250,7 +2142,7 @@
         "key": "community_peers_limit",
         "value": {
           "_": "JsonNumber",
-          "value": 100.0
+          "value": 10.0
         }
       },
       {
@@ -2258,7 +2150,7 @@
         "key": "community_bot_peers_limit",
         "value": {
           "_": "JsonNumber",
-          "value": 100.0
+          "value": 10.0
         }
       },
       {
