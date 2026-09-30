@@ -28,7 +28,7 @@ from telethon.tl.functions.messages import GetAvailableReactionsRequest
 from .safety import validate_snapshot
 
 ROOT = Path(__file__).resolve().parents[1]
-DATA_ROOT = ROOT / "data" / "mtproto" / "config"
+DATA_ROOT = ROOT / "data" / "mtproto"
 
 PRODUCTION_DCS = ("1", "2", "3", "4", "5")
 TEST_DCS = ("1-test", "2-test", "3-test")
