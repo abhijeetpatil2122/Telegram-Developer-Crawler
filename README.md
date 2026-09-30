@@ -27,7 +27,7 @@ Globally, when an authorized user StringSession is configured:
 - `messages.getAvailableReactions` — available reaction metadata and animations
 - `help.getPremiumPromo` — Premium promotion configuration
 
-Telegram documents `getConfig` and `getAppConfig` as runtime configuration sources; `getCdnConfig` and `getCountriesList` are additional server/client configuration datasets tracked by the crawler. The latter two user-only datasets require a user session. citeturn1search6turn1search1turn1search0turn4search3turn1search9
+Telegram documents `getConfig` and `getAppConfig` as runtime configuration sources; `getCdnConfig` and `getCountriesList` are additional server/client configuration datasets tracked by the crawler. The latter two user-only datasets require a user session.
 
 For production:
 
