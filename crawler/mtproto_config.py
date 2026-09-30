@@ -1,9 +1,8 @@
-"""MTProto configuration collector.
+"""Collect MTProto configuration snapshots from Telegram.
 
-This module is deliberately small and transport-oriented. The first version
-uses Telethon so the collector can call official MTProto methods directly.
-Raw responses are normalized before they are written to data/ so volatile
-values do not create meaningless Git diffs.
+Production DC endpoints are discovered from Telegram itself through
+help.getConfig. Test DC endpoints are supplied explicitly because test
+environments are separate from production.
 """
 
 from __future__ import annotations
@@ -18,6 +17,7 @@ from telethon import TelegramClient
 from telethon.sessions import MemorySession
 from telethon.tl.functions.help import GetAppConfigRequest, GetConfigRequest
 
+from .safety import validate_snapshot
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA_ROOT = ROOT / "data" / "mtproto" / "config"
@@ -46,12 +46,94 @@ def normalize_config(value: Any) -> Any:
 
 def normalize_app_config(value: Any) -> Any:
     data = json_safe(value.to_dict())
-    # This value changes independently of the configuration itself.
     data.pop("ton_usd_rate", None)
     return data
 
 
-async def collect_dc(dc: str, test_mode: bool, endpoint: tuple[str, int]) -> None:
+def parse_dc_options(config: Any) -> dict[str, tuple[str, int]]:
+    """Extract one usable IPv4 endpoint for every production DC."""
+    endpoints: dict[str, tuple[str, int]] = {}
+
+    for option in config.dc_options:
+        values = option.to_dict() if hasattr(option, "to_dict") else option
+        dc_id = str(values.get("id", ""))
+        ip = values.get("ip_address")
+        port = values.get("port")
+
+        if not dc_id or not ip or not port or ":" in str(ip):
+            continue
+
+        key = dc_id.replace("-test", "")
+        if key in PRODUCTION_DCS and key not in endpoints:
+            endpoints[key] = (str(ip), int(port))
+
+    missing = set(PRODUCTION_DCS) - endpoints.keys()
+    if missing:
+        raise RuntimeError(
+            "Telegram help.getConfig did not provide endpoints for DCs: "
+            + ", ".join(sorted(missing))
+        )
+
+    return endpoints
+
+
+def load_test_endpoints() -> dict[str, tuple[str, int]]:
+    raw = os.getenv("TDC_TEST_DC_ENDPOINTS", "").strip()
+    if not raw:
+        return {}
+
+    values = json.loads(raw)
+    result: dict[str, tuple[str, int]] = {}
+    for dc in TEST_DCS:
+        endpoint = values.get(dc)
+        if endpoint:
+            result[dc] = (str(endpoint[0]), int(endpoint[1]))
+    return result
+
+
+def read_previous(path: Path) -> Any | None:
+    if not path.exists():
+        return None
+    return json.loads(path.read_text(encoding="utf-8"))
+
+
+def write_snapshot(path: Path, value: Any) -> None:
+    previous = read_previous(path)
+    if previous is not None:
+        validate_snapshot(previous, value)
+
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(
+        json.dumps(value, indent=2, sort_keys=True) + "\n",
+        encoding="utf-8",
+    )
+
+
+async def discover_production_endpoints() -> dict[str, tuple[str, int]]:
+    api_id = int(os.environ["TG_API_ID"])
+    api_hash = os.environ["TG_API_HASH"]
+
+    client = TelegramClient(
+        MemorySession(),
+        api_id,
+        api_hash,
+        device_model="Telegram Developer Crawler",
+        system_version="1.0",
+        app_version="0.1",
+    )
+    await client.start(bot_token=os.environ["TG_BOT_TOKEN"])
+    try:
+        config = await client(GetConfigRequest())
+        return parse_dc_options(config)
+    finally:
+        await client.disconnect()
+
+
+async def collect_dc(
+    dc: str,
+    test_mode: bool,
+    endpoint: tuple[str, int],
+) -> None:
     api_id = int(os.environ["TG_API_ID"])
     api_hash = os.environ["TG_API_HASH"]
 
@@ -75,27 +157,26 @@ async def collect_dc(dc: str, test_mode: bool, endpoint: tuple[str, int]) -> Non
         app_config = await client(GetAppConfigRequest())
 
         target = DATA_ROOT / ("test" if test_mode else "production") / f"dc{dc.replace('-test', '')}"
-        target.mkdir(parents=True, exist_ok=True)
-
-        (target / "config.json").write_text(
-            json.dumps(normalize_config(config), indent=2, sort_keys=True) + "\n",
-            encoding="utf-8",
-        )
-        (target / "app-config.json").write_text(
-            json.dumps(normalize_app_config(app_config), indent=2, sort_keys=True) + "\n",
-            encoding="utf-8",
-        )
+        write_snapshot(target / "config.json", normalize_config(config))
+        write_snapshot(target / "app-config.json", normalize_app_config(app_config))
     finally:
         await client.disconnect()
 
 
 async def collect_all() -> None:
-    endpoints = json.loads(os.environ["TDC_DC_ENDPOINTS"])
-    jobs = []
-    for dc in PRODUCTION_DCS:
-        jobs.append(collect_dc(dc, False, tuple(endpoints[dc])))
-    for dc in TEST_DCS:
-        jobs.append(collect_dc(dc, True, tuple(endpoints[dc])))
+    production = await discover_production_endpoints()
+    test = load_test_endpoints()
+
+    jobs = [
+        collect_dc(dc, False, production[dc])
+        for dc in PRODUCTION_DCS
+    ]
+    jobs.extend(
+        collect_dc(dc, True, test[dc])
+        for dc in TEST_DCS
+        if dc in test
+    )
+
     await asyncio.gather(*jobs)
 
 
