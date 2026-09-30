@@ -26,9 +26,10 @@ public class TLRPC {
  }
  public static class doThing extends TLMethod {
    public static final int constructor = 0x23456789;
+   public int value;
    public void serializeToStream(AbstractSerializedData stream) {
      stream.writeInt32(constructor);
-     value = 1;
+     stream.writeInt32(value);
    }
    public Response deserializeResponse(AbstractSerializedData stream, int constructor, boolean exception) {
      return Response.TLdeserialize(stream, constructor, exception);
@@ -55,6 +56,7 @@ def test_parse_constructor_and_method():
         {"name": "name", "type": "flags.0?string"},
     ]
     assert method["result"] == "Response"
+    assert method["params"] == [{"name": "value", "type": "int"}]
 
 
 def test_parse_flags():
