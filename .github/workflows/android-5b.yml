@@ -1,0 +1,54 @@
+name: Verify Android TL extraction
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "crawler/android_client.py"
+      - "crawler/android_tl.py"
+      - "tests/test_android_tl.py"
+      - ".github/workflows/android-5b.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  android:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout crawler
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Set up Java
+        uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: "17"
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+      - name: Run Android collector tests
+        run: PYTHONPATH=. pytest -q tests/test_android_client.py tests/test_android_tl.py
+      - name: Collect Android stable and public beta
+        run: python -m crawler.android_client
+      - name: Extract Android TL schemas
+        run: python -m crawler.android_tl
+      - name: Validate generated schemas
+        run: |
+          test -s data/android/stable/tl.tl
+          test -s data/android/stable/tl.json
+          test -s data/android/beta/tl.tl
+          test -s data/android/beta/tl.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          for channel in ("stable", "beta"):
+              data = json.loads(Path(f"data/android/{channel}/tl.json").read_text())
+              assert data["counts"]["constructors"] >= 500
+              assert data["counts"]["methods"] >= 200
+              assert data["layer"] is not None
+              print(channel, data["layer"], data["counts"])
+          PY
