@@ -169,15 +169,40 @@ async def collect_dc(
     await client.connect()
     try:
         config = await client(GetConfigRequest())
-        cdn_config = await client(GetCdnConfigRequest())
         countries = await client(GetCountriesListRequest(lang_code="en", hash=0))
         app_config = await client(GetAppConfigRequest(0))
 
         target = DATA_ROOT / ("test" if test_mode else "production") / f"dc{dc.replace('-test', '')}"
         write_snapshot(target / "config.json", normalize_config(config))
-        write_snapshot(target / "cdn-config.json", json_safe(cdn_config.to_dict()))
         write_snapshot(target / "countries-list.json", json_safe(countries.to_dict()))
         write_snapshot(target / "app-config.json", normalize_app_config(app_config))
+    finally:
+        await client.disconnect()
+
+
+async def collect_bot_global_config() -> None:
+    bot_token = os.getenv("TG_BOT_TOKEN", "").strip()
+    if not bot_token:
+        raise RuntimeError("TG_BOT_TOKEN is required for help.getCdnConfig")
+
+    api_id = int(os.environ["TG_API_ID"])
+    api_hash = os.environ["TG_API_HASH"]
+    client = TelegramClient(
+        MemorySession(),
+        api_id,
+        api_hash,
+        device_model="Telegram Developer Crawler",
+        system_version="1.0",
+        app_version="0.1",
+    )
+
+    await client.start(bot_token=bot_token)
+    try:
+        cdn_config = await client(GetCdnConfigRequest())
+        write_snapshot(
+            DATA_ROOT / "global" / "cdn-config.json",
+            json_safe(cdn_config.to_dict()),
+        )
     finally:
         await client.disconnect()
 
@@ -256,7 +281,7 @@ async def collect_all() -> None:
     else:
         print("Test DC collection skipped: test credentials/endpoints are not configured.")
 
-    await asyncio.gather(*jobs, collect_user_only_config())
+    await asyncio.gather(*jobs, collect_bot_global_config(), collect_user_only_config())
 
 
 def main() -> None:
