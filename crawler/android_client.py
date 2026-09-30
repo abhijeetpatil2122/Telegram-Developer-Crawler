@@ -149,6 +149,13 @@ async def download(
                 raise ValueError("downloaded Android artifact is not a ZIP/APK")
             destination.write_bytes(content)
             return final_url, content
+        except httpx.HTTPStatusError as exc:
+            if exc.response.status_code < 500:
+                raise
+            last_error = exc
+            if attempt == attempts:
+                raise
+            await asyncio.sleep(min(2 ** (attempt - 1), 8))
         except RETRYABLE_HTTPX_ERRORS as exc:
             last_error = exc
             if attempt == attempts:
