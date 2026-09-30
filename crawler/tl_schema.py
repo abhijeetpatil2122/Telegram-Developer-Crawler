@@ -32,7 +32,7 @@ API_JSON_URL = "https://core.telegram.org/schema/json"
 MTPROTO_TL_URL = "https://core.telegram.org/schema/mtproto"
 MTPROTO_JSON_URL = "https://core.telegram.org/schema/mtproto-json"
 
-DEFINITION_RE = re.compile(r"^\\s*([A-Za-z0-9_.]+)(?:#([0-9a-fA-F]+))?.*\\s=\\s*[A-Za-z0-9_.<>]+;\\s*$")
+DEFINITION_RE = re.compile(r"^\s*([A-Za-z0-9_.]+)(?:#([0-9a-fA-F]+))?.*\s=\s*[A-Za-z0-9_.<>]+;\s*$")
 
 
 def normalize_json(value: Any) -> Any:
