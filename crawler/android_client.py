@@ -9,6 +9,7 @@ import asyncio
 import hashlib
 import json
 import os
+import re
 import shutil
 import subprocess
 import tempfile
@@ -28,22 +29,50 @@ SOURCES = {
     "stable": "https://telegram.org/dl/android/apk",
     "beta": "https://telegram.org/dl/android/apk-public-beta",
 }
+EXPECTED_PACKAGES = {
+    "stable": "org.telegram.messenger.web",
+    "beta": "org.telegram.messenger.beta",
+}
 ANDROID_NS = "http://schemas.android.com/apk/res/android"
 USER_AGENT = "Telegram-Developer-Crawler/0.1"
+
 
 def render_json(value: Any) -> str:
     return json.dumps(value, indent=2, ensure_ascii=False, sort_keys=True) + "\n"
 
+
 def sha256_bytes(value: bytes) -> str:
     return hashlib.sha256(value).hexdigest()
 
-def parse_manifest(manifest: Path) -> dict[str, Any]:
+
+def parse_apktool_version_info(apktool_yml: Path) -> tuple[str | None, int | None]:
+    text = apktool_yml.read_text(encoding="utf-8")
+    name_match = re.search(r"(?m)^\s*versionName:\s*['\"]?([^'\"\n]+)", text)
+    code_match = re.search(r"(?m)^\s*versionCode:\s*['\"]?([0-9]+)", text)
+    version_name = name_match.group(1).strip() if name_match else None
+    version_code = int(code_match.group(1)) if code_match else None
+    return version_name, version_code
+
+
+def parse_manifest(
+    manifest: Path,
+    apktool_yml: Path | None = None,
+    expected_package: str | None = None,
+) -> dict[str, Any]:
     root = ET.parse(manifest).getroot()
+    package = root.attrib.get("package")
     version_name = root.attrib.get(f"{{{ANDROID_NS}}}versionName")
     version_code = root.attrib.get(f"{{{ANDROID_NS}}}versionCode")
-    package = root.attrib.get("package")
+
+    if apktool_yml and apktool_yml.exists():
+        yml_name, yml_code = parse_apktool_version_info(apktool_yml)
+        version_name = version_name or yml_name
+        version_code = version_code or (str(yml_code) if yml_code is not None else None)
+
+    package = package or expected_package
     if not package or not version_name or not version_code:
-        raise ValueError("decoded AndroidManifest.xml is missing package/version metadata")
+        raise ValueError("decoded Android metadata is missing package/version metadata")
+
     try:
         code = int(version_code, 0)
     except ValueError as exc:
@@ -56,15 +85,18 @@ def parse_manifest(manifest: Path) -> dict[str, Any]:
         "version_code": code,
     }
 
+
 def validate_resources(decoded_root: Path) -> None:
     required = [
         decoded_root / "AndroidManifest.xml",
+        decoded_root / "apktool.yml",
         decoded_root / "res" / "values" / "strings.xml",
         decoded_root / "res" / "values" / "public.xml",
     ]
     missing = [str(path.relative_to(decoded_root)) for path in required if not path.exists()]
     if missing:
         raise ValueError(f"apktool output is missing required Android resources: {', '.join(missing)}")
+
 
 def run_apktool(apktool_jar: Path, apk_path: Path, output_dir: Path) -> None:
     process = subprocess.run(
@@ -79,7 +111,12 @@ def run_apktool(apktool_jar: Path, apk_path: Path, output_dir: Path) -> None:
         tail = process.stdout[-4000:]
         raise RuntimeError(f"apktool failed with exit code {process.returncode}:\n{tail}")
 
-async def download(client: httpx.AsyncClient, url: str, destination: Path) -> tuple[str, bytes]:
+
+async def download(
+    client: httpx.AsyncClient,
+    url: str,
+    destination: Path,
+) -> tuple[str, bytes]:
     async with client.stream("GET", url, follow_redirects=True) as response:
         response.raise_for_status()
         final_url = str(response.url).split("?")[0]
@@ -88,11 +125,12 @@ async def download(client: httpx.AsyncClient, url: str, destination: Path) -> tu
             chunks.append(chunk)
         content = b"".join(chunks)
     if len(content) < 1024 * 1024:
-        raise ValueError(f"downloaded APK is suspiciously small: {len(content)} bytes")
+        raise ValueError(f"downloaded artifact is suspiciously small: {len(content)} bytes")
     if not content.startswith(b"PK"):
         raise ValueError("downloaded Android artifact is not a ZIP/APK")
     destination.write_bytes(content)
     return final_url, content
+
 
 async def collect_one(
     client: httpx.AsyncClient,
@@ -106,7 +144,11 @@ async def collect_one(
     final_url, apk = await download(client, source_url, apk_path)
     run_apktool(apktool_jar, apk_path, decoded)
     validate_resources(decoded)
-    manifest = parse_manifest(decoded / "AndroidManifest.xml")
+    manifest = parse_manifest(
+        decoded / "AndroidManifest.xml",
+        decoded / "apktool.yml",
+        EXPECTED_PACKAGES[channel],
+    )
 
     output = DATA_ROOT / channel
     output.mkdir(parents=True, exist_ok=True)
@@ -114,7 +156,6 @@ async def collect_one(
     if resources.exists():
         shutil.rmtree(resources)
     shutil.copytree(decoded / "res" / "values", resources)
-    # Keep only deterministic text evidence from the resource stage.
     for path in resources.iterdir():
         if path.name not in {"strings.xml", "public.xml"}:
             path.unlink()
@@ -143,6 +184,7 @@ async def collect_one(
     (output / "metadata.json").write_text(render_json(metadata), encoding="utf-8")
     return metadata
 
+
 async def collect_async() -> None:
     DATA_ROOT.mkdir(parents=True, exist_ok=True)
     with tempfile.TemporaryDirectory(prefix="tdc-android-") as temp:
@@ -154,8 +196,10 @@ async def collect_async() -> None:
         ) as client:
             await download(client, APKTOOL_URL, apktool_jar)
             results = await asyncio.gather(
-                *(collect_one(client, apktool_jar, channel, url, work_root)
-                  for channel, url in SOURCES.items())
+                *(
+                    collect_one(client, apktool_jar, channel, url, work_root)
+                    for channel, url in SOURCES.items()
+                )
             )
     combined = {
         "sources": SOURCES,
@@ -174,8 +218,10 @@ async def collect_async() -> None:
     }
     (DATA_ROOT / "metadata.json").write_text(render_json(combined), encoding="utf-8")
 
+
 def collect() -> None:
     asyncio.run(collect_async())
+
 
 if __name__ == "__main__":
     collect()
