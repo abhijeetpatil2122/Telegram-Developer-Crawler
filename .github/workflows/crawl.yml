@@ -63,8 +63,7 @@ jobs:
           TG_API_HASH: ${{ secrets.TG_API_HASH }}
           TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
           TG_USER_SESSION: ${{ secrets.TG_USER_SESSION }}
-          TG_TEST_API_ID: ${{ secrets.TG_TEST_API_ID }}
-          TG_TEST_API_HASH: ${{ secrets.TG_TEST_API_HASH }}
+          TDC_TEST_DC_ENDPOINTS: ${{ secrets.TDC_TEST_DC_ENDPOINTS }}
         run: python -m crawler.mtproto_config
 
       - name: Save generated snapshots
