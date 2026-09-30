@@ -79,8 +79,11 @@ def normalize_tl(text: str) -> str:
     return "\n".join(lines).strip() + "\n"
 
 
-def definition_key(item: dict[str, Any]) -> str:
-    return f"{item['kind']}:{item['id']}:{item['name']}"
+def definition_key(item: dict[str, Any], default_kind: str | None = None) -> str:
+    kind = item.get("kind") or default_kind
+    if not kind:
+        raise ValueError("definition is missing kind")
+    return f"{kind}:{item['id']}:{item['name']}"
 
 
 def leaf_paths(value: Any, prefix: str = "") -> set[str]:
@@ -102,9 +105,13 @@ def validate_definition_safety(previous: Any, current: list[dict[str, Any]]) -> 
     if not previous:
         return
     old = {
-        definition_key(x)
-        for x in previous.get("constructors", []) + previous.get("methods", [])
+        definition_key(x, "constructor")
+        for x in previous.get("constructors", [])
     }
+    old.update(
+        definition_key(x, "method")
+        for x in previous.get("methods", [])
+    )
     new = {definition_key(x) for x in current}
     if not old:
         return
@@ -221,11 +228,13 @@ def parse_java_source(text: str, source_name: str) -> tuple[list[dict[str, Any]]
 
     for match in CLASS_RE.finditer(text):
         name = match.group("name")
-        # Only TL generated classes have a constructor constant. Restrict the
+        extends = match.group("extends") or ""
+        # The TLRPC/TL_* container classes themselves can contain generated
+        # nested classes. Only classes with an extends clause can be TL objects. Restrict the
         # search to this class body so an outer container class cannot steal the
         # constructor of its first nested TL class.
         brace = text.find("{", match.end())
-        if brace < 0:
+        if not extends or brace < 0:
             continue
         try:
             body = balanced_block(text, brace)
