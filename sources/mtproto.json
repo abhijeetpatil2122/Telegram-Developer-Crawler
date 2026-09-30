@@ -7,7 +7,11 @@
     "help.getCountriesList",
     "help.getAppConfig",
     "messages.getAvailableReactions",
-    "help.getPremiumPromo"
+    "help.getPremiumPromo",
+    "core.telegram.org/schema",
+    "core.telegram.org/schema/json",
+    "core.telegram.org/schema/mtproto",
+    "core.telegram.org/schema/mtproto-json"
   ],
   "scope": {
     "per_dc": [
@@ -21,12 +25,23 @@
     "global_user": [
       "messages.getAvailableReactions",
       "help.getPremiumPromo"
+    ],
+    "tl_schema": [
+      "core.telegram.org/schema",
+      "core.telegram.org/schema/json",
+      "core.telegram.org/schema/mtproto",
+      "core.telegram.org/schema/mtproto-json"
     ]
   },
   "normalization": {
     "config": ["date", "expires", "dc_options", "autologin_token"],
     "app_config": ["hash", "ton_usd_rate"],
-    "premium_promo": ["users", "status_text", "status_entities", "period_options"]
+    "premium_promo": ["users", "status_text", "status_entities", "period_options"],
+    "tl_schema": [
+      "line endings",
+      "trailing whitespace",
+      "JSON key ordering"
+    ]
   },
   "endpoint_discovery": {
     "production": "help.getConfig",
@@ -35,9 +50,11 @@
   "authentication": {
     "production_and_test": "TG_API_ID + TG_API_HASH",
     "global_bot": "TG_BOT_TOKEN",
-    "global_user": "TG_USER_SESSION"
+    "global_user": "TG_USER_SESSION",
+    "tl_schema": "public HTTPS sources"
   },
   "safety": {
-    "max_leaf_removal_ratio": 0.1
+    "max_leaf_removal_ratio": 0.1,
+    "tl_schema_max_definition_removal_ratio": 0.1
   }
 }
