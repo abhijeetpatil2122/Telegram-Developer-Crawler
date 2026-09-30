@@ -129,23 +129,20 @@ def validate_tl_text(previous: str | None, current: str, *, required_markers: tu
             raise ValueError(f"TL schema response is missing required marker: {marker}")
 
     current_keys = definition_keys(current)
+
+    if previous is not None:
+        previous_keys = definition_keys(previous)
+        if previous_keys:
+            removed = previous_keys - current_keys
+            ratio = len(removed) / len(previous_keys)
+            if ratio > 0.10:
+                raise ValueError(
+                    "TL schema safety guard triggered: "
+                    f"{len(removed)}/{len(previous_keys)} definitions disappeared ({ratio:.1%})"
+                )
+
     if len(current_keys) < 5:
         raise ValueError("TL schema response contains too few definitions")
-
-    if previous is None:
-        return
-
-    previous_keys = definition_keys(previous)
-    if not previous_keys:
-        return
-
-    removed = previous_keys - current_keys
-    ratio = len(removed) / len(previous_keys)
-    if ratio > 0.10:
-        raise ValueError(
-            "TL schema safety guard triggered: "
-            f"{len(removed)}/{len(previous_keys)} definitions disappeared ({ratio:.1%})"
-        )
 
 
 def read_json(path: Path) -> Any | None:
