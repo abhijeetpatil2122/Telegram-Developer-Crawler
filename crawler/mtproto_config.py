@@ -32,6 +32,15 @@ DATA_ROOT = ROOT / "data" / "mtproto" / "config"
 PRODUCTION_DCS = ("1", "2", "3", "4", "5")
 TEST_DCS = ("1-test", "2-test", "3-test")
 
+# Telegram's standard MTProto test DC IPv4 endpoints.
+# TDC_TEST_DC_ENDPOINTS can override these values when Telegram changes
+# the endpoint used by a specific test environment.
+DEFAULT_TEST_DC_ENDPOINTS: dict[str, tuple[str, int]] = {
+    "1-test": ("149.154.175.10", 443),
+    "2-test": ("149.154.167.40", 443),
+    "3-test": ("149.154.175.117", 443),
+}
+
 
 def json_safe(value: Any) -> Any:
     if isinstance(value, bytes):
@@ -97,17 +106,17 @@ def parse_dc_options(config: Any) -> dict[str, tuple[str, int]]:
 
 
 def load_test_endpoints() -> dict[str, tuple[str, int]]:
+    endpoints = dict(DEFAULT_TEST_DC_ENDPOINTS)
     raw = os.getenv("TDC_TEST_DC_ENDPOINTS", "").strip()
     if not raw:
-        return {}
+        return endpoints
 
     values = json.loads(raw)
-    result: dict[str, tuple[str, int]] = {}
     for dc in TEST_DCS:
         endpoint = values.get(dc)
         if endpoint:
-            result[dc] = (str(endpoint[0]), int(endpoint[1]))
-    return result
+            endpoints[dc] = (str(endpoint[0]), int(endpoint[1]))
+    return endpoints
 
 
 def read_previous(path: Path) -> Any | None:
@@ -283,7 +292,7 @@ async def collect_all() -> None:
             if dc in test_endpoints
         )
     else:
-        print("Test DC collection skipped: test credentials/endpoints are not configured.")
+        print("Test DC collection skipped: TG_TEST_API_ID and TG_TEST_API_HASH are not configured.")
 
     await asyncio.gather(*jobs, collect_bot_global_config(), collect_user_only_config())
 
