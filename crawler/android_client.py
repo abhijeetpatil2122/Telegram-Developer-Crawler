@@ -13,6 +13,7 @@ import re
 import shutil
 import subprocess
 import tempfile
+import uuid
 import xml.etree.ElementTree as ET
 from pathlib import Path
 from typing import Any
@@ -35,6 +36,7 @@ EXPECTED_PACKAGES = {
 }
 ANDROID_NS = "http://schemas.android.com/apk/res/android"
 USER_AGENT = "Telegram-Developer-Crawler/0.1"
+RETRYABLE_HTTPX_ERRORS = (httpx.ProtocolError, httpx.TimeoutException, httpx.NetworkError)
 
 
 def render_json(value: Any) -> str:
@@ -116,20 +118,45 @@ async def download(
     client: httpx.AsyncClient,
     url: str,
     destination: Path,
+    *,
+    attempts: int = 5,
 ) -> tuple[str, bytes]:
-    async with client.stream("GET", url, follow_redirects=True) as response:
-        response.raise_for_status()
-        final_url = str(response.url).split("?")[0]
-        chunks: list[bytes] = []
-        async for chunk in response.aiter_bytes():
-            chunks.append(chunk)
-        content = b"".join(chunks)
-    if len(content) < 1024 * 1024:
-        raise ValueError(f"downloaded artifact is suspiciously small: {len(content)} bytes")
-    if not content.startswith(b"PK"):
-        raise ValueError("downloaded Android artifact is not a ZIP/APK")
-    destination.write_bytes(content)
-    return final_url, content
+    last_error: Exception | None = None
+    for attempt in range(1, attempts + 1):
+        cache_buster = uuid.uuid4().hex
+        try:
+            async with client.stream(
+                "GET",
+                url,
+                params={"tdcNoCache": cache_buster},
+                follow_redirects=True,
+            ) as response:
+                response.raise_for_status()
+                final_url = str(response.url).split("?")[0]
+                expected = response.headers.get("content-length")
+                chunks: list[bytes] = []
+                async for chunk in response.aiter_bytes():
+                    chunks.append(chunk)
+                content = b"".join(chunks)
+
+            if expected and expected.isdigit() and len(content) != int(expected):
+                raise httpx.RemoteProtocolError(
+                    f"incomplete body: received {len(content)} bytes, expected {expected}"
+                )
+            if len(content) < 1024 * 1024:
+                raise ValueError(f"downloaded artifact is suspiciously small: {len(content)} bytes")
+            if not content.startswith(b"PK"):
+                raise ValueError("downloaded Android artifact is not a ZIP/APK")
+            destination.write_bytes(content)
+            return final_url, content
+        except RETRYABLE_HTTPX_ERRORS as exc:
+            last_error = exc
+            if attempt == attempts:
+                raise
+            await asyncio.sleep(min(2 ** (attempt - 1), 8))
+        except ValueError:
+            raise
+    raise RuntimeError(f"download failed: {last_error}")
 
 
 async def collect_one(
