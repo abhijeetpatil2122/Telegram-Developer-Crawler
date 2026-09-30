@@ -42,7 +42,7 @@ TYPE_READERS = {
 
 
 
-LAYER_SUFFIX_RE = re.compile(r"^(?P<base>.+?)(?:_layer_?(?P<layer>\\d+)|_old\\d*|_(?P<legacy>\\d{3,}))$")
+LAYER_SUFFIX_RE = re.compile(r"^(?P<base>.+?)(?:_layer_?(?P<layer>\d+)|_old\d*|_(?P<legacy>\d{3,}))$")
 
 
 def canonical_name(raw: str) -> tuple[str, int | None, bool]:
@@ -71,7 +71,7 @@ def canonical_name(raw: str) -> tuple[str, int | None, bool]:
             historical = True
 
     if "_old" in name.lower():
-        name = re.sub(r"_old\\d*$", "", name, flags=re.IGNORECASE)
+        name = re.sub(r"_old\d*$", "", name, flags=re.IGNORECASE)
         historical = True
 
     # Java uses underscores to encode TL namespaces, e.g.
