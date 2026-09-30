@@ -47,8 +47,8 @@ jobs:
           from pathlib import Path
           for channel in ("stable", "beta"):
               data = json.loads(Path(f"data/android/{channel}/tl.json").read_text())
+              print(channel, "layer=", data["layer"], "counts=", data["counts"])
               assert data["counts"]["constructors"] >= 500
               assert data["counts"]["methods"] >= 200
               assert data["layer"] is not None
-              print(channel, data["layer"], data["counts"])
           PY
