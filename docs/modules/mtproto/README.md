@@ -2,10 +2,15 @@
 
 This module contains developer-facing data collected through Telegram's MTProto and official TL-schema surfaces.
 
-## Current submodules
+## Data categories
 
-- `config/` — runtime server/client configuration and related datasets.
-- `tl/` — official MTProto/API TL schemas in text and machine-readable JSON form.
+- `config/` — `help.getConfig`, the server/MTProto configuration.
+- `app-config/` — `help.getAppConfig`, client-specific application configuration.
+- `countries-list/` — `help.getCountriesList`, country and phone-code metadata.
+- `global/` — datasets not tied to one DC, including CDN configuration, available reactions and Premium promo.
+- `tl/` — official API and MTProto TL schemas.
+
+Telegram explicitly distinguishes `help.getConfig` from `help.getAppConfig`: the former contains MTProto/server configuration, while the latter contains rapidly evolving client-specific configuration. citeturn1search0turn1search2
 
 ## TL schema collection
 
@@ -15,6 +20,8 @@ The `tl/` dataset is collected directly from Telegram's public schema endpoints:
 - `https://core.telegram.org/schema/json` — current API TL schema in JSON.
 - `https://core.telegram.org/schema/mtproto` — current MTProto TL schema.
 - `https://core.telegram.org/schema/mtproto-json` — current MTProto TL schema in JSON.
+
+Telegram's TL documentation describes the schema as declarations of types/constructors and functions, with the `---functions---` divider between the two main sections. citeturn0search0turn0search5
 
 The collector preserves both text and JSON representations and writes deterministic JSON formatting. The API layer is read from the source JSON rather than hard-coded.
 
