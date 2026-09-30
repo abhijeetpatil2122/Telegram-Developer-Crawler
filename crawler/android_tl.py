@@ -62,19 +62,19 @@ ASSIGN_VECTOR_RE = re.compile(
 CAST_VECTOR_RE = re.compile(
     r"\((?P<type>[A-Za-z0-9_.$<>]+)\)\s*Vector(?:Legacy)?\."
 )
-FLAG_IF_RE = re.compile(r"\(flags\s*&\s*(?P<mask>0x[0-9a-fA-F]+|\d+)\)\s*!=\s*0")\n\nFIELD_RE = re.compile(
-    r"(?:public|protected|private)\\s+(?:static\\s+)?(?:final\\s+)?"
-    r"(?P<type>[A-Za-z0-9_.$<>\\[\\]]+)\\s+(?P<name>[A-Za-z_$][\\w$]*)\\s*;"
+FLAG_IF_RE = re.compile(r"\(flags\s*&\s*(?P<mask>0x[0-9a-fA-F]+|\d+)\)\s*!=\s*0")
+
+FIELD_RE = re.compile(
+    r"(?:public|protected|private)\s+(?:static\s+)?(?:final\s+)?"
+    r"(?P<type>[A-Za-z0-9_.$<>\[\]]+)\s+(?P<name>[A-Za-z_$][\w$]*)\s*;"
 )
 WRITE_RE = re.compile(
-    r"stream\\.(?P<writer>writeInt32|writeInt64|writeDouble|writeString|"
-    r"writeByteBuffer|writeByteArray|writeBool)\\s*\\(\\s*(?P<field>[A-Za-z_$][\\w$]*)"
+    r"stream\.(?P<writer>writeInt32|writeInt64|writeDouble|writeString|"
+    r"writeByteBuffer|writeByteArray|writeBool)\s*\(\s*(?P<field>[A-Za-z_$][\w$]*)"
 )
 OBJECT_WRITE_RE = re.compile(
-    r"(?P<field>[A-Za-z_$][\\w$]*)\\.serializeToStream\\s*\\(\\s*stream"
+    r"(?P<field>[A-Za-z_$][\w$]*)\.serializeToStream\s*\(\s*stream"
 )
-
-
 
 def render_json(value: Any) -> str:
     return json.dumps(value, indent=2, ensure_ascii=False, sort_keys=True) + "\n"
