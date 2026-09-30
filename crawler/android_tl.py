@@ -45,7 +45,11 @@ CLASS_RE = re.compile(
     r"(?P<name>[A-Za-z_$][\w$]*)(?:\s+extends\s+(?P<extends>[A-Za-z0-9_.$<>]+))?"
 )
 CONSTRUCTOR_RE = re.compile(r"\bconstructor\s*=\s*(?P<id>-?0x[0-9a-fA-F]+|-?\d+)\s*;")
-LAYER_RE = re.compile(r"\b(?:this\.)?layer\s*=\s*(\d+)\s*;")
+LAYER_RE = re.compile(
+    r"\bLAYER\s*=\s*(?P<constant>\d+)\s*;"
+    r"|\b(?:this\.)?layer\s*=\s*(?P<field>\d+)\s*;"
+    r"|\bcurrentLayer\s*=\s*(?P<current>\d+)\s*;"
+)
 RETURN_TL_RE = re.compile(r"return\s+([A-Za-z0-9_.$]+)\.TLdeserialize\s*\(")
 RETURN_READ_RE = re.compile(r"return\s+stream\.([A-Za-z0-9_]+)\s*\(")
 ASSIGN_TL_RE = re.compile(
@@ -287,7 +291,13 @@ def infer_return_type(body: str) -> str | None:
 def parse_java_source(text: str, source_name: str) -> tuple[list[dict[str, Any]], int | None]:
     definitions: list[dict[str, Any]] = []
     layer_match = LAYER_RE.search(text)
-    layer = int(layer_match.group(1)) if layer_match else None
+    layer = None
+    if layer_match:
+        for group in ("constant", "field", "current"):
+            value = layer_match.group(group)
+            if value is not None and 200 <= int(value) <= 400:
+                layer = int(value)
+                break
 
     for match in CLASS_RE.finditer(text):
         name = match.group("name")
@@ -469,9 +479,7 @@ def extract_channel(channel: str, jadx_bin: Path) -> dict[str, Any]:
                 java_file.relative_to(sources).as_posix(),
             )
             definitions.extend(parsed)
-            if found_layer is not None and (
-                java_file.name == "TLRPC.java" or java_file.name.startswith("TLRPC$")
-            ):
+            if layer is None and found_layer is not None:
                 layer = found_layer
 
     names = [definition_key(x) for x in definitions]
