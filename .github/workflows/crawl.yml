@@ -42,22 +42,18 @@ jobs:
           TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
         run: |
           set -euo pipefail
-
           missing=0
-
           for name in TG_API_ID TG_API_HASH TG_BOT_TOKEN; do
             if [ -z "${!name:-}" ]; then
               echo "::error::Missing required environment secret: $name"
               missing=1
             fi
           done
-
           if [ "$missing" -ne 0 ]; then
             echo "The collect job is connected to the GitHub Environment 'appConfig'."
             echo "Check that TG_API_ID, TG_API_HASH, and TG_BOT_TOKEN are secrets in that environment."
             exit 1
           fi
-
           echo "Required Telegram credentials are present."
 
       - name: Collect Telegram configuration
@@ -72,12 +68,16 @@ jobs:
       - name: Collect MTProto TL schemas
         run: python -m crawler.tl_schema
 
+      - name: Collect TDLib schema
+        run: python -m crawler.tdlib_schema
+
       - name: Save generated snapshots
         run: |
           rm -rf /tmp/telegram-developer-data
           cp -a data /tmp/telegram-developer-data
           cp docs/data-branch/README.md /tmp/telegram-developer-data-branch-README.md
           cp docs/modules/mtproto/README.md /tmp/telegram-developer-mtproto-README.md
+          cp docs/modules/tdlib/README.md /tmp/telegram-developer-tdlib-README.md
 
       - name: Publish snapshots to data branch
         run: |
@@ -90,8 +90,9 @@ jobs:
 
           cp -a /tmp/telegram-developer-data data
           cp /tmp/telegram-developer-data-branch-README.md README.md
-          mkdir -p data/mtproto
+          mkdir -p data/mtproto data/tdlib
           cp /tmp/telegram-developer-mtproto-README.md data/mtproto/README.md
+          cp /tmp/telegram-developer-tdlib-README.md data/tdlib/README.md
 
           git config user.name "telegram-developer-crawler[bot]"
           git config user.email "telegram-developer-crawler[bot]@users.noreply.github.com"
