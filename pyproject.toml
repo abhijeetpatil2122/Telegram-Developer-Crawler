@@ -15,3 +15,4 @@ test = [
 
 [project.scripts]
 tdc-config = "crawler.mtproto_config:main"
+tdc-tl = "crawler.tl_schema:main"
