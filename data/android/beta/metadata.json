@@ -1,0 +1,25 @@
+{
+  "android": {
+    "package": "org.telegram.messenger.beta",
+    "version_code": 71129,
+    "version_name": "12.10.6"
+  },
+  "artifact": {
+    "filename": "beta.apk",
+    "sha256": "9a3eda38e9155825e12bd32b72c99b3a432e8eeb25a6fc42f909776cd726de85",
+    "size": 64674361
+  },
+  "channel": "beta",
+  "extractor": {
+    "apktool_url": "https://bitbucket.org/iBotPeaches/apktool/downloads/apktool_2.12.1.jar",
+    "mode": "-s",
+    "tool": "apktool"
+  },
+  "resolved_url": "https://cdn4.telesco.pe/file/Telegram-Beta.apk",
+  "scope": [
+    "AndroidManifest.xml metadata",
+    "res/values/strings.xml",
+    "res/values/public.xml"
+  ],
+  "source_url": "https://telegram.org/dl/android/apk-public-beta"
+}

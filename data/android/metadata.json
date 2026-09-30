@@ -1,0 +1,25 @@
+{
+  "channels": {
+    "beta": {
+      "metadata": "beta/metadata.json",
+      "package": "org.telegram.messenger.beta",
+      "resources": "beta/resources/",
+      "sha256": "9a3eda38e9155825e12bd32b72c99b3a432e8eeb25a6fc42f909776cd726de85",
+      "version_code": 71129,
+      "version_name": "12.10.6"
+    },
+    "stable": {
+      "metadata": "stable/metadata.json",
+      "package": "org.telegram.messenger.web",
+      "resources": "stable/resources/",
+      "sha256": "7827ea506d297644b1d350266bdfbd8d5d38a7869fa3fc1a0fbcb1ebc81f45ad",
+      "version_code": 71129,
+      "version_name": "12.10.6"
+    }
+  },
+  "sources": {
+    "beta": "https://telegram.org/dl/android/apk-public-beta",
+    "stable": "https://telegram.org/dl/android/apk"
+  },
+  "stage": "5A"
+}
