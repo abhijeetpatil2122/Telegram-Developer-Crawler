@@ -66,7 +66,10 @@ jobs:
           TDC_TEST_DC_ENDPOINTS: ${{ secrets.TDC_TEST_DC_ENDPOINTS }}
         run: python -m crawler.mtproto_config
 
-      - name: Collect MTProto TL schemas\n        run: python -m crawler.tl_schema\n\n      - name: Save generated snapshots
+      - name: Collect MTProto TL schemas
+        run: python -m crawler.tl_schema
+
+      - name: Save generated snapshots
         run: |
           rm -rf /tmp/telegram-developer-data
           cp -a data /tmp/telegram-developer-data
