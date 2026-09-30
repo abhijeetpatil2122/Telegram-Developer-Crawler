@@ -26,7 +26,7 @@ For production:
 4. Create a fresh in-memory MTProto session for each DC.
 5. Collect `help.getConfig` and `help.getAppConfig` independently.
 
-For test DCs, endpoints are supplied through `TDC_TEST_DC_ENDPOINTS` because the test network is separate from production.
+For test DCs, endpoints and separate test-network credentials are optional because the test network is separate from production.
 
 Known volatile values are normalized before snapshots are written:
 
@@ -74,7 +74,7 @@ Local development uses:
 cp .env.example .env
 ```
 
-Then fill in the required values. The collector reads environment variables directly.
+Then fill in the values. Production collection requires `TG_API_ID`, `TG_API_HASH`, and `TG_BOT_TOKEN`. Test collection additionally requires `TG_TEST_API_ID`, `TG_TEST_API_HASH`, `TG_TEST_BOT_TOKEN`, and `TDC_TEST_DC_ENDPOINTS`. The collector reads environment variables directly.
 
 GitHub Actions will use repository secrets with the same names.
 
