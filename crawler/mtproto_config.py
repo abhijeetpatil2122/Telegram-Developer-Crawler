@@ -185,12 +185,24 @@ async def collect_dc(
         countries = await client(GetCountriesListRequest(lang_code="en", hash=0))
         app_config = await client(GetAppConfigRequest(0))
 
-        target = DATA_ROOT / (
-            "test" if test_mode else "production"
-        ) / f"dc{dc.replace('-test', '')}"
-        write_snapshot(target / "config.json", normalize_config(config))
-        write_snapshot(target / "countries-list.json", json_safe(countries.to_dict()))
-        write_snapshot(target / "app-config.json", normalize_app_config(app_config))
+        network = "test" if test_mode else "production"
+        dc_name = f"dc{dc.replace('-test', '')}"
+
+        # Keep distinct Telegram datasets in distinct top-level categories.
+        # help.getConfig is server/MTProto configuration, while
+        # help.getAppConfig is client-specific application configuration.
+        write_snapshot(
+            DATA_ROOT / "config" / network / dc_name / "config.json",
+            normalize_config(config),
+        )
+        write_snapshot(
+            DATA_ROOT / "countries-list" / network / dc_name / "countries-list.json",
+            json_safe(countries.to_dict()),
+        )
+        write_snapshot(
+            DATA_ROOT / "app-config" / network / dc_name / "app-config.json",
+            normalize_app_config(app_config),
+        )
     finally:
         await client.disconnect()
 
