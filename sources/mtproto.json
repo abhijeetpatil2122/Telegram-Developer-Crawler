@@ -14,7 +14,9 @@
     "core.telegram.org/schema/mtproto-json",
     "github.com/tdlib/td:td/generate/scheme/td_api.tl",
     "github.com/telegramdesktop/tdesktop:Telegram/SourceFiles/mtproto/scheme/api.tl",
-    "github.com/telegramdesktop/tdesktop:Telegram/SourceFiles/mtproto/scheme/mtproto.tl"
+    "github.com/telegramdesktop/tdesktop:Telegram/SourceFiles/mtproto/scheme/mtproto.tl",
+    "telegram.org/dl/android/apk",
+    "telegram.org/dl/android/apk-public-beta"
   ],
   "scope": {
     "per_dc": ["help.getConfig", "help.getCountriesList", "help.getAppConfig"],
@@ -27,7 +29,8 @@
       "global": "data/mtproto/global/",
       "tl": "data/mtproto/tl/",
       "tdlib": "data/tdlib/schema/",
-      "tdesktop": "data/tdesktop/schema/"
+      "tdesktop": "data/tdesktop/schema/",
+      "android": "data/android/"
     },
     "tl_schema": [
       "core.telegram.org/schema",
@@ -47,6 +50,10 @@
       "api_raw": "https://raw.githubusercontent.com/telegramdesktop/tdesktop/dev/Telegram/SourceFiles/mtproto/scheme/api.tl",
       "mtproto_path": "Telegram/SourceFiles/mtproto/scheme/mtproto.tl",
       "mtproto_raw": "https://raw.githubusercontent.com/telegramdesktop/tdesktop/dev/Telegram/SourceFiles/mtproto/scheme/mtproto.tl"
+    },
+    "android_client": {
+      "stable_apk": "https://telegram.org/dl/android/apk",
+      "beta_apk": "https://telegram.org/dl/android/apk-public-beta"
     }
   },
   "normalization": {
@@ -55,25 +62,34 @@
     "premium_promo": ["users", "status_text", "status_entities", "period_options"],
     "tl_schema": ["line endings", "trailing whitespace", "JSON key ordering"],
     "tdlib_schema": ["line endings", "trailing whitespace", "JSON key ordering"],
-    "tdesktop_schema": ["line endings", "trailing whitespace", "JSON key ordering"]
+    "tdesktop_schema": ["line endings", "trailing whitespace", "JSON key ordering"],
+    "android_client": ["APK SHA-256", "decoded manifest metadata", "strings.xml", "public.xml"]
   },
   "endpoint_discovery": {
     "production": "help.getConfig",
     "test": "built-in Telegram test DC endpoints; optional override: TDC_TEST_DC_ENDPOINTS",
     "tdlib": "official tdlib/td master branch",
-    "tdesktop": "official telegramdesktop/tdesktop dev branch"
+    "tdesktop": "official telegramdesktop/tdesktop dev branch",
+    "android_stable": "telegram.org/dl/android/apk",
+    "android_beta": "telegram.org/dl/android/apk-public-beta"
   },
   "authentication": {
     "production_and_test": "TG_API_ID + TG_API_HASH",
     "global_bot": "TG_BOT_TOKEN",
     "tl_schema": "public HTTPS sources",
     "tdlib_schema": "public GitHub source",
-    "tdesktop_schema": "public GitHub source"
+    "tdesktop_schema": "public GitHub source",
+    "android_client": "public HTTPS APK sources"
   },
   "safety": {
     "max_leaf_removal_ratio": 0.1,
     "tl_schema_max_definition_removal_ratio": 0.1,
     "tdlib_schema_max_definition_removal_ratio": 0.1,
-    "tdesktop_schema_max_definition_removal_ratio": 0.1
+    "tdesktop_schema_max_definition_removal_ratio": 0.1,
+    "android_client": {
+      "apktool_required": true,
+      "required_resources": ["AndroidManifest.xml", "res/values/strings.xml", "res/values/public.xml"],
+      "apk_min_bytes": 1048576
+    }
   }
 }
