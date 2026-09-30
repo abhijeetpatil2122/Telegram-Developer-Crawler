@@ -12,7 +12,7 @@ The generated `config/` tree contains the collected datasets, grouped by scope a
 
 ## Collection model
 
-The crawler uses Telethon to call the relevant MTProto methods. Production DC endpoints are discovered from `help.getConfig`; test-network endpoints use Telegram's standard test DC endpoints, with an optional environment override.
+The crawler uses Telethon to call the relevant MTProto methods. Production DC endpoints are discovered from `help.getConfig`; test-network endpoints use Telegram's standard test DC endpoints with the same application API credentials; an optional environment override can replace those endpoints.
 
 Data is normalized before publication and protected by the snapshot safety guard.
 
