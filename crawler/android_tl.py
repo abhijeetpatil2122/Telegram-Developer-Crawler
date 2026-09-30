@@ -221,10 +221,9 @@ def parse_java_source(text: str, source_name: str) -> tuple[list[dict[str, Any]]
 
     for match in CLASS_RE.finditer(text):
         name = match.group("name")
-        # Only TL generated classes have a constructor constant.
-        constructor = CONSTRUCTOR_RE.search(text, match.end())
-        if not constructor:
-            continue
+        # Only TL generated classes have a constructor constant. Restrict the
+        # search to this class body so an outer container class cannot steal the
+        # constructor of its first nested TL class.
         brace = text.find("{", match.end())
         if brace < 0:
             continue
@@ -232,7 +231,9 @@ def parse_java_source(text: str, source_name: str) -> tuple[list[dict[str, Any]]
             body = balanced_block(text, brace)
         except ValueError:
             continue
-
+        constructor = CONSTRUCTOR_RE.search(body)
+        if not constructor:
+            continue
         cid = int(constructor.group("id"), 0)
         is_method = (
             "deserializeResponse(" in body or "deserializeResponseT(" in body
