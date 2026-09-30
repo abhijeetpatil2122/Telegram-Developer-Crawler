@@ -52,7 +52,7 @@ def test_validate_schema_guards_mass_removal():
         [{"kind": "constructors", "name": f"c{i}"} for i in range(200)]
         + [{"kind": "functions", "name": f"f{i}"} for i in range(200)]
     )
-    current = previous[:150] + [{"kind": "functions", "name": "f0"}]
+    current = previous[:150] + [{"kind": "functions", "name": f"f{i}"} for i in range(150)]
 
     try:
         validate_schema(previous, current)
