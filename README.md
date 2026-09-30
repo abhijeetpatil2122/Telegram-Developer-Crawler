@@ -9,87 +9,51 @@ Developer-focused crawler for meaningful changes across Telegram's official deve
 - Git history: the source of truth for changes and diff links.
 - Telegram: notification layer.
 
-The design intentionally avoids a database or Redis. The generated `data` branch is the historical snapshot store, following the same evidence-first model used by Telegram crawler projects such as MarshalX's crawler.
+The design intentionally avoids a database or Redis. The generated `data` branch is the historical snapshot store.
 
-## First collector: MTProto configuration
+## Current collectors
 
-The first collector observes the MTProto server configuration surface, following the server-data approach used by MarshalX's Telegram crawler.
+1. **MTProto configuration**
+2. **MTProto/TL schemas**
+
+The planned roadmap continues with TDLib schemas, Telegram Desktop schemas, Android/iOS/desktop developer resources, Bot API/Mini Apps documentation, and finally diff classification and Telegram alerts.
+
+### MTProto configuration
 
 Per production/test DC:
+- `help.getConfig`
+- `help.getCountriesList`
+- `help.getAppConfig`
 
-- `help.getConfig` — core MTProto/server configuration and DC options
-- `help.getCdnConfig` — CDN public-key configuration
-- `help.getCountriesList` — country names, ISO codes and phone-code patterns
-- `help.getAppConfig` — rapidly changing graphical-client configuration
+Global datasets:
+- `help.getCdnConfig`
+- `messages.getAvailableReactions` (user session)
+- `help.getPremiumPromo` (user session)
 
-Globally, when an authorized user StringSession is configured:
+Production endpoints are discovered from `help.getConfig`. Test DCs use Telegram's standard test-network endpoints with the **same application `api_id/api_hash`**; `TDC_TEST_DC_ENDPOINTS` is an optional override.
 
-- `messages.getAvailableReactions` — available reaction metadata and animations
-- `help.getPremiumPromo` — Premium promotion configuration
+### MTProto/TL schemas
 
-Telegram documents `getConfig` and `getAppConfig` as runtime configuration sources; `getCdnConfig` and `getCountriesList` are additional server/client configuration datasets tracked by the crawler. The latter two user-only datasets require a user session.
+The crawler collects the official API and MTProto TL schemas from:
+- `https://core.telegram.org/schema`
+- `https://core.telegram.org/schema/json`
+- `https://core.telegram.org/schema/mtproto`
+- `https://core.telegram.org/schema/mtproto-json`
 
-For production:
-
-1. Connect once to Telegram.
-2. Call `help.getConfig`.
-3. Discover the current production DC endpoints from Telegram's response.
-4. Create a fresh in-memory MTProto session for each DC.
-5. Collect the four per-DC datasets independently.
-6. If `TG_USER_SESSION` is configured, collect the two user-only datasets into the global snapshot.
-
-For test DCs, the collector uses Telegram's standard test-network endpoints and separate test-network API credentials. The endpoints can be overridden with TDC_TEST_DC_ENDPOINTS when necessary.
-
-Known volatile values are normalized before snapshots are written:
-
-- `config.date`
-- `config.expires`
-- `config.dc_options`
-- `app_config.ton_usd_rate`
-
-A snapshot safety guard rejects a generated file when more than 10% of its previously observed leaf paths disappear. This prevents a broken extractor or partial response from silently replacing good historical data.
-
-## Repository layout
-
-```
-main
-├── crawler/              # collectors, normalization, validation
-├── sources/              # source manifests and collector configuration
-├── .github/workflows/    # scheduled collection and data-branch publishing
-├── docs/                 # data-branch and module README templates
-└── tests/                # collector and safety tests
-
-data branch
-└── data/                 # generated historical snapshots
-```
-
-The `data` branch is intentionally separate from `main`, so crawler code changes do not mix with generated observations.
-
-## Planned collectors
-
-1. MTProto configuration
-2. MTProto/TL schemas
-3. TDLib schemas
-4. Telegram Desktop schemas
-5. Android stable/beta schema and developer resources
-6. iOS stable/beta developer resources
-7. Desktop/macOS developer resources
-8. Bot API and Mini Apps documentation
-9. Diff classification and Telegram alerts
+Both the human-readable TL form and JSON form are stored. The API layer is read from the live schema instead of hard-coded.
 
 ## Credentials
 
 Never commit a real `.env` file.
 
-Local development uses:
+The MTProto configuration collector uses:
+- `TG_API_ID`
+- `TG_API_HASH`
+- `TG_BOT_TOKEN`
+- optional `TG_USER_SESSION`
+- optional `TDC_TEST_DC_ENDPOINTS`
 
-```bash
-cp .env.example .env
-```
-
-Then fill in the values. The MTProto configuration collector requires `TG_API_ID` and `TG_API_HASH`. It connects without logging in, which allows `help.getConfig` and `help.getAppConfig` to be collected without using a bot account. `TG_BOT_TOKEN` is optional and is reserved for the future Telegram alerting layer.
-
-Test collection additionally requires `TG_TEST_API_ID` and `TG_TEST_API_HASH`. Telegram's standard test DC endpoints are built in; `TDC_TEST_DC_ENDPOINTS` is an optional override.
+**There are no separate `TG_TEST_API_ID` or `TG_TEST_API_HASH` credentials.** Production and test DC collection use the same application API credentials, while test DCs use the separate Telegram test network.
 
 GitHub Actions reads these secrets from the `appConfig` environment.
 
