@@ -1,8 +1,7 @@
 """Collect MTProto configuration snapshots from Telegram.
 
-Production DC endpoints are discovered from Telegram itself through
-help.getConfig. Test DC endpoints are supplied explicitly because test
-environments are separate from production.
+Production DC endpoints are discovered from Telegram through help.getConfig.
+Test DCs use separate optional credentials and explicitly configured endpoints.
 """
 
 from __future__ import annotations
@@ -51,7 +50,6 @@ def normalize_app_config(value: Any) -> Any:
 
 
 def parse_dc_options(config: Any) -> dict[str, tuple[str, int]]:
-    """Extract one usable IPv4 endpoint for every production DC."""
     endpoints: dict[str, tuple[str, int]] = {}
 
     for option in config.dc_options:
@@ -112,6 +110,7 @@ def write_snapshot(path: Path, value: Any) -> None:
 async def discover_production_endpoints() -> dict[str, tuple[str, int]]:
     api_id = int(os.environ["TG_API_ID"])
     api_hash = os.environ["TG_API_HASH"]
+    bot_token = os.environ["TG_BOT_TOKEN"]
 
     client = TelegramClient(
         MemorySession(),
@@ -121,7 +120,7 @@ async def discover_production_endpoints() -> dict[str, tuple[str, int]]:
         system_version="1.0",
         app_version="0.1",
     )
-    await client.start(bot_token=os.environ["TG_BOT_TOKEN"])
+    await client.start(bot_token=bot_token)
     try:
         config = await client(GetConfigRequest())
         return parse_dc_options(config)
@@ -133,10 +132,10 @@ async def collect_dc(
     dc: str,
     test_mode: bool,
     endpoint: tuple[str, int],
+    api_id: int,
+    api_hash: str,
+    bot_token: str,
 ) -> None:
-    api_id = int(os.environ["TG_API_ID"])
-    api_hash = os.environ["TG_API_HASH"]
-
     session = MemorySession()
     dc_id = int(dc.replace("-test", ""))
     session.set_dc(dc_id, endpoint[0], endpoint[1])
@@ -151,7 +150,7 @@ async def collect_dc(
         app_version="0.1",
     )
 
-    await client.start(bot_token=os.environ["TG_BOT_TOKEN"])
+    await client.start(bot_token=bot_token)
     try:
         config = await client(GetConfigRequest())
         app_config = await client(GetAppConfigRequest())
@@ -165,17 +164,42 @@ async def collect_dc(
 
 async def collect_all() -> None:
     production = await discover_production_endpoints()
-    test = load_test_endpoints()
+    production_api_id = int(os.environ["TG_API_ID"])
+    production_api_hash = os.environ["TG_API_HASH"]
+    production_bot_token = os.environ["TG_BOT_TOKEN"]
 
     jobs = [
-        collect_dc(dc, False, production[dc])
+        collect_dc(
+            dc,
+            False,
+            production[dc],
+            production_api_id,
+            production_api_hash,
+            production_bot_token,
+        )
         for dc in PRODUCTION_DCS
     ]
-    jobs.extend(
-        collect_dc(dc, True, test[dc])
-        for dc in TEST_DCS
-        if dc in test
-    )
+
+    test_endpoints = load_test_endpoints()
+    test_api_id = os.getenv("TG_TEST_API_ID")
+    test_api_hash = os.getenv("TG_TEST_API_HASH")
+    test_bot_token = os.getenv("TG_TEST_BOT_TOKEN")
+
+    if test_endpoints and test_api_id and test_api_hash and test_bot_token:
+        jobs.extend(
+            collect_dc(
+                dc,
+                True,
+                test_endpoints[dc],
+                int(test_api_id),
+                test_api_hash,
+                test_bot_token,
+            )
+            for dc in TEST_DCS
+            if dc in test_endpoints
+        )
+    else:
+        print("Test DC collection skipped: test credentials/endpoints are not configured.")
 
     await asyncio.gather(*jobs)
 
