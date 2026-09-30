@@ -12,9 +12,11 @@
   "scope": {
     "per_dc": [
       "help.getConfig",
-      "help.getCdnConfig",
       "help.getCountriesList",
       "help.getAppConfig"
+    ],
+    "global_bot": [
+      "help.getCdnConfig"
     ],
     "global_user": [
       "messages.getAvailableReactions",
@@ -32,7 +34,8 @@
   },
   "authentication": {
     "public": "TG_API_ID + TG_API_HASH",
-    "user_only": "TG_USER_SESSION"
+    "global_bot": "TG_BOT_TOKEN",
+    "global_user": "TG_USER_SESSION"
   },
   "safety": {
     "max_leaf_removal_ratio": 0.1
