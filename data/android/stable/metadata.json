@@ -21,5 +21,19 @@
     "res/values/strings.xml",
     "res/values/public.xml"
   ],
-  "source_url": "https://telegram.org/dl/android/apk"
+  "source_url": "https://telegram.org/dl/android/apk",
+  "tl_extraction": {
+    "counts": {
+      "constructors": 1947,
+      "methods": 730,
+      "total": 2677
+    },
+    "jadx": "https://github.com/skylot/jadx/releases/download/v1.5.6/jadx-1.5.6.zip",
+    "json": "tl.json",
+    "layer": 229,
+    "sha256": "2a7840dfe11594b48ac2fc542cd29ab8a4d968a8c324d0584a00b954ea6bffc3",
+    "stage": "5B",
+    "target_package": "org.telegram.tgnet",
+    "tl": "tl.tl"
+  }
 }
