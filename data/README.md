@@ -1,29 +1,41 @@
 # Generated Telegram developer data
 
-This branch is the generated data archive for Telegram-Developer-Crawler.
+This directory is the generated snapshot store for the crawler.
 
-The root of this branch intentionally contains only the data/ directory. Crawler code, workflows, tests and source manifests live on the main branch.
+The repository's main branch contains crawler code and source definitions. The data branch contains only this data/ tree and its Git history.
 
-## MTProto server datasets
+## MTProto server data
 
-Per data center:
+The first collector tracks these datasets:
+
+### Per data center
 
 - config.json — help.getConfig
 - cdn-config.json — help.getCdnConfig
 - countries-list.json — help.getCountriesList
 - app-config.json — help.getAppConfig
 
-Stored under data/mtproto/config/{production,test}/dcN/.
+These are stored under:
 
-When the optional TG_USER_SESSION is configured on the main-branch workflow, the user-only datasets are also collected:
+data/mtproto/config/{production,test}/dcN/
+
+### Global user datasets
+
+When TG_USER_SESSION is configured:
 
 - available-reactions.json — messages.getAvailableReactions
 - premium-promo.json — help.getPremiumPromo
 
-Stored under data/mtproto/config/global/.
+These are stored under:
 
-## Change detection
+data/mtproto/config/global/
 
-This branch is the historical snapshot store. Each generated file is committed only when its normalized content changes, so Git history provides the change timeline and exact diffs.
+User-only datasets are intentionally normalized to remove account-specific or volatile fields before they enter Git history.
 
-Do not edit this branch manually. Generated data is published by the crawler workflow from main.
+## Git history
+
+Do not edit generated snapshots manually.
+
+Every crawler run compares the newly generated snapshots with the previous data-branch version. Git history therefore acts as the historical change detector and evidence store.
+
+The data branch is data-only by design; crawler source code, workflows, tests and source manifests belong on main.
