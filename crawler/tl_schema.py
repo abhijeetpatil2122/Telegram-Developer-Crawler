@@ -22,8 +22,6 @@ from typing import Any
 
 import httpx
 
-from .safety import validate_snapshot
-
 ROOT = Path(__file__).resolve().parents[1]
 DATA_ROOT = ROOT / "data" / "mtproto" / "tl"
 
@@ -92,8 +90,21 @@ def validate_schema_json(previous: Any | None, current: Any) -> None:
             if not isinstance(item, dict) or item.get("id") is None:
                 raise ValueError(f"invalid {collection_name} entry in TL schema JSON")
 
-    if previous is not None:
-        validate_snapshot(previous, current)
+    if previous is None:
+        return
+
+    previous_keys = schema_object_keys(previous)
+    current_keys = schema_object_keys(current)
+    if not previous_keys:
+        return
+
+    removed = previous_keys - current_keys
+    ratio = len(removed) / len(previous_keys)
+    if ratio > 0.10:
+        raise ValueError(
+            "TL schema object safety guard triggered: "
+            f"{len(removed)}/{len(previous_keys)} objects disappeared ({ratio:.1%})"
+        )
 
 
 def definition_keys(value: str) -> set[str]:
