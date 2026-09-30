@@ -1,0 +1,23 @@
+{
+  "counts": {
+    "constructors": 59,
+    "functions": 10,
+    "total": 69
+  },
+  "safety": {
+    "max_definition_removal_ratio": 0.1
+  },
+  "sha256": {
+    "json": "7e7afc83d285d0e2f9b1cd269b1f1f2b7280a784972d119dc3403aebef7255cc",
+    "tl": "40c10255afb6cfcbcfc190a457a53b66ec9e410f6418cd97cc4c276709a739a9"
+  },
+  "source": "https://raw.githubusercontent.com/telegramdesktop/tdesktop/dev/Telegram/SourceFiles/mtproto/scheme/mtproto.tl",
+  "source_path": "Telegram/SourceFiles/mtproto/scheme/mtproto.tl",
+  "source_repository": "https://github.com/telegramdesktop/tdesktop",
+  "upstream": {
+    "branch": "dev",
+    "commit": "0b4a7faa9d99ba24ab4f3624cd3d7a5d38cc1ef8",
+    "commit_url": "https://github.com/telegramdesktop/tdesktop/commit/0b4a7faa9d99ba24ab4f3624cd3d7a5d38cc1ef8",
+    "message": "Update patches for wayland-specific fix."
+  }
+}

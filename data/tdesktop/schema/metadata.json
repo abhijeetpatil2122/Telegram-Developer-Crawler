@@ -1,0 +1,18 @@
+{
+  "branch": "dev",
+  "commit": "0b4a7faa9d99ba24ab4f3624cd3d7a5d38cc1ef8",
+  "commit_url": "https://github.com/telegramdesktop/tdesktop/commit/0b4a7faa9d99ba24ab4f3624cd3d7a5d38cc1ef8",
+  "schemas": {
+    "api": {
+      "json": "api.json",
+      "metadata": "api-metadata.json",
+      "tl": "api.tl"
+    },
+    "mtproto": {
+      "json": "mtproto.json",
+      "metadata": "mtproto-metadata.json",
+      "tl": "mtproto.tl"
+    }
+  },
+  "source_repository": "https://github.com/telegramdesktop/tdesktop"
+}
