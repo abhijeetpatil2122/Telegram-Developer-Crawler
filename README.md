@@ -74,9 +74,11 @@ Local development uses:
 cp .env.example .env
 ```
 
-Then fill in the values. Production collection requires `TG_API_ID`, `TG_API_HASH`, and `TG_BOT_TOKEN`. Test collection additionally requires `TG_TEST_API_ID`, `TG_TEST_API_HASH`, `TG_TEST_BOT_TOKEN`, and `TDC_TEST_DC_ENDPOINTS`. The collector reads environment variables directly.
+Then fill in the values. The MTProto configuration collector requires `TG_API_ID` and `TG_API_HASH`. It connects without logging in, which allows `help.getConfig` and `help.getAppConfig` to be collected without using a bot account. `TG_BOT_TOKEN` is optional and is reserved for the future Telegram alerting layer.
 
-GitHub Actions will use repository secrets with the same names.
+Test collection additionally requires `TG_TEST_API_ID`, `TG_TEST_API_HASH`, and `TDC_TEST_DC_ENDPOINTS`. `TG_TEST_BOT_TOKEN` is optional and reserved for future bot-based collectors or alerts.
+
+GitHub Actions reads these secrets from the `appConfig` environment.
 
 ## Safety principles
 
