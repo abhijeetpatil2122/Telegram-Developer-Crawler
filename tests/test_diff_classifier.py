@@ -17,6 +17,6 @@ def test_tl_classification():
     assert changed == []
 
 def test_module_mapping():
-    assert module_for("data/tdesktop/schema/api.tl") == "Telegram Desktop"
-    assert module_for("data/mtproto/config/production/dc1/config.json") == "MTProto configuration"
-    assert module_for("data/android/beta/main_api.tl") == "Android Preview"
+    assert module_for("data/tdesktop/tl/api.tl") == "Telegram Desktop"
+    assert module_for("data/mtproto/configs/production/dc1/config.json") == "MTProto configuration"
+    assert module_for("data/TgAndroid/tl/beta/main_api.tl") == "Android Preview"
