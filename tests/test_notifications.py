@@ -33,7 +33,7 @@ def test_final_contains_rich_buttons():
 
 def test_status_supports_stage_counter():
     html = status_html(35, "📐 Official TL schemas", "Collecting API + MTProto schemas.", 3, 7)
-    assert "Stage 3/7" in html
+    assert "3/7" in html
     assert "35%" in html
 
 
@@ -42,3 +42,10 @@ def test_final_uses_expandable_rich_blocks():
     assert "<blockquote expandable>" in html
     assert "<details open>" in html
     assert "<tg-button-row" in html
+
+
+def test_status_includes_crawl_number_and_eta():
+    html = status_html(90, "🛠️ Android schema extraction", "Extracting Stable + Preview schemas.", 7, 7, "42", "~3–4 min")
+    assert "#42" in html
+    assert "~3–4 min" in html
+    assert "90%" in html
