@@ -131,7 +131,7 @@ jobs:
       - name: Publish snapshots to data branch
         run: |
           set -euo pipefail
-          git fetch origin data
+          git fetch --prune origin data
           python /tmp/telegram-developer-notifications.py update --message-id "${TG_STATUS_MESSAGE_ID:-}" --progress 98 --title "📦 Publishing snapshot" --detail "Classifying changes, updating the public data branch and preparing the changelog."
 
           if ! python /tmp/telegram-developer-diff-classifier.py \
@@ -142,37 +142,43 @@ jobs:
             echo "::warning::5C diff classification failed; publishing snapshot with fallback metadata."
             printf '%s\n' '# Telegram Developer Crawler — Change Report' '' 'Semantic 5C classification failed for this crawl.' '' 'See the GitHub compare/commit links for the complete raw snapshot change.' > /tmp/telegram-developer-change.md
             printf '%s\n' 'classifier=fallback' 'generated_by=Telegram Developer Crawler' > /tmp/telegram-developer-change.json
-            printf '%s\n' '<b>🛠️ Telegram Developer Crawler</b>' '\nA new developer-data snapshot was published.' > /tmp/telegram-developer-notification.txt
+            printf '%s\n' '<b>🛠️ Telegram Developer Crawler</b>' '' 'A new developer-data snapshot was published.' > /tmp/telegram-developer-notification.txt
           fi
 
-          # Compare the freshly generated main-branch snapshot with the current data branch.
-          # Do this before resetting the worktree to origin/data.
+          # The main checkout contains freshly generated data/. Compare it against
+          # the public archive before touching the checkout.
           if git diff --quiet -- data && [ -z "$(git ls-files --others --exclude-standard -- data)" ]; then
             echo "TG_DATA_CHANGED=false" >> "$GITHUB_ENV"
             echo "No generated data changes."
             exit 0
           fi
 
-          git reset --hard origin/data
-          git clean -fd
+          # Build the data-branch commit from a clean worktree. This avoids
+          # branch switching in the collector checkout and guarantees that the
+          # archive has exactly the intended public layout.
+          rm -rf /tmp/telegram-developer-data-publish
+          git worktree add --detach /tmp/telegram-developer-data-publish origin/data
+          trap 'git worktree remove --force /tmp/telegram-developer-data-publish >/dev/null 2>&1 || true' EXIT
 
-          # The data branch is the public archive itself.
-          # Generated collector output lives at the branch root:
-          #   mtproto/configs/
-          #   mtproto/tl/
-          #   tdlib/tl/
-          #   tdesktop/tl/
-          #   TgAndroid/tl/
-          # Never publish data/data/ or a changes/ directory.
-          rm -rf data android mtproto tdlib tdesktop TgAndroid changes
+          cd /tmp/telegram-developer-data-publish
+          git clean -fdx
+
+          # Never carry a nested data/ or transient changes/ directory into the
+          # public archive.
+          rm -rf data changes android mtproto tdlib tdesktop TgAndroid
           cp -a /tmp/telegram-developer-data/data/. .
           cp /tmp/telegram-developer-data-branch-README.md README.md
 
+          # Module READMEs are published beside their snapshots.
           mkdir -p mtproto tdlib tdesktop TgAndroid
           cp /tmp/telegram-developer-mtproto-README.md mtproto/README.md
           cp /tmp/telegram-developer-tdlib-README.md tdlib/README.md
           cp /tmp/telegram-developer-tdesktop-README.md tdesktop/README.md
           cp /tmp/telegram-developer-android-README.md TgAndroid/README.md
+
+          # Stage 5C artifacts are temporary workflow products, not archive data.
+          rm -f change.md change.json notification.txt
+          rm -rf changes
 
           git config user.name "telegram-developer-crawler[bot]"
           git config user.email "telegram-developer-crawler[bot]@users.noreply.github.com"
@@ -180,7 +186,7 @@ jobs:
 
           if git diff --cached --quiet; then
             echo "TG_DATA_CHANGED=false" >> "$GITHUB_ENV"
-            echo "No data changes."
+            echo "No data changes after archive normalization."
             exit 0
           fi
 
