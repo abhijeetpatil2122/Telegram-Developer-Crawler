@@ -117,7 +117,7 @@ def collect() -> None:
                 "functions": sum(x["kind"] == "functions" for x in definitions),
                 "total": len(definitions),
             },
-            "sha256": {"tl": sha256_text(source), "json": sha256_text(structured_text)},
+            "sha256": {"tl": sha256_text(with_tl_credit(source)), "json": sha256_text(structured_text)},
             "safety": {"max_definition_removal_ratio": 0.10},
         }
         (DATA_ROOT / f"{label}-metadata.json").write_text(render_json(metadata), encoding="utf-8")
