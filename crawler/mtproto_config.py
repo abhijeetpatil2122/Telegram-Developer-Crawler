@@ -199,7 +199,7 @@ async def collect_dc(
             # help.getConfig is server/MTProto configuration, while
             # help.getAppConfig is client-specific application configuration.
             write_snapshot(
-                DATA_ROOT / "config" / network / dc_name / "config.json",
+                DATA_ROOT / "configs" / network / dc_name / "config.json",
                 normalize_config(config),
             )
             write_snapshot(
