@@ -116,10 +116,20 @@ def render_markdown(summary,base):
     lines += ["## Credited unified diff","","DIFF START",diff,"DIFF END"]
     return with_markdown_credit("\n".join(lines))
 
+def notification(summary):
+    lines=["🛠️ Telegram Developer Crawler",""]
+    for module,g in summary["groups"].items():
+        if not g["files"]: continue
+        lines.append("📦 " + module + " — ➕ " + str(g["additions"]) + " ✏️ " + str(g["changes"]) + " ➖ " + str(g["deletions"]))
+        for e in g["files"]:
+            lines.append("  • " + e["path"])
+    return "\n".join(lines)
+
 def main():
-    p=argparse.ArgumentParser(); p.add_argument("--base",default=DATA_BRANCH); p.add_argument("--output",required=True); p.add_argument("--json",required=True); a=p.parse_args()
+    p=argparse.ArgumentParser(); p.add_argument("--base",default=DATA_BRANCH); p.add_argument("--output",required=True); p.add_argument("--json",required=True); p.add_argument("--notification"); a=p.parse_args()
     s=classify(a.base)
     Path(a.output).write_text(render_markdown(s,a.base),encoding="utf-8")
     Path(a.json).write_text(json.dumps(s,indent=2,ensure_ascii=False)+"\n",encoding="utf-8")
+    if a.notification: Path(a.notification).write_text(notification(s),encoding="utf-8")
     print(json.dumps({"files":sum(len(g["files"]) for g in s["groups"].values()),"groups":list(s["groups"])}))
 if __name__=="__main__": main()
