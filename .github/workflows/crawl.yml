@@ -131,8 +131,7 @@ jobs:
             exit 0
           fi
           publish_dir="$(mktemp -d)"
-          git worktree add --detach "$publish_dir" data
-          trap 'git worktree remove --force "$publish_dir" >/dev/null 2>&1 || true' EXIT
+          git clone --local --branch data --single-branch "$GITHUB_WORKSPACE" "$publish_dir"
 
           find "$publish_dir" -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf {} +
           cp -a /tmp/telegram-developer-data/. "$publish_dir/"
