@@ -77,12 +77,12 @@ def semantic_tl(old,new):
 
 def module_for(path):
     p=path.removeprefix("data/")
-    if p.startswith(("mtproto/config/","mtproto/app-config/","mtproto/countries-list/","mtproto/global/")): return "MTProto configuration"
+    if p.startswith(("mtproto/configs/","mtproto/app-config/","mtproto/countries-list/","mtproto/global/")): return "MTProto configuration"
     if p.startswith("mtproto/tl/"): return "MTProto/TL schema"
     if p.startswith("tdlib/"): return "TDLib"
     if p.startswith("tdesktop/"): return "Telegram Desktop"
-    if p.startswith("android/stable/"): return "Android Stable"
-    if p.startswith("android/beta/"): return "Android Preview"
+    if p.startswith("TgAndroid/tl/stable/"): return "Android Stable"
+    if p.startswith("TgAndroid/tl/beta/"): return "Android Preview"
     return "Other"
 
 def classify(base):
@@ -117,8 +117,8 @@ def render_markdown(summary,base):
     return with_markdown_credit("\n".join(lines))
 
 def android_info(channel):
-    meta=parse_json(read_current(f"data/android/{channel}/metadata.json")) or {}
-    schema=parse_json(read_current(f"data/android/{channel}/main_api.json")) or {}
+    meta=parse_json(read_current(f"data/TgAndroid/{channel}/metadata.json")) or {}
+    schema=parse_json(read_current(f"data/TgAndroid/tl/{channel}/main_api.json")) or {}
     android=meta.get("android",{}) if isinstance(meta,dict) else {}
     return android.get("version_name"), android.get("version_code"), schema.get("layer")
 
