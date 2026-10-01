@@ -25,6 +25,7 @@ ROOT = Path(__file__).resolve().parents[1]
 DATA_ROOT = ROOT / "data" / "android"
 E2E_TL_URL = "https://core.telegram.org/schema/end-to-end"
 E2E_JSON_URL = "https://core.telegram.org/schema/end-to-end-json"
+API_JSON_URL = "https://core.telegram.org/schema/json"
 
 JADX_URL = os.environ.get(
     "ANDROID_JADX_URL",
@@ -170,6 +171,45 @@ def render_json(value: Any) -> str:
     if isinstance(value, dict):
         value = add_json_credit(value)
     return json.dumps(value, indent=2, ensure_ascii=False, sort_keys=True) + "\n"
+
+
+def fetch_upstream_api_schema() -> dict[str, Any]:
+    with httpx.Client(timeout=30.0, follow_redirects=True, headers={"User-Agent": "Telegram-Developer-Crawler/0.1"}) as client:
+        response = client.get(API_JSON_URL)
+        response.raise_for_status()
+        return response.json()
+
+
+def official_api_definitions(value: dict[str, Any]) -> list[dict[str, Any]]:
+    result: list[dict[str, Any]] = []
+    for item in value.get("constructors", []):
+        result.append({
+            "kind": "constructor",
+            "name": item["predicate"],
+            "id": int(item["id"]),
+            "type": item["type"],
+            "params": [{"name": p["name"], "type": p["type"]} for p in item.get("params", [])],
+            "source": "core.telegram.org/schema/json",
+        })
+    for item in value.get("methods", []):
+        result.append({
+            "kind": "method",
+            "name": item["method"],
+            "id": int(item["id"]),
+            "result": item["type"],
+            "params": [{"name": p["name"], "type": p["type"]} for p in item.get("params", [])],
+            "source": "core.telegram.org/schema/json",
+        })
+    return result
+
+
+def merge_upstream_api(android: list[dict[str, Any]], upstream: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    merged: dict[tuple[str, int, str], dict[str, Any]] = {}
+    for item in upstream:
+        merged[(item["kind"], item["id"], item["name"])] = item
+    for item in android:
+        merged[(item["kind"], item["id"], item["name"])] = item
+    return sorted(merged.values(), key=lambda x: (x["kind"], x["name"], x["id"]))
 
 
 def fetch_e2e_schema() -> dict[str, Any]:
@@ -643,6 +683,13 @@ def extract_channel(channel: str, jadx_bin: Path) -> dict[str, Any]:
         raise ValueError("Android TL canonicalization produced duplicate definition keys")
 
     definitions = canonical_definitions
+
+    # Android contains the newest client-specific objects but also omits many
+    # stable API definitions that are not needed by that APK. Merge the official
+    # current API as the base, with Android taking precedence on matching objects.
+    upstream = official_api_definitions(fetch_upstream_api_schema())
+    definitions = merge_upstream_api(definitions, upstream)
+
     constructors = [x for x in definitions if x["kind"] == "constructor"]
     methods = [x for x in definitions if x["kind"] == "method"]
     if len(constructors) < MIN_CONSTRUCTORS or len(methods) < MIN_METHODS:
