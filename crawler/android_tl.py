@@ -19,7 +19,7 @@ from typing import Any
 
 import httpx
 
-from crawler.credits import add_json_credit, with_tl_credit
+from crawler.credits import with_tl_credit
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA_ROOT = ROOT / "data" / "android"
@@ -169,7 +169,7 @@ OBJECT_WRITE_RE = re.compile(
 
 def render_json(value: Any) -> str:
     if isinstance(value, dict):
-        value = add_json_credit(value)
+        value = value
     return json.dumps(value, indent=2, ensure_ascii=False, sort_keys=True) + "\n"
 
 
