@@ -130,38 +130,41 @@ jobs:
             echo "No generated data changes."
             exit 0
           fi
-          rm -rf data
-          git checkout data
-          find . -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf {} +
-          cp -a /tmp/telegram-developer-data data
-          cp /tmp/telegram-developer-data-branch-README.md README.md
-          mkdir -p data/mtproto data/tdlib data/tdesktop data/android
-          cp /tmp/telegram-developer-mtproto-README.md data/mtproto/README.md
-          cp /tmp/telegram-developer-tdlib-README.md data/tdlib/README.md
-          cp /tmp/telegram-developer-tdesktop-README.md data/tdesktop/README.md
-          cp /tmp/telegram-developer-android-README.md data/android/README.md
-          mkdir -p data/changes
+          publish_dir="$(mktemp -d)"
+          git worktree add --detach "$publish_dir" data
+          trap 'git worktree remove --force "$publish_dir" >/dev/null 2>&1 || true' EXIT
+
+          find "$publish_dir" -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf {} +
+          cp -a /tmp/telegram-developer-data/. "$publish_dir/"
+          cp /tmp/telegram-developer-data-branch-README.md "$publish_dir/README.md"
+          mkdir -p "$publish_dir/data/mtproto" "$publish_dir/data/tdlib" "$publish_dir/data/tdesktop" "$publish_dir/data/android"
+          cp /tmp/telegram-developer-mtproto-README.md "$publish_dir/data/mtproto/README.md"
+          cp /tmp/telegram-developer-tdlib-README.md "$publish_dir/data/tdlib/README.md"
+          cp /tmp/telegram-developer-tdesktop-README.md "$publish_dir/data/tdesktop/README.md"
+          cp /tmp/telegram-developer-android-README.md "$publish_dir/data/android/README.md"
+          mkdir -p "$publish_dir/data/changes"
           stamp="$(date -u +%Y%m%dT%H%M%SZ)"
-          cp /tmp/telegram-developer-change.md "data/changes/$stamp-change-report.md"
-          git config user.name "telegram-developer-crawler[bot]"
-          git config user.email "telegram-developer-crawler[bot]@users.noreply.github.com"
-          git add -A
-          if git diff --cached --quiet; then
+          cp /tmp/telegram-developer-change.md "$publish_dir/data/changes/$stamp-change-report.md"
+
+          git -C "$publish_dir" config user.name "telegram-developer-crawler[bot]"
+          git -C "$publish_dir" config user.email "telegram-developer-crawler[bot]@users.noreply.github.com"
+          git -C "$publish_dir" add -A
+          if git -C "$publish_dir" diff --cached --quiet; then
             echo "TG_DATA_CHANGED=false" >> "$GITHUB_ENV"
             echo "No data changes."
             exit 0
           fi
           echo "TG_DATA_CHANGED=true" >> "$GITHUB_ENV"
           python /tmp/telegram-developer-notifications.py delete --message-id "$TG_STATUS_MESSAGE_ID"
-          git commit -m "chore(data): update Telegram developer snapshots"
-          new_sha="$(git rev-parse HEAD)"
-          old_sha="$(git rev-parse HEAD^)"
-          git push origin data
+          git -C "$publish_dir" commit -m "chore(data): update Telegram developer snapshots"
+          new_sha="$(git -C "$publish_dir" rev-parse HEAD)"
+          old_sha="$(git -C "$publish_dir" rev-parse HEAD^)"
+          git -C "$publish_dir" push origin HEAD:data
           commit_url="https://github.com/abhijeetpatil2122/Telegram-Developer-Crawler/commit/$new_sha"
           compare_url="https://github.com/abhijeetpatil2122/Telegram-Developer-Crawler/compare/$old_sha...$new_sha"
-          python /tmp/telegram-developer-notifications.py notify \\
-            --text "$(cat /tmp/telegram-developer-notification.txt)" \\
-            --compare-url "$compare_url" \\
+          python /tmp/telegram-developer-notifications.py notify \
+            --text "$(cat /tmp/telegram-developer-notification.txt)" \
+            --compare-url "$compare_url" \
             --commit-url "$commit_url" || echo "::warning::Telegram final notification failed after data was pushed."
 
       - name: Finish Telegram crawl status
