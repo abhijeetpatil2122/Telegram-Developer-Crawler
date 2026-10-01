@@ -140,13 +140,13 @@ def notification(summary, base):
             lines.append(f"📱 <b>Android {label}</b>")
             if version: lines.append(f"Version: <code>{version}</code>  Build: <code>{build}</code>")
             if layer: lines.append(f"Layer: <code>{layer}</code>")
-            lines.append(f"➕ Added: <b>{g["additions"]}</b>")
-            lines.append(f"✏️ Changed: <b>{g["changes"]}</b>")
-            lines.append(f"➖ Removed: <b>{g["deletions"]}</b>")
+            lines.append(f"➕ Added: <b>{g['additions']}</b>")
+            lines.append(f"✏️ Changed: <b>{g['changes']}</b>")
+            lines.append(f"➖ Removed: <b>{g['deletions']}</b>")
             if version and version==old_version and build!=old_build: lines.append("#Android #"+label+" #Patch")
             else: lines.append("#Android #"+label)
         else:
-            lines.append(f"📦 <b>{module}</b> — ➕ {g["additions"]} ✏️ {g["changes"]} ➖ {g["deletions"]}")
+            lines.append(f"📦 <b>{module}</b> — ➕ {g['additions']} ✏️ {g['changes']} ➖ {g['deletions']}")
         lines.append("")
     return "\n".join(lines).rstrip()
 
