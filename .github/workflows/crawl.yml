@@ -114,11 +114,22 @@ jobs:
           cp docs/modules/tdesktop/README.md /tmp/telegram-developer-tdesktop-README.md
           cp docs/modules/android/README.md /tmp/telegram-developer-android-README.md
           cp crawler/notifications.py /tmp/telegram-developer-notifications.py
+          cp crawler/diff_classifier.py /tmp/telegram-developer-diff-classifier.py
 
       - name: Publish snapshots to data branch
         run: |
           set -euo pipefail
           git fetch origin data:data
+          python /tmp/telegram-developer-diff-classifier.py \\
+            --base data \\
+            --output /tmp/telegram-developer-change.md \\
+            --json /tmp/telegram-developer-change.json \\
+            --notification /tmp/telegram-developer-notification.txt
+          if git diff --quiet data -- data; then
+            echo "TG_DATA_CHANGED=false" >> "$GITHUB_ENV"
+            echo "No generated data changes."
+            exit 0
+          fi
           rm -rf data
           git checkout data
           find . -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf {} +
@@ -129,6 +140,9 @@ jobs:
           cp /tmp/telegram-developer-tdlib-README.md data/tdlib/README.md
           cp /tmp/telegram-developer-tdesktop-README.md data/tdesktop/README.md
           cp /tmp/telegram-developer-android-README.md data/android/README.md
+          mkdir -p data/changes
+          stamp="$(date -u +%Y%m%dT%H%M%SZ)"
+          cp /tmp/telegram-developer-change.md "data/changes/$stamp-change-report.md"
           git config user.name "telegram-developer-crawler[bot]"
           git config user.email "telegram-developer-crawler[bot]@users.noreply.github.com"
           git add -A
@@ -140,7 +154,15 @@ jobs:
           echo "TG_DATA_CHANGED=true" >> "$GITHUB_ENV"
           python /tmp/telegram-developer-notifications.py delete --message-id "$TG_STATUS_MESSAGE_ID"
           git commit -m "chore(data): update Telegram developer snapshots"
+          new_sha="$(git rev-parse HEAD)"
+          old_sha="$(git rev-parse HEAD^)"
           git push origin data
+          commit_url="https://github.com/abhijeetpatil2122/Telegram-Developer-Crawler/commit/$new_sha"
+          compare_url="https://github.com/abhijeetpatil2122/Telegram-Developer-Crawler/compare/$old_sha...$new_sha"
+          python /tmp/telegram-developer-notifications.py notify \\
+            --text "$(cat /tmp/telegram-developer-notification.txt)" \\
+            --compare-url "$compare_url" \\
+            --commit-url "$commit_url"
 
       - name: Finish Telegram crawl status
         if: always()
