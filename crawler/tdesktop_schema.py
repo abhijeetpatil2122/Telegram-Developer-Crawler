@@ -11,7 +11,7 @@ import httpx
 from crawler.credits import with_tl_credit
 
 ROOT = Path(__file__).resolve().parents[1]
-DATA_ROOT = ROOT / "data" / "tdesktop" / "schema"
+DATA_ROOT = ROOT / "data" / "tdesktop" / "tl"
 BASE = "https://raw.githubusercontent.com/telegramdesktop/tdesktop/dev/Telegram/SourceFiles/mtproto/scheme"
 COMMIT_URL = "https://api.github.com/repos/telegramdesktop/tdesktop/commits/dev"
 SOURCES = {"api": f"{BASE}/api.tl", "mtproto": f"{BASE}/mtproto.tl"}
