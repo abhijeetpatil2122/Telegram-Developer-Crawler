@@ -59,7 +59,7 @@ jobs:
       - name: Start Telegram crawl status
         env:
           TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
-          TG_ALERT_CHAT_ID: ${{ secrets.TG_ALERT_CHAT_ID }}
+          TG_ALERT_CHAT_ID: ${{ secrets.TG_ALERT_CHAT_ID || '@botapinews' }}
         run: |
           id="$(python -m crawler.notifications start)"
           echo "TG_STATUS_MESSAGE_ID=$id" >> "$GITHUB_ENV"
