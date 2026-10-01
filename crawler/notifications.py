@@ -1,7 +1,6 @@
 """Telegram notification controller for crawler progress and final changes."""
 from __future__ import annotations
 import argparse
-import html
 import os
 import sys
 import httpx
@@ -18,8 +17,8 @@ def call(method: str, **payload):
     except httpx.HTTPError as exc:
         print(f"Telegram notification request failed: {exc}", file=sys.stderr)
         return None
-        response.raise_for_status()
-        data=response.json()
+    response.raise_for_status()
+    data=response.json()
     if not data.get("ok"):
         print(f"Telegram notification failed: {data}", file=sys.stderr)
         return None
