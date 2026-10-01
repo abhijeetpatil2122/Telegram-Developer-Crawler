@@ -143,14 +143,11 @@ jobs:
           mkdir -p data
           cp -a /tmp/telegram-developer-data/. data/
           cp /tmp/telegram-developer-data-branch-README.md README.md
-          mkdir -p data/mtproto data/tdlib data/tdesktop data/android
+          mkdir -p data/mtproto data/tdlib data/tdesktop data/TgAndroid data/TgAndroid/tl
           cp /tmp/telegram-developer-mtproto-README.md data/mtproto/README.md
           cp /tmp/telegram-developer-tdlib-README.md data/tdlib/README.md
           cp /tmp/telegram-developer-tdesktop-README.md data/tdesktop/README.md
-          cp /tmp/telegram-developer-android-README.md data/android/README.md
-          mkdir -p data/changes
-          stamp="$(date -u +%Y%m%dT%H%M%SZ)"
-          cp /tmp/telegram-developer-change.md "data/changes/$stamp-change-report.md"
+          cp /tmp/telegram-developer-android-README.md data/TgAndroid/README.md
           git config user.name "telegram-developer-crawler[bot]"
           git config user.email "telegram-developer-crawler[bot]@users.noreply.github.com"
           git add -A
