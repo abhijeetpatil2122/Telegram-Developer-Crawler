@@ -25,12 +25,21 @@ def call(method: str, **payload):
                 API.format(token, method),
                 data={"chat_id": chat_id, **payload},
             )
-            response.raise_for_status()
+            try:
+                data = response.json()
+            except ValueError:
+                data = {"ok": False, "description": response.text}
+            if not response.is_success:
+                print(
+                    f"Telegram API HTTP {response.status_code} for {method}: "
+                    f"{data.get('description', response.text)}",
+                    file=sys.stderr,
+                )
+                return None
     except httpx.HTTPError as exc:
         print(f"Telegram notification request failed: {exc}", file=sys.stderr)
         return None
 
-    data = response.json()
     if not data.get("ok"):
         print(f"Telegram notification failed: {data}", file=sys.stderr)
         return None
@@ -117,6 +126,16 @@ def main() -> int:
         result = call("sendRichMessage", rich_message=rich_payload(html_content))
         if result:
             print(result["message_id"])
+            return 0
+
+        fallback = call(
+            "sendMessage",
+            text=html_content,
+            parse_mode="HTML",
+            disable_web_page_preview="true",
+        )
+        if fallback:
+            print(fallback["message_id"])
         return 0
 
     if args.action == "notify":
