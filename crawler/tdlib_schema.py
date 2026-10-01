@@ -23,7 +23,7 @@ import httpx
 from crawler.credits import with_tl_credit
 
 ROOT = Path(__file__).resolve().parents[1]
-DATA_ROOT = ROOT / "data" / "tdlib" / "schema"
+DATA_ROOT = ROOT / "data" / "tdlib" / "tl"
 
 TDLIB_TL_URL = "https://raw.githubusercontent.com/tdlib/td/master/td/generate/scheme/td_api.tl"
 TDLIB_COMMIT_URL = "https://api.github.com/repos/tdlib/td/commits/master"
