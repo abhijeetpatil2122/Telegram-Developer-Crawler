@@ -59,10 +59,12 @@ jobs:
       - name: Start Telegram crawl status
         env:
           TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
-          TG_ALERT_CHAT_ID: ${{ secrets.TG_ALERT_CHAT_ID || '@botapinews' }}
+          TG_ALERT_CHAT_ID: ${{ secrets.TG_ALERT_CHAT_ID }}
         run: |
           id="$(python -m crawler.notifications start)"
-          echo "TG_STATUS_MESSAGE_ID=$id" >> "$GITHUB_ENV"
+          if [ -n "$id" ]; then
+            echo "TG_STATUS_MESSAGE_ID=$id" >> "$GITHUB_ENV"
+          fi
 
       - name: Collect Telegram configuration
         env:
@@ -72,7 +74,7 @@ jobs:
           TG_USER_SESSION: ${{ secrets.TG_USER_SESSION }}
           TDC_TEST_DC_ENDPOINTS: ${{ secrets.TDC_TEST_DC_ENDPOINTS }}
         run: |
-          python -m crawler.notifications update --message-id "$TG_STATUS_MESSAGE_ID" --text "⚙️ Telegram Developer Crawler — 🔐 Collecting MTProto configuration…"
+          python -m crawler.notifications update --message-id "${TG_STATUS_MESSAGE_ID:-}" --text "🔐 <b>Crawling MTProto configuration</b><br/>Production + test DCs, app-config, countries and global datasets."
           python -m crawler.mtproto_config
 
       - name: Collect MTProto TL schemas
@@ -81,27 +83,27 @@ jobs:
           TG_API_HASH: ${{ secrets.TG_API_HASH }}
           TG_USER_SESSION: ${{ secrets.TG_USER_SESSION }}
         run: |
-          python -m crawler.notifications update --message-id "$TG_STATUS_MESSAGE_ID" --text "⚙️ Telegram Developer Crawler — 📐 Collecting official TL schemas…"
+          python -m crawler.notifications update --message-id "${TG_STATUS_MESSAGE_ID:-}" --text "📐 <b>Crawling official TL schemas</b><br/>API + MTProto schema sources and machine-readable JSON."
           python -m crawler.tl_schema
 
       - name: Collect TDLib schema
         run: |
-          python -m crawler.notifications update --message-id "$TG_STATUS_MESSAGE_ID" --text "⚙️ Telegram Developer Crawler — 📚 Collecting TDLib schema…"
+          python -m crawler.notifications update --message-id "${TG_STATUS_MESSAGE_ID:-}" --text "📚 <b>Crawling TDLib</b><br/>Fetching the upstream td_api.tl schema and metadata."
           python -m crawler.tdlib_schema
 
       - name: Collect Telegram Desktop schemas
         run: |
-          python -m crawler.notifications update --message-id "$TG_STATUS_MESSAGE_ID" --text "⚙️ Telegram Developer Crawler — 🖥️ Collecting Telegram Desktop schemas…"
+          python -m crawler.notifications update --message-id "${TG_STATUS_MESSAGE_ID:-}" --text "🖥️ <b>Crawling Telegram Desktop</b><br/>API + MTProto schemas from the dev branch."
           python -m crawler.tdesktop_schema
 
       - name: Collect Android stable and public beta
         run: |
-          python -m crawler.notifications update --message-id "$TG_STATUS_MESSAGE_ID" --text "⚙️ Telegram Developer Crawler — 📱 Downloading Android Stable + Public Beta APKs…"
+          python -m crawler.notifications update --message-id "${TG_STATUS_MESSAGE_ID:-}" --text "📱 <b>Downloading Android clients</b><br/>Stable + Public Beta APKs."
           python -m crawler.android_client
 
       - name: Extract Android TL schemas
         run: |
-          python -m crawler.notifications update --message-id "$TG_STATUS_MESSAGE_ID" --text "⚙️ Telegram Developer Crawler — 🛠️ Decompiling Android APKs with JADX… Stable + Preview"
+          python -m crawler.notifications update --message-id "${TG_STATUS_MESSAGE_ID:-}" --text "🛠️ <b>Extracting Android schemas</b><br/>Decompiling Stable + Preview with JADX and reconstructing TL."
           python -m crawler.android_tl
 
       - name: Save generated snapshots
@@ -120,54 +122,62 @@ jobs:
         run: |
           set -euo pipefail
           git fetch origin data
-          if ! python /tmp/telegram-developer-diff-classifier.py \
-            --base data \
-            --output /tmp/telegram-developer-change.md \
-            --json /tmp/telegram-developer-change.json \
-            --notification /tmp/telegram-developer-notification.txt; then
+          if ! python /tmp/telegram-developer-diff-classifier.py             --base data             --output /tmp/telegram-developer-change.md             --json /tmp/telegram-developer-change.json             --notification /tmp/telegram-developer-notification.txt; then
             echo "::warning::5C diff classification failed; publishing snapshot with fallback metadata."
-            printf '%s\\n' '# Telegram Developer Crawler — Change Report' '' 'Semantic 5C classification failed for this crawl.' '' 'See the GitHub compare/commit links for the complete raw snapshot change.' > /tmp/telegram-developer-change.md
-            printf '%s\\n' '{"classifier":"fallback","generated_by":"Telegram Developer Crawler","copyright":"Copyright (C) 2026 Abhijeet Patil"}' > /tmp/telegram-developer-change.json
-            printf '%s\\n' '🛠️ <b>Telegram Developer Crawler</b>' '' 'A new developer-data snapshot was published.' > /tmp/telegram-developer-notification.txt
+            printf '%s\n' '# Telegram Developer Crawler — Change Report' '' 'Semantic 5C classification failed for this crawl.' '' 'See the GitHub compare/commit links for the complete raw snapshot change.' > /tmp/telegram-developer-change.md
+            printf '%s\n' 'classifier=fallback' 'generated_by=Telegram Developer Crawler' > /tmp/telegram-developer-change.json
+            printf '%s\n' '<b>🛠️ Telegram Developer Crawler</b>' '<br/>A new developer-data snapshot was published.' > /tmp/telegram-developer-notification.txt
           fi
+
           if git diff --quiet data -- data; then
             echo "TG_DATA_CHANGED=false" >> "$GITHUB_ENV"
             echo "No generated data changes."
             exit 0
           fi
+
           git reset --hard origin/data
           git clean -fd
-          # The data branch is a published archive: generated snapshots belong
-          # directly under its root data/ directory, never data/data/.
-          rm -rf data android mtproto tdlib tdesktop
-          mkdir -p data
-          cp -a /tmp/telegram-developer-data/. data/
+
+          # The data branch is the public archive itself.
+          # Generated collector output lives at the branch root:
+          #   mtproto/configs/
+          #   mtproto/tl/
+          #   tdlib/tl/
+          #   tdesktop/tl/
+          #   TgAndroid/tl/
+          # Never publish data/data/ or a changes/ directory.
+          rm -rf data android mtproto tdlib tdesktop TgAndroid changes
+          cp -a /tmp/telegram-developer-data/data/. .
           cp /tmp/telegram-developer-data-branch-README.md README.md
-          mkdir -p data/mtproto data/tdlib data/tdesktop data/TgAndroid data/TgAndroid/tl
-          cp /tmp/telegram-developer-mtproto-README.md data/mtproto/README.md
-          cp /tmp/telegram-developer-tdlib-README.md data/tdlib/README.md
-          cp /tmp/telegram-developer-tdesktop-README.md data/tdesktop/README.md
-          cp /tmp/telegram-developer-android-README.md data/TgAndroid/README.md
+
+          mkdir -p mtproto tdlib tdesktop TgAndroid
+          cp /tmp/telegram-developer-mtproto-README.md mtproto/README.md
+          cp /tmp/telegram-developer-tdlib-README.md tdlib/README.md
+          cp /tmp/telegram-developer-tdesktop-README.md tdesktop/README.md
+          cp /tmp/telegram-developer-android-README.md TgAndroid/README.md
+
           git config user.name "telegram-developer-crawler[bot]"
           git config user.email "telegram-developer-crawler[bot]@users.noreply.github.com"
           git add -A
+
           if git diff --cached --quiet; then
             echo "TG_DATA_CHANGED=false" >> "$GITHUB_ENV"
             echo "No data changes."
             exit 0
           fi
+
           echo "TG_DATA_CHANGED=true" >> "$GITHUB_ENV"
-          python /tmp/telegram-developer-notifications.py delete --message-id "$TG_STATUS_MESSAGE_ID"
+          python /tmp/telegram-developer-notifications.py delete --message-id "${TG_STATUS_MESSAGE_ID:-}" || true
+
           git commit -m "chore(data): update Telegram developer snapshots"
           new_sha="$(git rev-parse HEAD)"
           old_sha="$(git rev-parse HEAD^)"
           git push origin HEAD:data
+
           commit_url="https://github.com/abhijeetpatil2122/Telegram-Developer-Crawler/commit/$new_sha"
           compare_url="https://github.com/abhijeetpatil2122/Telegram-Developer-Crawler/compare/$old_sha...$new_sha"
-          python /tmp/telegram-developer-notifications.py notify \
-            --text "$(cat /tmp/telegram-developer-notification.txt)" \
-            --compare-url "$compare_url" \
-            --commit-url "$commit_url" || echo "::warning::Telegram final notification failed after data was pushed."
+
+          python /tmp/telegram-developer-notifications.py notify             --text "$(cat /tmp/telegram-developer-notification.txt)"             --compare-url "$compare_url"             --commit-url "$commit_url"             || echo "::warning::Telegram final notification failed after data was pushed."
 
       - name: Finish Telegram crawl status
         if: always()
