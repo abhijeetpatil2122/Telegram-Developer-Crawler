@@ -152,7 +152,7 @@ def final_html(text: str, compare_url: str, commit_url: str) -> str:
         "<summary>Semantic 5C report</summary>"
         f"{content}"
         "</details>"
-        "<tg-button-row align="center">"
+        '<tg-button-row align="center">'
         + "".join(buttons)
         + "</tg-button-row>"
         "<footer>Generated automatically by Telegram Developer Crawler.</footer>"
