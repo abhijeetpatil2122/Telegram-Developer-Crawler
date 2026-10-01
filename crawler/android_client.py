@@ -20,6 +20,8 @@ from typing import Any
 
 import httpx
 
+from crawler.credits import add_json_credit, with_tl_credit
+
 ROOT = Path(__file__).resolve().parents[1]
 DATA_ROOT = ROOT / "data" / "android"
 APKTOOL_URL = os.environ.get(
@@ -40,7 +42,7 @@ RETRYABLE_HTTPX_ERRORS = (httpx.ProtocolError, httpx.TimeoutException, httpx.Net
 
 
 def render_json(value: Any) -> str:
-    return json.dumps(value, indent=2, ensure_ascii=False, sort_keys=True) + "\n"
+    return json.dumps(add_json_credit(value) if isinstance(value, dict) else value, indent=2, ensure_ascii=False, sort_keys=True) + "\n"
 
 
 def sha256_bytes(value: bytes) -> str:
