@@ -78,7 +78,7 @@ def normalize_json(value: Any) -> Any:
 
 def render_json(value: Any) -> str:
     return json.dumps(
-        add_json_credit(normalize_json(value)) if isinstance(value, dict) else normalize_json(value),
+        normalize_json(value),
         indent=2,
         ensure_ascii=False,
         sort_keys=True,
