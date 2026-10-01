@@ -139,7 +139,7 @@ jobs:
           git clean -fd
           # The data branch is a published archive: generated snapshots belong
           # directly under its root data/ directory, never data/data/.
-          rm -rf data
+          rm -rf data android mtproto tdlib tdesktop
           mkdir -p data
           cp -a /tmp/telegram-developer-data/. data/
           cp /tmp/telegram-developer-data-branch-README.md README.md
