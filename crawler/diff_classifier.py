@@ -4,6 +4,7 @@ from __future__ import annotations
 import argparse
 import datetime as dt
 import difflib
+import html
 import json
 import re
 import subprocess
@@ -266,38 +267,48 @@ def android_previous_info(base, channel):
 
 
 def notification(summary, base):
-    lines = ["<b>🛠️ Telegram Developer Crawler</b>", "", "<b>Developer data changed</b>", ""]
+    """Render the final 5C notification as native Rich HTML blocks."""
+    sections = [
+        "<h2>📣 Developer data changed</h2>",
+        "<p>A new Telegram developer-data snapshot was published.</p>",
+    ]
+
     for module, g in summary["groups"].items():
         if not g["files"]:
             continue
+
+        sections.append(f"<h3>📦 {html.escape(module)}</h3>")
+        items = [
+            f"➕ Added: <b>{g['additions']}</b>",
+            f"✏️ Changed: <b>{g['changes']}</b>",
+            f"➖ Removed: <b>{g['deletions']}</b>",
+            f"📄 Files: <b>{len(g['files'])}</b>",
+        ]
+
         if module in ("Android Stable", "Android Preview"):
             channel = "stable" if module == "Android Stable" else "beta"
             version, build, layer = android_info(channel)
             old_version, old_build, _ = android_previous_info(base, channel)
             label = "Stable" if channel == "stable" else "Preview"
-            lines.append(f"📱 <b>Android {label}</b>")
-            if version:
-                lines.append(f"Version: <code>{version}</code>  Build: <code>{build}</code>")
-            if layer:
-                lines.append(f"Layer: <code>{layer}</code>")
-            lines.append(f"➕ Added: <b>{g['additions']}</b>")
-            lines.append(f"✏️ Changed: <b>{g['changes']}</b>")
-            lines.append(f"➖ Removed: <b>{g['deletions']}</b>")
-            lines.append(
-                "#Android #"
-                + label
-                + (" #Patch" if version and version == old_version and build != old_build else "")
-            )
-        else:
-            lines.append(
-                f"📦 <b>{module}</b>\n"
-                f"➕ Added: <b>{g['additions']}</b>  "
-                f"✏️ Changed: <b>{g['changes']}</b>  "
-                f"➖ Removed: <b>{g['deletions']}</b>"
-            )
-        lines.append("")
-    return "\n".join(lines).rstrip()
 
+            if version:
+                items.insert(
+                    0,
+                    f"📱 {label}: <code>{html.escape(str(version))}</code> "
+                    f"• Build <code>{html.escape(str(build or '—'))}</code>",
+                )
+            if layer:
+                items.insert(
+                    1 if version else 0,
+                    f"🧩 Layer: <code>{html.escape(str(layer))}</code>",
+                )
+            if version and version == old_version and build != old_build:
+                items.append("🏷️ <b>#Patch</b>")
+            items.append(f"#Android #{label}")
+
+        sections.append("<ul>" + "".join(f"<li>{item}</li>" for item in items) + "</ul>")
+
+    return "<hr/>".join(sections)
 
 def main():
     p = argparse.ArgumentParser()
