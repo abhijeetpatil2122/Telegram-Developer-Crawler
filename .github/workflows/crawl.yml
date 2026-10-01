@@ -2,7 +2,8 @@ name: Crawl Telegram developer data
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
   workflow_dispatch:
   schedule:
     - cron: "*/30 * * * *"
@@ -19,7 +20,6 @@ jobs:
     runs-on: ubuntu-latest
     environment: appConfig
     timeout-minutes: 45
-
     steps:
       - name: Checkout crawler
         uses: actions/checkout@v4
@@ -54,18 +54,14 @@ jobs:
               missing=1
             fi
           done
-          if [ "$missing" -ne 0 ]; then
-            exit 1
-          fi
+          if [ "$missing" -ne 0 ]; then exit 1; fi
 
       - name: Start Telegram crawl status
         env:
           TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
           TG_ALERT_CHAT_ID: ${{ secrets.TG_ALERT_CHAT_ID }}
         run: |
-          id="$(python -m crawler.notifications start --text '⚙️ Telegram Developer Crawler
-
-📦 Preparing Telegram developer crawl…')"
+          id="$(python -m crawler.notifications start)"
           echo "TG_STATUS_MESSAGE_ID=$id" >> "$GITHUB_ENV"
 
       - name: Collect Telegram configuration
@@ -76,9 +72,7 @@ jobs:
           TG_USER_SESSION: ${{ secrets.TG_USER_SESSION }}
           TDC_TEST_DC_ENDPOINTS: ${{ secrets.TDC_TEST_DC_ENDPOINTS }}
         run: |
-          python -m crawler.notifications update --message-id "$TG_STATUS_MESSAGE_ID" --text '⚙️ Telegram Developer Crawler
-
-🔐 Collecting MTProto configuration…'
+          python -m crawler.notifications update --message-id "$TG_STATUS_MESSAGE_ID" --text "⚙️ Telegram Developer Crawler — 🔐 Collecting MTProto configuration…"
           python -m crawler.mtproto_config
 
       - name: Collect MTProto TL schemas
@@ -87,38 +81,27 @@ jobs:
           TG_API_HASH: ${{ secrets.TG_API_HASH }}
           TG_USER_SESSION: ${{ secrets.TG_USER_SESSION }}
         run: |
-          python -m crawler.notifications update --message-id "$TG_STATUS_MESSAGE_ID" --text '⚙️ Telegram Developer Crawler
-
-📐 Collecting official TL schemas…'
+          python -m crawler.notifications update --message-id "$TG_STATUS_MESSAGE_ID" --text "⚙️ Telegram Developer Crawler — 📐 Collecting official TL schemas…"
           python -m crawler.tl_schema
 
       - name: Collect TDLib schema
         run: |
-          python -m crawler.notifications update --message-id "$TG_STATUS_MESSAGE_ID" --text '⚙️ Telegram Developer Crawler
-
-📚 Collecting TDLib schema…'
+          python -m crawler.notifications update --message-id "$TG_STATUS_MESSAGE_ID" --text "⚙️ Telegram Developer Crawler — 📚 Collecting TDLib schema…"
           python -m crawler.tdlib_schema
 
       - name: Collect Telegram Desktop schemas
         run: |
-          python -m crawler.notifications update --message-id "$TG_STATUS_MESSAGE_ID" --text '⚙️ Telegram Developer Crawler
-
-🖥️ Collecting Telegram Desktop schemas…'
+          python -m crawler.notifications update --message-id "$TG_STATUS_MESSAGE_ID" --text "⚙️ Telegram Developer Crawler — 🖥️ Collecting Telegram Desktop schemas…"
           python -m crawler.tdesktop_schema
 
       - name: Collect Android stable and public beta
         run: |
-          python -m crawler.notifications update --message-id "$TG_STATUS_MESSAGE_ID" --text '⚙️ Telegram Developer Crawler
-
-📱 Downloading Android Stable + Public Beta APKs…'
+          python -m crawler.notifications update --message-id "$TG_STATUS_MESSAGE_ID" --text "⚙️ Telegram Developer Crawler — 📱 Downloading Android Stable + Public Beta APKs…"
           python -m crawler.android_client
 
       - name: Extract Android TL schemas
         run: |
-          python -m crawler.notifications update --message-id "$TG_STATUS_MESSAGE_ID" --text '⚙️ Telegram Developer Crawler
-
-🛠️ Decompiling Android APKs with JADX…
-Stable + Preview'
+          python -m crawler.notifications update --message-id "$TG_STATUS_MESSAGE_ID" --text "⚙️ Telegram Developer Crawler — 🛠️ Decompiling Android APKs with JADX… Stable + Preview"
           python -m crawler.android_tl
 
       - name: Save generated snapshots
@@ -145,17 +128,14 @@ Stable + Preview'
           cp /tmp/telegram-developer-tdlib-README.md data/tdlib/README.md
           cp /tmp/telegram-developer-tdesktop-README.md data/tdesktop/README.md
           cp /tmp/telegram-developer-android-README.md data/android/README.md
-
           git config user.name "telegram-developer-crawler[bot]"
           git config user.email "telegram-developer-crawler[bot]@users.noreply.github.com"
           git add -A
-
           if git diff --cached --quiet; then
             echo "TG_DATA_CHANGED=false" >> "$GITHUB_ENV"
             echo "No data changes."
             exit 0
           fi
-
           echo "TG_DATA_CHANGED=true" >> "$GITHUB_ENV"
           python -m crawler.notifications delete --message-id "$TG_STATUS_MESSAGE_ID"
           git commit -m "chore(data): update Telegram developer snapshots"
