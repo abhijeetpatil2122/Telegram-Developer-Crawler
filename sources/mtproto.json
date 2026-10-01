@@ -51,7 +51,8 @@
       "tdlib": "data/tdlib/schema/",
       "tdesktop": "data/tdesktop/schema/",
       "android": "data/android/",
-      "android_tl": "data/android/"
+      "android_tl": "data/android/",
+      "change_reports": "data/changes/"
     },
     "tl_schema": [
       "core.telegram.org/schema",
@@ -120,6 +121,12 @@
       "trailing whitespace",
       "definition ordering",
       "structured JSON key ordering"
+    ],
+    "change_reports": [
+      "semantic additions",
+      "semantic changes",
+      "semantic deletions",
+      "credited unified diff hunks"
     ]
   },
   "endpoint_discovery": {
