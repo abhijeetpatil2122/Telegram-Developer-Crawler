@@ -113,6 +113,7 @@ jobs:
           cp docs/modules/tdlib/README.md /tmp/telegram-developer-tdlib-README.md
           cp docs/modules/tdesktop/README.md /tmp/telegram-developer-tdesktop-README.md
           cp docs/modules/android/README.md /tmp/telegram-developer-android-README.md
+          cp crawler/notifications.py /tmp/telegram-developer-notifications.py
 
       - name: Publish snapshots to data branch
         run: |
@@ -137,7 +138,7 @@ jobs:
             exit 0
           fi
           echo "TG_DATA_CHANGED=true" >> "$GITHUB_ENV"
-          python -m crawler.notifications delete --message-id "$TG_STATUS_MESSAGE_ID"
+          python /tmp/telegram-developer-notifications.py delete --message-id "$TG_STATUS_MESSAGE_ID"
           git commit -m "chore(data): update Telegram developer snapshots"
           git push origin data
 
@@ -148,5 +149,5 @@ jobs:
           TG_ALERT_CHAT_ID: ${{ secrets.TG_ALERT_CHAT_ID }}
         run: |
           if [ -n "${TG_STATUS_MESSAGE_ID:-}" ]; then
-            python -m crawler.notifications delete --message-id "$TG_STATUS_MESSAGE_ID" || true
+            python /tmp/telegram-developer-notifications.py delete --message-id "$TG_STATUS_MESSAGE_ID" || true
           fi
