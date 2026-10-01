@@ -20,6 +20,9 @@ jobs:
     runs-on: ubuntu-latest
     environment: appConfig
     timeout-minutes: 45
+    env:
+      TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
+      TG_ALERT_CHAT_ID: ${{ secrets.TG_ALERT_CHAT_ID }}
     steps:
       - name: Checkout crawler
         uses: actions/checkout@v4
@@ -56,10 +59,11 @@ jobs:
           done
           if [ "$missing" -ne 0 ]; then exit 1; fi
 
+      - name: Prepare Telegram notification helper
+        run: cp crawler/notifications.py /tmp/telegram-developer-notifications.py
+
       - name: Start Telegram crawl status
         env:
-          TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
-          TG_ALERT_CHAT_ID: ${{ secrets.TG_ALERT_CHAT_ID }}
         run: |
           id="$(python -m crawler.notifications start)"
           if [ -n "$id" ]; then
