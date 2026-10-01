@@ -2,37 +2,29 @@
 
 This module contains developer-facing data collected through Telegram's MTProto and official TL-schema surfaces.
 
-## Data categories
+## Data branch layout
 
-- `config/` — `help.getConfig`, the server/MTProto configuration.
-- `app-config/` — `help.getAppConfig`, client-specific application configuration.
-- `countries-list/` — `help.getCountriesList`, country and phone-code metadata.
-- `global/` — datasets not tied to one DC, including CDN configuration, available reactions and Premium promo.
-- `tl/` — official API and MTProto TL schemas.
+- `mtproto/configs/` — production/test `help.getConfig` snapshots.
+- `mtproto/app-config/` — production/test `help.getAppConfig` snapshots.
+- `mtproto/countries-list/` — production/test `help.getCountriesList` snapshots.
+- `mtproto/global/` — global datasets such as CDN configuration, available reactions and Premium promo.
+- `mtproto/tl/` — official API and MTProto TL/JSON schemas.
 
-Telegram explicitly distinguishes `help.getConfig` from `help.getAppConfig`: the former contains MTProto/server configuration, while the latter contains rapidly evolving client-specific configuration. citeturn1search0turn1search2
+The `data` branch is the archive itself, so these paths are relative to the branch root; there is no extra `data/` directory.
+
+Telegram distinguishes `help.getConfig` from `help.getAppConfig`: the former contains MTProto/server configuration, while the latter contains rapidly evolving client-specific application configuration.
 
 ## TL schema collection
 
-The `tl/` dataset is collected directly from Telegram's public schema endpoints:
+The `mtproto/tl/` dataset is collected directly from Telegram's public schema endpoints:
 
-- `https://core.telegram.org/schema` — current API TL schema.
-- `https://core.telegram.org/schema/json` — current API TL schema in JSON.
-- `https://core.telegram.org/schema/mtproto` — current MTProto TL schema.
-- `https://core.telegram.org/schema/mtproto-json` — current MTProto TL schema in JSON.
+- `core.telegram.org/schema` — current API TL schema.
+- `core.telegram.org/schema/json` — current API TL schema in JSON.
+- `core.telegram.org/schema/mtproto` — current MTProto TL schema.
+- `core.telegram.org/schema/mtproto-json` — current MTProto TL schema in JSON.
 
-Telegram's TL documentation describes the schema as declarations of types/constructors and functions, with the `---functions---` divider between the two main sections. citeturn0search0turn0search5
+The collector preserves both text and JSON representations and writes deterministic JSON formatting.
 
-The collector preserves both text and JSON representations and writes deterministic JSON formatting. The API layer is read from the source JSON rather than hard-coded.
+## Provenance
 
-Before publication, the collector checks that the schema is structurally valid and rejects a replacement when more than 10% of previously observed schema objects/definitions disappear. This is intended to catch partial downloads or broken extraction.
-
-## Configuration collection
-
-The configuration collector uses Telethon to call the relevant MTProto methods. Production DC endpoints are discovered from `help.getConfig`; test-network endpoints use Telegram's standard test DC endpoints with the same application API credentials; an optional environment override can replace those endpoints.
-
-Data is normalized before publication and protected by the snapshot safety guard.
-
-## Future MTProto modules
-
-Additional MTProto datasets can be added here when they provide useful developer-facing change signals. New collectors should document their source, authentication requirement, normalization rules and output path before being enabled.
+TL files use native `//` comments. JSON files remain valid, untouched JSON; no synthetic credit property is injected. Stage 5C adds attribution only to the separate credited diff artifact.
