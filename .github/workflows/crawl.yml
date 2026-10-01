@@ -137,7 +137,11 @@ jobs:
           fi
           git reset --hard origin/data
           git clean -fd
-          cp -a /tmp/telegram-developer-data/. .
+          # The data branch is a published archive: generated snapshots belong
+          # directly under its root data/ directory, never data/data/.
+          rm -rf data
+          mkdir -p data
+          cp -a /tmp/telegram-developer-data/. data/
           cp /tmp/telegram-developer-data-branch-README.md README.md
           mkdir -p data/mtproto data/tdlib data/tdesktop data/android
           cp /tmp/telegram-developer-mtproto-README.md data/mtproto/README.md
