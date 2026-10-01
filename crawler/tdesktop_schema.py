@@ -8,7 +8,7 @@ from pathlib import Path
 from typing import Any
 import httpx
 
-from crawler.credits import add_json_credit, with_tl_credit
+from crawler.credits import with_tl_credit
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA_ROOT = ROOT / "data" / "tdesktop" / "schema"
@@ -25,7 +25,7 @@ def normalize_tl(value: str) -> str:
     return value.replace("\r\n", "\n").replace("\r", "\n").rstrip() + "\n"
 
 def render_json(value: Any) -> str:
-    return json.dumps(add_json_credit(value) if isinstance(value, dict) else value, indent=2, ensure_ascii=False, sort_keys=True) + "\n"
+    return json.dumps(value if isinstance(value, dict) else value, indent=2, ensure_ascii=False, sort_keys=True) + "\n"
 
 def parse_definitions(value: str) -> list[dict[str, Any]]:
     result, section = [], "constructors"
