@@ -38,9 +38,9 @@ jobs:
         run: python -m crawler.android_tl
       - name: Validate generated schemas
         run: |
-          test -s data/android/stable/main_api.tl
+          test -s data/TgAndroid/tl/stable/main_api.tl
           test -s data/android/stable/main_api.json
-          test -s data/android/beta/main_api.tl
+          test -s data/TgAndroid/tl/beta/main_api.tl
           test -s data/android/beta/main_api.json
           python - <<'PY'
           import json
