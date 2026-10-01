@@ -15,8 +15,20 @@ DEF_RE = re.compile(r"^\s*(?P<name>[A-Za-z0-9_.]+)#(?P<id>[0-9a-fA-F]+).*?=\s*(?
 def run(*args: str) -> str:
     return subprocess.check_output(["git", *args], text=True, stderr=subprocess.DEVNULL)
 
+def git_diff(*args: str) -> str:
+    result = subprocess.run(
+        ["git", "diff", *args],
+        text=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.DEVNULL,
+        check=False,
+    )
+    if result.returncode not in (0, 1):
+        raise subprocess.CalledProcessError(result.returncode, ["git", "diff", *args])
+    return result.stdout
+
 def changed_files(base: str):
-    out = run("diff", "--name-status", base, "--", "data")
+    out = git_diff("--name-status", base, "--", "data")
     return [(p.split("\t")[0], p.split("\t")[-1]) for p in out.splitlines() if p]
 
 def read_base(base: str, path: str) -> str | None:
@@ -112,7 +124,7 @@ def render_markdown(summary,base):
                     lines.append(f"**{title}**")
                     lines += [f"- {x}" for x in e[key]]
                     lines.append("")
-    diff=credit_diff(run("diff","--unified=3",base,"--","data").rstrip("\n"))
+    diff=credit_diff(git_diff("--unified=3",base,"--","data").rstrip("\n"))
     lines += ["## Credited unified diff","","DIFF START",diff,"DIFF END"]
     return with_markdown_credit("\n".join(lines))
 
