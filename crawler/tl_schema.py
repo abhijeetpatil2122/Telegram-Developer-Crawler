@@ -24,6 +24,8 @@ from typing import Any
 
 import httpx
 
+from crawler.credits import add_json_credit, with_tl_credit
+
 ROOT = Path(__file__).resolve().parents[1]
 DATA_ROOT = ROOT / "data" / "mtproto" / "tl"
 
