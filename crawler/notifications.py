@@ -50,7 +50,7 @@ def rich_payload(html_content: str) -> str:
     # Rich HTML is intentionally used here: Telegram maps h*, p, ul/li,
     # hr and tg-button-row/tg-button to native Rich Message blocks.
     return json.dumps(
-        {"html": html_content, "skip_entity_detection": False},
+        {"html": html_content},
         ensure_ascii=False,
         separators=(",", ":"),
     )
