@@ -5,7 +5,7 @@ Developer-focused crawler for meaningful changes across Telegram's official deve
 ## Architecture
 
 - main: crawler code, source manifests, normalization, validation, tests and workflows.
-- data: generated snapshots, credited change reports and Git history.
+- data: generated snapshots and Git history.
 - Git history: the historical source of truth for exact changes.
 - Telegram: temporary crawl progress and final change notifications.
 - No database or Redis is required.
@@ -25,9 +25,9 @@ Developer-focused crawler for meaningful changes across Telegram's official deve
 Generated snapshots carry:
 
 - TL: // auto-generated header with Copyright (C) 2026 Abhijeet Patil
-- JSON: _crawler provenance metadata
+- JSON: unchanged valid JSON; no synthetic credit field is injected.
 - XML/Markdown: native comment-style provenance
-- Change reports: every unified-diff hunk receives // Telegram Developer Crawler — Copyright (C) 2026 Abhijeet Patil
+- Diff credit: every credited unified-diff hunk receives // Telegram Developer Crawler — Copyright (C) 2026 Abhijeet Patil
 
 The credited diff is an attribution layer; the native GitHub commit/compare diff is left untouched.
 
