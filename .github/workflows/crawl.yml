@@ -134,14 +134,20 @@ jobs:
           git fetch origin data
           python /tmp/telegram-developer-notifications.py update --message-id "${TG_STATUS_MESSAGE_ID:-}" --progress 98 --title "📦 Publishing snapshot" --detail "Classifying changes, updating the public data branch and preparing the changelog."
 
-          if ! python /tmp/telegram-developer-diff-classifier.py             --base data             --output /tmp/telegram-developer-change.md             --json /tmp/telegram-developer-change.json             --notification /tmp/telegram-developer-notification.txt; then
+          if ! python /tmp/telegram-developer-diff-classifier.py \
+            --base data \
+            --output /tmp/telegram-developer-change.md \
+            --json /tmp/telegram-developer-change.json \
+            --notification /tmp/telegram-developer-notification.txt; then
             echo "::warning::5C diff classification failed; publishing snapshot with fallback metadata."
             printf '%s\n' '# Telegram Developer Crawler — Change Report' '' 'Semantic 5C classification failed for this crawl.' '' 'See the GitHub compare/commit links for the complete raw snapshot change.' > /tmp/telegram-developer-change.md
             printf '%s\n' 'classifier=fallback' 'generated_by=Telegram Developer Crawler' > /tmp/telegram-developer-change.json
             printf '%s\n' '<b>🛠️ Telegram Developer Crawler</b>' '\nA new developer-data snapshot was published.' > /tmp/telegram-developer-notification.txt
           fi
 
-          if git diff --quiet data -- data; then
+          # Compare the freshly generated main-branch snapshot with the current data branch.
+          # Do this before resetting the worktree to origin/data.
+          if git diff --quiet -- data && [ -z "$(git ls-files --others --exclude-standard -- data)" ]; then
             echo "TG_DATA_CHANGED=false" >> "$GITHUB_ENV"
             echo "No generated data changes."
             exit 0
@@ -189,7 +195,11 @@ jobs:
           commit_url="https://github.com/abhijeetpatil2122/Telegram-Developer-Crawler/commit/$new_sha"
           compare_url="https://github.com/abhijeetpatil2122/Telegram-Developer-Crawler/compare/$old_sha...$new_sha"
 
-          python /tmp/telegram-developer-notifications.py notify             --text "$(cat /tmp/telegram-developer-notification.txt)"             --compare-url "$compare_url"             --commit-url "$commit_url"             || echo "::warning::Telegram final notification failed after data was pushed."
+          python /tmp/telegram-developer-notifications.py notify \
+            --text "$(cat /tmp/telegram-developer-notification.txt)" \
+            --compare-url "$compare_url" \
+            --commit-url "$commit_url" \
+            || echo "::warning::Telegram final notification failed after data was pushed."
 
       - name: Finish Telegram crawl status
         if: always()
