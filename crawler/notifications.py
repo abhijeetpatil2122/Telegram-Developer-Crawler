@@ -97,7 +97,6 @@ def status_html(
         f"{html.escape(bar)}"
         "</code></td></tr>"
         "</table>"
-        "</table>"
         eta_line
         "<hr/>"
         f"<h3>{html.escape(title)}</h3>"
@@ -258,7 +257,7 @@ def main() -> int:
             "editMessageText",
             message_id=args.message_id,
             rich_message=rich_payload(
-                status_html(progress, title, detail, args.stage, args.total_stages)
+                status_html(progress, title, detail, args.stage, args.total_stages, args.crawl_number, args.eta)
             ),
         )
         if rich_result is not None:
@@ -267,7 +266,7 @@ def main() -> int:
         fallback = call(
             "editMessageText",
             message_id=args.message_id,
-            text=status_fallback_html(progress, title, detail),
+            text=status_fallback_html(progress, title, detail, args.crawl_number, args.eta),
             parse_mode="HTML",
             disable_web_page_preview="true",
         )
