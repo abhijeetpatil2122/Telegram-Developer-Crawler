@@ -64,7 +64,7 @@ jobs:
 
       - name: Start Telegram crawl status
         run: |
-          id="$(python -m crawler.notifications start)"
+          id="$(python -m crawler.notifications start --progress 10 --title "🚀 Starting crawl" --detail "Preparing all Telegram developer data collectors.")
           if [ -n "$id" ]; then
             echo "TG_STATUS_MESSAGE_ID=$id" >> "$GITHUB_ENV"
           fi
@@ -77,7 +77,7 @@ jobs:
           TG_USER_SESSION: ${{ secrets.TG_USER_SESSION }}
           TDC_TEST_DC_ENDPOINTS: ${{ secrets.TDC_TEST_DC_ENDPOINTS }}
         run: |
-          python -m crawler.notifications update --message-id "${TG_STATUS_MESSAGE_ID:-}" --text "🔐 <b>Crawling MTProto configuration</b>\nProduction + test DCs, app-config, countries and global datasets."
+          python -m crawler.notifications update --message-id "${TG_STATUS_MESSAGE_ID:-}" --progress 25 --title "🔐 MTProto configuration" --detail "Crawling production + test DCs, app-config, countries and global datasets."
           python -m crawler.mtproto_config
 
       - name: Collect MTProto TL schemas
@@ -86,27 +86,27 @@ jobs:
           TG_API_HASH: ${{ secrets.TG_API_HASH }}
           TG_USER_SESSION: ${{ secrets.TG_USER_SESSION }}
         run: |
-          python -m crawler.notifications update --message-id "${TG_STATUS_MESSAGE_ID:-}" --text "📐 <b>Crawling official TL schemas</b>\nAPI + MTProto schema sources and machine-readable JSON."
+          python -m crawler.notifications update --message-id "${TG_STATUS_MESSAGE_ID:-}" --progress 40 --title "📐 Official TL schemas" --detail "Crawling API + MTProto schema sources and machine-readable JSON."
           python -m crawler.tl_schema
 
       - name: Collect TDLib schema
         run: |
-          python -m crawler.notifications update --message-id "${TG_STATUS_MESSAGE_ID:-}" --text "📚 <b>Crawling TDLib</b>\nFetching the upstream td_api.tl schema and metadata."
+          python -m crawler.notifications update --message-id "${TG_STATUS_MESSAGE_ID:-}" --progress 55 --title "📚 TDLib schema" --detail "Fetching the upstream td_api.tl schema and commit metadata."
           python -m crawler.tdlib_schema
 
       - name: Collect Telegram Desktop schemas
         run: |
-          python -m crawler.notifications update --message-id "${TG_STATUS_MESSAGE_ID:-}" --text "🖥️ <b>Crawling Telegram Desktop</b>\nAPI + MTProto schemas from the dev branch."
+          python -m crawler.notifications update --message-id "${TG_STATUS_MESSAGE_ID:-}" --progress 65 --title "🖥️ Telegram Desktop" --detail "Crawling API + MTProto schemas from the dev branch."
           python -m crawler.tdesktop_schema
 
       - name: Collect Android stable and public beta
         run: |
-          python -m crawler.notifications update --message-id "${TG_STATUS_MESSAGE_ID:-}" --text "📱 <b>Downloading Android clients</b>\nStable + Public Beta APKs."
+          python -m crawler.notifications update --message-id "${TG_STATUS_MESSAGE_ID:-}" --progress 80 --title "📱 Android clients" --detail "Downloading Stable + Public Beta APKs and validating their packages."
           python -m crawler.android_client
 
       - name: Extract Android TL schemas
         run: |
-          python -m crawler.notifications update --message-id "${TG_STATUS_MESSAGE_ID:-}" --text "🛠️ <b>Extracting Android schemas</b>\nDecompiling Stable + Preview with JADX and reconstructing TL."
+          python -m crawler.notifications update --message-id "${TG_STATUS_MESSAGE_ID:-}" --progress 95 --title "🛠️ Android schema extraction" --detail "Decompiling Stable + Preview with JADX and reconstructing canonical TL schemas."
           python -m crawler.android_tl
 
       - name: Save generated snapshots
@@ -125,6 +125,8 @@ jobs:
         run: |
           set -euo pipefail
           git fetch origin data
+          python /tmp/telegram-developer-notifications.py update --message-id "${TG_STATUS_MESSAGE_ID:-}" --progress 98 --title "📦 Publishing snapshot" --detail "Classifying changes, updating the public data branch and preparing the changelog."
+
           if ! python /tmp/telegram-developer-diff-classifier.py             --base data             --output /tmp/telegram-developer-change.md             --json /tmp/telegram-developer-change.json             --notification /tmp/telegram-developer-notification.txt; then
             echo "::warning::5C diff classification failed; publishing snapshot with fallback metadata."
             printf '%s\n' '# Telegram Developer Crawler — Change Report' '' 'Semantic 5C classification failed for this crawl.' '' 'See the GitHub compare/commit links for the complete raw snapshot change.' > /tmp/telegram-developer-change.md
