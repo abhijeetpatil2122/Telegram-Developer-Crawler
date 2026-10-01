@@ -119,7 +119,7 @@ jobs:
       - name: Publish snapshots to data branch
         run: |
           set -euo pipefail
-          git fetch origin data:data
+          git fetch origin data
           python /tmp/telegram-developer-diff-classifier.py \\
             --base data \\
             --output /tmp/telegram-developer-change.md \\
@@ -130,7 +130,7 @@ jobs:
             echo "No generated data changes."
             exit 0
           fi
-          git checkout -f data
+          git checkout -B data origin/data
           find . -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf {} +
           cp -a /tmp/telegram-developer-data/. .
           cp /tmp/telegram-developer-data-branch-README.md README.md
