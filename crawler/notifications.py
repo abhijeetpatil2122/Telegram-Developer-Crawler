@@ -47,8 +47,7 @@ def call(method: str, **payload):
 
 
 def rich_payload(html_content: str) -> str:
-    # Rich HTML is intentionally used here: Telegram maps h*, p, ul/li,
-    # hr and tg-button-row/tg-button to native Rich Message blocks.
+    """Build the JSON-serialized InputRichMessage expected by Bot API."""
     return json.dumps(
         {"html": html_content},
         ensure_ascii=False,
@@ -72,9 +71,21 @@ def status_html(progress: int, title: str, detail: str) -> str:
     )
 
 
+def status_fallback_html(progress: int, title: str, detail: str) -> str:
+    """Only uses legacy Bot API HTML tags; never sends Rich-only tags to sendMessage."""
+    progress = max(0, min(100, progress))
+    filled = progress // 10
+    bar = "▰" * filled + "▱" * (10 - filled)
+    return (
+        "<b>⚙️ Telegram Developer Crawler</b>\n"
+        f"<b>Progress:</b> <code>{progress}%</code> <code>{bar}</code>\n\n"
+        f"<b>{html.escape(title)}</b>\n"
+        f"{html.escape(detail)}\n\n"
+        "<i>Live crawl status • this message updates automatically.</i>"
+    )
+
+
 def final_html(text: str, compare_url: str, commit_url: str) -> str:
-    # 5C produces trusted Rich HTML. Keep it as HTML instead of wrapping it
-    # inside a plain paragraph so its headings/lists remain real blocks.
     content = text.strip() or "<p>A new developer-data snapshot is available.</p>"
     buttons = []
     if compare_url:
@@ -105,6 +116,23 @@ def final_html(text: str, compare_url: str, commit_url: str) -> str:
     )
 
 
+def final_fallback_html(text: str, compare_url: str, commit_url: str) -> str:
+    """Safe legacy-HTML fallback for a Rich API rejection."""
+    plain = html.unescape(text or "").replace("<", "").replace(">", "").strip()
+    lines = ["<b>🛠️ Telegram Developer Crawler</b>", "", "<b>Developer data changed</b>"]
+    if plain:
+        lines += ["", plain]
+    if compare_url:
+        lines += ["", f'<a href="{html.escape(compare_url, quote=True)}">Full Changelog</a>']
+    if commit_url:
+        lines += [f'<a href="{html.escape(commit_url, quote=True)}">Commit</a>']
+    lines += [
+        '<a href="https://github.com/abhijeetpatil2122/Telegram-Developer-Crawler/tree/data">'
+        "Data Snapshot</a>"
+    ]
+    return "\n".join(lines)
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("action", choices=("start", "update", "delete", "notify"))
@@ -118,19 +146,18 @@ def main() -> int:
     args = parser.parse_args()
 
     if args.action == "start":
-        html_content = status_html(
-            args.progress or 5,
-            args.title or "Starting crawl",
-            args.detail or "Preparing Telegram developer data collectors.",
-        )
-        result = call("sendRichMessage", rich_message=rich_payload(html_content))
+        progress = args.progress or 5
+        title = args.title or "Starting crawl"
+        detail = args.detail or "Preparing Telegram developer data collectors."
+        result = call("sendRichMessage", rich_message=rich_payload(status_html(progress, title, detail)))
         if result:
             print(result["message_id"])
             return 0
 
+        # Rich failures must never turn into an invalid legacy HTML request.
         fallback = call(
             "sendMessage",
-            text=html_content,
+            text=status_fallback_html(progress, title, detail),
             parse_mode="HTML",
             disable_web_page_preview="true",
         )
@@ -141,25 +168,46 @@ def main() -> int:
     if args.action == "notify":
         if not os.environ.get("TG_BOT_TOKEN"):
             return 0
-        result = call(
+        rich_result = call(
             "sendRichMessage",
             rich_message=rich_payload(
                 final_html(args.text, args.compare_url, args.commit_url)
             ),
         )
-        return 0 if result is not None else 1
+        if rich_result is not None:
+            return 0
+
+        fallback = call(
+            "sendMessage",
+            text=final_fallback_html(args.text, args.compare_url, args.commit_url),
+            parse_mode="HTML",
+            disable_web_page_preview="true",
+        )
+        return 0 if fallback is not None else 1
 
     if not args.message_id or not os.environ.get("TG_BOT_TOKEN"):
         return 0
 
     if args.action == "update":
-        html_content = status_html(args.progress, args.title, args.detail)
-        result = call(
+        progress = args.progress
+        title = args.title or "Updating"
+        detail = args.detail
+        rich_result = call(
             "editMessageText",
             message_id=args.message_id,
-            rich_message=rich_payload(html_content),
+            rich_message=rich_payload(status_html(progress, title, detail)),
         )
-        return 0 if result is not None else 1
+        if rich_result is not None:
+            return 0
+
+        fallback = call(
+            "editMessageText",
+            message_id=args.message_id,
+            text=status_fallback_html(progress, title, detail),
+            parse_mode="HTML",
+            disable_web_page_preview="true",
+        )
+        return 0 if fallback is not None else 1
 
     result = call("deleteMessage", message_id=args.message_id)
     return 0 if result is not None else 1
