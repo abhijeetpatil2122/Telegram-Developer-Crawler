@@ -69,8 +69,9 @@ jobs:
         run: |
           python -m crawler.notifications start \
             --progress 5 --stage 1 --total-stages 7 \
+            --crawl-number "$GITHUB_RUN_NUMBER" --eta '~1 min' \
             --title '🚀 Starting crawl' \
-            --detail 'Preparing all Telegram developer data collectors.' > /tmp/telegram-status-message-id
+            --detail 'Preparing the crawl.' > /tmp/telegram-status-message-id
           id="$(cat /tmp/telegram-status-message-id)"
           if [ -n "$id" ]; then
             echo "TG_STATUS_MESSAGE_ID=$id" >> "$GITHUB_ENV"
@@ -84,7 +85,7 @@ jobs:
           TG_USER_SESSION: ${{ secrets.TG_USER_SESSION }}
           TDC_TEST_DC_ENDPOINTS: ${{ secrets.TDC_TEST_DC_ENDPOINTS }}
         run: |
-          python -m crawler.notifications update --message-id "${TG_STATUS_MESSAGE_ID:-}" --progress 20 --stage 2 --total-stages 7 --title "🔐 MTProto configuration" --detail "Crawling production + test DCs, app-config, countries and global datasets."
+          python -m crawler.notifications update --message-id "${TG_STATUS_MESSAGE_ID:-}" --progress 20 --stage 2 --total-stages 7 --crawl-number "$GITHUB_RUN_NUMBER" --eta '<30 sec' --title "🔐 MTProto configuration" --detail "Checking Telegram configuration and DC data."
           python -m crawler.mtproto_config
 
       - name: Collect MTProto TL schemas
@@ -93,27 +94,27 @@ jobs:
           TG_API_HASH: ${{ secrets.TG_API_HASH }}
           TG_USER_SESSION: ${{ secrets.TG_USER_SESSION }}
         run: |
-          python -m crawler.notifications update --message-id "${TG_STATUS_MESSAGE_ID:-}" --progress 35 --stage 3 --total-stages 7 --title "📐 Official TL schemas" --detail "Crawling API + MTProto schema sources and machine-readable JSON."
+          python -m crawler.notifications update --message-id "${TG_STATUS_MESSAGE_ID:-}" --progress 35 --stage 3 --total-stages 7 --crawl-number "$GITHUB_RUN_NUMBER" --eta '<30 sec' --title "📐 Official TL schemas" --detail "Checking the official API and MTProto schemas."
           python -m crawler.tl_schema
 
       - name: Collect TDLib schema
         run: |
-          python -m crawler.notifications update --message-id "${TG_STATUS_MESSAGE_ID:-}" --progress 50 --stage 4 --total-stages 7 --title "📚 TDLib schema" --detail "Fetching the upstream td_api.tl schema and commit metadata."
+          python -m crawler.notifications update --message-id "${TG_STATUS_MESSAGE_ID:-}" --progress 50 --stage 4 --total-stages 7 --crawl-number "$GITHUB_RUN_NUMBER" --eta '<30 sec' --title "📚 TDLib schema" --detail "Checking the latest TDLib schema."
           python -m crawler.tdlib_schema
 
       - name: Collect Telegram Desktop schemas
         run: |
-          python -m crawler.notifications update --message-id "${TG_STATUS_MESSAGE_ID:-}" --progress 65 --stage 5 --total-stages 7 --title "🖥️ Telegram Desktop" --detail "Crawling API + MTProto schemas from the dev branch."
+          python -m crawler.notifications update --message-id "${TG_STATUS_MESSAGE_ID:-}" --progress 65 --stage 5 --total-stages 7 --crawl-number "$GITHUB_RUN_NUMBER" --eta '<30 sec' --title "🖥️ Telegram Desktop" --detail "Checking the latest Desktop schemas."
           python -m crawler.tdesktop_schema
 
       - name: Collect Android stable and public beta
         run: |
-          python -m crawler.notifications update --message-id "${TG_STATUS_MESSAGE_ID:-}" --progress 78 --stage 6 --total-stages 7 --title "📱 Android clients" --detail "Downloading Stable + Public Beta APKs and validating their packages."
+          python -m crawler.notifications update --message-id "${TG_STATUS_MESSAGE_ID:-}" --progress 78 --stage 6 --total-stages 7 --crawl-number "$GITHUB_RUN_NUMBER" --eta '~1–2 min' --title "📱 Android clients" --detail "Downloading and checking Stable + Preview."
           python -m crawler.android_client
 
       - name: Extract Android TL schemas
         run: |
-          python -m crawler.notifications update --message-id "${TG_STATUS_MESSAGE_ID:-}" --progress 90 --stage 7 --total-stages 7 --title "🛠️ Android schema extraction" --detail "Decompiling Stable + Preview with JADX and reconstructing canonical TL schemas."
+          python -m crawler.notifications update --message-id "${TG_STATUS_MESSAGE_ID:-}" --progress 90 --stage 7 --total-stages 7 --crawl-number "$GITHUB_RUN_NUMBER" --eta '~3–4 min' --title "🛠️ Android schema extraction" --detail "Extracting Stable + Preview schemas."
           python -m crawler.android_tl
 
       - name: Save generated snapshots
@@ -132,7 +133,7 @@ jobs:
         run: |
           set -euo pipefail
           git fetch --prune origin data
-          python /tmp/telegram-developer-notifications.py update --message-id "${TG_STATUS_MESSAGE_ID:-}" --progress 98 --stage 7 --total-stages 7 --title "📦 Publishing snapshot" --detail "Classifying changes, updating the public data branch and preparing the changelog."
+          python /tmp/telegram-developer-notifications.py update --message-id "${TG_STATUS_MESSAGE_ID:-}" --progress 98 --stage 7 --total-stages 7 --crawl-number "$GITHUB_RUN_NUMBER" --eta '<30 sec' --title "📦 Publishing snapshot" --detail "Publishing the latest snapshot."
 
           if ! PYTHONPATH=/tmp/telegram-developer-crawler python /tmp/telegram-developer-diff-classifier.py \
             --base data \
