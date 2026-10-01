@@ -223,10 +223,6 @@ async def collect_dc(
 
 
 async def collect_bot_global_config() -> None:
-    bot_token = os.getenv("TG_BOT_TOKEN", "").strip()
-    if not bot_token:
-        raise RuntimeError("TG_BOT_TOKEN is required for help.getCdnConfig")
-
     api_id = int(os.environ["TG_API_ID"])
     api_hash = os.environ["TG_API_HASH"]
     client = TelegramClient(
@@ -238,7 +234,7 @@ async def collect_bot_global_config() -> None:
         app_version="0.1",
     )
 
-    await client.start(bot_token=bot_token)
+    await client.connect()
     try:
         cdn_config = await client(GetCdnConfigRequest())
         write_snapshot(
