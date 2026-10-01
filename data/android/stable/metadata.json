@@ -1,4 +1,8 @@
 {
+  "_crawler": {
+    "copyright": "Copyright (C) 2026 Abhijeet Patil",
+    "generated_by": "Telegram Developer Crawler"
+  },
   "android": {
     "package": "org.telegram.messenger.web",
     "version_code": 71129,
@@ -28,12 +32,14 @@
       "methods": 725,
       "total": 2052
     },
+    "e2e_json": "e2e.json",
+    "e2e_tl": "e2e.tl",
     "jadx": "https://github.com/skylot/jadx/releases/download/v1.5.6/jadx-1.5.6.zip",
-    "json": "tl.json",
     "layer": 229,
-    "sha256": "6c776347ebfe67bf8f95fb98336d369dd52f4981040d3b6ea1d8df4002079070",
+    "main_api_json": "main_api.json",
+    "main_api_tl": "main_api.tl",
+    "sha256": "1d5f49a4fd0257e12e097ccf54ff14cc6fd5eaf478d7dfdae3b86124576bea38",
     "stage": "5B",
-    "target_package": "org.telegram.tgnet",
-    "tl": "tl.tl"
+    "target_package": "org.telegram.tgnet"
   }
 }

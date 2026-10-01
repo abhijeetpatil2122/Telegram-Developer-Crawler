@@ -1,4 +1,8 @@
 {
+  "_crawler": {
+    "copyright": "Copyright (C) 2026 Abhijeet Patil",
+    "generated_by": "Telegram Developer Crawler"
+  },
   "constructors": [
     {
       "id": -653423106,
@@ -3061,7 +3065,7 @@
       "name": "inputChatPhoto",
       "params": [
         {
-          "name": "f18397id",
+          "name": "id",
           "type": "InputPhoto"
         }
       ],
@@ -3548,7 +3552,7 @@
       "name": "inputMediaDocument",
       "params": [
         {
-          "name": "f18398id",
+          "name": "id",
           "type": "InputDocument"
         },
         {
@@ -3586,7 +3590,7 @@
       "name": "inputMediaGame",
       "params": [
         {
-          "name": "f18399id",
+          "name": "id",
           "type": "InputGame"
         }
       ],
@@ -3658,7 +3662,7 @@
       "name": "inputMediaPhoto",
       "params": [
         {
-          "name": "f18400id",
+          "name": "id",
           "type": "InputPhoto"
         },
         {
@@ -4667,7 +4671,7 @@
       "name": "inputStickeredMediaDocument",
       "params": [
         {
-          "name": "f18406id",
+          "name": "id",
           "type": "InputDocument"
         }
       ],
@@ -4680,7 +4684,7 @@
       "name": "inputStickeredMediaPhoto",
       "params": [
         {
-          "name": "f18407id",
+          "name": "id",
           "type": "InputPhoto"
         }
       ],
@@ -9562,6 +9566,14 @@
       "type": "InputChatTheme"
     },
     {
+      "id": -245208620,
+      "kind": "constructor",
+      "name": "updateSmsJob",
+      "params": [],
+      "source": "sources/org/telegram/tgnet/TL_smsjobs.java",
+      "type": "Update"
+    },
+    {
       "id": -910564679,
       "kind": "constructor",
       "name": "businessAwayMessageScheduleAlways",
@@ -14090,9 +14102,9 @@
     }
   ],
   "counts": {
-    "constructors": 1326,
-    "methods": 721,
-    "total": 2047
+    "constructors": 1327,
+    "methods": 725,
+    "total": 2052
   },
   "layer": 229,
   "methods": [
@@ -17417,6 +17429,38 @@
       "source": "sources/org/telegram/tgnet/TLRPC.java"
     },
     {
+      "id": 1327415076,
+      "kind": "method",
+      "name": "smsjobs.finishJob",
+      "params": [],
+      "result": "Bool",
+      "source": "sources/org/telegram/tgnet/TL_smsjobs.java"
+    },
+    {
+      "id": -1488007635,
+      "kind": "method",
+      "name": "smsjobs.join",
+      "params": [],
+      "result": "Bool",
+      "source": "sources/org/telegram/tgnet/TL_smsjobs.java"
+    },
+    {
+      "id": -1734824589,
+      "kind": "method",
+      "name": "smsjobs.leave",
+      "params": [],
+      "result": "Bool",
+      "source": "sources/org/telegram/tgnet/TL_smsjobs.java"
+    },
+    {
+      "id": 155164863,
+      "kind": "method",
+      "name": "smsjobs.updateSettings",
+      "params": [],
+      "result": "Bool",
+      "source": "sources/org/telegram/tgnet/TL_smsjobs.java"
+    },
+    {
       "id": -466818615,
       "kind": "method",
       "name": "tl.getUniqueGiftChatThemes",
@@ -19869,14 +19913,14 @@
     "max_definition_removal_ratio": 0.1
   },
   "sha256": {
-    "tl": "19e702313c925bc39066ed1b64475fc120fa80dc8e8adad4a3982c802149a2aa"
+    "tl": "1d5f49a4fd0257e12e097ccf54ff14cc6fd5eaf478d7dfdae3b86124576bea38"
   },
   "source": {
-    "apk": "https://cdn4.telesco.pe/file/Telegram-Beta.apk",
-    "apk_sha256": "0cfa61490e46fb5c6a91aa88fe96f5eaff0e2f0aab135804b2180b51176e3146",
+    "apk": "https://cdn4.telesco.pe/file/Telegram.apk",
+    "apk_sha256": "7827ea506d297644b1d350266bdfbd8d5d38a7869fa3fc1a0fbcb1ebc81f45ad",
     "jadx": "https://github.com/skylot/jadx/releases/download/v1.5.6/jadx-1.5.6.zip",
-    "package": "org.telegram.messenger.beta",
-    "version_code": 71159,
-    "version_name": "12.10.7"
+    "package": "org.telegram.messenger.web",
+    "version_code": 71129,
+    "version_name": "12.10.6"
   }
 }

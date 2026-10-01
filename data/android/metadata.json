@@ -1,4 +1,8 @@
 {
+  "_crawler": {
+    "copyright": "Copyright (C) 2026 Abhijeet Patil",
+    "generated_by": "Telegram Developer Crawler"
+  },
   "channels": {
     "beta": {
       "counts": {
@@ -6,10 +10,12 @@
         "methods": 721,
         "total": 2047
       },
-      "json": "beta/tl.json",
+      "e2e_json": "beta/e2e.json",
+      "e2e_tl": "beta/e2e.tl",
       "layer": 229,
-      "sha256": "19e702313c925bc39066ed1b64475fc120fa80dc8e8adad4a3982c802149a2aa",
-      "tl": "beta/tl.tl"
+      "main_api_json": "beta/main_api.json",
+      "main_api_tl": "beta/main_api.tl",
+      "sha256": "707176382d4e13a967f7b9e80a9f09ec00bd0430d0c54cba38e1fce69766b2f2"
     },
     "stable": {
       "counts": {
@@ -17,10 +23,12 @@
         "methods": 725,
         "total": 2052
       },
-      "json": "stable/tl.json",
+      "e2e_json": "stable/e2e.json",
+      "e2e_tl": "stable/e2e.tl",
       "layer": 229,
-      "sha256": "6c776347ebfe67bf8f95fb98336d369dd52f4981040d3b6ea1d8df4002079070",
-      "tl": "stable/tl.tl"
+      "main_api_json": "stable/main_api.json",
+      "main_api_tl": "stable/main_api.tl",
+      "sha256": "1d5f49a4fd0257e12e097ccf54ff14cc6fd5eaf478d7dfdae3b86124576bea38"
     }
   },
   "safety": {
