@@ -26,7 +26,6 @@ from telethon.tl.functions.help import (
 from telethon.tl.functions.messages import GetAvailableReactionsRequest
 
 from .safety import validate_snapshot
-from .credits import add_json_credit
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA_ROOT = ROOT / "data" / "mtproto"
@@ -134,7 +133,7 @@ def write_snapshot(path: Path, value: Any) -> None:
 
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(
-        json.dumps(add_json_credit(value) if isinstance(value, dict) else value, indent=2, ensure_ascii=False, sort_keys=True) + "\n",
+        json.dumps(value if isinstance(value, dict) else value, indent=2, ensure_ascii=False, sort_keys=True) + "\n",
         encoding="utf-8",
     )
 
