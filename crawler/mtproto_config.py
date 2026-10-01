@@ -26,6 +26,7 @@ from telethon.tl.functions.help import (
 from telethon.tl.functions.messages import GetAvailableReactionsRequest
 
 from .safety import validate_snapshot
+from .credits import add_json_credit
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA_ROOT = ROOT / "data" / "mtproto"
