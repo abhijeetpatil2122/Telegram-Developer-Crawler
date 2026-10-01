@@ -126,7 +126,7 @@ jobs:
           cp docs/modules/tdesktop/README.md /tmp/telegram-developer-tdesktop-README.md
           cp docs/modules/android/README.md /tmp/telegram-developer-android-README.md
           cp crawler/notifications.py /tmp/telegram-developer-notifications.py
-          cp crawler/diff_classifier.py /tmp/telegram-developer-diff-classifier.py
+          cp -a crawler /tmp/telegram-developer-crawler
 
       - name: Publish snapshots to data branch
         run: |
@@ -134,7 +134,7 @@ jobs:
           git fetch --prune origin data
           python /tmp/telegram-developer-notifications.py update --message-id "${TG_STATUS_MESSAGE_ID:-}" --progress 98 --title "📦 Publishing snapshot" --detail "Classifying changes, updating the public data branch and preparing the changelog."
 
-          if ! python /tmp/telegram-developer-diff-classifier.py \
+          if ! PYTHONPATH=/tmp/telegram-developer-crawler python /tmp/telegram-developer-diff-classifier.py \
             --base data \
             --output /tmp/telegram-developer-change.md \
             --json /tmp/telegram-developer-change.json \
@@ -166,7 +166,7 @@ jobs:
           # Never carry a nested data/ or transient changes/ directory into the
           # public archive.
           rm -rf data changes android mtproto tdlib tdesktop TgAndroid
-          cp -a /tmp/telegram-developer-data/data/. .
+          cp -a /tmp/telegram-developer-data/. .
           cp /tmp/telegram-developer-data-branch-README.md README.md
 
           # Module READMEs are published beside their snapshots.
