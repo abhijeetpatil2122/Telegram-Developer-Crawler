@@ -155,6 +155,7 @@ def semantic_tl(old, new):
 
 
 def module_for(path):
+    path = path.removeprefix("data/")
     if path.startswith(("mtproto/configs/", "mtproto/app-config/",
                         "mtproto/countries-list/", "mtproto/global/")):
         return "MTProto configuration"
