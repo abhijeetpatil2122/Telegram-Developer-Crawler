@@ -185,7 +185,7 @@ def collect() -> None:
             "total": len(definitions),
         },
         "sha256": {
-            "tl": sha256_text(source),
+            "tl": sha256_text(with_tl_credit(source)),
             "json": sha256_text(structured_text),
         },
         "safety": {
