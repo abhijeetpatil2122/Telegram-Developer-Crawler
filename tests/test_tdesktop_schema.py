@@ -13,7 +13,7 @@ def test_normalize_tl():
     assert normalize_tl("a\r\nb\r\n") == "a\nb\n"
 
 def test_render_json_is_deterministic():
-    assert render_json({"b": 2, "a": 1}) == '{\n  "a": 1,\n  "b": 2\n}\n'
+    assert render_json({"b": 2, "a": 1}) == '{\n  "_crawler": {\n    "copyright": "Copyright (C) 2026 Abhijeet Patil",\n    "generated_by": "Telegram Developer Crawler"\n  },\n  "a": 1,\n  "b": 2\n}\n'
 
 def test_parse_definitions_separates_functions_and_types():
     definitions = parse_definitions(sample_schema())
