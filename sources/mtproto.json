@@ -43,16 +43,16 @@
       "help.getPremiumPromo"
     ],
     "paths": {
-      "config": "data/mtproto/configs/",
-      "app_config": "data/mtproto/app-config/",
-      "countries_list": "data/mtproto/countries-list/",
-      "global": "data/mtproto/global/",
-      "tl": "data/mtproto/tl/",
-      "tdlib": "data/tdlib/tl/",
-      "tdesktop": "data/tdesktop/tl/",
-      "android": "data/TgAndroid/",
-      "android_tl": "data/TgAndroid/tl/",
-    },
+      "config": "mtproto/configs/",
+      "app_config": "mtproto/app-config/",
+      "countries_list": "mtproto/countries-list/",
+      "global": "mtproto/global/",
+      "tl": "mtproto/tl/",
+      "tdlib": "tdlib/tl/",
+      "tdesktop": "tdesktop/tl/",
+      "android": "TgAndroid/",
+      "android_tl": "TgAndroid/tl/"
+  },
     "tl_schema": [
       "core.telegram.org/schema",
       "core.telegram.org/schema/json",
