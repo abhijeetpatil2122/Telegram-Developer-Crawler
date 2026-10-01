@@ -162,7 +162,7 @@ jobs:
           python /tmp/telegram-developer-notifications.py notify \\
             --text "$(cat /tmp/telegram-developer-notification.txt)" \\
             --compare-url "$compare_url" \\
-            --commit-url "$commit_url"
+            --commit-url "$commit_url" || echo "::warning::Telegram final notification failed after data was pushed."
 
       - name: Finish Telegram crawl status
         if: always()
