@@ -677,14 +677,29 @@ def extract_channel(channel: str, jadx_bin: Path) -> dict[str, Any]:
     }
     output = DATA_ROOT / channel
     output.mkdir(parents=True, exist_ok=True)
-    (output / "tl.tl").write_text(tl, encoding="utf-8")
-    (output / "tl.json").write_text(render_json(payload), encoding="utf-8")
+    main_api_tl = with_tl_credit(tl)
+    (output / "main_api.tl").write_text(main_api_tl, encoding="utf-8")
+    payload["sha256"]["tl"] = sha256_text(main_api_tl)
+    (output / "main_api.json").write_text(render_json(payload), encoding="utf-8")
+
+    e2e_json = fetch_e2e_schema()
+    e2e_tl = render_e2e_tl(e2e_json)
+    (output / "e2e.tl").write_text(e2e_tl, encoding="utf-8")
+    e2e_payload = {
+        "source": E2E_JSON_URL,
+        "source_tl": E2E_TL_URL,
+        "counts": {"constructors": len(e2e_json.get("constructors", [])), "methods": 0},
+        "sha256": {"tl": sha256_text(e2e_tl)},
+    }
+    (output / "e2e.json").write_text(render_json(e2e_payload), encoding="utf-8")
     metadata["tl_extraction"] = {
         "stage": "5B",
         "layer": layer,
         "counts": payload["counts"],
-        "tl": "tl.tl",
-        "json": "tl.json",
+        "main_api_tl": "main_api.tl",
+        "main_api_json": "main_api.json",
+        "e2e_tl": "e2e.tl",
+        "e2e_json": "e2e.json",
         "sha256": payload["sha256"]["tl"],
         "jadx": JADX_URL,
         "target_package": PACKAGE_PREFIX,
@@ -722,8 +737,10 @@ def collect() -> None:
             channel: {
                 "layer": result["layer"],
                 "counts": result["counts"],
-                "tl": f"{channel}/tl.tl",
-                "json": f"{channel}/tl.json",
+                "main_api_tl": f"{channel}/main_api.tl",
+                "main_api_json": f"{channel}/main_api.json",
+                "e2e_tl": f"{channel}/e2e.tl",
+                "e2e_json": f"{channel}/e2e.json",
                 "sha256": result["sha256"]["tl"],
             }
             for channel, result in results.items()
