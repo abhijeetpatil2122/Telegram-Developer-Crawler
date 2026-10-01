@@ -38,22 +38,25 @@ jobs:
         run: python -m crawler.android_tl
       - name: Validate generated schemas
         run: |
-          test -s data/android/stable/tl.tl
-          test -s data/android/stable/tl.json
-          test -s data/android/beta/tl.tl
-          test -s data/android/beta/tl.json
+          test -s data/android/stable/main_api.tl
+          test -s data/android/stable/main_api.json
+          test -s data/android/beta/main_api.tl
+          test -s data/android/beta/main_api.json
           python - <<'PY'
           import json
           from pathlib import Path
           for channel in ("stable", "beta"):
-              data = json.loads(Path(f"data/android/{channel}/tl.json").read_text())
+              data = json.loads(Path(f"data/android/{channel}/main_api.json").read_text())
               print(channel, "layer=", data["layer"], "counts=", data["counts"])
               assert data["counts"]["constructors"] >= 500
               assert data["counts"]["methods"] >= 200
               assert data["layer"] is not None
-              tl = Path(f"data/android/{channel}/tl.tl").read_text()
+              tl = Path(f"data/android/{channel}/main_api.tl").read_text()
               assert "---types---" in tl
               assert "---functions---" in tl
               assert f"// LAYER {data['layer']}" in tl
               assert "TL_" not in tl
+              e2e = Path(f"data/android/{channel}/e2e.tl").read_text()
+              assert "---types---" in e2e
+              assert "TL_" not in e2e
           PY
