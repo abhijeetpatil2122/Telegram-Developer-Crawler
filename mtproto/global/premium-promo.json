@@ -1,9 +1,5 @@
 {
   "_": "PremiumPromo",
-  "_crawler": {
-    "copyright": "Copyright (C) 2026 Abhijeet Patil",
-    "generated_by": "Telegram Developer Crawler"
-  },
   "period_options": [],
   "status_entities": [],
   "status_text": "crawler",
@@ -55,7 +51,7 @@
       "date": "2022-06-07T12:42:15+00:00",
       "dc_id": 4,
       "file_reference": {
-        "__bytes__": "006abdf3ac037875e48d5fb6d9c9cbd461e1bfc4e3"
+        "__bytes__": "006abdf6c6f5c9a28903d0e95e37a53c2b7352f422"
       },
       "id": 5834827897566661579,
       "mime_type": "video/mp4",
@@ -90,7 +86,7 @@
       "date": "2022-10-24T20:37:51+00:00",
       "dc_id": 2,
       "file_reference": {
-        "__bytes__": "006abdf3ac31170a56d09b741aaa0010a6de6d35e6"
+        "__bytes__": "006abdf6c632470f687d8be5be8a9659a448aac8ef"
       },
       "id": 5384493318086337831,
       "mime_type": "video/mp4",
@@ -125,7 +121,7 @@
       "date": "2022-06-07T12:33:01+00:00",
       "dc_id": 2,
       "file_reference": {
-        "__bytes__": "006abdf3acbfce27011fa19ef5b08c93ec5f311eeb"
+        "__bytes__": "006abdf6c624419b5b4395b6d618ce9a595a50c1db"
       },
       "id": 5258318753866718270,
       "mime_type": "video/mp4",
@@ -160,7 +156,7 @@
       "date": "2022-06-07T12:33:03+00:00",
       "dc_id": 2,
       "file_reference": {
-        "__bytes__": "006abdf3ac5400c15b0d5400ba18bd63cda1720d53"
+        "__bytes__": "006abdf6c6c072a0f39554583f7bae64f60253ae57"
       },
       "id": 5258318753866718271,
       "mime_type": "video/mp4",
@@ -195,7 +191,7 @@
       "date": "2022-06-07T12:42:08+00:00",
       "dc_id": 4,
       "file_reference": {
-        "__bytes__": "006abdf3ac2b9b4eeff3046821faec8dd58b33803d"
+        "__bytes__": "006abdf6c6da82709fca00ad0f628bafcddb0726cc"
       },
       "id": 5834827897566661578,
       "mime_type": "video/mp4",
@@ -245,7 +241,7 @@
       "date": "2022-06-05T21:06:48+00:00",
       "dc_id": 1,
       "file_reference": {
-        "__bytes__": "006abdf3ace01c3fb16a6de9ff16243d7ad33bba89"
+        "__bytes__": "006abdf6c67e0a8eb6446de25358ef1c8b0bc1816a"
       },
       "id": 4967628967772161220,
       "mime_type": "video/mp4",
@@ -280,7 +276,7 @@
       "date": "2022-06-07T12:33:08+00:00",
       "dc_id": 2,
       "file_reference": {
-        "__bytes__": "006abdf3ac1346e3e93ecc21e57e54b9f5ec13bebd"
+        "__bytes__": "006abdf6c6413ec7ca7e7e82a9f9215f88f7c8e484"
       },
       "id": 5258318753866718272,
       "mime_type": "video/mp4",
@@ -315,7 +311,7 @@
       "date": "2022-07-27T17:14:14+00:00",
       "dc_id": 2,
       "file_reference": {
-        "__bytes__": "006abdf3acc63c9e576c17a7724ffa11c7d3ce17c5"
+        "__bytes__": "006abdf6c6e8e0e8dbfc0a52b44ed60897adba38f4"
       },
       "id": 5406575866668916333,
       "mime_type": "video/mp4",
@@ -365,7 +361,7 @@
       "date": "2022-09-06T19:04:35+00:00",
       "dc_id": 2,
       "file_reference": {
-        "__bytes__": "006abdf3ac535767a4c750f101c5c8f2de95093245"
+        "__bytes__": "006abdf6c63202a1af003e8a9c7a122240c0349d04"
       },
       "id": 5240141571801753115,
       "mime_type": "video/mp4",
@@ -400,7 +396,7 @@
       "date": "2022-09-06T12:27:39+00:00",
       "dc_id": 2,
       "file_reference": {
-        "__bytes__": "006abdf3ac168312a38416068700a4493036354dc4"
+        "__bytes__": "006abdf6c6a6cec29387370071a2beb3c1566d7aeb"
       },
       "id": 5239981945047227720,
       "mime_type": "video/mp4",
@@ -435,7 +431,7 @@
       "date": "2023-01-24T09:08:57+00:00",
       "dc_id": 4,
       "file_reference": {
-        "__bytes__": "006abdf3ac8924a6893d59a502841716c84eb31863"
+        "__bytes__": "006abdf6c6a5d53a34be384ffa82de0fc376dc588a"
       },
       "id": 5945247070045606290,
       "mime_type": "video/mp4",
@@ -485,7 +481,7 @@
       "date": "2023-11-28T10:06:12+00:00",
       "dc_id": 1,
       "file_reference": {
-        "__bytes__": "006abdf3ac5b4bf46d91050bdbb4e58c980015da30"
+        "__bytes__": "006abdf6c66928c3794e610c6a83319ac6e3aba2fd"
       },
       "id": 5127627348635550782,
       "mime_type": "video/mp4",
@@ -535,7 +531,7 @@
       "date": "2023-11-28T10:07:02+00:00",
       "dc_id": 1,
       "file_reference": {
-        "__bytes__": "006abdf3ac72ca45c4c4f06107254dd656d888fc95"
+        "__bytes__": "006abdf6c68801b5957d145adacab356d374a4f077"
       },
       "id": 5127413777091790312,
       "mime_type": "video/mp4",
@@ -570,7 +566,7 @@
       "date": "2024-01-26T13:43:07+00:00",
       "dc_id": 4,
       "file_reference": {
-        "__bytes__": "006abdf3ac515f4980aef9405761d7f21087f803c5"
+        "__bytes__": "006abdf6c6d421a1f9e0a2b095e4eef941ff0bf8f8"
       },
       "id": 5882098457950294207,
       "mime_type": "video/mp4",
@@ -605,7 +601,7 @@
       "date": "2024-01-31T10:04:43+00:00",
       "dc_id": 2,
       "file_reference": {
-        "__bytes__": "006abdf3ac68a619801e5e90bb4644742257e67ecc"
+        "__bytes__": "006abdf6c60777dfebe68ab0d265b85cfd8dbe9c92"
       },
       "id": 5318812994568732240,
       "mime_type": "video/mp4",
@@ -640,7 +636,7 @@
       "date": "2025-02-27T12:49:40+00:00",
       "dc_id": 2,
       "file_reference": {
-        "__bytes__": "006abdf3ac282914bcf7ec948bcfc3fdb03cc6aa99"
+        "__bytes__": "006abdf6c66c6859d736aee597f0aed8c42fbd4899"
       },
       "id": 5334751085628253913,
       "mime_type": "video/mp4",
@@ -675,7 +671,7 @@
       "date": "2025-02-27T12:49:40+00:00",
       "dc_id": 2,
       "file_reference": {
-        "__bytes__": "006abdf3ac282914bcf7ec948bcfc3fdb03cc6aa99"
+        "__bytes__": "006abdf6c66c6859d736aee597f0aed8c42fbd4899"
       },
       "id": 5334751085628253913,
       "mime_type": "video/mp4",
@@ -722,7 +718,7 @@
       "date": "2024-02-23T13:28:50+00:00",
       "dc_id": 4,
       "file_reference": {
-        "__bytes__": "006abdf3ac7b39df76ccf13681475c4a008d37b923"
+        "__bytes__": "006abdf6c67bdc6e40176a84b787903859ffd6f032"
       },
       "id": 5965269254096818448,
       "mime_type": "video/mp4",
@@ -769,7 +765,7 @@
       "date": "2024-02-23T13:29:10+00:00",
       "dc_id": 4,
       "file_reference": {
-        "__bytes__": "006abdf3ac98a9b20bea356432c58348aac2af1c01"
+        "__bytes__": "006abdf6c6f0822fcb035b1e2cd830d1101a534869"
       },
       "id": 5965269254096818450,
       "mime_type": "video/mp4",
@@ -816,7 +812,7 @@
       "date": "2024-02-22T13:41:03+00:00",
       "dc_id": 2,
       "file_reference": {
-        "__bytes__": "006abdf3ac22e488c844b4f64ef208881f693ba21d"
+        "__bytes__": "006abdf6c686e1180c4b118a16397a14071300dcbd"
       },
       "id": 5384418740274216982,
       "mime_type": "video/mp4",
@@ -863,7 +859,7 @@
       "date": "2024-02-23T13:29:50+00:00",
       "dc_id": 4,
       "file_reference": {
-        "__bytes__": "006abdf3acde7eb8cdd5256ac9b4eeb10169b40169"
+        "__bytes__": "006abdf6c62058197457f10981c84dbdeed05768b1"
       },
       "id": 5965269254096818454,
       "mime_type": "video/mp4",
@@ -898,7 +894,7 @@
       "date": "2024-03-26T09:05:54+00:00",
       "dc_id": 1,
       "file_reference": {
-        "__bytes__": "006abdf3ac901964047b95dfffc9b8754e1c173d95"
+        "__bytes__": "006abdf6c66db02d98361a02f479e1a8ac974b8ea0"
       },
       "id": 4904526543755152234,
       "mime_type": "video/mp4",
@@ -945,7 +941,7 @@
       "date": "2024-02-23T13:29:34+00:00",
       "dc_id": 4,
       "file_reference": {
-        "__bytes__": "006abdf3ac07ad9bdfe422261992fd56109067e324"
+        "__bytes__": "006abdf6c680a97c0aefa6e40c5ba0271c6c11757d"
       },
       "id": 5965269254096818452,
       "mime_type": "video/mp4",
@@ -992,7 +988,7 @@
       "date": "2024-02-23T13:30:07+00:00",
       "dc_id": 4,
       "file_reference": {
-        "__bytes__": "006abdf3ac4d8a230e0a2258e5b1e907adad548edb"
+        "__bytes__": "006abdf6c6f31544b360bff30a934affbae517be8d"
       },
       "id": 5965269254096818456,
       "mime_type": "video/mp4",
@@ -1027,7 +1023,7 @@
       "date": "2024-03-26T11:59:04+00:00",
       "dc_id": 2,
       "file_reference": {
-        "__bytes__": "006abdf3ac88c481950263ff206f2e0c21990fbe3b"
+        "__bytes__": "006abdf6c67e953cc3ce0587bbe2408256007d4e94"
       },
       "id": 5195154581104903751,
       "mime_type": "video/mp4",
@@ -1062,7 +1058,7 @@
       "date": "2024-03-27T13:48:30+00:00",
       "dc_id": 4,
       "file_reference": {
-        "__bytes__": "006abdf3ace98c1f6e56e2329a7fa7e8f43b3100eb"
+        "__bytes__": "006abdf6c6a9dcae9da95e614c8da0193d8a237edb"
       },
       "id": 5774125879231779846,
       "mime_type": "video/mp4",
@@ -1109,7 +1105,7 @@
       "date": "2024-06-19T13:43:38+00:00",
       "dc_id": 4,
       "file_reference": {
-        "__bytes__": "006abdf3ac9ca63fb2bdbc69549fdc691ef6b8f5b6"
+        "__bytes__": "006abdf6c6c7ddd535a210bcafb59b875902c31e99"
       },
       "id": 6023877604723921693,
       "mime_type": "video/mp4",
@@ -1144,7 +1140,7 @@
       "date": "2025-06-29T10:03:53+00:00",
       "dc_id": 2,
       "file_reference": {
-        "__bytes__": "006abdf3accdcd4f8d999ab96982845797ddb96f8a"
+        "__bytes__": "006abdf6c68ae28b302e4fc0774af34c604f9867d1"
       },
       "id": 5406687943840526317,
       "mime_type": "video/mp4",
@@ -1179,7 +1175,7 @@
       "date": "2025-12-04T23:18:59+00:00",
       "dc_id": 2,
       "file_reference": {
-        "__bytes__": "006abdf3ac8429bce19f28beba81a6e43e0d764341"
+        "__bytes__": "006abdf6c61c9537cc61a1b85ce0357a812f15d327"
       },
       "id": 5300894773261932112,
       "mime_type": "video/mp4",
@@ -1214,7 +1210,7 @@
       "date": "2026-02-21T18:50:10+00:00",
       "dc_id": 2,
       "file_reference": {
-        "__bytes__": "006abdf3ac4e2965e5db533e57fa5f4126f6f525f4"
+        "__bytes__": "006abdf6c60eb44b68e686ebde58ae869128fa4523"
       },
       "id": 5247118814893611242,
       "mime_type": "video/mp4",
@@ -1249,7 +1245,7 @@
       "date": "2026-03-25T23:36:01+00:00",
       "dc_id": 2,
       "file_reference": {
-        "__bytes__": "006abdf3ac1b75262c4c5bfad97f5d4429200eac00"
+        "__bytes__": "006abdf6c6d91d4bdf546aa388d9e4cd7d21631038"
       },
       "id": 5343531390350693275,
       "mime_type": "video/mp4",
@@ -1284,7 +1280,7 @@
       "date": "2026-07-03T15:31:45+00:00",
       "dc_id": 2,
       "file_reference": {
-        "__bytes__": "006abdf3acb2d3c97fad3d419732f0d4c0a1925991"
+        "__bytes__": "006abdf6c66b6a12d4f224cab09334da28d360951a"
       },
       "id": 5350391608468610285,
       "mime_type": "video/mp4",

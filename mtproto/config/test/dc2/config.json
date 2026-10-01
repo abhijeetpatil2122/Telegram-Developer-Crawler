@@ -1,9 +1,5 @@
 {
   "_": "Config",
-  "_crawler": {
-    "copyright": "Copyright (C) 2026 Abhijeet Patil",
-    "generated_by": "Telegram Developer Crawler"
-  },
   "autologin_token": null,
   "autoupdate_url_prefix": null,
   "base_lang_pack_version": null,

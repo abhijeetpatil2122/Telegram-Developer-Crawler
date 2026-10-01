@@ -1,9 +1,5 @@
 {
   "_": "AppConfig",
-  "_crawler": {
-    "copyright": "Copyright (C) 2026 Abhijeet Patil",
-    "generated_by": "Telegram Developer Crawler"
-  },
   "config": {
     "_": "JsonObject",
     "value": [
@@ -1359,7 +1355,7 @@
         "key": "ton_usd_rate",
         "value": {
           "_": "JsonNumber",
-          "value": 1.5160477455434662
+          "value": 1.5164874015387173
         }
       },
       {

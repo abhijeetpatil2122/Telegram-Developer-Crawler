@@ -1,9 +1,5 @@
 {
   "_": "CdnConfig",
-  "_crawler": {
-    "copyright": "Copyright (C) 2026 Abhijeet Patil",
-    "generated_by": "Telegram Developer Crawler"
-  },
   "public_keys": [
     {
       "_": "CdnPublicKey",

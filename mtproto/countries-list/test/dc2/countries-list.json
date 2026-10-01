@@ -1,9 +1,5 @@
 {
   "_": "CountriesList",
-  "_crawler": {
-    "copyright": "Copyright (C) 2026 Abhijeet Patil",
-    "generated_by": "Telegram Developer Crawler"
-  },
   "countries": [
     {
       "_": "Country",
