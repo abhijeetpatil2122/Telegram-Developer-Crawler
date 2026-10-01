@@ -5,6 +5,7 @@ import datetime as dt
 import json
 import re
 import subprocess
+import sys
 from pathlib import Path
 from typing import Any
 from crawler.credits import credit_diff, with_markdown_credit
@@ -165,8 +166,12 @@ def notification(summary, base):
 
 def main():
     p=argparse.ArgumentParser(); p.add_argument("--base",default=DATA_BRANCH); p.add_argument("--output",required=True); p.add_argument("--json",required=True); p.add_argument("--notification"); a=p.parse_args()
-    s=classify(a.base)
-    Path(a.output).write_text(render_markdown(s,a.base),encoding="utf-8")
+    try:
+        s=classify(a.base)
+        Path(a.output).write_text(render_markdown(s,a.base),encoding="utf-8")
+    except Exception as exc:
+        print(f"5C classifier error: {type(exc).__name__}: {exc}", file=sys.stderr)
+        raise
     Path(a.json).write_text(json.dumps(s,indent=2,ensure_ascii=False)+"\n",encoding="utf-8")
     if a.notification: Path(a.notification).write_text(notification(s,a.base),encoding="utf-8")
     print(json.dumps({"files":sum(len(g["files"]) for g in s["groups"].values()),"groups":list(s["groups"])}))
