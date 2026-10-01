@@ -13,6 +13,9 @@ def test_status_is_rich_html():
     assert "<br/>" not in html
     assert "<h3>📱 Android clients</h3>" in html
     assert "80%" in html
+    assert "Backend activity" in html
+    assert "<table compact striped>" in html
+    assert "<blockquote>" in html
 
 
 def test_final_contains_rich_buttons():
@@ -26,3 +29,16 @@ def test_final_contains_rich_buttons():
     assert "Full Changelog" in html
     assert "Commit" in html
     assert "Data Snapshot" in html
+
+
+def test_status_supports_stage_counter():
+    html = status_html(35, "📐 Official TL schemas", "Collecting API + MTProto schemas.", 3, 7)
+    assert "Stage 3/7" in html
+    assert "35%" in html
+
+
+def test_final_uses_expandable_rich_blocks():
+    html = final_html("<h3>📦 MTProto</h3><ul><li>Added: <b>2</b></li></ul>", "", "")
+    assert "<blockquote expandable>" in html
+    assert "<details open>" in html
+    assert "<tg-button-row" in html
