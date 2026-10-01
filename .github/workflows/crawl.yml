@@ -67,7 +67,11 @@ jobs:
           TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
           TG_ALERT_CHAT_ID: ${{ secrets.TG_ALERT_CHAT_ID }}
         run: |
-          id="$(python -m crawler.notifications start --progress 10 --title "🚀 Starting crawl" --detail "Preparing all Telegram developer data collectors.")
+          python -m crawler.notifications start \
+            --progress 10 \
+            --title '🚀 Starting crawl' \
+            --detail 'Preparing all Telegram developer data collectors.' > /tmp/telegram-status-message-id
+          id="$(cat /tmp/telegram-status-message-id)"
           if [ -n "$id" ]; then
             echo "TG_STATUS_MESSAGE_ID=$id" >> "$GITHUB_ENV"
           fi
