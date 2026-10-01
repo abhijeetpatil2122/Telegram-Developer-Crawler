@@ -1,32 +1,25 @@
 # Telegram Desktop schemas
 
-The crawler tracks the official Telegram Desktop TL schemas from the upstream telegramdesktop/tdesktop repository.
+The crawler tracks the official Telegram Desktop TL schemas from the upstream `telegramdesktop/tdesktop` repository.
 
 ## Sources
 
 - Repository: https://github.com/telegramdesktop/tdesktop
-- API schema: Telegram/SourceFiles/mtproto/scheme/api.tl
-- MTProto schema: Telegram/SourceFiles/mtproto/scheme/mtproto.tl
-- Branch: dev
+- API schema: `Telegram/SourceFiles/mtproto/scheme/api.tl`
+- MTProto schema: `Telegram/SourceFiles/mtproto/scheme/mtproto.tl`
+- Branch: `dev`
 
-Telegram Desktop's developer guidance identifies these two files as its API schema files.
+## Data branch layout
 
-## Generated files
+- `tdesktop/tl/api.tl` — normalized API TL source.
+- `tdesktop/tl/api.json` — deterministic API constructor/function index.
+- `tdesktop/tl/mtproto.tl` — normalized MTProto TL source.
+- `tdesktop/tl/mtproto.json` — deterministic MTProto constructor/function index.
+- `tdesktop/tl/*-metadata.json` — exact upstream commit, counts, hashes and safety settings.
+- `tdesktop/tl/metadata.json` — module-level source manifest.
 
-- schema/api.tl — normalized upstream Telegram API TL source.
-- schema/api.json — deterministic structured index of API constructors and functions.
-- schema/mtproto.tl — normalized upstream MTProto TL source.
-- schema/mtproto.json — deterministic structured index of MTProto constructors and functions.
-- schema/*-metadata.json — exact upstream commit, counts, hashes and safety settings.
-- schema/metadata.json — module-level source and commit manifest.
+The data branch is the archive root, so there is no additional `data/` prefix.
 
-The raw TL files remain canonical evidence and preserve upstream comments. Only line endings and the final newline are normalized.
+## Provenance
 
-## Safety
-
-Each schema rejects:
-- very small snapshots;
-- duplicate definition names;
-- snapshots where more than 10% of previously known definitions disappear.
-
-The API and MTProto schemas are kept separate because they represent different schema layers used by Telegram Desktop.
+TL files use native `//` comments. JSON files remain valid JSON and contain no injected crawler credit field.
