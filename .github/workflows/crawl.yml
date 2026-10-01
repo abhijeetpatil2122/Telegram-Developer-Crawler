@@ -13,7 +13,7 @@ permissions:
 
 concurrency:
   group: telegram-developer-crawler
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   collect:
