@@ -8,6 +8,8 @@ from pathlib import Path
 from typing import Any
 import httpx
 
+from crawler.credits import add_json_credit, with_tl_credit
+
 ROOT = Path(__file__).resolve().parents[1]
 DATA_ROOT = ROOT / "data" / "tdesktop" / "schema"
 BASE = "https://raw.githubusercontent.com/telegramdesktop/tdesktop/dev/Telegram/SourceFiles/mtproto/scheme"
@@ -23,7 +25,7 @@ def normalize_tl(value: str) -> str:
     return value.replace("\r\n", "\n").replace("\r", "\n").rstrip() + "\n"
 
 def render_json(value: Any) -> str:
-    return json.dumps(value, indent=2, ensure_ascii=False, sort_keys=True) + "\n"
+    return json.dumps(add_json_credit(value) if isinstance(value, dict) else value, indent=2, ensure_ascii=False, sort_keys=True) + "\n"
 
 def parse_definitions(value: str) -> list[dict[str, Any]]:
     result, section = [], "constructors"
@@ -96,7 +98,7 @@ def collect() -> None:
         previous_json = read_json(DATA_ROOT / f"{label}.json")
         previous = previous_json.get("definitions") if isinstance(previous_json, dict) else None
         validate_schema(previous, definitions, label)
-        (DATA_ROOT / f"{label}.tl").write_text(source, encoding="utf-8")
+        (DATA_ROOT / f"{label}.tl").write_text(with_tl_credit(source), encoding="utf-8")
         structured = {"source": SOURCES[label], "definitions": definitions}
         structured_text = render_json(structured)
         (DATA_ROOT / f"{label}.json").write_text(structured_text, encoding="utf-8")
