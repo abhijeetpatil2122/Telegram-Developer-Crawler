@@ -116,20 +116,46 @@ def render_markdown(summary,base):
     lines += ["## Credited unified diff","","DIFF START",diff,"DIFF END"]
     return with_markdown_credit("\n".join(lines))
 
-def notification(summary):
-    lines=["🛠️ Telegram Developer Crawler",""]
+def android_info(channel):
+    meta=parse_json(read_current(f"data/android/{channel}/metadata.json")) or {}
+    schema=parse_json(read_current(f"data/android/{channel}/main_api.json")) or {}
+    android=meta.get("android",{}) if isinstance(meta,dict) else {}
+    return android.get("version_name"), android.get("version_code"), schema.get("layer")
+
+def android_previous_info(base,channel):
+    meta=parse_json(read_base(base,f"data/android/{channel}/metadata.json")) or {}
+    schema=parse_json(read_base(base,f"data/android/{channel}/main_api.json")) or {}
+    android=meta.get("android",{}) if isinstance(meta,dict) else {}
+    return android.get("version_name"), android.get("version_code"), schema.get("layer")
+
+def notification(summary, base):
+    lines=["🛠️ <b>Telegram Developer Crawler</b>",""]
     for module,g in summary["groups"].items():
         if not g["files"]: continue
-        lines.append("📦 " + module + " — ➕ " + str(g["additions"]) + " ✏️ " + str(g["changes"]) + " ➖ " + str(g["deletions"]))
-        for e in g["files"]:
-            lines.append("  • " + e["path"])
-    return "\n".join(lines)
+        if module in ("Android Stable","Android Preview"):
+            channel="stable" if module=="Android Stable" else "beta"
+            version,build,layer=android_info(channel)
+            old_version,old_build,old_layer=android_previous_info(base,channel)
+            label="Stable" if channel=="stable" else "Preview"
+            lines.append(f"📱 <b>Android {label}</b>")
+            if version: lines.append(f"Version: <code>{version}</code>  Build: <code>{build}</code>")
+            if layer: lines.append(f"Layer: <code>{layer}</code>")
+            lines.append(f"➕ Added: <b>{g["additions"]}</b>")
+            lines.append(f"✏️ Changed: <b>{g["changes"]}</b>")
+            lines.append(f"➖ Removed: <b>{g["deletions"]}</b>")
+            if version and version==old_version and build!=old_build: lines.append("#Android #"+label+" #Patch")
+            else: lines.append("#Android #"+label)
+        else:
+            lines.append(f"📦 <b>{module}</b> — ➕ {g["additions"]} ✏️ {g["changes"]} ➖ {g["deletions"]}")
+        lines.append("")
+    return "\n".join(lines).rstrip()
+
 
 def main():
     p=argparse.ArgumentParser(); p.add_argument("--base",default=DATA_BRANCH); p.add_argument("--output",required=True); p.add_argument("--json",required=True); p.add_argument("--notification"); a=p.parse_args()
     s=classify(a.base)
     Path(a.output).write_text(render_markdown(s,a.base),encoding="utf-8")
     Path(a.json).write_text(json.dumps(s,indent=2,ensure_ascii=False)+"\n",encoding="utf-8")
-    if a.notification: Path(a.notification).write_text(notification(s),encoding="utf-8")
+    if a.notification: Path(a.notification).write_text(notification(s,a.base),encoding="utf-8")
     print(json.dumps({"files":sum(len(g["files"]) for g in s["groups"].values()),"groups":list(s["groups"])}))
 if __name__=="__main__": main()
