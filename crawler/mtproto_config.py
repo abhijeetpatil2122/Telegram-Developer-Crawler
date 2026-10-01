@@ -134,7 +134,7 @@ def write_snapshot(path: Path, value: Any) -> None:
 
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(
-        json.dumps(value, indent=2, sort_keys=True) + "\n",
+        json.dumps(add_json_credit(value) if isinstance(value, dict) else value, indent=2, ensure_ascii=False, sort_keys=True) + "\n",
         encoding="utf-8",
     )
 
