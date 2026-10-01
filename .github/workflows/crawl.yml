@@ -135,8 +135,8 @@ jobs:
             echo "No generated data changes."
             exit 0
           fi
-          git checkout -B data origin/data
-          find . -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf {} +
+          git reset --hard origin/data
+          git clean -fd
           cp -a /tmp/telegram-developer-data/. .
           cp /tmp/telegram-developer-data-branch-README.md README.md
           mkdir -p data/mtproto data/tdlib data/tdesktop data/android
@@ -160,7 +160,7 @@ jobs:
           git commit -m "chore(data): update Telegram developer snapshots"
           new_sha="$(git rev-parse HEAD)"
           old_sha="$(git rev-parse HEAD^)"
-          git push origin data
+          git push origin HEAD:data
           commit_url="https://github.com/abhijeetpatil2122/Telegram-Developer-Crawler/commit/$new_sha"
           compare_url="https://github.com/abhijeetpatil2122/Telegram-Developer-Crawler/compare/$old_sha...$new_sha"
           python /tmp/telegram-developer-notifications.py notify \
