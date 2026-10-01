@@ -12,11 +12,17 @@ def call(method: str, **payload):
     token=os.environ.get("TG_BOT_TOKEN")
     chat_id=os.environ.get("TG_ALERT_CHAT_ID")
     if not token or not chat_id: return None
-    with httpx.Client(timeout=20.0) as client:
-        response=client.post(API.format(token,method),data={"chat_id":chat_id,**payload})
+    try:
+        with httpx.Client(timeout=20.0) as client:
+            response=client.post(API.format(token,method),data={"chat_id":chat_id,**payload})
+    except httpx.HTTPError as exc:
+        print(f"Telegram notification request failed: {exc}", file=sys.stderr)
+        return None
         response.raise_for_status()
         data=response.json()
-    if not data.get("ok"): raise RuntimeError(data)
+    if not data.get("ok"):
+        print(f"Telegram notification failed: {data}", file=sys.stderr)
+        return None
     return data["result"]
 
 def main() -> int:
