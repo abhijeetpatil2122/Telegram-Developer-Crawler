@@ -42,6 +42,11 @@ No APK bytes are stored in Git.
 
 ## Module 5B — Android TL extraction
 
-Stage 5B downloads each recorded APK into a temporary workspace, decompiles `org.telegram.tgnet` with a pinned JADX release, reconstructs TL constructors/methods from generated serialization code, and records the embedded layer. The raw Android Java class names are then canonicalized into a developer-facing TL scheme: `TL_` prefixes are removed, namespace separators become `.`, historical `_layerNNN`/`_old` classes are filtered, type references are normalized, and the output uses the standard `---types---` / `---functions---` layout with a `// LAYER N` footer. Only `tl.tl`, structured `tl.json`, and extraction metadata are published; APKs and decompiled Java sources are never committed.
+Stage 5B downloads each recorded APK into a temporary workspace, decompiles `org.telegram.tgnet` with a pinned JADX release, reconstructs TL constructors/methods from generated serialization code, and records the embedded layer. The raw Android Java class names are then canonicalized into a developer-facing TL scheme: `TL_` prefixes are removed, namespace separators become `.`, historical `_layerNNN`/`_old` classes are filtered, type references are normalized, and the output uses the standard `---types---` / `---functions---` layout with a `// LAYER N` footer. The developer-facing outputs are `main_api.tl`, `main_api.json`, `e2e.tl`, `e2e.json`, and extraction metadata; APKs and decompiled Java sources are never committed. `main_api.tl` is the Android-derived main API schema and `e2e.tl` is the official end-to-end schema kept as a separate usable input.
 
 Safety checks require at least 500 constructors and 200 methods, reject duplicate definition keys, and reject historical definition loss above 10%. Stable and Public Beta are processed independently.
+
+
+## Provenance and notifications
+
+Generated artifacts carry Telegram Developer Crawler provenance. The crawler can also maintain one temporary Telegram status message during a run (download → decompile → extract → validate); it is removed when the run finishes without a data change. Change announcements will be produced by the later Stable/Beta diff classifier.

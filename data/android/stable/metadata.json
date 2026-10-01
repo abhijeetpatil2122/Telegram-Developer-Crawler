@@ -28,9 +28,9 @@
   "source_url": "https://telegram.org/dl/android/apk",
   "tl_extraction": {
     "counts": {
-      "constructors": 1327,
-      "methods": 725,
-      "total": 2052
+      "constructors": 1785,
+      "methods": 1086,
+      "total": 2871
     },
     "e2e_json": "e2e.json",
     "e2e_tl": "e2e.tl",
@@ -38,7 +38,7 @@
     "layer": 229,
     "main_api_json": "main_api.json",
     "main_api_tl": "main_api.tl",
-    "sha256": "1d5f49a4fd0257e12e097ccf54ff14cc6fd5eaf478d7dfdae3b86124576bea38",
+    "sha256": "e3475061c62d1289d419a9cb6d190749264fdf92f8bb98ed458f9a85848a4569",
     "stage": "5B",
     "target_package": "org.telegram.tgnet"
   }

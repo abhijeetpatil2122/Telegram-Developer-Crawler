@@ -28,9 +28,9 @@
   "source_url": "https://telegram.org/dl/android/apk-public-beta",
   "tl_extraction": {
     "counts": {
-      "constructors": 1326,
-      "methods": 721,
-      "total": 2047
+      "constructors": 1785,
+      "methods": 1086,
+      "total": 2871
     },
     "e2e_json": "e2e.json",
     "e2e_tl": "e2e.tl",
@@ -38,7 +38,7 @@
     "layer": 229,
     "main_api_json": "main_api.json",
     "main_api_tl": "main_api.tl",
-    "sha256": "707176382d4e13a967f7b9e80a9f09ec00bd0430d0c54cba38e1fce69766b2f2",
+    "sha256": "65420aac30e4a338729111fa15bfc5ab00bdb12d709f0b110afa77cb93f60f81",
     "stage": "5B",
     "target_package": "org.telegram.tgnet"
   }
