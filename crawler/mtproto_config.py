@@ -223,10 +223,15 @@ async def collect_dc(
 
 
 async def collect_bot_global_config() -> None:
+    session_string = os.getenv("TG_USER_SESSION", "").strip()
+    if not session_string:
+        print("CDN config skipped: TG_USER_SESSION is not configured.")
+        return
+
     api_id = int(os.environ["TG_API_ID"])
     api_hash = os.environ["TG_API_HASH"]
     client = TelegramClient(
-        MemorySession(),
+        StringSession(session_string),
         api_id,
         api_hash,
         device_model="Telegram Developer Crawler",
@@ -236,6 +241,9 @@ async def collect_bot_global_config() -> None:
 
     await client.connect()
     try:
+        if not await client.is_user_authorized():
+            print("CDN config skipped: TG_USER_SESSION is not authorized.")
+            return
         cdn_config = await client(GetCdnConfigRequest())
         write_snapshot(
             DATA_ROOT / "global" / "cdn-config.json",
