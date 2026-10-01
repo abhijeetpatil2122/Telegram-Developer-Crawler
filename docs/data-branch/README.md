@@ -24,7 +24,7 @@ The GitHub commit and compare URLs remain the canonical, unmodified source diff.
 
 Generated artifacts carry Telegram Developer Crawler provenance and Copyright (C) 2026 Abhijeet Patil.
 
-TL snapshots use a // file header. JSON snapshots use a _crawler provenance object. XML/Markdown artifacts use their native comment syntax.
+TL snapshots use a // file header. JSON snapshots remain untouched valid JSON because JSON has no standard comment syntax; provenance is carried by crawler documentation and credited change reports. XML/Markdown artifacts use their native comment syntax.
 
 ## Directory structure
 
