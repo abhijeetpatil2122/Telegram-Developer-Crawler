@@ -11,6 +11,7 @@ import httpx
 
 API = "https://api.telegram.org/bot{}/{}"
 DEFAULT_CHAT = "@botapinews"
+TOTAL_STAGES = 7
 
 
 def call(method: str, **payload):
@@ -47,7 +48,7 @@ def call(method: str, **payload):
 
 
 def rich_payload(html_content: str) -> str:
-    """Build the JSON-serialized InputRichMessage expected by Bot API."""
+    """Build InputRichMessage JSON using Telegram Rich HTML block syntax."""
     return json.dumps(
         {"html": html_content},
         ensure_ascii=False,
@@ -55,27 +56,61 @@ def rich_payload(html_content: str) -> str:
     )
 
 
-def status_html(progress: int, title: str, detail: str) -> str:
+def _progress_bar(progress: int) -> str:
     progress = max(0, min(100, progress))
     filled = progress // 10
-    bar = "▰" * filled + "▱" * (10 - filled)
+    return "▰" * filled + "▱" * (10 - filled)
+
+
+def status_html(
+    progress: int,
+    title: str,
+    detail: str,
+    stage: int | None = None,
+    total_stages: int = TOTAL_STAGES,
+) -> str:
+    """Render a compact live status using native Rich block HTML."""
+    progress = max(0, min(100, progress))
+    stage = stage if stage is not None else 1
+    total_stages = max(1, total_stages)
+    stage = max(1, min(stage, total_stages))
+
+    stage_label = f"Stage {stage}/{total_stages}"
+    bar = _progress_bar(progress)
+
     return (
         "<h2>⚙️ Telegram Developer Crawler</h2>"
-        "<p><b>Workflow progress</b> "
-        f"<code>{progress}%</code></p>"
-        f"<p><code>{bar}</code></p>"
+        "<p><b>Live crawl progress</b></p>"
+        "<table compact striped>"
+        "<tr><td><b>Progress</b></td><td><code>"
+        f"{progress}%"
+        "</code></td></tr>"
+        "<tr><td><b>Stage</b></td><td><code>"
+        f"{stage_label}"
+        "</code></td></tr>"
+        "<tr><td><b>Status</b></td><td><code>"
+        f"{html.escape(bar)}"
+        "</code></td></tr>"
+        "</table>"
         "<hr/>"
         f"<h3>{html.escape(title)}</h3>"
-        f"<p>{html.escape(detail)}</p>"
-        "<p><i>Live crawl status • this message updates automatically.</i></p>"
+        f"<blockquote>{html.escape(detail)}</blockquote>"
+        "<details>"
+        "<summary>Backend activity</summary>"
+        "<ul>"
+        "<li>Collecting official Telegram developer sources</li>"
+        "<li>Normalizing and validating generated snapshots</li>"
+        "<li>Comparing the new snapshot with the <code>data</code> archive</li>"
+        "</ul>"
+        "</details>"
+        "<footer>Live status • this message updates automatically.</footer>"
     )
 
 
 def status_fallback_html(progress: int, title: str, detail: str) -> str:
-    """Only uses legacy Bot API HTML tags; never sends Rich-only tags to sendMessage."""
+    """Safe legacy Bot API HTML fallback."""
     progress = max(0, min(100, progress))
-    filled = progress // 10
-    bar = "▰" * filled + "▱" * (10 - filled)
+    bar = _progress_bar(progress)
     return (
         "<b>⚙️ Telegram Developer Crawler</b>\n"
         f"<b>Progress:</b> <code>{progress}%</code> <code>{bar}</code>\n\n"
@@ -103,16 +138,26 @@ def final_html(text: str, compare_url: str, commit_url: str) -> str:
         'url="https://github.com/abhijeetpatil2122/Telegram-Developer-Crawler/tree/data">'
         "Data Snapshot</tg-button>"
     )
+
     return (
         "<h2>🛠️ Telegram Developer Crawler</h2>"
         "<p><b>Developer data changed</b></p>"
+        "<blockquote expandable>"
+        "The crawler found changes in one or more Telegram developer data sources. "
+        "Expand this section for the generated 5C classification."
+        "</blockquote>"
         "<hr/>"
         f"{content}"
         "<hr/>"
-        "<p><i>Generated automatically by Telegram Developer Crawler.</i></p>"
-        "<tg-button-row>"
+        "<h3>🔎 What changed?</h3>"
+        "<details open>"
+        "<summary>Semantic change report</summary>"
+        f"{content}"
+        "</details>"
+        "<tg-button-row align="center">"
         + "".join(buttons)
         + "</tg-button-row>"
+        "<footer>Generated automatically by Telegram Developer Crawler.</footer>"
     )
 
 
@@ -141,6 +186,8 @@ def main() -> int:
     parser.add_argument("--title", default="")
     parser.add_argument("--detail", default="")
     parser.add_argument("--progress", type=int, default=0)
+    parser.add_argument("--stage", type=int)
+    parser.add_argument("--total-stages", type=int, default=TOTAL_STAGES)
     parser.add_argument("--compare-url", default="")
     parser.add_argument("--commit-url", default="")
     args = parser.parse_args()
@@ -149,12 +196,16 @@ def main() -> int:
         progress = args.progress or 5
         title = args.title or "Starting crawl"
         detail = args.detail or "Preparing Telegram developer data collectors."
-        result = call("sendRichMessage", rich_message=rich_payload(status_html(progress, title, detail)))
+        result = call(
+            "sendRichMessage",
+            rich_message=rich_payload(
+                status_html(progress, title, detail, args.stage, args.total_stages)
+            ),
+        )
         if result:
             print(result["message_id"])
             return 0
 
-        # Rich failures must never turn into an invalid legacy HTML request.
         fallback = call(
             "sendMessage",
             text=status_fallback_html(progress, title, detail),
@@ -195,7 +246,9 @@ def main() -> int:
         rich_result = call(
             "editMessageText",
             message_id=args.message_id,
-            rich_message=rich_payload(status_html(progress, title, detail)),
+            rich_message=rich_payload(
+                status_html(progress, title, detail, args.stage, args.total_stages)
+            ),
         )
         if rich_result is not None:
             return 0
