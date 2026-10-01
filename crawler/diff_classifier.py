@@ -123,8 +123,8 @@ def android_info(channel):
     return android.get("version_name"), android.get("version_code"), schema.get("layer")
 
 def android_previous_info(base,channel):
-    meta=parse_json(read_base(base,f"data/android/{channel}/metadata.json")) or {}
-    schema=parse_json(read_base(base,f"data/android/{channel}/main_api.json")) or {}
+    meta=parse_json(read_base(base,f"data/TgAndroid/{channel}/metadata.json")) or {}
+    schema=parse_json(read_base(base,f"data/TgAndroid/tl/{channel}/main_api.json")) or {}
     android=meta.get("android",{}) if isinstance(meta,dict) else {}
     return android.get("version_name"), android.get("version_code"), schema.get("layer")
 
