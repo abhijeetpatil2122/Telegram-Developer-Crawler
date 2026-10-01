@@ -30,6 +30,17 @@ def with_markdown_credit(text: str) -> str:
     return MARKDOWN_COMMENT + "\n" + text
 
 
+def with_xml_credit(text: str) -> str:
+    text = text.rstrip() + "\n"
+    comment = "<!-- " + PROJECT + " generated snapshot. " + COPYRIGHT + ". -->"
+    if comment in text:
+        return text
+    if text.startswith("<?xml") and "?>" in text:
+        i = text.index("?>") + 2
+        return text[:i] + "\n" + comment + text[i:]
+    return comment + "\n" + text
+
+
 def add_json_credit(value: dict) -> dict:
     result = dict(value)
     result.setdefault("_crawler", {})
