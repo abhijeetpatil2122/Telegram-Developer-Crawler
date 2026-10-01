@@ -68,6 +68,8 @@ def status_html(
     detail: str,
     stage: int | None = None,
     total_stages: int = TOTAL_STAGES,
+    crawl_number: str = "",
+    eta: str = "",
 ) -> str:
     """Render a compact live status using native Rich block HTML."""
     progress = max(0, min(100, progress))
@@ -75,23 +77,28 @@ def status_html(
     total_stages = max(1, total_stages)
     stage = max(1, min(stage, total_stages))
 
-    stage_label = f"Stage {stage}/{total_stages}"
+    stage_label = f"{stage}/{total_stages}"
     bar = _progress_bar(progress)
+    crawl_line = f"<p><b>Crawl</b> <code>#{html.escape(crawl_number)}</code></p>" if crawl_number else ""
+    eta_line = f"<p><b>Expected</b> <code>{html.escape(eta)}</code></p>" if eta else ""
 
     return (
         "<h2>⚙️ Telegram Developer Crawler</h2>"
-        "<p><b>Live crawl progress</b></p>"
+        crawl_line
+        "<p><b>Live crawl</b></p>"
         "<table compact striped>"
         "<tr><td><b>Progress</b></td><td><code>"
         f"{progress}%"
         "</code></td></tr>"
-        "<tr><td><b>Stage</b></td><td><code>"
+        "<tr><td><b>Step</b></td><td><code>"
         f"{stage_label}"
         "</code></td></tr>"
         "<tr><td><b>Status</b></td><td><code>"
         f"{html.escape(bar)}"
         "</code></td></tr>"
         "</table>"
+        "</table>"
+        eta_line
         "<hr/>"
         f"<h3>{html.escape(title)}</h3>"
         f"<blockquote>{html.escape(detail)}</blockquote>"
@@ -107,13 +114,17 @@ def status_html(
     )
 
 
-def status_fallback_html(progress: int, title: str, detail: str) -> str:
+def status_fallback_html(progress: int, title: str, detail: str, crawl_number: str = "", eta: str = "") -> str:
     """Safe legacy Bot API HTML fallback."""
     progress = max(0, min(100, progress))
     bar = _progress_bar(progress)
+    crawl = f"<b>Crawl:</b> #{html.escape(crawl_number)}\n" if crawl_number else ""
+    expected = f"<b>Expected:</b> {html.escape(eta)}\n" if eta else ""
     return (
         "<b>⚙️ Telegram Developer Crawler</b>\n"
-        f"<b>Progress:</b> <code>{progress}%</code> <code>{bar}</code>\n\n"
+        + crawl
+        + expected
+        + f"<b>Progress:</b> <code>{progress}%</code> <code>{bar}</code>\n\n"
         f"<b>{html.escape(title)}</b>\n"
         f"{html.escape(detail)}\n\n"
         "<i>Live crawl status • this message updates automatically.</i>"
@@ -186,6 +197,8 @@ def main() -> int:
     parser.add_argument("--progress", type=int, default=0)
     parser.add_argument("--stage", type=int)
     parser.add_argument("--total-stages", type=int, default=TOTAL_STAGES)
+    parser.add_argument("--crawl-number", default=os.environ.get("GITHUB_RUN_NUMBER", ""))
+    parser.add_argument("--eta", default="")
     parser.add_argument("--compare-url", default="")
     parser.add_argument("--commit-url", default="")
     args = parser.parse_args()
@@ -197,7 +210,7 @@ def main() -> int:
         result = call(
             "sendRichMessage",
             rich_message=rich_payload(
-                status_html(progress, title, detail, args.stage, args.total_stages)
+                status_html(progress, title, detail, args.stage, args.total_stages, args.crawl_number, args.eta)
             ),
         )
         if result:
@@ -206,7 +219,7 @@ def main() -> int:
 
         fallback = call(
             "sendMessage",
-            text=status_fallback_html(progress, title, detail),
+            text=status_fallback_html(progress, title, detail, args.crawl_number, args.eta),
             parse_mode="HTML",
             disable_web_page_preview="true",
         )
