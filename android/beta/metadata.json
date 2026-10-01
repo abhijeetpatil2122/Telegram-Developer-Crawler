@@ -1,0 +1,45 @@
+{
+  "_crawler": {
+    "copyright": "Copyright (C) 2026 Abhijeet Patil",
+    "generated_by": "Telegram Developer Crawler"
+  },
+  "android": {
+    "package": "org.telegram.messenger.beta",
+    "version_code": 71159,
+    "version_name": "12.10.7"
+  },
+  "artifact": {
+    "filename": "beta.apk",
+    "sha256": "0cfa61490e46fb5c6a91aa88fe96f5eaff0e2f0aab135804b2180b51176e3146",
+    "size": 64674836
+  },
+  "channel": "beta",
+  "extractor": {
+    "apktool_url": "https://bitbucket.org/iBotPeaches/apktool/downloads/apktool_2.12.1.jar",
+    "mode": "-s",
+    "tool": "apktool"
+  },
+  "resolved_url": "https://cdn4.telesco.pe/file/Telegram-Beta.apk",
+  "scope": [
+    "AndroidManifest.xml metadata",
+    "res/values/strings.xml",
+    "res/values/public.xml"
+  ],
+  "source_url": "https://telegram.org/dl/android/apk-public-beta",
+  "tl_extraction": {
+    "counts": {
+      "constructors": 1785,
+      "methods": 1086,
+      "total": 2871
+    },
+    "e2e_json": "e2e.json",
+    "e2e_tl": "e2e.tl",
+    "jadx": "https://github.com/skylot/jadx/releases/download/v1.5.6/jadx-1.5.6.zip",
+    "layer": 229,
+    "main_api_json": "main_api.json",
+    "main_api_tl": "main_api.tl",
+    "sha256": "65420aac30e4a338729111fa15bfc5ab00bdb12d709f0b110afa77cb93f60f81",
+    "stage": "5B",
+    "target_package": "org.telegram.tgnet"
+  }
+}

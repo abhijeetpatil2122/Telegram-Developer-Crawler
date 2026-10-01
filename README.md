@@ -1,31 +1,33 @@
 # Telegram Developer Crawler — data archive
 
-This branch is the generated data archive for the Telegram Developer Crawler.
-
-It is intentionally separate from main so consumers can inspect Telegram developer data without pulling crawler implementation, tests, workflow files or source manifests.
+This branch contains generated Telegram developer snapshots and their Git history.
 
 ## Current modules
 
-### MTProto
+- MTProto configuration: config, app-config, countries-list and global datasets.
+- MTProto/TL: official API and MTProto schemas.
+- TDLib: official td_api.tl and structured JSON.
+- Telegram Desktop: official API and MTProto schemas.
+- Android Stable: APK metadata/resources plus main API and E2E schemas.
+- Android Preview: APK metadata/resources plus main API and E2E schemas.
+- changes/: credited Stage 5C change reports generated only when a snapshot changes.
 
-- data/mtproto/config/ — help.getConfig server/MTProto configuration.
-- data/mtproto/app-config/ — help.getAppConfig client-specific application configuration.
-- data/mtproto/countries-list/ — help.getCountriesList country metadata.
-- data/mtproto/global/ — global datasets.
-- data/mtproto/tl/ — official API and MTProto TL schemas.
+## History and diffs
 
-### TDLib
+Git history is the historical database. Each crawler run compares the generated snapshot against the previous data commit before publishing.
 
-- data/tdlib/schema/ — official tdlib/td td_api.tl, structured JSON index and provenance metadata.
+Stage 5C classifies changes as additions, changes and deletions by module. The generated change report contains a unified diff whose every hunk is annotated with the crawler provenance marker.
 
-### Telegram Desktop
+The GitHub commit and compare URLs remain the canonical, unmodified source diff. The credited report is an additional attribution artifact and does not rewrite GitHub's native diff.
 
-- data/tdesktop/schema/ — official telegramdesktop/tdesktop api.tl and mtproto.tl, structured JSON indexes and provenance metadata.
-- api.tl and mtproto.tl are kept separate because they represent different schema layers used by Telegram Desktop.
+## Generated-file provenance
+
+Generated artifacts carry Telegram Developer Crawler provenance and Copyright (C) 2026 Abhijeet Patil.
+
+TL snapshots use a // file header. JSON snapshots use a _crawler provenance object. XML/Markdown artifacts use their native comment syntax.
 
 ## Directory structure
 
-```text
 data/
 ├── mtproto/
 │   ├── config/
@@ -33,39 +35,11 @@ data/
 │   ├── countries-list/
 │   ├── global/
 │   └── tl/
-├── tdlib/
-│   └── schema/
-└── tdesktop/
-    └── schema/
-        ├── api.tl
-        ├── api.json
-        ├── api-metadata.json
-        ├── mtproto.tl
-        ├── mtproto.json
-        ├── mtproto-metadata.json
-        └── metadata.json
-```
+├── tdlib/schema/
+├── tdesktop/schema/
+└── android/
+    ├── stable/
+    ├── beta/
+    └── metadata.json
 
-The data branch is generated. Do not edit snapshots manually; changes to collection logic belong on main.
-
-## How history works
-
-Git history is the historical database for this project.
-
-A scheduled/manual crawler run:
-1. fetches current Telegram data;
-2. normalizes deterministic fields;
-3. validates the new snapshot against the previous snapshot;
-4. publishes changed data to this branch;
-5. records the change as a Git commit.
-
-A schema change can therefore be inspected through the exact file diff and commit history.
-
-## Safety
-
-The collectors use structural guards to reject suspicious mass disappearance from a source. Schema collectors currently apply a 10% maximum disappearance threshold.
-
-## Relationship to main
-
-- main = crawler implementation, source definitions, tests and GitHub Actions.
-- data = normalized generated snapshots and Git history.
+The crawler also writes data/changes/<timestamp>-change-report.md when a run changes generated data.

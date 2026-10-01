@@ -1,0 +1,27 @@
+{
+  "_crawler": {
+    "copyright": "Copyright (C) 2026 Abhijeet Patil",
+    "generated_by": "Telegram Developer Crawler"
+  },
+  "counts": {
+    "constructors": 1658,
+    "functions": 813,
+    "total": 2471
+  },
+  "safety": {
+    "max_definition_removal_ratio": 0.1
+  },
+  "sha256": {
+    "json": "182d9a2421595686519e32eb29e58f0e1ff15547806565b76462145a534f70f9",
+    "tl": "d60601c5bc291504167ad8f504dcc38408701a57981e8654c2700297a1d7dced"
+  },
+  "source": "https://raw.githubusercontent.com/telegramdesktop/tdesktop/dev/Telegram/SourceFiles/mtproto/scheme/api.tl",
+  "source_path": "Telegram/SourceFiles/mtproto/scheme/api.tl",
+  "source_repository": "https://github.com/telegramdesktop/tdesktop",
+  "upstream": {
+    "branch": "dev",
+    "commit": "8c0d1e5691a28637ee99084662f49c4ca0254e24",
+    "commit_url": "https://github.com/telegramdesktop/tdesktop/commit/8c0d1e5691a28637ee99084662f49c4ca0254e24",
+    "message": "Build dependencies with 26.6 toolchain."
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "_crawler": {
+    "copyright": "Copyright (C) 2026 Abhijeet Patil",
+    "generated_by": "Telegram Developer Crawler"
+  },
+  "api": {
+    "constructors": 1573,
+    "layer": null,
+    "methods": 783,
+    "sha256_json": "9063b23f6eae38b0130c5684767f19a5762f3819a78481c529436612b127292e",
+    "sha256_tl": "d9886ec668c26da0882718a126708efe92d449e0d10a77539fde6cae85fbe7cc"
+  },
+  "mtproto": {
+    "constructors": 38,
+    "methods": 10,
+    "sha256_json": "09dba8c221f34d42c5f4dc629593b8a7328b7b8f3fa6b2911b96935a0e03fca1",
+    "sha256_tl": "fc64850044435c5d031092033d01d8ed9e7100e5ef36b5ee06833d3018ba0ef3"
+  },
+  "safety": {
+    "max_object_removal_ratio": 0.1
+  },
+  "sources": {
+    "api_json": "https://core.telegram.org/schema/json",
+    "api_tl": "https://core.telegram.org/schema",
+    "mtproto_json": "https://core.telegram.org/schema/mtproto-json",
+    "mtproto_tl": "https://core.telegram.org/schema/mtproto"
+  }
+}
