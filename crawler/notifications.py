@@ -85,11 +85,13 @@ def main() -> int:
         return 0
 
     if args.action == "notify":
+        if not os.environ.get("TG_BOT_TOKEN"):
+            return 0
         html = final_html(args.text, args.compare_url, args.commit_url)
         result = call("sendRichMessage", rich_message=rich_payload(html))
         return 0 if result is not None else 1
 
-    if not args.message_id:
+    if not args.message_id or not os.environ.get("TG_BOT_TOKEN"):
         return 0
 
     if args.action == "update":
