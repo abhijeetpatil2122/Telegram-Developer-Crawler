@@ -20,7 +20,7 @@ from typing import Any
 
 import httpx
 
-from crawler.credits import add_json_credit, with_tl_credit
+from crawler.credits import add_json_credit, with_tl_credit, with_xml_credit
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA_ROOT = ROOT / "data" / "android"
@@ -195,6 +195,12 @@ async def collect_one(
     for path in resources.iterdir():
         if path.name not in {"strings.xml", "public.xml"}:
             path.unlink()
+    for name in ("strings.xml", "public.xml"):
+        resource_path = resources / name
+        resource_path.write_text(
+            with_xml_credit(resource_path.read_text(encoding="utf-8")),
+            encoding="utf-8",
+        )
 
     metadata = {
         "channel": channel,
