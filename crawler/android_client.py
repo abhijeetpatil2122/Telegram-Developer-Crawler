@@ -23,7 +23,7 @@ import httpx
 from crawler.credits import with_tl_credit, with_xml_credit
 
 ROOT = Path(__file__).resolve().parents[1]
-DATA_ROOT = ROOT / "data" / "android"
+DATA_ROOT = ROOT / "data" / "TgAndroid"
 APKTOOL_URL = os.environ.get(
     "ANDROID_APKTOOL_URL",
     "https://bitbucket.org/iBotPeaches/apktool/downloads/apktool_2.12.1.jar",
