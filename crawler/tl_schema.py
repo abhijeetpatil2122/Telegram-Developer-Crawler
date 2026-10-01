@@ -262,13 +262,13 @@ def collect() -> None:
             "layer": api_json.get("layer"),
             "constructors": len(api_json.get("constructors", [])),
             "methods": len(api_json.get("methods", [])),
-            "sha256_tl": sha256_text(api_tl),
+            "sha256_tl": sha256_text(with_tl_credit(api_tl)),
             "sha256_json": sha256_text(render_json(api_json)),
         },
         "mtproto": {
             "constructors": len(mtproto_json.get("constructors", [])),
             "methods": len(mtproto_json.get("methods", [])),
-            "sha256_tl": sha256_text(mtproto_tl),
+            "sha256_tl": sha256_text(with_tl_credit(mtproto_tl)),
             "sha256_json": sha256_text(render_json(mtproto_json)),
         },
         "safety": {
