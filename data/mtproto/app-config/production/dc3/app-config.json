@@ -27,31 +27,31 @@
           "value": [
             {
               "_": "JsonString",
-              "value": "\ud83c\udfb2"
+              "value": "🎲"
             },
             {
               "_": "JsonString",
-              "value": "\ud83c\udfaf"
+              "value": "🎯"
             },
             {
               "_": "JsonString",
-              "value": "\ud83c\udfc0"
+              "value": "🏀"
             },
             {
               "_": "JsonString",
-              "value": "\u26bd"
+              "value": "⚽"
             },
             {
               "_": "JsonString",
-              "value": "\u26bd\ufe0f"
+              "value": "⚽️"
             },
             {
               "_": "JsonString",
-              "value": "\ud83c\udfb0"
+              "value": "🎰"
             },
             {
               "_": "JsonString",
-              "value": "\ud83c\udfb3"
+              "value": "🎳"
             }
           ]
         }
@@ -64,7 +64,7 @@
           "value": [
             {
               "_": "JsonObjectValue",
-              "key": "\ud83c\udfaf",
+              "key": "🎯",
               "value": {
                 "_": "JsonObject",
                 "value": [
@@ -89,7 +89,7 @@
             },
             {
               "_": "JsonObjectValue",
-              "key": "\ud83c\udfc0",
+              "key": "🏀",
               "value": {
                 "_": "JsonObject",
                 "value": [
@@ -114,7 +114,7 @@
             },
             {
               "_": "JsonObjectValue",
-              "key": "\u26bd",
+              "key": "⚽",
               "value": {
                 "_": "JsonObject",
                 "value": [
@@ -139,7 +139,7 @@
             },
             {
               "_": "JsonObjectValue",
-              "key": "\u26bd\ufe0f",
+              "key": "⚽️",
               "value": {
                 "_": "JsonObject",
                 "value": [
@@ -164,7 +164,7 @@
             },
             {
               "_": "JsonObjectValue",
-              "key": "\ud83c\udfb0",
+              "key": "🎰",
               "value": {
                 "_": "JsonObject",
                 "value": [
@@ -189,7 +189,7 @@
             },
             {
               "_": "JsonObjectValue",
-              "key": "\ud83c\udfb3",
+              "key": "🎳",
               "value": {
                 "_": "JsonObject",
                 "value": [
@@ -231,43 +231,43 @@
           "value": [
             {
               "_": "JsonString",
-              "value": "\ud83d\udc4d"
+              "value": "👍"
             },
             {
               "_": "JsonString",
-              "value": "\ud83d\ude18"
+              "value": "😘"
             },
             {
               "_": "JsonString",
-              "value": "\ud83d\ude0d"
+              "value": "😍"
             },
             {
               "_": "JsonString",
-              "value": "\ud83d\ude21"
+              "value": "😡"
             },
             {
               "_": "JsonString",
-              "value": "\ud83e\udd73"
+              "value": "🥳"
             },
             {
               "_": "JsonString",
-              "value": "\ud83d\ude02"
+              "value": "😂"
             },
             {
               "_": "JsonString",
-              "value": "\ud83d\ude2e"
+              "value": "😮"
             },
             {
               "_": "JsonString",
-              "value": "\ud83d\ude44"
+              "value": "🙄"
             },
             {
               "_": "JsonString",
-              "value": "\ud83d\ude0e"
+              "value": "😎"
             },
             {
               "_": "JsonString",
-              "value": "\ud83d\udc4e"
+              "value": "👎"
             }
           ]
         }
@@ -1463,7 +1463,7 @@
         "key": "ton_usd_rate",
         "value": {
           "_": "JsonNumber",
-          "value": 1.5195240955807618
+          "value": 1.5160106723940356
         }
       },
       {

@@ -1,8 +1,4 @@
 {
-  "_crawler": {
-    "copyright": "Copyright (C) 2026 Abhijeet Patil",
-    "generated_by": "Telegram Developer Crawler"
-  },
   "counts": {
     "constructors": 59,
     "functions": 10,
@@ -12,7 +8,7 @@
     "max_definition_removal_ratio": 0.1
   },
   "sha256": {
-    "json": "43ad282d33ff28607d4cca9e18a0cd10d1af2d5439d5174248c5612f30a0b63d",
+    "json": "7e7afc83d285d0e2f9b1cd269b1f1f2b7280a784972d119dc3403aebef7255cc",
     "tl": "e4559ec7bf3a6af38818d9eaca29e2eb2ba33e04d7d3234bb30f9c9acb73fbac"
   },
   "source": "https://raw.githubusercontent.com/telegramdesktop/tdesktop/dev/Telegram/SourceFiles/mtproto/scheme/mtproto.tl",
