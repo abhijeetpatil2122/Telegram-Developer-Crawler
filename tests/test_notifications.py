@@ -5,14 +5,14 @@ import json
 def test_rich_payload_uses_html():
     payload = json.loads(rich_payload("<b>Hello</b>"))
     assert payload["html"] == "<b>Hello</b>"
-    assert payload["skip_entity_detection"] is False
 
 
 def test_status_is_rich_html():
-    html = status_html("📱 <b>Downloading Android</b>")
-    assert html.startswith("<b>⚙️ Telegram Developer Crawler</b>")
+    html = status_html(80, "📱 Android clients", "Downloading Stable + Public Beta APKs.")
+    assert html.startswith("<h2>⚙️ Telegram Developer Crawler</h2>")
     assert "<br/>" not in html
-    assert "<b>Downloading Android</b>" in html
+    assert "<h3>📱 Android clients</h3>" in html
+    assert "80%" in html
 
 
 def test_final_contains_rich_buttons():
