@@ -143,3 +143,22 @@ def test_canonicalize_current_definition():
     assert normalized["name"] == "auth.authorization"
     assert normalized["type"] == "auth.Authorization"
     assert normalized["params"] == [{"name": "user", "type": "User"}]
+
+
+def test_merge_upstream_api_prefers_android_definition():
+    from crawler.android_tl import merge_upstream_api
+
+    upstream = [{"kind": "constructor", "name": "user", "id": 1, "type": "User", "params": [], "source": "upstream"}]
+    android = [{"kind": "constructor", "name": "user", "id": 1, "type": "User", "params": [{"name": "id", "type": "long"}], "source": "android"}]
+    merged = merge_upstream_api(android, upstream)
+    assert len(merged) == 1
+    assert merged[0]["source"] == "android"
+
+
+def test_merge_upstream_api_keeps_android_additions():
+    from crawler.android_tl import merge_upstream_api
+
+    upstream = [{"kind": "constructor", "name": "user", "id": 1, "type": "User", "params": [], "source": "upstream"}]
+    android = [{"kind": "constructor", "name": "newThing", "id": 2, "type": "NewThing", "params": [], "source": "android"}]
+    merged = merge_upstream_api(android, upstream)
+    assert {x["name"] for x in merged} == {"user", "newThing"}
