@@ -20,6 +20,8 @@ from typing import Any
 
 import httpx
 
+from crawler.credits import add_json_credit, with_tl_credit
+
 ROOT = Path(__file__).resolve().parents[1]
 DATA_ROOT = ROOT / "data" / "tdlib" / "schema"
 
@@ -39,7 +41,7 @@ def normalize_tl(value: str) -> str:
 
 
 def render_json(value: Any) -> str:
-    return json.dumps(value, indent=2, ensure_ascii=False, sort_keys=True) + "\n"
+    return json.dumps(add_json_credit(value) if isinstance(value, dict) else value, indent=2, ensure_ascii=False, sort_keys=True) + "\n"
 
 
 def parse_definitions(value: str) -> list[dict[str, Any]]:
@@ -158,7 +160,7 @@ def collect() -> None:
     validate_schema(previous_definitions, definitions)
 
     DATA_ROOT.mkdir(parents=True, exist_ok=True)
-    (DATA_ROOT / "td_api.tl").write_text(source, encoding="utf-8")
+    (DATA_ROOT / "td_api.tl").write_text(with_tl_credit(source), encoding="utf-8")
 
     structured = {
         "source": TDLIB_TL_URL,
