@@ -63,6 +63,9 @@ jobs:
         run: cp crawler/notifications.py /tmp/telegram-developer-notifications.py
 
       - name: Start Telegram crawl status
+        env:
+          TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
+          TG_ALERT_CHAT_ID: ${{ secrets.TG_ALERT_CHAT_ID }}
         run: |
           id="$(python -m crawler.notifications start --progress 10 --title "🚀 Starting crawl" --detail "Preparing all Telegram developer data collectors.")
           if [ -n "$id" ]; then
