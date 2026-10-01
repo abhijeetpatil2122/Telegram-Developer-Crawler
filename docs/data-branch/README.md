@@ -1,45 +1,27 @@
 # Telegram Developer Crawler — data archive
 
-This branch contains generated Telegram developer snapshots and their Git history.
+This branch contains generated Telegram developer snapshots. Git history is the historical source of truth for changes; no change-report directory is stored in the data branch.
 
-## Current modules
+## Current layout
 
-- MTProto configuration: config, app-config, countries-list and global datasets.
-- MTProto/TL: official API and MTProto schemas.
-- TDLib: official td_api.tl and structured JSON.
-- Telegram Desktop: official API and MTProto schemas.
-- Android Stable: APK metadata/resources plus main API and E2E schemas.
-- Android Preview: APK metadata/resources plus main API and E2E schemas.
-- changes/: credited Stage 5C change reports generated only when a snapshot changes.
+- `mtproto/configs/` — production/test MTProto configuration snapshots.
+- `mtproto/app-config/` — production/test application configuration.
+- `mtproto/countries-list/` — production/test country lists.
+- `mtproto/global/` — global MTProto datasets.
+- `mtproto/tl/` — official API and MTProto TL/JSON schemas.
+- `tdlib/tl/` — TDLib schema.
+- `tdesktop/tl/` — Telegram Desktop API and MTProto schemas.
+- `TgAndroid/` — Android Stable/Preview APK metadata and selected resources.
+- `TgAndroid/tl/` — canonical Android Stable/Preview main API and E2E schemas.
+
+## Provenance
+
+- TL files use native `//` comments.
+- XML files use native XML comments.
+- Markdown files use native HTML comments.
+- JSON snapshots remain untouched valid JSON; they contain no injected crawler credit field.
+- Credited diffs are generated separately by Stage 5C and are not committed into this branch.
 
 ## History and diffs
 
-Git history is the historical database. Each crawler run compares the generated snapshot against the previous data commit before publishing.
-
-Stage 5C classifies changes as additions, changes and deletions by module. The generated change report contains a unified diff whose every hunk is annotated with the crawler provenance marker.
-
-The GitHub commit and compare URLs remain the canonical, unmodified source diff. The credited report is an additional attribution artifact and does not rewrite GitHub's native diff.
-
-## Generated-file provenance
-
-Generated artifacts carry Telegram Developer Crawler provenance and Copyright (C) 2026 Abhijeet Patil.
-
-TL snapshots use a // file header. JSON snapshots remain untouched valid JSON because JSON has no standard comment syntax; provenance is carried by crawler documentation and credited change reports. XML/Markdown artifacts use their native comment syntax.
-
-## Directory structure
-
-data/
-├── mtproto/
-│   ├── config/
-│   ├── app-config/
-│   ├── countries-list/
-│   ├── global/
-│   └── tl/
-├── tdlib/schema/
-├── tdesktop/schema/
-└── android/
-    ├── stable/
-    ├── beta/
-    └── metadata.json
-
-The crawler also writes data/changes/<timestamp>-change-report.md when a run changes generated data.
+Git history and GitHub compare views remain the canonical source for exact snapshot changes. Stage 5C classifies additions, changes and deletions before the final Telegram notification; its credited diff is an attribution layer and never modifies generated source files.
