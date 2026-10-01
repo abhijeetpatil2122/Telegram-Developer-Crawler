@@ -547,7 +547,7 @@ def to_tl(definitions: list[dict[str, Any]], layer: int | None) -> str:
 
 
 def find_previous(channel: str) -> dict[str, Any] | None:
-    path = DATA_ROOT / channel / "tl.json"
+    path = DATA_ROOT / channel / "main_api.json"
     if not path.exists():
         return None
     try:
