@@ -78,7 +78,7 @@ def normalize_json(value: Any) -> Any:
 
 def render_json(value: Any) -> str:
     return json.dumps(
-        normalize_json(value),
+        add_json_credit(normalize_json(value)) if isinstance(value, dict) else normalize_json(value),
         indent=2,
         ensure_ascii=False,
         sort_keys=True,
@@ -246,9 +246,9 @@ def collect() -> None:
         required_markers=("---functions---", "resPQ#"),
     )
 
-    write_text(api_tl_path, api_tl)
+    write_text(api_tl_path, with_tl_credit(api_tl))
     write_text(api_json_path, render_json(api_json))
-    write_text(mtproto_tl_path, mtproto_tl)
+    write_text(mtproto_tl_path, with_tl_credit(mtproto_tl))
     write_text(mtproto_json_path, render_json(mtproto_json))
 
     metadata = {
