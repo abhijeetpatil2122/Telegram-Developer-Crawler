@@ -16,8 +16,8 @@
   "source_repository": "https://github.com/telegramdesktop/tdesktop",
   "upstream": {
     "branch": "dev",
-    "commit": "12302ec71a4f9da23b5266a06a2d5994b6156bd2",
-    "commit_url": "https://github.com/telegramdesktop/tdesktop/commit/12302ec71a4f9da23b5266a06a2d5994b6156bd2",
-    "message": "Check staged Updater copy completion before removal"
+    "commit": "33261535a0e747f125e0ed25486f01e556330677",
+    "commit_url": "https://github.com/telegramdesktop/tdesktop/commit/33261535a0e747f125e0ed25486f01e556330677",
+    "message": "Open My Profile from the My Account settings entry"
   }
 }
