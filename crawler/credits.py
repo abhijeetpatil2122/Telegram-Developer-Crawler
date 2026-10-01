@@ -42,15 +42,13 @@ def with_xml_credit(text: str) -> str:
 
 
 def add_json_credit(value: dict) -> dict:
-    result = dict(value)
-    result.setdefault("_crawler", {})
-    result["_crawler"] = {
-        "generated_by": PROJECT,
-        "copyright": COPYRIGHT,
-        **result["_crawler"],
-    }
-    return result
+    """Return JSON data unchanged.
 
+    JSON has no standard comment syntax. Generated JSON must remain valid
+    upstream-compatible JSON, so provenance is kept in crawler documentation
+    and credited change artifacts instead of being injected into the payload.
+    """
+    return value
 
 def credit_diff(diff: str, comment: str | None = None) -> str:
     """Annotate every diff hunk with provenance without changing source files."""
