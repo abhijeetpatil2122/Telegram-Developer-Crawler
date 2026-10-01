@@ -289,13 +289,13 @@ def notification(summary, base):
             )
         else:
             lines.append(
-                f"📦 <b>{module}</b><br/>"
+                f"📦 <b>{module}</b>\n"
                 f"➕ Added: <b>{g['additions']}</b>  "
                 f"✏️ Changed: <b>{g['changes']}</b>  "
                 f"➖ Removed: <b>{g['deletions']}</b>"
             )
         lines.append("")
-    return "<br/>".join(lines).rstrip()
+    return "\n".join(lines).rstrip()
 
 
 def main():
