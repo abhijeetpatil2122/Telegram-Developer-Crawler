@@ -83,8 +83,8 @@ def status_html(
     eta_line = f"<p><b>Expected</b> <code>{html.escape(eta)}</code></p>" if eta else ""
 
     return (
+        crawl_line +
         "<h2>⚙️ Telegram Developer Crawler</h2>"
-        crawl_line
         "<p><b>Live crawl</b></p>"
         "<table compact striped>"
         "<tr><td><b>Progress</b></td><td><code>"
@@ -97,8 +97,8 @@ def status_html(
         f"{html.escape(bar)}"
         "</code></td></tr>"
         "</table>"
-        eta_line
-        "<hr/>"
+        + eta_line
+        + "<hr/>"
         f"<h3>{html.escape(title)}</h3>"
         f"<blockquote>{html.escape(detail)}</blockquote>"
         "<details>"
