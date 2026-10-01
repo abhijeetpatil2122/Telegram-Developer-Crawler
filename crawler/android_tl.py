@@ -616,7 +616,7 @@ def run_jadx(jadx_bin: Path, apk: Path, output: Path) -> None:
 
 
 def extract_channel(channel: str, jadx_bin: Path) -> dict[str, Any]:
-    metadata_path = DATA_ROOT / channel / "metadata.json"
+    metadata_path = ROOT / "data" / "TgAndroid" / channel / "metadata.json"
     metadata = json.loads(metadata_path.read_text(encoding="utf-8"))
     apk_url = metadata["source_url"]
     with tempfile.TemporaryDirectory(prefix=f"tdc-android-tl-{channel}-") as temp:
