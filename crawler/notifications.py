@@ -45,7 +45,7 @@ def rich_payload(html: str) -> str:
 
 
 def status_html(text: str) -> str:
-    return f"<b>⚙️ Telegram Developer Crawler</b><br/><br/>{text}"
+    return f"<b>⚙️ Telegram Developer Crawler</b>\\n\\n{text}"
 
 
 def final_html(text: str, compare_url: str, commit_url: str) -> str:
@@ -62,7 +62,7 @@ def final_html(text: str, compare_url: str, commit_url: str) -> str:
     buttons.append(
         '<tg-button type="url" style="link" url="https://github.com/abhijeetpatil2122/Telegram-Developer-Crawler/tree/data">Data Snapshot</tg-button>'
     )
-    return html + "<br/><br/><tg-button-row>" + "".join(buttons) + "</tg-button-row>"
+    return html + "\\n\\n<tg-button-row>" + "".join(buttons) + "</tg-button-row>"
 
 
 def main() -> int:
