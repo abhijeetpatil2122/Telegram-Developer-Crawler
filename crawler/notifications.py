@@ -36,7 +36,7 @@ def main() -> int:
         text=args.text or "🛠️ Telegram Developer Crawler\n\nA new developer-data snapshot is available."
         if args.compare_url: text += f"\n\n🔗 Full Changelog: {args.compare_url}"
         if args.commit_url: text += f"\n🧾 Commit / Diff: {args.commit_url}"
-        call("sendMessage",text=text,disable_web_page_preview=False)
+        call("sendMessage",text=text,parse_mode="HTML",disable_web_page_preview=False)
         return 0
     if not args.message_id: return 0
     if args.action=="update":
