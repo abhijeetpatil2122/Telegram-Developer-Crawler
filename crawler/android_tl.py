@@ -22,7 +22,7 @@ import httpx
 from crawler.credits import with_tl_credit
 
 ROOT = Path(__file__).resolve().parents[1]
-DATA_ROOT = ROOT / "data" / "android"
+DATA_ROOT = ROOT / "data" / "TgAndroid"
 E2E_TL_URL = "https://core.telegram.org/schema/end-to-end"
 E2E_JSON_URL = "https://core.telegram.org/schema/end-to-end-json"
 API_JSON_URL = "https://core.telegram.org/schema/json"
