@@ -19,8 +19,13 @@ from typing import Any
 
 import httpx
 
+from crawler.credits import add_json_credit, with_tl_credit
+
 ROOT = Path(__file__).resolve().parents[1]
 DATA_ROOT = ROOT / "data" / "android"
+E2E_TL_URL = "https://core.telegram.org/schema/end-to-end"
+E2E_JSON_URL = "https://core.telegram.org/schema/end-to-end-json"
+
 JADX_URL = os.environ.get(
     "ANDROID_JADX_URL",
     "https://github.com/skylot/jadx/releases/download/v1.5.6/jadx-1.5.6.zip",
@@ -162,7 +167,32 @@ OBJECT_WRITE_RE = re.compile(
 )
 
 def render_json(value: Any) -> str:
+    if isinstance(value, dict):
+        value = add_json_credit(value)
     return json.dumps(value, indent=2, ensure_ascii=False, sort_keys=True) + "\n"
+
+
+def fetch_e2e_schema() -> dict[str, Any]:
+    with httpx.Client(timeout=30.0, follow_redirects=True, headers={"User-Agent": "Telegram-Developer-Crawler/0.1"}) as client:
+        response = client.get(E2E_JSON_URL)
+        response.raise_for_status()
+        return response.json()
+
+
+def render_e2e_tl(value: dict[str, Any]) -> str:
+    grouped: dict[str, list[dict[str, Any]]] = {}
+    for item in value.get("constructors", []):
+        grouped.setdefault(item["predicate"], []).append(item)
+    lines = ["///////////////////////////////", "// Telegram E2E API", "///////////////////////////////", "", "---types---"]
+    for predicate in sorted(grouped):
+        variants = sorted(grouped[predicate], key=lambda x: int(x.get("layer", 0)))
+        for item in variants:
+            name = predicate if len(variants) == 1 else f"{predicate}_{item.get('layer', 0)}"
+            cid = int(item["id"]) & 0xffffffff
+            params = " ".join(f"{p['name']}:{p['type']}" for p in item.get("params", []))
+            suffix = f" {params}" if params else ""
+            lines.append(f"{name}#{cid:08x}{suffix} = {item['type']};")
+    return with_tl_credit(normalize_tl("\n".join(lines)))
 
 
 def sha256_text(value: str) -> str:
