@@ -24,7 +24,7 @@ def test_final_contains_rich_buttons():
         "https://github.com/example/compare/a...b",
         "https://github.com/example/commit/b",
     )
-    assert "<tg-button-row>" in html
+    assert "<tg-button-row align="center">" in html
     assert 'type="url"' in html
     assert "Full Changelog" in html
     assert "Commit" in html
