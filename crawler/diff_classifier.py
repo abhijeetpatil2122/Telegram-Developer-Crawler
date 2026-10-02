@@ -201,7 +201,12 @@ def semantic_json_for_notification(path: str, old_text: str | None, new_text: st
     if old is None or new is None:
         return semantic_json(old_text, new_text)
     ignored = notification_ignored_paths(path)
-    config_noise = path.startswith("mtproto/")
+    config_noise = path.startswith((
+        "mtproto/configs/",
+        "mtproto/app-config/",
+        "mtproto/countries-list/",
+        "mtproto/global/",
+    ))
     if ignored or config_noise:
         old = remove_json_paths(old, ignored, config_noise=config_noise)
         new = remove_json_paths(new, ignored, config_noise=config_noise)
