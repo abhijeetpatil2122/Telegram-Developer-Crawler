@@ -1,11 +1,11 @@
-"""Compact Telegram Rich Message notifications for the developer crawler."""
+"""Telegram Rich Message notifications for the developer crawler."""
 from __future__ import annotations
 
 import argparse
 import html
 import json
-import re
 import os
+import re
 import sys
 
 import httpx
@@ -45,10 +45,10 @@ def call(method: str, **payload):
     return data["result"]
 
 
-def rich_payload(blocks: list[dict]) -> str:
-    """Serialize explicit InputRichMessage blocks."""
+def rich_payload(html_text: str) -> str:
+    """Serialize InputRichMessage using Telegram's native Rich HTML mode."""
     return json.dumps(
-        {"blocks": blocks},
+        {"html": html_text},
         ensure_ascii=False,
         separators=(",", ":"),
     )
@@ -60,23 +60,7 @@ def _progress_bar(progress: int, width: int = 10) -> str:
     return "▰" * filled + "▱" * (width - filled)
 
 
-def _paragraph(text: str) -> dict:
-    return {"type": "paragraph", "text": text}
-
-
-def _heading(text: str, size: int = 4) -> dict:
-    return {"type": "heading", "size": size, "text": text}
-
-
-def _blockquote(text: str) -> dict:
-    return {"type": "blockquote", "blocks": [_paragraph(text)]}
-
-
-def _button(text: str, url: str, style: str = "primary") -> dict:
-    return {"text": text, "style": style, "url": url}
-
-
-def status_blocks(
+def status_html(
     progress: int,
     title: str,
     detail: str,
@@ -84,79 +68,58 @@ def status_blocks(
     total_stages: int = TOTAL_STAGES,
     crawl_number: str = "",
     eta: str = "",
-) -> list[dict]:
+) -> str:
     progress = max(0, min(100, progress))
-    stage = max(1, min(stage or 1, max(1, total_stages)))
     total_stages = max(1, total_stages)
+    stage = max(1, min(stage or 1, total_stages))
+    crawl = f"  •  #{html.escape(str(crawl_number))}" if crawl_number else ""
+    eta_html = f"  •  ETA <code>{html.escape(eta)}</code>" if eta else ""
 
-    header = "⚙️ Telegram Developer Crawler"
-    if crawl_number:
-        header += f"  •  #{crawl_number}"
-
-    blocks = [
-        _heading(header, 4),
-        _paragraph(
-            f"<b>{progress}%</b>  <code>{_progress_bar(progress)}</code>  "
-            f"•  Step <b>{stage}/{total_stages}</b>"
-            + (f"  •  ETA <code>{html.escape(eta)}</code>" if eta else "")
-        ),
-        _heading(title, 5),
-        _blockquote(detail),
-    ]
-    return blocks
+    return (
+        "<h2>⚙️ Telegram Developer Crawler"
+        f"{crawl}</h2>"
+        "<table compact striped>"
+        "<tr><th>Progress</th><th>Stage</th></tr>"
+        f"<tr><td><b>{progress}%</b> <code>{_progress_bar(progress)}</code></td>"
+        f"<td><b>{stage}/{total_stages}</b>{eta_html}</td></tr>"
+        "</table>"
+        f"<h3>{html.escape(title)}</h3>"
+        f"<blockquote>{html.escape(detail)}</blockquote>"
+    )
 
 
-def final_blocks(text: str, compare_url: str, commit_url: str) -> list[dict]:
-    """Build a compact permanent change post from the classifier's HTML summary."""
+def final_html(text: str, compare_url: str, commit_url: str) -> str:
+    """Convert the classifier's HTML summary into a native Rich HTML post."""
     raw = html.unescape(text or "")
-    raw = re.sub(r"<br\s*/?>", "\n", raw, flags=re.I)
-    raw = re.sub(r"</(?:p|li|h[1-6])>", "\n", raw, flags=re.I)
-    raw = re.sub(r"<[^>]+>", "", raw)
-    lines = [html.unescape(x).strip() for x in raw.splitlines() if x.strip()]
+    raw = re.sub(r"<hr\s*/?>", "", raw, flags=re.I)
+    raw = re.sub(r"</?(?:p|ul|li)>", lambda m: m.group(0), raw, flags=re.I)
 
-    blocks = [
-        _heading("📣 Telegram Developer Update", 4),
-        _paragraph("New developer-facing changes were detected."),
-    ]
-
-    current: list[str] = []
-    for line in lines:
-        if line.startswith(("📦 ", "📱 ", "🧩 ")):
-            if current:
-                blocks.append({"type": "list", "items": [
-                    {"blocks": [_paragraph(item)]} for item in current
-                ]})
-                current = []
-            blocks.append(_heading(line, 5))
-        elif line.startswith((
-            "➕ ", "✏️ ", "➖ ", "📄 ", "🏷️ ", "#Android", "#Stable", "#Preview"
-        )):
-            current.append(line)
-        elif line not in {
-            "📣 Developer data changed",
-            "A new Telegram developer-data snapshot contains meaningful changes.",
-        }:
-            current.append(line)
-
-    if current:
-        blocks.append({"type": "list", "items": [
-            {"blocks": [_paragraph(item)]} for item in current
-        ]})
+    # The classifier already emits safe, intentionally formatted HTML. Strip
+    # only tags which are not part of the Rich HTML vocabulary we use below.
+    raw = re.sub(r"<h[1-6]>", "<h3>", raw, flags=re.I)
+    raw = re.sub(r"</h[1-6]>", "</h3>", raw, flags=re.I)
 
     buttons = []
     if compare_url:
-        buttons.append(_button("Full Changelog", compare_url, "primary"))
-    if commit_url:
-        buttons.append(_button("Snapshot Commit", commit_url, "success"))
-    buttons.append(
-        _button(
-            "Data Snapshot",
-            "https://github.com/abhijeetpatil2122/Telegram-Developer-Crawler/tree/data",
-            "link",
+        buttons.append(
+            f'<tg-button type="url" style="primary" url="{html.escape(compare_url, quote=True)}">Full Changelog</tg-button>'
         )
+    if commit_url:
+        buttons.append(
+            f'<tg-button type="url" style="success" url="{html.escape(commit_url, quote=True)}">Snapshot Commit</tg-button>'
+        )
+    buttons.append(
+        '<tg-button type="url" style="link" url="https://github.com/abhijeetpatil2122/Telegram-Developer-Crawler/tree/data">Data Snapshot</tg-button>'
     )
-    blocks.append({"type": "buttons", "align": "center", "buttons": buttons})
-    return blocks
+
+    return (
+        "<h2>📣 Telegram Developer Update</h2>"
+        "<p>New developer-facing changes were detected.</p>"
+        f"{raw}"
+        '<tg-button-row align="center">'
+        + "".join(buttons)
+        + "</tg-button-row>"
+    )
 
 
 def main() -> int:
@@ -179,7 +142,7 @@ def main() -> int:
         result = call(
             "sendRichMessage",
             rich_message=rich_payload(
-                status_blocks(
+                status_html(
                     args.progress or 5,
                     args.title or "🚀 Starting crawl",
                     args.detail or "Preparing Telegram developer data collectors.",
@@ -198,7 +161,7 @@ def main() -> int:
         result = call(
             "sendRichMessage",
             rich_message=rich_payload(
-                final_blocks(args.text, args.compare_url, args.commit_url)
+                final_html(args.text, args.compare_url, args.commit_url)
             ),
         )
         return 0 if result is not None else 0
@@ -211,7 +174,7 @@ def main() -> int:
             "editMessageText",
             message_id=args.message_id,
             rich_message=rich_payload(
-                status_blocks(
+                status_html(
                     args.progress,
                     args.title or "Updating",
                     args.detail,
