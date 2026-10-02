@@ -47,7 +47,6 @@ jobs:
         env:
           TG_API_ID: ${{ secrets.TG_API_ID }}
           TG_API_HASH: ${{ secrets.TG_API_HASH }}
-          TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
         run: |
           set -euo pipefail
           missing=0
@@ -67,11 +66,8 @@ jobs:
           TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
           TG_ALERT_CHAT_ID: ${{ secrets.TG_ALERT_CHAT_ID }}
         run: |
-          python -m crawler.notifications start \
-            --progress 5 --stage 1 --total-stages 7 \
-            --crawl-number "$GITHUB_RUN_NUMBER" --eta '~1 min' \
-            --title '🚀 Starting crawl' \
-            --detail 'Preparing the crawl.' > /tmp/telegram-status-message-id
+          set -euo pipefail
+          python -m crawler.notifications start             --progress 5 --stage 1 --total-stages 7             --crawl-number "$GITHUB_RUN_NUMBER" --eta '~1 min'             --title '🚀 Starting crawl'             --detail 'Preparing the crawl.' > /tmp/telegram-status-message-id
           id="$(cat /tmp/telegram-status-message-id)"
           if [ -n "$id" ]; then
             echo "TG_STATUS_MESSAGE_ID=$id" >> "$GITHUB_ENV"
@@ -119,6 +115,7 @@ jobs:
 
       - name: Save generated snapshots
         run: |
+          set -euo pipefail
           rm -rf /tmp/telegram-developer-data
           cp -a data /tmp/telegram-developer-data
           cp docs/data-branch/README.md /tmp/telegram-developer-data-branch-README.md
@@ -136,16 +133,9 @@ jobs:
           git fetch --prune origin data
           python /tmp/telegram-developer-notifications.py update --message-id "${TG_STATUS_MESSAGE_ID:-}" --progress 98 --stage 7 --total-stages 7 --crawl-number "$GITHUB_RUN_NUMBER" --eta '<30 sec' --title "📦 Publishing snapshot" --detail "Publishing the latest snapshot."
 
-          if ! PYTHONPATH=/tmp/telegram-developer-crawler python /tmp/telegram-developer-diff-classifier.py \
-            --base data \
-            --output /tmp/telegram-developer-change.md \
-            --json /tmp/telegram-developer-change.json \
-            --notification /tmp/telegram-developer-notification.txt; then
-            echo "::warning::change classification failed; publishing snapshot with fallback metadata."
-            printf '%s\n' '# Telegram Developer Crawler — Change Report' '' 'Change classification failed for this crawl.' '' 'See the GitHub compare/commit links for the complete raw snapshot change.' > /tmp/telegram-developer-change.md
-            printf '%s\n' 'classifier=fallback' 'generated_by=Telegram Developer Crawler' > /tmp/telegram-developer-change.json
-            printf '%s\n' '<p>A new Telegram developer-data snapshot was published.</p>' > /tmp/telegram-developer-notification.txt
-          fi
+          # 5C is part of the publication contract. Never manufacture a
+          # developer alert when classification failed.
+          PYTHONPATH=/tmp/telegram-developer-crawler python /tmp/telegram-developer-diff-classifier.py             --base data             --output /tmp/telegram-developer-change.md             --json /tmp/telegram-developer-change.json             --notification /tmp/telegram-developer-notification.txt
 
           # The main checkout contains freshly generated data/. Compare it against
           # the public archive before touching the checkout.
@@ -155,9 +145,6 @@ jobs:
             exit 0
           fi
 
-          # Build the data-branch commit from a clean worktree. This avoids
-          # branch switching in the collector checkout and guarantees that the
-          # archive has exactly the intended public layout.
           rm -rf /tmp/telegram-developer-data-publish
           git worktree add --detach /tmp/telegram-developer-data-publish origin/data
           trap 'git worktree remove --force /tmp/telegram-developer-data-publish >/dev/null 2>&1 || true' EXIT
@@ -165,20 +152,18 @@ jobs:
           cd /tmp/telegram-developer-data-publish
           git clean -fdx
 
-          # Never carry a nested data/ or transient changes/ directory into the
-          # public archive.
+          # The public archive is the branch root. Never publish a nested
+          # data/ directory or temporary 5C artifacts.
           rm -rf data changes android mtproto tdlib tdesktop TgAndroid
           cp -a /tmp/telegram-developer-data/. .
           cp /tmp/telegram-developer-data-branch-README.md README.md
 
-          # Module READMEs are published beside their snapshots.
           mkdir -p mtproto tdlib tdesktop TgAndroid
           cp /tmp/telegram-developer-mtproto-README.md mtproto/README.md
           cp /tmp/telegram-developer-tdlib-README.md tdlib/README.md
           cp /tmp/telegram-developer-tdesktop-README.md tdesktop/README.md
           cp /tmp/telegram-developer-android-README.md TgAndroid/README.md
 
-          # Stage 5C artifacts are temporary workflow products, not archive data.
           rm -f change.md change.json notification.txt
           rm -rf changes
 
@@ -203,12 +188,10 @@ jobs:
           commit_url="https://github.com/abhijeetpatil2122/Telegram-Developer-Crawler/commit/$new_sha"
           compare_url="https://github.com/abhijeetpatil2122/Telegram-Developer-Crawler/compare/$old_sha...$new_sha"
 
+          # An empty notification file means 5C found only archive/runtime
+          # changes. Do not post a channel message for those changes.
           if [ -s /tmp/telegram-developer-notification.txt ]; then
-            python /tmp/telegram-developer-notifications.py notify \
-              --text "$(cat /tmp/telegram-developer-notification.txt)" \
-              --compare-url "$compare_url" \
-              --commit-url "$commit_url" \
-              || echo "::warning::Telegram final notification failed after data was pushed."
+            python /tmp/telegram-developer-notifications.py notify               --text "$(cat /tmp/telegram-developer-notification.txt)"               --compare-url "$compare_url"               --commit-url "$commit_url"               || echo "::warning::Telegram final notification failed after data was pushed."
           else
             echo "No alert-worthy semantic changes; suppressing final Telegram notification."
           fi
