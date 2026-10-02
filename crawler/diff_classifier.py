@@ -182,6 +182,7 @@ def remove_json_paths(
             if (
                 object_key_l in VOLATILE_CONFIG_KEYS
                 or object_key_l.endswith("_hash")
+                or object_key_l.endswith("hash")
                 or "file_reference" in object_key_l
                 or object_key_l == "__bytes__"
                 or VOLATILE_RATE_KEY_RE.search(object_key_l)
@@ -205,6 +206,7 @@ def remove_json_paths(
             if config_noise and (
                 key_l in VOLATILE_CONFIG_KEYS
                 or key_l.endswith("_hash")
+                or key_l.endswith("hash")
                 or "file_reference" in key_l
                 or VOLATILE_RATE_KEY_RE.search(key_l)
             ):
