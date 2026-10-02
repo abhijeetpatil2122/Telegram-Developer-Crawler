@@ -216,13 +216,16 @@ def remove_json_paths(
                 out[key] = cleaned
         return out
     if isinstance(value, list):
+        # Preserve list positions when an ignored runtime item is removed.
+        # AppConfig arrays are order-sensitive for notification paths: dropping
+        # an ignored entry would shift every following item's index and make an
+        # unrelated developer setting look changed.
         out_list = []
         for i, item in enumerate(value):
             cleaned = remove_json_paths(
                 item, ignored, f"{prefix}[{i}]", config_noise=config_noise
             )
-            if cleaned is not None:
-                out_list.append(cleaned)
+            out_list.append(cleaned)
         return out_list
     return value
 
