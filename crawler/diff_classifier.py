@@ -205,10 +205,14 @@ def remove_json_paths(
                 out[key] = cleaned
         return out
     if isinstance(value, list):
-        return [
-            remove_json_paths(item, ignored, f"{prefix}[{i}]", config_noise=config_noise)
-            for i, item in enumerate(value)
-        ]
+        out_list = []
+        for i, item in enumerate(value):
+            cleaned = remove_json_paths(
+                item, ignored, f"{prefix}[{i}]", config_noise=config_noise
+            )
+            if cleaned is not None:
+                out_list.append(cleaned)
+        return out_list
     return value
 
 
