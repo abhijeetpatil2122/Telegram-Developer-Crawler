@@ -40,11 +40,13 @@ The credited diff is an attribution artifact and never modifies the extracted so
 
 ## Notification lifecycle
 
-The crawler uses one editable Telegram Rich Message for live crawl status. It is updated through the collection stages and removed after publication.
+Each crawl uses one editable Telegram Rich Message for live status. The message advances through the collection stages with a percentage, stage counter, ETA, headings, lists, tables and other Rich Message blocks, then is removed after publication.
 
-Stage 5C separately classifies the generated snapshot into semantic additions, changes and deletions. Snapshot-only noise does not produce a final channel alert. The notification comparison ignores known volatile/generated metadata such as Android APK/TL hashes, CDN resolution URLs, and MTProto runtime date/expires fields while keeping those values intact in the data archive.
+Stage 5C separately compares the freshly generated snapshot with the public `data` archive. Only developer-meaningful additions, changes and deletions can produce the permanent channel notification. Known volatile/runtime values such as APK hashes, CDN resolution URLs, MTProto runtime timestamps, media identifiers and TON/rate settings are retained in the archive but are ignored for channel-alert classification.
 
-This separation is intentional: the data branch records the complete crawl; the Telegram channel reports developer-meaningful changes. Final alerts include the Rich Message changelog, GitHub compare/commit buttons, and module-specific Android version/build/layer information when applicable.
+If 5C classification fails, the workflow fails closed rather than publishing a fabricated fallback alert. This prevents classifier failures from becoming repeated or misleading channel notifications.
+
+Final alerts use Telegram Rich Messages with module sections and GitHub changelog, commit and data-snapshot buttons.
 
 ## Android output
 
