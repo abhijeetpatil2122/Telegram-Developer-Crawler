@@ -45,14 +45,7 @@ def rich_payload(html_text: str) -> str:
     return json.dumps({"html": html_text}, ensure_ascii=False, separators=(",", ":"))
 
 
-def _progress_bar(progress: int, width: int = 10) -> str:
-    progress = max(0, min(100, progress))
-    filled = round(progress / 100 * width)
-    return "▰" * filled + "▱" * (width - filled)
-
-
 def status_html(
-    progress: int,
     title: str,
     detail: str,
     stage: int | None = None,
@@ -60,26 +53,17 @@ def status_html(
     crawl_number: str = "",
     eta: str = "",
 ) -> str:
-    """Render the existing live crawl table; keep its visual contract unchanged."""
-    progress = max(0, min(100, progress))
+    """Render the compact live Rich status without a progress bar."""
     total_stages = max(1, total_stages)
     stage = max(1, min(stage or 1, total_stages))
     crawl = f"  •  #{html.escape(str(crawl_number))}" if crawl_number else ""
     eta_html = f"  •  ETA <code>{html.escape(eta)}</code>" if eta else ""
-
     return (
         "<h2>⚙️ Telegram Developer Crawler"
         f"{crawl}</h2>"
-        "<table compact striped>"
-        "<tr><th>Task</th><th>Progress</th></tr>"
-        f"<tr><td>{html.escape(title)}</td>"
-        f"<td><b>{progress}%</b> <code>{_progress_bar(progress)}</code><br/>"
-        f"Step <b>{stage}/{total_stages}</b>{eta_html}</td></tr>"
-        "</table>"
-        "<blockquote>"
-        "<b>Current step</b><br/>"
-        f"{html.escape(detail)}"
-        "</blockquote>"
+        f"<h3>{html.escape(title)}</h3>"
+        f"<blockquote>{html.escape(detail)}<br/>"
+        f"<b>Stage {stage}/{total_stages}</b>{eta_html}</blockquote>"
     )
 
 
@@ -132,7 +116,6 @@ def main() -> int:
             "sendRichMessage",
             rich_message=rich_payload(
                 status_html(
-                    args.progress or 5,
                     args.title or "🚀 Starting crawl",
                     args.detail or "Preparing Telegram developer data collectors.",
                     args.stage,
@@ -164,7 +147,6 @@ def main() -> int:
             message_id=args.message_id,
             rich_message=rich_payload(
                 status_html(
-                    args.progress,
                     args.title or "Updating",
                     args.detail,
                     args.stage,
