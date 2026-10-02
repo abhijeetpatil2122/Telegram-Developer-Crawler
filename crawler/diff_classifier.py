@@ -473,16 +473,30 @@ def notification_messages(summary, base):
         additions = sum(a for _, a, _, _ in files)
         changes = sum(c for _, _, c, _ in files)
         deletions = sum(d for _, _, _, d in files)
-        sections = [
-            f"<h2>📣 {html.escape(module)}</h2>",
-            "<p>New developer-facing changes were detected.</p>",
-        ]
-        items = [
-            f"➕ Added: <b>{additions}</b>",
-            f"✏️ Changed: <b>{changes}</b>",
-            f"➖ Removed: <b>{deletions}</b>",
-            f"📄 Files: <b>{len(files)}</b>",
-        ]
+        if module == "MTProto configuration":
+            sections = [
+                "<h2>🔐 MTProto Configuration Update</h2>",
+                "<p>Telegram configuration data changed.</p>",
+                "<ul>"
+                f"<li>➕ Added: <b>{additions}</b></li>"
+                f"<li>✏️ Changed: <b>{changes}</b></li>"
+                f"<li>➖ Removed: <b>{deletions}</b></li>"
+                f"<li>📄 Datasets: <b>{len(files)}</b></li>"
+                "</ul>",
+                "<blockquote><b>Configuration change</b><br/>"
+                "Runtime noise such as rotating hashes, timestamps and media references is filtered from this alert.</blockquote>",
+            ]
+        else:
+            sections = [
+                f"<h2>📣 {html.escape(module)}</h2>",
+                "<p>New developer-facing changes were detected.</p>",
+            ]
+            items = [
+                f"➕ Added: <b>{additions}</b>",
+                f"✏️ Changed: <b>{changes}</b>",
+                f"➖ Removed: <b>{deletions}</b>",
+                f"📄 Files: <b>{len(files)}</b>",
+            ]
 
         if module in ("Android Stable", "Android Preview"):
             channel = "stable" if module == "Android Stable" else "beta"
@@ -501,7 +515,22 @@ def notification_messages(summary, base):
                 items.append("🏷️ <b>#Patch</b>")
             items.append(f"#Android #{label}")
 
-        sections.append("<ul>" + "".join(f"<li>{item}</li>" for item in items) + "</ul>")
+        if module == "MTProto configuration":
+            dataset_items = []
+            for entry, a, c, d in files:
+                dataset_items.append(
+                    "<li><code>"
+                    + html.escape(entry["path"])
+                    + "</code> — "
+                    f"➕ {a} • ✏️ {c} • ➖ {d}</li>"
+                )
+            sections.append(
+                "<details open><summary>Changed datasets</summary><ul>"
+                + "".join(dataset_items)
+                + "</ul></details>"
+            )
+        else:
+            sections.append("<ul>" + "".join(f"<li>{item}</li>" for item in items) + "</ul>")
         messages[module] = "\n".join(sections)
 
     return messages
