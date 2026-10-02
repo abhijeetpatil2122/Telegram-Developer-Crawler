@@ -113,6 +113,11 @@ def notification_html(
     )
 
 
+def final_html(text: str, compare_url: str, commit_url: str) -> str:
+    """Backward-compatible alias for callers using the old final renderer."""
+    return notification_html(text, "", compare_url, commit_url)
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("action", choices=("start", "update", "delete", "notify"))
