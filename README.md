@@ -40,11 +40,11 @@ The credited diff is an attribution artifact and never modifies the extracted so
 
 ## Notification lifecycle
 
-1. Start one temporary Rich Message status.
-2. Edit it through MTProto config, official TL, TDLib, Desktop, Android download and Android extraction stages.
-3. If there are no data changes, remove the temporary status and send no changelog.
-4. If data changes, remove the temporary status, publish the archive, then send one Rich Message changelog covering every changed module.
-5. The final message includes Rich Buttons for the full GitHub compare, commit, and data snapshot.
+The crawler uses one editable Telegram Rich Message for live crawl status. It is updated through the collection stages and removed after publication.
+
+Stage 5C separately classifies the generated snapshot into semantic additions, changes and deletions. Snapshot-only noise does not produce a final channel alert. The notification comparison ignores known volatile/generated metadata such as Android APK/TL hashes, CDN resolution URLs, and MTProto runtime date/expires fields while keeping those values intact in the data archive.
+
+This separation is intentional: the data branch records the complete crawl; the Telegram channel reports developer-meaningful changes. Final alerts include the Rich Message changelog, GitHub compare/commit buttons, and module-specific Android version/build/layer information when applicable.
 
 ## Android output
 
