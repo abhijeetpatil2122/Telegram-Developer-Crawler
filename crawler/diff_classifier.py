@@ -1,4 +1,4 @@
-"""Classify generated data changes and render a credited Stage 5C changelog."""
+"""Classify generated data changes and render a credited developer changelog."""
 from __future__ import annotations
 
 import argparse
