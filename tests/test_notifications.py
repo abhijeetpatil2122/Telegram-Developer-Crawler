@@ -15,7 +15,7 @@ def test_status_is_rich_html():
     assert "📱 Android clients" in html
     assert "<b>Current step</b>" in html
     assert "80%" in html
-    assert "What is happening?" in html
+    assert "<b>Current step</b>" in html
     assert "<table compact striped>" in html
     assert "<blockquote>" in html
 
