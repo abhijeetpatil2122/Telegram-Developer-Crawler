@@ -160,6 +160,20 @@ def remove_json_paths(
     config_noise: bool = False,
 ) -> Any:
     if isinstance(value, dict):
+        # Telegram AppConfig encodes settings as {"key": "...", "value": ...}.
+        # Treat the setting name as the semantic key so volatile rate/hash/id
+        # settings are ignored as a whole, rather than comparing their value.
+        object_key = value.get("key") if value.get("_") == "JsonObjectValue" else None
+        if config_noise and isinstance(object_key, str):
+            object_key_l = object_key.strip().lower()
+            if (
+                object_key_l in VOLATILE_CONFIG_KEYS
+                or object_key_l.endswith("_hash")
+                or "file_reference" in object_key_l
+                or VOLATILE_RATE_KEY_RE.search(object_key_l)
+            ):
+                return None
+
         out = {}
         for key, item in value.items():
             path = f"{prefix}.{key}" if prefix else key
@@ -184,9 +198,11 @@ def remove_json_paths(
             ):
                 continue
 
-            out[key] = remove_json_paths(
+            cleaned = remove_json_paths(
                 item, ignored, path, config_noise=config_noise
             )
+            if cleaned is not None:
+                out[key] = cleaned
         return out
     if isinstance(value, list):
         return [
