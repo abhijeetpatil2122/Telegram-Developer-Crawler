@@ -436,8 +436,12 @@ def android_previous_info(base, channel):
 
 
 
-def notification(summary, base):
-    """Render only developer-meaningful changes; volatile metadata stays silent."""
+def notification_messages(summary, base):
+    """Render one Rich Message payload per changed developer module.
+
+    Only modules with semantic developer-facing changes are emitted. Runtime,
+    provenance, APK hash and other ignored metadata never create a message.
+    """
     meaningful = []
     for module, group in summary["groups"].items():
         files = []
@@ -461,16 +465,16 @@ def notification(summary, base):
     if not meaningful:
         return ""
 
-    sections = [
-        "<h2>📣 Developer data changed</h2>",
-        "<p>A new Telegram developer-data snapshot contains meaningful changes.</p>",
-    ]
+    messages = {}
 
     for module, files in meaningful:
         additions = sum(a for _, a, _, _ in files)
         changes = sum(c for _, _, c, _ in files)
         deletions = sum(d for _, _, _, d in files)
-        sections.append(f"<h3>📦 {html.escape(module)}</h3>")
+        sections = [
+            f"<h2>📣 {html.escape(module)}</h2>",
+            "<p>New developer-facing changes were detected.</p>",
+        ]
         items = [
             f"➕ Added: <b>{additions}</b>",
             f"✏️ Changed: <b>{changes}</b>",
@@ -496,8 +500,14 @@ def notification(summary, base):
             items.append(f"#Android #{label}")
 
         sections.append("<ul>" + "".join(f"<li>{item}</li>" for item in items) + "</ul>")
+        messages[module] = "\n".join(sections)
 
-    return "<hr/>".join(sections)
+    return messages
+
+
+def notification(summary, base):
+    """Backward-compatible combined renderer for local tooling/tests."""
+    return "<hr/>".join(notification_messages(summary, base).values())
 
 def main():
     p = argparse.ArgumentParser()
@@ -505,6 +515,7 @@ def main():
     p.add_argument("--output", required=True)
     p.add_argument("--json", required=True)
     p.add_argument("--notification")
+    p.add_argument("--notification-dir")
     a = p.parse_args()
 
     s = classify(a.base)
@@ -515,6 +526,12 @@ def main():
     )
     if a.notification:
         Path(a.notification).write_text(notification(s, a.base), encoding="utf-8")
+    if a.notification_dir:
+        directory = Path(a.notification_dir)
+        directory.mkdir(parents=True, exist_ok=True)
+        for module, message in notification_messages(s, a.base).items():
+            safe_name = re.sub(r"[^a-z0-9]+", "-", module.lower()).strip("-") or "module"
+            (directory / f"{safe_name}.html").write_text(message, encoding="utf-8")
     print(json.dumps({"files": sum(len(g["files"]) for g in s["groups"].values()),
                       "groups": list(s["groups"])}))
 
