@@ -134,7 +134,15 @@ NOTIFICATION_IGNORED_JSON_PATHS = {
 VOLATILE_CONFIG_KEYS = {
     "id", "hash", "access_hash", "file_reference", "date", "expires",
     "sha256", "size", "resolved_url",
+    # Runtime media/document metadata is regenerated independently of the
+    # developer-facing object. These fields must not wake the news alert.
+    "dc_id", "mime_type", "thumbs", "video_thumbs",
 }
+VOLATILE_MEDIA_KEYS = {
+    "id", "access_hash", "file_reference", "date", "size", "dc_id",
+    "mime_type", "thumbs", "video_thumbs", "document_id",
+}
+
 VOLATILE_RATE_KEY_RE = re.compile(
     r"(?:ton|toncoin|usd|eur|rub|inr).*(?:rate|price|usd|value)"
     r"|(?:rate|price|exchange).*(?:ton|toncoin|usd|eur|rub|inr)",
@@ -183,7 +191,7 @@ def remove_json_paths(
             if path in ignored:
                 continue
 
-            # Only apply generic ID/hash/rate filtering to MTProto configuration
+            # Only apply generic runtime filtering to MTProto configuration
             # payloads. Schema JSON must retain IDs because those are meaningful.
             if config_noise and (
                 key_l in VOLATILE_CONFIG_KEYS
@@ -193,9 +201,12 @@ def remove_json_paths(
             ):
                 continue
 
-            if key == "__bytes__" and (
-                "file_reference" in prefix or "thumb" in prefix
-            ):
+            if key == "__bytes__":
+                # Byte blobs in MTProto media/reaction/config payloads are
+                # transport artifacts, not developer-facing changes.
+                continue
+
+            if path.startswith("mtproto/global/") and key_l in VOLATILE_MEDIA_KEYS:
                 continue
 
             cleaned = remove_json_paths(
