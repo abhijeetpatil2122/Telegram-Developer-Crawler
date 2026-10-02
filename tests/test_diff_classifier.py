@@ -103,3 +103,29 @@ def test_nested_runtime_hash_and_rate_are_not_notifiable():
     assert added == []
     assert changed == ["config.value[2].value"]
     assert deleted == []
+
+
+def test_mtproto_configuration_notification_has_dedicated_rich_blocks(monkeypatch):
+    import crawler.diff_classifier as dc
+
+    summary = {
+        "groups": {
+            "MTProto configuration": {
+                "files": [
+                    {"path": "mtproto/configs/production/dc1/config.json", "additions": ["x"], "changes": ["y"], "deletions": []}
+                ],
+                "additions": 1,
+                "changes": 1,
+                "deletions": 0,
+            }
+        }
+    }
+    monkeypatch.setattr(dc, "read_current", lambda path: '{"this_dc":1}')
+    monkeypatch.setattr(dc, "read_base", lambda base, path: '{"this_dc":0}')
+    monkeypatch.setattr(dc, "android_info", lambda channel: (None, None, None))
+    monkeypatch.setattr(dc, "android_previous_info", lambda base, channel: (None, None, None))
+    messages = dc.notification_messages(summary, "origin/data")
+    body = messages["MTProto configuration"]
+    assert "<h2>🔐 MTProto Configuration Update</h2>" in body
+    assert "<details open><summary>Changed datasets</summary>" in body
+    assert "mtproto/configs/production/dc1/config.json" in body
