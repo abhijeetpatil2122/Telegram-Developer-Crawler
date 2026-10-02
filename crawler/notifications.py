@@ -121,6 +121,7 @@ def main() -> int:
     parser.add_argument("--module", default="")
     parser.add_argument("--title", default="")
     parser.add_argument("--detail", default="")
+    parser.add_argument("--progress", type=int, default=0)  # legacy compatibility; intentionally not rendered
     parser.add_argument("--stage", type=int)
     parser.add_argument("--total-stages", type=int, default=TOTAL_STAGES)
     parser.add_argument("--crawl-number", default=os.environ.get("GITHUB_RUN_NUMBER", ""))
