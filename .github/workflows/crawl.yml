@@ -141,10 +141,10 @@ jobs:
             --output /tmp/telegram-developer-change.md \
             --json /tmp/telegram-developer-change.json \
             --notification /tmp/telegram-developer-notification.txt; then
-            echo "::warning::5C diff classification failed; publishing snapshot with fallback metadata."
-            printf '%s\n' '# Telegram Developer Crawler — Change Report' '' 'Semantic 5C classification failed for this crawl.' '' 'See the GitHub compare/commit links for the complete raw snapshot change.' > /tmp/telegram-developer-change.md
+            echo "::warning::change classification failed; publishing snapshot with fallback metadata."
+            printf '%s\n' '# Telegram Developer Crawler — Change Report' '' 'Change classification failed for this crawl.' '' 'See the GitHub compare/commit links for the complete raw snapshot change.' > /tmp/telegram-developer-change.md
             printf '%s\n' 'classifier=fallback' 'generated_by=Telegram Developer Crawler' > /tmp/telegram-developer-change.json
-            printf '%s\n' '<b>🛠️ Telegram Developer Crawler</b>' '' 'A new developer-data snapshot was published.' > /tmp/telegram-developer-notification.txt
+            printf '%s\n' '<p>A new Telegram developer-data snapshot was published.</p>' > /tmp/telegram-developer-notification.txt
           fi
 
           # The main checkout contains freshly generated data/. Compare it against
