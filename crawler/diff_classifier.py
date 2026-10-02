@@ -465,7 +465,7 @@ def notification_messages(summary, base):
             meaningful.append((module, files))
 
     if not meaningful:
-        return ""
+        return {}
 
     messages = {}
 
