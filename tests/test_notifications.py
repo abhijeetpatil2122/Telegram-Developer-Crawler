@@ -7,19 +7,26 @@ def test_rich_payload_uses_html():
     assert payload["html"] == "<b>Hello</b>"
 
 
-def test_status_is_rich_html():
-    html = status_html(80, "📱 Android clients", "Downloading Stable + Public Beta APKs.")
-    assert html.startswith("<h2>⚙️ Telegram Developer Crawler</h2>")
-    assert "<br/>" in html
-    assert "<th>Task</th>" in html
-    assert "📱 Android clients" in html
-    assert "<b>Current step</b>" in html
-    assert "80%" in html
-    assert "<b>Current step</b>" in html
-    assert "<table compact striped>" in html
+def test_status_is_rich_html_without_progress_bar():
+    html = status_html(
+        "📱 Android clients",
+        "Downloading Stable + Public Beta APKs.",
+        6,
+        7,
+        "42",
+        "~1–2 min",
+    )
+    assert html.startswith("<h2>⚙️ Telegram Developer Crawler")
+    assert "<h3>📱 Android clients</h3>" in html
+    assert "Downloading Stable + Public Beta APKs." in html
+    assert "Stage <b>6/7</b>" in html
+    assert "#42" in html
+    assert "~1–2 min" in html
+    assert "<blockquote>" in html
+    assert "<table" not in html
     assert "▰" not in html
     assert "▱" not in html
-    assert "<blockquote>" in html
+    assert "%" not in html
 
 
 def test_final_contains_rich_buttons():
@@ -36,20 +43,19 @@ def test_final_contains_rich_buttons():
 
 
 def test_status_supports_stage_counter():
-    html = status_html(35, "📐 Official TL schemas", "Collecting API + MTProto schemas.", 3, 7)
+    html = status_html("📐 Official TL schemas", "Collecting API + MTProto schemas.", 3, 7)
     assert "3/7" in html
-    assert "35%" in html
+    assert "%" not in html
 
 
 def test_final_uses_expandable_rich_blocks():
     html = final_html("<h3>📦 MTProto</h3><ul><li>Added: <b>2</b></li></ul>", "", "")
-    assert "<details open>" in html
+    assert '<tg-button-row align="center">' in html
     assert "<h3>📦 MTProto</h3>" in html
 
 
 def test_status_includes_crawl_number_and_eta():
     html = status_html(
-        90,
         "🛠️ Android schema extraction",
         "Extracting Stable + Preview schemas.",
         7,
@@ -59,4 +65,4 @@ def test_status_includes_crawl_number_and_eta():
     )
     assert "#42" in html
     assert "~3–4 min" in html
-    assert "90%" in html
+    assert "%" not in html
