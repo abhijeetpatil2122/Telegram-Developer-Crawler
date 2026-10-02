@@ -52,3 +52,14 @@ def test_mtproto_runtime_timestamps_are_not_notifiable():
     assert added == []
     assert changed == []
     assert deleted == []
+
+
+def test_mtproto_volatile_file_references_are_not_notifiable():
+    old = '{"items":[{"id":123,"file_reference":{"__bytes__":"old"},"access_hash":111,"title":"same"}]}'
+    new = '{"items":[{"id":123,"file_reference":{"__bytes__":"new"},"access_hash":222,"title":"same"}]}'
+    added, changed, deleted = semantic_json_for_notification(
+        "mtproto/global/premium-promo.json", old, new
+    )
+    assert added == []
+    assert changed == []
+    assert deleted == []
