@@ -107,6 +107,51 @@ def parse_json(text):
         return None
 
 
+
+NOTIFICATION_IGNORED_JSON_PATHS = {
+    "TgAndroid/{channel}/metadata.json": {
+        "artifact.sha256", "artifact.size", "resolved_url", "tl_extraction.sha256",
+    },
+    "mtproto/configs/{environment}/{dc}/config.json": {"date", "expires"},
+}
+
+
+def notification_ignored_paths(path: str) -> set[str]:
+    for pattern, fields in NOTIFICATION_IGNORED_JSON_PATHS.items():
+        regex = re.escape(pattern).replace(r"\{channel\}", r"[^/]+").replace(
+            r"\{environment\}", r"[^/]+"
+        ).replace(r"\{dc\}", r"[^/]+")
+        if re.fullmatch(regex, path):
+            return set(fields)
+    return set()
+
+
+def remove_json_paths(value: Any, ignored: set[str], prefix: str = "") -> Any:
+    if isinstance(value, dict):
+        return {
+            key: remove_json_paths(item, ignored, f"{prefix}.{key}" if prefix else key)
+            for key, item in value.items()
+            if (f"{prefix}.{key}" if prefix else key) not in ignored
+        }
+    if isinstance(value, list):
+        return [remove_json_paths(item, ignored, f"{prefix}[{i}]") for i, item in enumerate(value)]
+    return value
+
+
+def semantic_json_for_notification(path: str, old_text: str | None, new_text: str | None):
+    old, new = parse_json(old_text), parse_json(new_text)
+    if old is None or new is None:
+        return semantic_json(old_text, new_text)
+    ignored = notification_ignored_paths(path)
+    if ignored:
+        old = remove_json_paths(old, ignored)
+        new = remove_json_paths(new, ignored)
+    return semantic_json(
+        json.dumps(old, ensure_ascii=False, sort_keys=True),
+        json.dumps(new, ensure_ascii=False, sort_keys=True),
+    )
+
+
 def semantic_json(old_text, new_text):
     old, new = parse_json(old_text), parse_json(new_text)
     if old is None or new is None:
@@ -182,7 +227,7 @@ def classify(base):
         if path.endswith(".tl"):
             a, c, d = semantic_tl(old, new)
         elif path.endswith(".json"):
-            a, c, d = semantic_json(old, new)
+            a, c, d = semantic_json_for_notification(path, old, new)
         else:
             ol, nl = set((old or "").splitlines()), set((new or "").splitlines())
             a, c, d = sorted(nl - ol), [], sorted(ol - nl)
@@ -266,23 +311,45 @@ def android_previous_info(base, channel):
     return android.get("version_name"), android.get("version_code"), schema.get("layer")
 
 
+
 def notification(summary, base):
-    """Render the final 5C notification as native Rich HTML blocks."""
+    """Render only developer-meaningful changes; volatile metadata stays silent."""
+    meaningful = []
+    for module, group in summary["groups"].items():
+        files = []
+        for entry in group["files"]:
+            old, new = read_base(base, entry["path"]), read_current(entry["path"])
+            if entry["path"].endswith(".json"):
+                added, changed, deleted = semantic_json_for_notification(entry["path"], old, new)
+            elif entry["path"].endswith(".tl"):
+                added, changed, deleted = semantic_tl(old, new)
+            else:
+                old_lines = set((old or "").splitlines())
+                new_lines = set((new or "").splitlines())
+                added, changed, deleted = sorted(new_lines - old_lines), [], sorted(old_lines - new_lines)
+            if added or changed or deleted:
+                files.append((entry, len(added), len(changed), len(deleted)))
+        if files:
+            meaningful.append((module, files))
+
+    if not meaningful:
+        return ""
+
     sections = [
         "<h2>📣 Developer data changed</h2>",
-        "<p>A new Telegram developer-data snapshot was published.</p>",
+        "<p>A new Telegram developer-data snapshot contains meaningful changes.</p>",
     ]
 
-    for module, g in summary["groups"].items():
-        if not g["files"]:
-            continue
-
+    for module, files in meaningful:
+        additions = sum(a for _, a, _, _ in files)
+        changes = sum(c for _, _, c, _ in files)
+        deletions = sum(d for _, _, _, d in files)
         sections.append(f"<h3>📦 {html.escape(module)}</h3>")
         items = [
-            f"➕ Added: <b>{g['additions']}</b>",
-            f"✏️ Changed: <b>{g['changes']}</b>",
-            f"➖ Removed: <b>{g['deletions']}</b>",
-            f"📄 Files: <b>{len(g['files'])}</b>",
+            f"➕ Added: <b>{additions}</b>",
+            f"✏️ Changed: <b>{changes}</b>",
+            f"➖ Removed: <b>{deletions}</b>",
+            f"📄 Files: <b>{len(files)}</b>",
         ]
 
         if module in ("Android Stable", "Android Preview"):
@@ -290,7 +357,6 @@ def notification(summary, base):
             version, build, layer = android_info(channel)
             old_version, old_build, _ = android_previous_info(base, channel)
             label = "Stable" if channel == "stable" else "Preview"
-
             if version:
                 items.insert(
                     0,
@@ -298,10 +364,7 @@ def notification(summary, base):
                     f"• Build <code>{html.escape(str(build or '—'))}</code>",
                 )
             if layer:
-                items.insert(
-                    1 if version else 0,
-                    f"🧩 Layer: <code>{html.escape(str(layer))}</code>",
-                )
+                items.insert(1 if version else 0, f"🧩 Layer: <code>{html.escape(str(layer))}</code>")
             if version and version == old_version and build != old_build:
                 items.append("🏷️ <b>#Patch</b>")
             items.append(f"#Android #{label}")
