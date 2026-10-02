@@ -79,12 +79,15 @@ def status_html(
         "<h2>⚙️ Telegram Developer Crawler"
         f"{crawl}</h2>"
         "<table compact striped>"
-        "<tr><th>Progress</th><th>Stage</th></tr>"
-        f"<tr><td><b>{progress}%</b> <code>{_progress_bar(progress)}</code></td>"
-        f"<td><b>{stage}/{total_stages}</b>{eta_html}</td></tr>"
+        "<tr><th>Task</th><th>Progress</th></tr>"
+        f"<tr><td>{html.escape(title)}</td>"
+        f"<td><b>{progress}%</b> <code>{_progress_bar(progress)}</code><br/>"
+        f"Step <b>{stage}/{total_stages}</b>{eta_html}</td></tr>"
         "</table>"
-        f"<h3>{html.escape(title)}</h3>"
-        f"<blockquote>{html.escape(detail)}</blockquote>"
+        "<blockquote>"
+        "<b>Current step</b><br/>"
+        f"{html.escape(detail)}"
+        "</blockquote>"
     )
 
 
@@ -115,7 +118,9 @@ def final_html(text: str, compare_url: str, commit_url: str) -> str:
     return (
         "<h2>📣 Telegram Developer Update</h2>"
         "<p>New developer-facing changes were detected.</p>"
+        "<details open><summary>Change summary</summary>"
         f"{raw}"
+        "</details>"
         '<tg-button-row align="center">'
         + "".join(buttons)
         + "</tg-button-row>"
