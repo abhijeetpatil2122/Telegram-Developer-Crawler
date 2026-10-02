@@ -109,10 +109,21 @@ def parse_json(text):
 
 
 NOTIFICATION_IGNORED_JSON_PATHS = {
+    # APK identity/transport metadata is useful in the archive, but changing
+    # hashes, CDN URLs and extraction hashes are not developer-facing changes.
     "TgAndroid/{channel}/metadata.json": {
         "artifact.sha256", "artifact.size", "resolved_url", "tl_extraction.sha256",
     },
-    "mtproto/configs/{environment}/{dc}/config.json": {"date", "expires"},
+    # Runtime MTProto values can change while the developer-facing config is
+    # unchanged. Keep them in data, but suppress them from channel alerts.
+    "mtproto/configs/{environment}/{dc}/config.json": {
+        "date", "expires", "access_hash", "file_reference",
+    },
+    # Premium promo payloads contain Telegram media objects whose file
+    # references/bytes rotate without changing the developer-facing promo.
+    "mtproto/global/premium-promo.json": {
+        "file_reference", "access_hash",
+    },
 }
 
 
@@ -128,11 +139,15 @@ def notification_ignored_paths(path: str) -> set[str]:
 
 def remove_json_paths(value: Any, ignored: set[str], prefix: str = "") -> Any:
     if isinstance(value, dict):
-        return {
-            key: remove_json_paths(item, ignored, f"{prefix}.{key}" if prefix else key)
-            for key, item in value.items()
-            if (f"{prefix}.{key}" if prefix else key) not in ignored
-        }
+        out = {}
+        for key, item in value.items():
+            path = f"{prefix}.{key}" if prefix else key
+            # Ignore an explicitly configured field and nested occurrences of
+            # volatile MTProto object fields such as file_reference.
+            if path in ignored or key in {"__bytes__"} and "file_reference" in prefix:
+                continue
+            out[key] = remove_json_paths(item, ignored, path)
+        return out
     if isinstance(value, list):
         return [remove_json_paths(item, ignored, f"{prefix}[{i}]") for i, item in enumerate(value)]
     return value
