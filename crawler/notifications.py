@@ -54,12 +54,6 @@ def rich_payload(html_text: str) -> str:
     )
 
 
-def _progress_bar(progress: int, width: int = 10) -> str:
-    progress = max(0, min(100, progress))
-    filled = round(progress / 100 * width)
-    return "▰" * filled + "▱" * (width - filled)
-
-
 def status_html(
     progress: int,
     title: str,
@@ -81,7 +75,7 @@ def status_html(
         "<table compact striped>"
         "<tr><th>Task</th><th>Progress</th></tr>"
         f"<tr><td>{html.escape(title)}</td>"
-        f"<td><b>{progress}%</b> <code>{_progress_bar(progress)}</code><br/>"
+        f"<td><b>{progress}%</b><br/>"
         f"Step <b>{stage}/{total_stages}</b>{eta_html}</td></tr>"
         "</table>"
         "<blockquote>"
