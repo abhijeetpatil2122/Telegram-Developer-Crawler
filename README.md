@@ -17,7 +17,7 @@ Developer-focused crawler for meaningful changes across Telegram's official deve
 3. TDLib schema — official `td_api.tl` and structured definition index.
 4. Telegram Desktop schemas — official Desktop API and MTProto schemas.
 5. Telegram Android — Stable/Public Beta APK metadata/resources plus canonical main API and E2E extraction.
-6. Stage 5C — semantic additions/changes/deletions across every generated module.
+6. Change classification — semantic additions/changes/deletions across every generated module.
 7. Notifications — Rich Message crawl status plus final Rich Message changelog.
 
 ## Data branch layout
