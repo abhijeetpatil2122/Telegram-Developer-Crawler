@@ -73,3 +73,22 @@ def test_mtproto_ids_hashes_and_rates_are_not_notifiable():
     )
     assert "normal_setting" in changed
     assert not any("id" in x or "hash" in x or "ton_usd_rate" in x for x in changed)
+
+def test_global_media_metadata_is_not_notifiable():
+    old = '{"reactions":[{"reaction":"👍","activate_animation":{"_":"Document","id":1,"access_hash":2,"date":"2024-01-01","size":100,"file_reference":{"__bytes__":"old"},"thumbs":[{"bytes":{"__bytes__":"old"}}]}}]}'
+    new = '{"reactions":[{"reaction":"👍","activate_animation":{"_":"Document","id":9,"access_hash":8,"date":"2026-01-01","size":200,"file_reference":{"__bytes__":"new"},"thumbs":[{"bytes":{"__bytes__":"new"}}]}}]}'
+    added, changed, deleted = semantic_json_for_notification(
+        "mtproto/global/available-reactions.json", old, new
+    )
+    assert added == []
+    assert changed == []
+    assert deleted == []
+
+
+def test_ton_rate_setting_is_not_notifiable():
+    old = '{"config":{"_":"JsonObject","value":[{"_":"JsonObjectValue","key":"ton_usd_rate","value":{"_":"JsonNumber","value":7.1}},{"_":"JsonObjectValue","key":"developer_setting","value":{"_":"JsonNumber","value":1}}]}}'
+    new = '{"config":{"_":"JsonObject","value":[{"_":"JsonObjectValue","key":"ton_usd_rate","value":{"_":"JsonNumber","value":7.2}},{"_":"JsonObjectValue","key":"developer_setting","value":{"_":"JsonNumber","value":2}}]}}'
+    added, changed, deleted = semantic_json_for_notification(
+        "mtproto/app-config/production/dc1/app-config.json", old, new
+    )
+    assert changed == ["config.value[1].value.value"]
