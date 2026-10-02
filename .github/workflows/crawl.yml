@@ -202,6 +202,7 @@ jobs:
               notification_count=$((notification_count + 1))
               echo "Posting module notification: $(basename "$notification_file")"
               python /tmp/telegram-developer-notifications.py notify \
+                --module "$(basename "$notification_file" .html)" \
                 --text "$(cat "$notification_file")" \
                 --compare-url "$compare_url" \
                 --commit-url "$commit_url" \
