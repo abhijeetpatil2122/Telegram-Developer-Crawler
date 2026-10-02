@@ -145,11 +145,15 @@ jobs:
             exit 0
           fi
 
-          rm -rf /tmp/telegram-developer-data-publish
-          git worktree add --detach /tmp/telegram-developer-data-publish origin/data
-          trap 'git worktree remove --force /tmp/telegram-developer-data-publish >/dev/null 2>&1 || true' EXIT
+          # A failed/restarted run can leave stale worktree metadata behind.
+          # Prune it before creating the isolated archive worktree.
+          git worktree prune --expire now || true
+          publish_dir="/tmp/telegram-developer-data-publish-${GITHUB_RUN_ID}"
+          rm -rf "$publish_dir"
+          git worktree add --detach "$publish_dir" origin/data
+          trap 'git worktree remove --force "$publish_dir" >/dev/null 2>&1 || true; git worktree prune --expire now >/dev/null 2>&1 || true' EXIT
 
-          cd /tmp/telegram-developer-data-publish
+          cd "$publish_dir"
           git clean -fdx
 
           # The public archive is the branch root. Never publish a nested
