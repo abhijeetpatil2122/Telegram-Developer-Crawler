@@ -203,11 +203,15 @@ jobs:
           commit_url="https://github.com/abhijeetpatil2122/Telegram-Developer-Crawler/commit/$new_sha"
           compare_url="https://github.com/abhijeetpatil2122/Telegram-Developer-Crawler/compare/$old_sha...$new_sha"
 
-          python /tmp/telegram-developer-notifications.py notify \
-            --text "$(cat /tmp/telegram-developer-notification.txt)" \
-            --compare-url "$compare_url" \
-            --commit-url "$commit_url" \
-            || echo "::warning::Telegram final notification failed after data was pushed."
+          if [ -s /tmp/telegram-developer-notification.txt ]; then
+            python /tmp/telegram-developer-notifications.py notify \
+              --text "$(cat /tmp/telegram-developer-notification.txt)" \
+              --compare-url "$compare_url" \
+              --commit-url "$commit_url" \
+              || echo "::warning::Telegram final notification failed after data was pushed."
+          else
+            echo "No alert-worthy semantic changes; suppressing final Telegram notification."
+          fi
 
       - name: Finish Telegram crawl status
         if: always()
