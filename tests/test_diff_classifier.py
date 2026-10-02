@@ -63,3 +63,13 @@ def test_mtproto_volatile_file_references_are_not_notifiable():
     assert added == []
     assert changed == []
     assert deleted == []
+
+
+def test_mtproto_ids_hashes_and_rates_are_not_notifiable():
+    old = '{"id":1,"hash":111,"access_hash":222,"ton_usd_rate":7.1,"normal_setting":10}'
+    new = '{"id":2,"hash":999,"access_hash":333,"ton_usd_rate":7.2,"normal_setting":11}'
+    added, changed, deleted = semantic_json_for_notification(
+        "mtproto/app-config/production/dc1/app-config.json", old, new
+    )
+    assert "normal_setting" in changed
+    assert not any("id" in x or "hash" in x or "ton_usd_rate" in x for x in changed)
