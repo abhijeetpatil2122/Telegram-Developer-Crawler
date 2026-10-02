@@ -63,7 +63,7 @@ def status_html(
         f"{crawl}</h2>"
         f"<h3>{html.escape(title)}</h3>"
         f"<blockquote>{html.escape(detail)}<br/>"
-        f"<b>Stage {stage}/{total_stages}</b>{eta_html}</blockquote>"
+        f"Stage <b>{stage}/{total_stages}</b>{eta_html}</blockquote>"
     )
 
 
