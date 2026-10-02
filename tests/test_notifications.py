@@ -10,13 +10,15 @@ def test_rich_payload_uses_html():
 def test_status_is_rich_html():
     html = status_html(80, "📱 Android clients", "Downloading Stable + Public Beta APKs.")
     assert html.startswith("<h2>⚙️ Telegram Developer Crawler</h2>")
-    assert "<br/>" not in html
+    assert "<br/>" in html
     assert "<th>Task</th>" in html
     assert "📱 Android clients" in html
     assert "<b>Current step</b>" in html
     assert "80%" in html
     assert "<b>Current step</b>" in html
     assert "<table compact striped>" in html
+    assert "▰" not in html
+    assert "▱" not in html
     assert "<blockquote>" in html
 
 
