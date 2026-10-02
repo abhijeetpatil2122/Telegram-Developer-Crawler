@@ -125,7 +125,8 @@ jobs:
           cp docs/modules/android/README.md /tmp/telegram-developer-android-README.md
           cp crawler/notifications.py /tmp/telegram-developer-notifications.py
           cp crawler/diff_classifier.py /tmp/telegram-developer-diff-classifier.py
-          cp -a crawler /tmp/telegram-developer-crawler
+          mkdir -p /tmp/telegram-developer-crawler
+          cp -a crawler /tmp/telegram-developer-crawler/crawler
 
       - name: Publish snapshots to data branch
         run: |
