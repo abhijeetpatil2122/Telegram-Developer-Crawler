@@ -1,4 +1,4 @@
-"""Telegram Rich Message notification controller for crawler progress and changes."""
+"""Compact Telegram Rich Message notifications for the developer crawler."""
 from __future__ import annotations
 
 import argparse
@@ -22,43 +22,60 @@ def call(method: str, **payload):
         return None
     try:
         with httpx.Client(timeout=30.0) as client:
-            response = client.post(API.format(token, method), data={"chat_id": chat_id, **payload})
+            response = client.post(
+                API.format(token, method),
+                data={"chat_id": chat_id, **payload},
+            )
             try:
                 data = response.json()
             except ValueError:
                 data = {"ok": False, "description": response.text}
-            if not response.is_success:
-                print(
-                    f"Telegram API HTTP {response.status_code} for {method}: "
-                    f"{data.get('description', response.text)}",
-                    file=sys.stderr,
-                )
-                return None
     except httpx.HTTPError as exc:
         print(f"Telegram notification request failed: {exc}", file=sys.stderr)
         return None
-    if not data.get("ok"):
-        print(f"Telegram notification failed: {data}", file=sys.stderr)
+
+    if not response.is_success or not data.get("ok"):
+        print(
+            f"Telegram API failed for {method}: "
+            f"{data.get('description', response.text)}",
+            file=sys.stderr,
+        )
         return None
     return data["result"]
 
 
-def rich_payload(html_content: str) -> str:
-    """Build a valid InputRichMessage using Telegram Rich HTML."""
+def rich_payload(blocks: list[dict]) -> str:
+    """Serialize explicit InputRichMessage blocks."""
     return json.dumps(
-        {"html": html_content},
+        {"blocks": blocks},
         ensure_ascii=False,
         separators=(",", ":"),
     )
 
 
-def _progress_bar(progress: int) -> str:
+def _progress_bar(progress: int, width: int = 10) -> str:
     progress = max(0, min(100, progress))
-    filled = progress // 10
-    return "▰" * filled + "▱" * (10 - filled)
+    filled = round(progress / 100 * width)
+    return "▰" * filled + "▱" * (width - filled)
 
 
-def status_html(
+def _paragraph(text: str) -> dict:
+    return {"type": "paragraph", "text": text}
+
+
+def _heading(text: str, size: int = 4) -> dict:
+    return {"type": "heading", "size": size, "text": text}
+
+
+def _blockquote(text: str) -> dict:
+    return {"type": "blockquote", "blocks": [_paragraph(text)]}
+
+
+def _button(text: str, url: str, style: str = "primary") -> dict:
+    return {"text": text, "style": style, "url": url}
+
+
+def status_blocks(
     progress: int,
     title: str,
     detail: str,
@@ -66,140 +83,79 @@ def status_html(
     total_stages: int = TOTAL_STAGES,
     crawl_number: str = "",
     eta: str = "",
-) -> str:
-    """Render the single editable live crawl message with Rich blocks."""
+) -> list[dict]:
     progress = max(0, min(100, progress))
     stage = max(1, min(stage or 1, max(1, total_stages)))
     total_stages = max(1, total_stages)
-    stage_label = f"{stage}/{total_stages}"
-    bar = _progress_bar(progress)
 
-    crawl_line = (
-        f"<p><b>Crawl</b> <code>#{html.escape(crawl_number)}</code></p>"
-        if crawl_number else ""
-    )
-    eta_line = (
-        f"<p><b>Expected</b> <code>{html.escape(eta)}</code></p>"
-        if eta else ""
-    )
+    header = "⚙️ Telegram Developer Crawler"
+    if crawl_number:
+        header += f"  •  #{crawl_number}"
 
-    return (
-        crawl_line
-        + "<h2>⚙️ Telegram Developer Crawler</h2>"
-        + "<h3>Live crawl</h3>"
-        + "<table compact striped>"
-        + "<tr><td><b>Progress</b></td><td><code>"
-        + f"{progress}%"
-        + "</code></td></tr>"
-        + "<tr><td><b>Step</b></td><td><code>"
-        + stage_label
-        + "</code></td></tr>"
-        + "<tr><td><b>Status</b></td><td><code>"
-        + html.escape(bar)
-        + "</code></td></tr>"
-        + "</table>"
-        + eta_line
-        + "<hr/>"
-        + f"<h3>{html.escape(title)}</h3>"
-        + f"<blockquote>{html.escape(detail)}</blockquote>"
-        + "<details>"
-        + "<summary>What is happening?</summary>"
-        + "<ul>"
-        + "<li>Collecting official Telegram developer sources</li>"
-        + "<li>Normalizing and validating generated snapshots</li>"
-        + "<li>Comparing the new snapshot with the public archive</li>"
-        + "</ul>"
-        + "</details>"
-        + "<footer>Live status • this message updates automatically.</footer>"
-    )
+    blocks = [
+        _heading(header, 4),
+        _paragraph(
+            f"<b>{progress}%</b>  <code>{_progress_bar(progress)}</code>  "
+            f"•  Step <b>{stage}/{total_stages}</b>"
+            + (f"  •  ETA <code>{html.escape(eta)}</code>" if eta else "")
+        ),
+        _heading(title, 5),
+        _blockquote(detail),
+    ]
+    return blocks
 
 
-def status_fallback_html(
-    progress: int,
-    title: str,
-    detail: str,
-    crawl_number: str = "",
-    eta: str = "",
-) -> str:
-    """Safe legacy Bot API HTML fallback."""
-    progress = max(0, min(100, progress))
-    bar = _progress_bar(progress)
-    crawl = f"<b>Crawl:</b> #{html.escape(crawl_number)}\n" if crawl_number else ""
-    expected = f"<b>Expected:</b> {html.escape(eta)}\n" if eta else ""
-    return (
-        "<b>⚙️ Telegram Developer Crawler</b>\n"
-        + crawl
-        + expected
-        + f"<b>Progress:</b> <code>{progress}%</code> <code>{bar}</code>\n\n"
-        + f"<b>{html.escape(title)}</b>\n"
-        + f"{html.escape(detail)}\n\n"
-        + "<i>Live crawl status • this message updates automatically.</i>"
-    )
+def final_blocks(text: str, compare_url: str, commit_url: str) -> list[dict]:
+    """Build a compact permanent change post from the classifier's HTML summary."""
+    raw = html.unescape(text or "")
+    raw = re.sub(r"<br\s*/?>", "\n", raw, flags=re.I)
+    raw = re.sub(r"</(?:p|li|h[1-6])>", "\n", raw, flags=re.I)
+    raw = re.sub(r"<[^>]+>", "", raw)
+    lines = [html.unescape(x).strip() for x in raw.splitlines() if x.strip()]
 
+    blocks = [
+        _heading("📣 Telegram Developer Update", 4),
+        _paragraph("New developer-facing changes were detected."),
+    ]
 
-def final_html(text: str, compare_url: str, commit_url: str) -> str:
-    """Render the permanent developer change notification."""
-    content = text.strip()
-    if not content:
-        content = (
-            "<p>A new Telegram developer-data snapshot is available.</p>"
-            "<p>No detailed semantic summary was generated.</p>"
-        )
+    current: list[str] = []
+    for line in lines:
+        if line.startswith(("📦 ", "📱 ", "🧩 ")):
+            if current:
+                blocks.append({"type": "list", "items": [
+                    {"blocks": [_paragraph(item)]} for item in current
+                ]})
+                current = []
+            blocks.append(_heading(line, 5))
+        elif line.startswith((
+            "➕ ", "✏️ ", "➖ ", "📄 ", "🏷️ ", "#Android", "#Stable", "#Preview"
+        )):
+            current.append(line)
+        elif line not in {
+            "📣 Developer data changed",
+            "A new Telegram developer-data snapshot contains meaningful changes.",
+        }:
+            current.append(line)
+
+    if current:
+        blocks.append({"type": "list", "items": [
+            {"blocks": [_paragraph(item)]} for item in current
+        ]})
 
     buttons = []
     if compare_url:
-        buttons.append(
-            f'<tg-button type="url" style="primary" '
-            f'url="{html.escape(compare_url, quote=True)}">Full Changelog</tg-button>'
-        )
+        buttons.append(_button("Full Changelog", compare_url, "primary"))
     if commit_url:
-        buttons.append(
-            f'<tg-button type="url" style="success" '
-            f'url="{html.escape(commit_url, quote=True)}">Snapshot Commit</tg-button>'
-        )
+        buttons.append(_button("Snapshot Commit", commit_url, "success"))
     buttons.append(
-        '<tg-button type="url" style="link" '
-        'url="https://github.com/abhijeetpatil2122/Telegram-Developer-Crawler/tree/data">'
-        "Data Snapshot</tg-button>"
+        _button(
+            "Data Snapshot",
+            "https://github.com/abhijeetpatil2122/Telegram-Developer-Crawler/tree/data",
+            "link",
+        )
     )
-
-    return (
-        "<h2>📣 Telegram Developer Update</h2>"
-        "<p><b>A new developer-data snapshot contains changes.</b></p>"
-        "<hr/>"
-        "<h3>🔎 Change summary</h3>"
-        "<details open>"
-        "<summary>What changed</summary>"
-        f"{content}"
-        "</details>"
-        "<hr/>"
-        "<p><b>Source</b> GitHub snapshot comparison</p>"
-        '<tg-button-row align="center">'
-        + "".join(buttons)
-        + "</tg-button-row>"
-        "<footer>Generated automatically by Telegram Developer Crawler.</footer>"
-    )
-
-
-def final_fallback_html(text: str, compare_url: str, commit_url: str) -> str:
-    """Safe legacy-HTML fallback for a Rich API rejection."""
-    plain = html.unescape(text or "").replace("<", "").replace(">", "").strip()
-    lines = [
-        "<b>📣 Telegram Developer Update</b>",
-        "",
-        "<b>A new developer-data snapshot contains changes.</b>",
-    ]
-    if plain:
-        lines += ["", plain]
-    if compare_url:
-        lines += ["", f'<a href="{html.escape(compare_url, quote=True)}">Full Changelog</a>']
-    if commit_url:
-        lines += ["<a href="" + html.escape(commit_url, quote=True) + "">Snapshot Commit</a>"]
-    lines += [
-        '<a href="https://github.com/abhijeetpatil2122/Telegram-Developer-Crawler/tree/data">'
-        "Data Snapshot</a>"
-    ]
-    return "\n".join(lines)
+    blocks.append({"type": "buttons", "align": "center", "buttons": buttons})
+    return blocks
 
 
 def main() -> int:
@@ -219,80 +175,56 @@ def main() -> int:
     args = parser.parse_args()
 
     if args.action == "start":
-        progress = args.progress or 5
-        title = args.title or "Starting crawl"
-        detail = args.detail or "Preparing Telegram developer data collectors."
         result = call(
             "sendRichMessage",
             rich_message=rich_payload(
-                status_html(
-                    progress, title, detail, args.stage, args.total_stages,
-                    args.crawl_number, args.eta
+                status_blocks(
+                    args.progress or 5,
+                    args.title or "🚀 Starting crawl",
+                    args.detail or "Preparing Telegram developer data collectors.",
+                    args.stage,
+                    args.total_stages,
+                    args.crawl_number,
+                    args.eta,
                 )
             ),
         )
         if result:
             print(result["message_id"])
-            return 0
-        fallback = call(
-            "sendMessage",
-            text=status_fallback_html(progress, title, detail, args.crawl_number, args.eta),
-            parse_mode="HTML",
-            disable_web_page_preview="true",
-        )
-        if fallback:
-            print(fallback["message_id"])
         return 0
 
     if args.action == "notify":
-        if not os.environ.get("TG_BOT_TOKEN"):
-            return 0
-        rich_result = call(
+        result = call(
             "sendRichMessage",
             rich_message=rich_payload(
-                final_html(args.text, args.compare_url, args.commit_url)
+                final_blocks(args.text, args.compare_url, args.commit_url)
             ),
         )
-        if rich_result is not None:
-            return 0
-        fallback = call(
-            "sendMessage",
-            text=final_fallback_html(args.text, args.compare_url, args.commit_url),
-            parse_mode="HTML",
-            disable_web_page_preview="true",
-        )
-        return 0 if fallback is not None else 1
+        return 0 if result is not None else 0
 
     if not args.message_id or not os.environ.get("TG_BOT_TOKEN"):
         return 0
 
     if args.action == "update":
-        progress = args.progress
-        title = args.title or "Updating"
-        detail = args.detail
-        rich_result = call(
+        result = call(
             "editMessageText",
             message_id=args.message_id,
             rich_message=rich_payload(
-                status_html(
-                    progress, title, detail, args.stage, args.total_stages,
-                    args.crawl_number, args.eta
+                status_blocks(
+                    args.progress,
+                    args.title or "Updating",
+                    args.detail,
+                    args.stage,
+                    args.total_stages,
+                    args.crawl_number,
+                    args.eta,
                 )
             ),
         )
-        if rich_result is not None:
-            return 0
-        fallback = call(
-            "editMessageText",
-            message_id=args.message_id,
-            text=status_fallback_html(progress, title, detail, args.crawl_number, args.eta),
-            parse_mode="HTML",
-            disable_web_page_preview="true",
-        )
-        return 0 if fallback is not None else 1
+        return 0 if result is not None else 0
 
     result = call("deleteMessage", message_id=args.message_id)
-    return 0 if result is not None else 1
+    return 0 if result is not None else 0
 
 
 if __name__ == "__main__":
