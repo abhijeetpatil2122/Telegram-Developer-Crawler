@@ -92,3 +92,14 @@ def test_ton_rate_setting_is_not_notifiable():
         "mtproto/app-config/production/dc1/app-config.json", old, new
     )
     assert changed == ["config.value[1].value.value"]
+
+
+def test_nested_runtime_hash_and_rate_are_not_notifiable():
+    old = '{"config":{"value":[{"key":"server_hash","value":1},{"key":"ton_usd_rate","value":7.1},{"key":"developer_setting","value":1}]}}'
+    new = '{"config":{"value":[{"key":"server_hash","value":999},{"key":"ton_usd_rate","value":7.2},{"key":"developer_setting","value":2}]}}'
+    added, changed, deleted = semantic_json_for_notification(
+        "mtproto/app-config/production/dc1/app-config.json", old, new
+    )
+    assert added == []
+    assert changed == ["config.value[2].value"]
+    assert deleted == []
