@@ -143,6 +143,11 @@ VOLATILE_MEDIA_KEYS = {
     "mime_type", "thumbs", "video_thumbs", "document_id",
 }
 
+# Provenance is archive metadata, not developer data.
+IGNORED_PROVENANCE_KEYS = {
+    "_crawler", "generated_at", "crawler_generated_at",
+}
+
 VOLATILE_RATE_KEY_RE = re.compile(
     r"(?:ton|toncoin|usd|eur|rub|inr).*(?:rate|price|usd|value)"
     r"|(?:rate|price|exchange).*(?:ton|toncoin|usd|eur|rub|inr)",
@@ -187,6 +192,9 @@ def remove_json_paths(
         for key, item in value.items():
             path = f"{prefix}.{key}" if prefix else key
             key_l = str(key).strip().lower()
+
+            if key_l in IGNORED_PROVENANCE_KEYS:
+                continue
 
             # Explicit path ignores are exact and take precedence.
             if path in ignored:
@@ -297,6 +305,23 @@ def semantic_tl(old, new):
         [k for k in keys if k in o and k in n and o[k] != n[k]],
         [k for k in keys if k not in n],
     )
+
+
+def notification_candidate(path: str) -> bool:
+    """Only developer-data artifacts can wake the public news channel."""
+    path = path.removeprefix("data/")
+    if path.endswith(".tl"):
+        return True
+    if not path.endswith(".json"):
+        return False
+    if path.endswith("/metadata.json"):
+        return path.startswith("TgAndroid/")
+    return path.startswith((
+        "mtproto/",
+        "tdlib/tl/",
+        "tdesktop/tl/",
+        "TgAndroid/tl/",
+    ))
 
 
 def module_for(path):
@@ -417,6 +442,8 @@ def notification(summary, base):
     for module, group in summary["groups"].items():
         files = []
         for entry in group["files"]:
+            if not notification_candidate(entry["path"]):
+                continue
             old, new = read_base(base, entry["path"]), read_current(entry["path"])
             if entry["path"].endswith(".json"):
                 added, changed, deleted = semantic_json_for_notification(entry["path"], old, new)
