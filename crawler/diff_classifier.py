@@ -243,8 +243,6 @@ def remove_json_paths(
 
 def semantic_json_for_notification(path: str, old_text: str | None, new_text: str | None):
     old, new = parse_json(old_text), parse_json(new_text)
-    if old is None or new is None:
-        return semantic_json(old_text, new_text)
     ignored = notification_ignored_paths(path)
     config_noise = path.startswith((
         "mtproto/configs/",
@@ -263,8 +261,6 @@ def semantic_json_for_notification(path: str, old_text: str | None, new_text: st
 
 def semantic_json(old_text, new_text):
     old, new = parse_json(old_text), parse_json(new_text)
-    if old is None or new is None:
-        return [], [], []
 
     def schema_map(v):
         out = {}
@@ -282,6 +278,22 @@ def semantic_json(old_text, new_text):
         return out
 
     om, nm = schema_map(old), schema_map(new)
+
+    # Restored/added JSON snapshots are meaningful: a missing public snapshot
+    # can be recreated by the crawler and must produce a developer alert.
+    if old is None and new is not None:
+        if nm:
+            return sorted(nm), [], []
+        nf = flatten(new)
+        return sorted(nf), [], []
+    if new is None and old is not None:
+        if om:
+            return [], [], sorted(om)
+        of = flatten(old)
+        return [], [], sorted(of)
+    if old is None or new is None:
+        return [], [], []
+
     if om or nm:
         keys = sorted(set(om) | set(nm))
         return (
