@@ -5,6 +5,7 @@ import argparse
 import html
 import json
 import os
+import re
 import sys
 
 import httpx
@@ -22,10 +23,7 @@ def call(method: str, **payload):
         return None
     try:
         with httpx.Client(timeout=30.0) as client:
-            response = client.post(
-                API.format(token, method),
-                data={"chat_id": chat_id, **payload},
-            )
+            response = client.post(API.format(token, method), data={"chat_id": chat_id, **payload})
             try:
                 data = response.json()
             except ValueError:
@@ -33,7 +31,6 @@ def call(method: str, **payload):
     except httpx.HTTPError as exc:
         print(f"Telegram notification request failed: {exc}", file=sys.stderr)
         return None
-
     if not response.is_success or not data.get("ok"):
         print(
             f"Telegram API failed for {method}: "
@@ -46,14 +43,17 @@ def call(method: str, **payload):
 
 def rich_payload(html_text: str) -> str:
     """Serialize InputRichMessage using Telegram's native Rich HTML mode."""
-    return json.dumps(
-        {"html": html_text},
-        ensure_ascii=False,
-        separators=(",", ":"),
-    )
+    return json.dumps({"html": html_text}, ensure_ascii=False, separators=(",", ":"))
+
+
+def _progress_bar(progress: int, width: int = 10) -> str:
+    progress = max(0, min(100, progress))
+    filled = round(progress / 100 * width)
+    return "▰" * filled + "▱" * (width - filled)
 
 
 def status_html(
+    progress: int,
     title: str,
     detail: str,
     stage: int | None = None,
@@ -61,37 +61,31 @@ def status_html(
     crawl_number: str = "",
     eta: str = "",
 ) -> str:
-    stage_text = (
-        f"Stage <b>{max(1, min(stage, total_stages))}/{total_stages}</b>"
-        if stage
-        else ""
-    )
-    crawl = (
-        f" <code>#{html.escape(str(crawl_number))}</code>"
-        if crawl_number
-        else ""
-    )
-    eta_html = f" <i>ETA {html.escape(eta)}</i>" if eta else ""
-    meta = " • ".join(x for x in (stage_text, eta_html.strip()) if x)
-    meta_html = f"<p>{meta}</p>" if meta else ""
+    """Render the existing live crawl table; keep its visual contract unchanged."""
+    progress = max(0, min(100, progress))
+    total_stages = max(1, total_stages)
+    stage = max(1, min(stage or 1, total_stages))
+    crawl = f"  •  #{html.escape(str(crawl_number))}" if crawl_number else ""
+    eta_html = f"  •  ETA <code>{html.escape(eta)}</code>" if eta else ""
 
     return (
         "<h2>⚙️ Telegram Developer Crawler"
         f"{crawl}</h2>"
-        f"<h3>{html.escape(title)}</h3>"
-        f"<p>{html.escape(detail)}</p>"
-        f"{meta_html}"
-        "<blockquote>Live crawler status — this message is updated as the crawl advances.</blockquote>"
+        "<table compact striped>"
+        "<tr><th>Task</th><th>Progress</th></tr>"
+        f"<tr><td>{html.escape(title)}</td>"
+        f"<td><b>{progress}%</b> <code>{_progress_bar(progress)}</code><br/>"
+        f"Step <b>{stage}/{total_stages}</b>{eta_html}</td></tr>"
+        "</table>"
+        "<blockquote>"
+        "<b>Current step</b><br/>"
+        f"{html.escape(detail)}"
+        "</blockquote>"
     )
 
 
-def notification_html(
-    body: str,
-    module: str,
-    compare_url: str,
-    commit_url: str,
-) -> str:
-    """Attach navigation buttons to an already module-specific Rich Message."""
+def notification_html(body: str, module: str, compare_url: str, commit_url: str) -> str:
+    """Attach Rich navigation buttons to one already module-specific report."""
     buttons = []
     if compare_url:
         buttons.append(
@@ -104,7 +98,6 @@ def notification_html(
     buttons.append(
         '<tg-button type="url" style="link" url="https://github.com/abhijeetpatil2122/Telegram-Developer-Crawler/tree/data">Data Snapshot</tg-button>'
     )
-
     return (
         body.rstrip()
         + '<tg-button-row align="center">'
@@ -126,7 +119,7 @@ def main() -> int:
     parser.add_argument("--module", default="")
     parser.add_argument("--title", default="")
     parser.add_argument("--detail", default="")
-    parser.add_argument("--progress", type=int, default=0)  # legacy compatibility; intentionally not rendered
+    parser.add_argument("--progress", type=int, default=0)
     parser.add_argument("--stage", type=int)
     parser.add_argument("--total-stages", type=int, default=TOTAL_STAGES)
     parser.add_argument("--crawl-number", default=os.environ.get("GITHUB_RUN_NUMBER", ""))
@@ -140,6 +133,7 @@ def main() -> int:
             "sendRichMessage",
             rich_message=rich_payload(
                 status_html(
+                    args.progress or 5,
                     args.title or "🚀 Starting crawl",
                     args.detail or "Preparing Telegram developer data collectors.",
                     args.stage,
@@ -157,12 +151,7 @@ def main() -> int:
         result = call(
             "sendRichMessage",
             rich_message=rich_payload(
-                notification_html(
-                    args.text,
-                    args.module,
-                    args.compare_url,
-                    args.commit_url,
-                )
+                notification_html(args.text, args.module, args.compare_url, args.commit_url)
             ),
         )
         return 0 if result is not None else 0
@@ -176,6 +165,7 @@ def main() -> int:
             message_id=args.message_id,
             rich_message=rich_payload(
                 status_html(
+                    args.progress,
                     args.title or "Updating",
                     args.detail,
                     args.stage,
