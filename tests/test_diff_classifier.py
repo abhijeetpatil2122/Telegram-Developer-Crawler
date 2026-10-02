@@ -122,8 +122,7 @@ def test_mtproto_configuration_notification_has_dedicated_rich_blocks(monkeypatc
     }
     monkeypatch.setattr(dc, "read_current", lambda path: '{"this_dc":1}')
     monkeypatch.setattr(dc, "read_base", lambda base, path: '{"this_dc":0}')
-    monkeypatch.setattr(dc, "android_info", lambda channel: (None, None, None))
-    monkeypatch.setattr(dc, "android_previous_info", lambda base, channel: (None, None, None))
+    monkeypatch.setattr(dc, "semantic_json_for_notification", lambda path, old, new: (["this_dc"], [], []))
     messages = dc.notification_messages(summary, "origin/data")
     body = messages["MTProto configuration"]
     assert "<h2>🔐 MTProto Configuration Update</h2>" in body
