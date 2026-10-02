@@ -119,12 +119,27 @@ NOTIFICATION_IGNORED_JSON_PATHS = {
     "mtproto/configs/{environment}/{dc}/config.json": {
         "date", "expires", "access_hash", "file_reference",
     },
-    # Premium promo payloads contain Telegram media objects whose file
-    # references/bytes rotate without changing the developer-facing promo.
+    # Premium/reaction payloads contain Telegram media objects whose identifiers,
+    # hashes and byte references rotate without being a developer-facing change.
     "mtproto/global/premium-promo.json": {
         "file_reference", "access_hash",
     },
+    "mtproto/global/available-reactions.json": {
+        "file_reference", "access_hash", "hash",
+    },
 }
+
+# These are runtime/market metadata keys. They remain in the public snapshot,
+# but must never wake the developer-news notification on their own.
+VOLATILE_CONFIG_KEYS = {
+    "id", "hash", "access_hash", "file_reference", "date", "expires",
+    "sha256", "size", "resolved_url",
+}
+VOLATILE_RATE_KEY_RE = re.compile(
+    r"(?:ton|toncoin|usd|eur|rub|inr).*(?:rate|price|usd|value)"
+    r"|(?:rate|price|exchange).*(?:ton|toncoin|usd|eur|rub|inr)",
+    re.IGNORECASE,
+)
 
 
 def notification_ignored_paths(path: str) -> set[str]:
@@ -137,19 +152,47 @@ def notification_ignored_paths(path: str) -> set[str]:
     return set()
 
 
-def remove_json_paths(value: Any, ignored: set[str], prefix: str = "") -> Any:
+def remove_json_paths(
+    value: Any,
+    ignored: set[str],
+    prefix: str = "",
+    *,
+    config_noise: bool = False,
+) -> Any:
     if isinstance(value, dict):
         out = {}
         for key, item in value.items():
             path = f"{prefix}.{key}" if prefix else key
-            # Ignore an explicitly configured field and nested occurrences of
-            # volatile MTProto object fields such as file_reference.
-            if path in ignored or key in {"__bytes__"} and "file_reference" in prefix:
+            key_l = str(key).strip().lower()
+
+            # Explicit path ignores are exact and take precedence.
+            if path in ignored:
                 continue
-            out[key] = remove_json_paths(item, ignored, path)
+
+            # Only apply generic ID/hash/rate filtering to MTProto configuration
+            # payloads. Schema JSON must retain IDs because those are meaningful.
+            if config_noise and (
+                key_l in VOLATILE_CONFIG_KEYS
+                or key_l.endswith("_hash")
+                or "file_reference" in key_l
+                or VOLATILE_RATE_KEY_RE.search(key_l)
+            ):
+                continue
+
+            if key == "__bytes__" and (
+                "file_reference" in prefix or "thumb" in prefix
+            ):
+                continue
+
+            out[key] = remove_json_paths(
+                item, ignored, path, config_noise=config_noise
+            )
         return out
     if isinstance(value, list):
-        return [remove_json_paths(item, ignored, f"{prefix}[{i}]") for i, item in enumerate(value)]
+        return [
+            remove_json_paths(item, ignored, f"{prefix}[{i}]", config_noise=config_noise)
+            for i, item in enumerate(value)
+        ]
     return value
 
 
@@ -158,9 +201,10 @@ def semantic_json_for_notification(path: str, old_text: str | None, new_text: st
     if old is None or new is None:
         return semantic_json(old_text, new_text)
     ignored = notification_ignored_paths(path)
-    if ignored:
-        old = remove_json_paths(old, ignored)
-        new = remove_json_paths(new, ignored)
+    config_noise = path.startswith("mtproto/")
+    if ignored or config_noise:
+        old = remove_json_paths(old, ignored, config_noise=config_noise)
+        new = remove_json_paths(new, ignored, config_noise=config_noise)
     return semantic_json(
         json.dumps(old, ensure_ascii=False, sort_keys=True),
         json.dumps(new, ensure_ascii=False, sort_keys=True),
