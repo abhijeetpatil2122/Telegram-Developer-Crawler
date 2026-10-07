@@ -16,8 +16,8 @@
   "source_repository": "https://github.com/telegramdesktop/tdesktop",
   "upstream": {
     "branch": "dev",
-    "commit": "f23c37857220eb84f8559f0901ea26fb304b564b",
-    "commit_url": "https://github.com/telegramdesktop/tdesktop/commit/f23c37857220eb84f8559f0901ea26fb304b564b",
-    "message": "Update lib_ui to fix SeparatePanel fullscreen on Linux."
+    "commit": "e1ed57a44e7c14e0cbb91bcf0f7ec3e408786a39",
+    "commit_url": "https://github.com/telegramdesktop/tdesktop/commit/e1ed57a44e7c14e0cbb91bcf0f7ec3e408786a39",
+    "message": "Update macOS XZ to maintained 5.4 fixes"
   }
 }
