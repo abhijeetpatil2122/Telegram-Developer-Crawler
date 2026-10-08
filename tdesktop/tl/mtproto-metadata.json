@@ -16,8 +16,8 @@
   "source_repository": "https://github.com/telegramdesktop/tdesktop",
   "upstream": {
     "branch": "dev",
-    "commit": "aac515c5408015231a273c80ab4c4b33815e63ab",
-    "commit_url": "https://github.com/telegramdesktop/tdesktop/commit/aac515c5408015231a273c80ab4c4b33815e63ab",
-    "message": "Improve updater binary on Windows."
+    "commit": "22b352e866d0402505c07fa4ed21d75d7e4fb3db",
+    "commit_url": "https://github.com/telegramdesktop/tdesktop/commit/22b352e866d0402505c07fa4ed21d75d7e4fb3db",
+    "message": "Show Connected Apps in the wallet menu only when apps are connected"
   }
 }

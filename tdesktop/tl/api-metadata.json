@@ -1,23 +1,23 @@
 {
   "counts": {
-    "constructors": 1658,
-    "functions": 813,
-    "total": 2471
+    "constructors": 1704,
+    "functions": 850,
+    "total": 2554
   },
   "safety": {
     "max_definition_removal_ratio": 0.1
   },
   "sha256": {
-    "json": "147cdd698026cb8dcc3345fbb0cf1b8c9ed7949728439bded3ac2c37f197bcca",
-    "tl": "d60601c5bc291504167ad8f504dcc38408701a57981e8654c2700297a1d7dced"
+    "json": "fb55b7581e5a82d9df04fb9fa282d83e2618d88df8debc4430371823dcbed3ef",
+    "tl": "fb99a69d92bac2e91033bd81c6d16b006ae926ee24bc2501c866a52ce5921274"
   },
   "source": "https://raw.githubusercontent.com/telegramdesktop/tdesktop/dev/Telegram/SourceFiles/mtproto/scheme/api.tl",
   "source_path": "Telegram/SourceFiles/mtproto/scheme/api.tl",
   "source_repository": "https://github.com/telegramdesktop/tdesktop",
   "upstream": {
     "branch": "dev",
-    "commit": "aac515c5408015231a273c80ab4c4b33815e63ab",
-    "commit_url": "https://github.com/telegramdesktop/tdesktop/commit/aac515c5408015231a273c80ab4c4b33815e63ab",
-    "message": "Improve updater binary on Windows."
+    "commit": "22b352e866d0402505c07fa4ed21d75d7e4fb3db",
+    "commit_url": "https://github.com/telegramdesktop/tdesktop/commit/22b352e866d0402505c07fa4ed21d75d7e4fb3db",
+    "message": "Show Connected Apps in the wallet menu only when apps are connected"
   }
 }
