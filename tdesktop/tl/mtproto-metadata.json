@@ -16,8 +16,8 @@
   "source_repository": "https://github.com/telegramdesktop/tdesktop",
   "upstream": {
     "branch": "dev",
-    "commit": "d346b42a1d30ef60dc989b6e5191bb8e571f6bd5",
-    "commit_url": "https://github.com/telegramdesktop/tdesktop/commit/d346b42a1d30ef60dc989b6e5191bb8e571f6bd5",
-    "message": "Show URL tooltip and Copy Link on rich-message URL buttons"
+    "commit": "aac515c5408015231a273c80ab4c4b33815e63ab",
+    "commit_url": "https://github.com/telegramdesktop/tdesktop/commit/aac515c5408015231a273c80ab4c4b33815e63ab",
+    "message": "Improve updater binary on Windows."
   }
 }
