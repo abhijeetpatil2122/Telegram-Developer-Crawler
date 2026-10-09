@@ -3747,7 +3747,7 @@
         },
         {
           "name": "bot_verification",
-          "type": "botVerification"
+          "type": "BotVerification"
         },
         {
           "name": "main_tab",
@@ -4597,7 +4597,7 @@
         },
         {
           "name": "bot_verification",
-          "type": "botVerification"
+          "type": "BotVerification"
         }
       ],
       "source": "sources/org/telegram/tgnet/TLRPC.java",
@@ -8500,7 +8500,7 @@
       "name": "inputChatPhoto",
       "params": [
         {
-          "name": "f20107id",
+          "name": "f20098id",
           "type": "InputPhoto"
         }
       ],
@@ -9306,7 +9306,7 @@
       "name": "inputMediaDocument",
       "params": [
         {
-          "name": "f20108id",
+          "name": "f20099id",
           "type": "InputDocument"
         },
         {
@@ -9344,7 +9344,7 @@
       "name": "inputMediaGame",
       "params": [
         {
-          "name": "f20109id",
+          "name": "f20100id",
           "type": "InputGame"
         }
       ],
@@ -9416,7 +9416,7 @@
       "name": "inputMediaPhoto",
       "params": [
         {
-          "name": "f20110id",
+          "name": "f20101id",
           "type": "InputPhoto"
         },
         {
@@ -10887,7 +10887,7 @@
       "name": "inputStickeredMediaDocument",
       "params": [
         {
-          "name": "f20116id",
+          "name": "f20107id",
           "type": "InputDocument"
         }
       ],
@@ -10900,7 +10900,7 @@
       "name": "inputStickeredMediaPhoto",
       "params": [
         {
-          "name": "f20117id",
+          "name": "f20108id",
           "type": "InputPhoto"
         }
       ],
@@ -11130,6 +11130,27 @@
       "params": [],
       "source": "sources/org/telegram/tgnet/TLRPC.java",
       "type": "InputWallPaper"
+    },
+    {
+      "id": 1722182203,
+      "kind": "constructor",
+      "name": "inputWalletImported",
+      "params": [
+        {
+          "name": "proof",
+          "type": "walletOwnershipProof"
+        }
+      ],
+      "source": "sources/org/telegram/tgnet/tl/TL_wallet.java",
+      "type": "InputWalletReplacement"
+    },
+    {
+      "id": 1671708892,
+      "kind": "constructor",
+      "name": "inputWalletNew",
+      "params": [],
+      "source": "sources/org/telegram/tgnet/tl/TL_wallet.java",
+      "type": "InputWalletReplacement"
     },
     {
       "id": -1678949555,
@@ -12710,6 +12731,14 @@
       "type": "MessageAction"
     },
     {
+      "id": -1825969613,
+      "kind": "constructor",
+      "name": "messageActionGramTransfer",
+      "params": [],
+      "source": "sources/org/telegram/tgnet/TLRPC.java",
+      "type": "MessageAction"
+    },
+    {
       "id": 2047704898,
       "kind": "constructor",
       "name": "messageActionGroupCall",
@@ -13330,6 +13359,14 @@
       "type": "MessageAction"
     },
     {
+      "id": 1773716671,
+      "kind": "constructor",
+      "name": "messageActionWalletTonConnectRequest",
+      "params": [],
+      "source": "sources/org/telegram/tgnet/TLRPC.java",
+      "type": "MessageAction"
+    },
+    {
       "id": -1262252875,
       "kind": "constructor",
       "name": "messageActionWebViewDataSent",
@@ -13535,6 +13572,14 @@
       "id": 1990644519,
       "kind": "constructor",
       "name": "messageEntityTextUrl",
+      "params": [],
+      "source": "sources/org/telegram/tgnet/TLRPC.java",
+      "type": "MessageEntity"
+    },
+    {
+      "id": -39075891,
+      "kind": "constructor",
+      "name": "messageEntityTonAddress",
       "params": [],
       "source": "sources/org/telegram/tgnet/TLRPC.java",
       "type": "MessageEntity"
@@ -22551,6 +22596,19 @@
       "type": "RichText"
     },
     {
+      "id": 1020437354,
+      "kind": "constructor",
+      "name": "textTonAddress",
+      "params": [
+        {
+          "name": "text",
+          "type": "RichText"
+        }
+      ],
+      "source": "sources/org/telegram/tgnet/tl/TL_iv.java",
+      "type": "RichText"
+    },
+    {
       "id": -1054465340,
       "kind": "constructor",
       "name": "textUnderline",
@@ -24883,6 +24941,19 @@
       "type": "Update"
     },
     {
+      "id": -1320989366,
+      "kind": "constructor",
+      "name": "updateSentWalletTransaction",
+      "params": [
+        {
+          "name": "transaction",
+          "type": "walletTransaction"
+        }
+      ],
+      "source": "sources/org/telegram/tgnet/tl/TL_update.java",
+      "type": "Update"
+    },
+    {
       "id": -337352679,
       "kind": "constructor",
       "name": "updateServiceNotification",
@@ -25197,6 +25268,48 @@
       "type": "Update"
     },
     {
+      "id": -1464984404,
+      "kind": "constructor",
+      "name": "updateWalletGaslessInfo",
+      "params": [],
+      "source": "sources/org/telegram/tgnet/tl/TL_update.java",
+      "type": "Update"
+    },
+    {
+      "id": 1791226538,
+      "kind": "constructor",
+      "name": "updateWalletState",
+      "params": [
+        {
+          "name": "state",
+          "type": "WalletState"
+        }
+      ],
+      "source": "sources/org/telegram/tgnet/tl/TL_update.java",
+      "type": "Update"
+    },
+    {
+      "id": -772898407,
+      "kind": "constructor",
+      "name": "updateWalletTonConnectPendingDisconnect",
+      "params": [],
+      "source": "sources/org/telegram/tgnet/tl/TL_update.java",
+      "type": "Update"
+    },
+    {
+      "id": 1352896014,
+      "kind": "constructor",
+      "name": "updateWalletTonConnectSession",
+      "params": [
+        {
+          "name": "session",
+          "type": "tonConnectSession"
+        }
+      ],
+      "source": "sources/org/telegram/tgnet/tl/TL_update.java",
+      "type": "Update"
+    },
+    {
       "id": 335872721,
       "kind": "constructor",
       "name": "updateWebBrowserException",
@@ -25445,7 +25558,7 @@
       "type": "UrlAuthResult"
     },
     {
-      "id": 1020666860,
+      "id": -1110810265,
       "kind": "constructor",
       "name": "urlAuthResultRequest",
       "params": [
@@ -25455,6 +25568,71 @@
         }
       ],
       "source": "sources/org/telegram/tgnet/TLRPC.java",
+      "type": "UrlAuthResult"
+    },
+    {
+      "id": 1020666860,
+      "kind": "constructor",
+      "name": "urlAuthResultRequest",
+      "params": [
+        {
+          "name": "flags",
+          "type": "#"
+        },
+        {
+          "name": "request_write_access",
+          "type": "flags.0?true"
+        },
+        {
+          "name": "request_phone_number",
+          "type": "flags.1?true"
+        },
+        {
+          "name": "match_codes_first",
+          "type": "flags.5?true"
+        },
+        {
+          "name": "is_app",
+          "type": "flags.6?true"
+        },
+        {
+          "name": "bot",
+          "type": "User"
+        },
+        {
+          "name": "domain",
+          "type": "string"
+        },
+        {
+          "name": "browser",
+          "type": "flags.2?string"
+        },
+        {
+          "name": "platform",
+          "type": "flags.2?string"
+        },
+        {
+          "name": "ip",
+          "type": "flags.2?string"
+        },
+        {
+          "name": "region",
+          "type": "flags.2?string"
+        },
+        {
+          "name": "match_codes",
+          "type": "flags.3?Vector<string>"
+        },
+        {
+          "name": "user_id_hint",
+          "type": "flags.4?long"
+        },
+        {
+          "name": "verified_app_name",
+          "type": "flags.7?string"
+        }
+      ],
+      "source": "core.telegram.org/schema/json",
       "type": "UrlAuthResult"
     },
     {
@@ -25717,6 +25895,255 @@
       "name": "userFull",
       "params": [
         {
+          "name": "flags",
+          "type": "#"
+        },
+        {
+          "name": "blocked",
+          "type": "flags.0?true"
+        },
+        {
+          "name": "phone_calls_available",
+          "type": "flags.4?true"
+        },
+        {
+          "name": "phone_calls_private",
+          "type": "flags.5?true"
+        },
+        {
+          "name": "can_pin_message",
+          "type": "flags.7?true"
+        },
+        {
+          "name": "has_scheduled",
+          "type": "flags.12?true"
+        },
+        {
+          "name": "video_calls_available",
+          "type": "flags.13?true"
+        },
+        {
+          "name": "voice_messages_forbidden",
+          "type": "flags.20?true"
+        },
+        {
+          "name": "translations_disabled",
+          "type": "flags.23?true"
+        },
+        {
+          "name": "stories_pinned_available",
+          "type": "flags.26?true"
+        },
+        {
+          "name": "blocked_my_stories_from",
+          "type": "flags.27?true"
+        },
+        {
+          "name": "wallpaper_overridden",
+          "type": "flags.28?true"
+        },
+        {
+          "name": "contact_require_premium",
+          "type": "flags.29?true"
+        },
+        {
+          "name": "read_dates_private",
+          "type": "flags.30?true"
+        },
+        {
+          "name": "flags2",
+          "type": "#"
+        },
+        {
+          "name": "sponsored_enabled",
+          "type": "flags2.7?true"
+        },
+        {
+          "name": "can_view_revenue",
+          "type": "flags2.9?true"
+        },
+        {
+          "name": "bot_can_manage_emoji_status",
+          "type": "flags2.10?true"
+        },
+        {
+          "name": "display_gifts_button",
+          "type": "flags2.16?true"
+        },
+        {
+          "name": "noforwards_my_enabled",
+          "type": "flags2.23?true"
+        },
+        {
+          "name": "noforwards_peer_enabled",
+          "type": "flags2.24?true"
+        },
+        {
+          "name": "unofficial_security_risk",
+          "type": "flags2.26?true"
+        },
+        {
+          "name": "id",
+          "type": "long"
+        },
+        {
+          "name": "about",
+          "type": "flags.1?string"
+        },
+        {
+          "name": "settings",
+          "type": "PeerSettings"
+        },
+        {
+          "name": "personal_photo",
+          "type": "flags.21?Photo"
+        },
+        {
+          "name": "profile_photo",
+          "type": "flags.2?Photo"
+        },
+        {
+          "name": "fallback_photo",
+          "type": "flags.22?Photo"
+        },
+        {
+          "name": "notify_settings",
+          "type": "PeerNotifySettings"
+        },
+        {
+          "name": "bot_info",
+          "type": "flags.3?BotInfo"
+        },
+        {
+          "name": "pinned_msg_id",
+          "type": "flags.6?int"
+        },
+        {
+          "name": "common_chats_count",
+          "type": "int"
+        },
+        {
+          "name": "folder_id",
+          "type": "flags.11?int"
+        },
+        {
+          "name": "ttl_period",
+          "type": "flags.14?int"
+        },
+        {
+          "name": "theme",
+          "type": "flags.15?ChatTheme"
+        },
+        {
+          "name": "private_forward_name",
+          "type": "flags.16?string"
+        },
+        {
+          "name": "bot_group_admin_rights",
+          "type": "flags.17?ChatAdminRights"
+        },
+        {
+          "name": "bot_broadcast_admin_rights",
+          "type": "flags.18?ChatAdminRights"
+        },
+        {
+          "name": "wallpaper",
+          "type": "flags.24?WallPaper"
+        },
+        {
+          "name": "stories",
+          "type": "flags.25?PeerStories"
+        },
+        {
+          "name": "business_work_hours",
+          "type": "flags2.0?BusinessWorkHours"
+        },
+        {
+          "name": "business_location",
+          "type": "flags2.1?BusinessLocation"
+        },
+        {
+          "name": "business_greeting_message",
+          "type": "flags2.2?BusinessGreetingMessage"
+        },
+        {
+          "name": "business_away_message",
+          "type": "flags2.3?BusinessAwayMessage"
+        },
+        {
+          "name": "business_intro",
+          "type": "flags2.4?BusinessIntro"
+        },
+        {
+          "name": "birthday",
+          "type": "flags2.5?Birthday"
+        },
+        {
+          "name": "personal_channel_id",
+          "type": "flags2.6?long"
+        },
+        {
+          "name": "personal_channel_message",
+          "type": "flags2.6?int"
+        },
+        {
+          "name": "stargifts_count",
+          "type": "flags2.8?int"
+        },
+        {
+          "name": "starref_program",
+          "type": "flags2.11?StarRefProgram"
+        },
+        {
+          "name": "bot_verification",
+          "type": "flags2.12?BotVerification"
+        },
+        {
+          "name": "send_paid_messages_stars",
+          "type": "flags2.14?long"
+        },
+        {
+          "name": "disallowed_gifts",
+          "type": "flags2.15?DisallowedGiftsSettings"
+        },
+        {
+          "name": "stars_rating",
+          "type": "flags2.17?StarsRating"
+        },
+        {
+          "name": "stars_my_pending_rating",
+          "type": "flags2.18?StarsRating"
+        },
+        {
+          "name": "stars_my_pending_rating_date",
+          "type": "flags2.18?int"
+        },
+        {
+          "name": "main_tab",
+          "type": "flags2.20?ProfileTab"
+        },
+        {
+          "name": "saved_music",
+          "type": "flags2.21?Document"
+        },
+        {
+          "name": "note",
+          "type": "flags2.22?TextWithEntities"
+        },
+        {
+          "name": "bot_manager_id",
+          "type": "flags2.25?long"
+        }
+      ],
+      "source": "core.telegram.org/schema/json",
+      "type": "UserFull"
+    },
+    {
+      "id": 2145859780,
+      "kind": "constructor",
+      "name": "userFull",
+      "params": [
+        {
           "name": "settings",
           "type": "PeerSettings"
         },
@@ -25790,7 +26217,7 @@
         },
         {
           "name": "bot_verification",
-          "type": "botVerification"
+          "type": "BotVerification"
         },
         {
           "name": "disallowed_stargifts",
@@ -26119,6 +26546,54 @@
       "type": "WallPapers"
     },
     {
+      "id": -1782238101,
+      "kind": "constructor",
+      "name": "walletState",
+      "params": [],
+      "source": "sources/org/telegram/tgnet/tl/TL_wallet.java",
+      "type": "WalletState"
+    },
+    {
+      "id": -1665551636,
+      "kind": "constructor",
+      "name": "walletStateEmpty",
+      "params": [],
+      "source": "sources/org/telegram/tgnet/tl/TL_wallet.java",
+      "type": "WalletState"
+    },
+    {
+      "id": 103596476,
+      "kind": "constructor",
+      "name": "walletTransactionPeerAddress",
+      "params": [],
+      "source": "sources/org/telegram/tgnet/tl/TL_wallet.java",
+      "type": "WalletTransactionPeer"
+    },
+    {
+      "id": -443213714,
+      "kind": "constructor",
+      "name": "walletTransactionPeerOnramp",
+      "params": [],
+      "source": "sources/org/telegram/tgnet/tl/TL_wallet.java",
+      "type": "WalletTransactionPeer"
+    },
+    {
+      "id": 1921772890,
+      "kind": "constructor",
+      "name": "walletTransactionPeerUnsupported",
+      "params": [],
+      "source": "sources/org/telegram/tgnet/tl/TL_wallet.java",
+      "type": "WalletTransactionPeer"
+    },
+    {
+      "id": -722833299,
+      "kind": "constructor",
+      "name": "walletTransactionPeerUser",
+      "params": [],
+      "source": "sources/org/telegram/tgnet/tl/TL_wallet.java",
+      "type": "WalletTransactionPeer"
+    },
+    {
       "id": -1493633966,
       "kind": "constructor",
       "name": "webAuthorization",
@@ -26392,11 +26867,11 @@
     }
   ],
   "counts": {
-    "constructors": 1785,
-    "methods": 1086,
-    "total": 2871
+    "constructors": 1804,
+    "methods": 1119,
+    "total": 2923
   },
-  "layer": 229,
+  "layer": 231,
   "methods": [
     {
       "id": -202552205,
@@ -30706,6 +31181,14 @@
       "source": "sources/org/telegram/tgnet/tl/TL_phone.java"
     },
     {
+      "id": -1575387914,
+      "kind": "method",
+      "name": "createOnrampSession",
+      "params": [],
+      "result": "onrampSession",
+      "source": "sources/org/telegram/tgnet/tl/TL_toncenter.java"
+    },
+    {
       "id": 524947079,
       "kind": "method",
       "name": "createStarGiftCollection",
@@ -30874,6 +31357,14 @@
       "source": "sources/org/telegram/tgnet/tl/TL_ephemeral.java"
     },
     {
+      "id": 185331930,
+      "kind": "method",
+      "name": "disableBackup",
+      "params": [],
+      "result": "WalletState",
+      "source": "sources/org/telegram/tgnet/tl/TL_wallet.java"
+    },
+    {
       "id": 1581481689,
       "kind": "method",
       "name": "disablePeerConnectedBot",
@@ -30954,6 +31445,14 @@
       "source": "sources/org/telegram/tgnet/tl/TL_bots.java"
     },
     {
+      "id": 1157678373,
+      "kind": "method",
+      "name": "enableBackup",
+      "params": [],
+      "result": "WalletState",
+      "source": "sources/org/telegram/tgnet/tl/TL_wallet.java"
+    },
+    {
       "id": 6533257,
       "kind": "method",
       "name": "exportBotToken",
@@ -30968,6 +31467,22 @@
       "params": [],
       "result": "exportedGroupCallInvite",
       "source": "sources/org/telegram/tgnet/tl/TL_phone.java"
+    },
+    {
+      "id": -1871197780,
+      "kind": "method",
+      "name": "exportSecretPhrase",
+      "params": [],
+      "result": "secretPhraseParts",
+      "source": "sources/org/telegram/tgnet/tl/TL_wallet.java"
+    },
+    {
+      "id": -180804145,
+      "kind": "method",
+      "name": "fetchEncryptedSecretPhrasePart",
+      "params": [],
+      "result": "encryptedSecretPhrasePart",
+      "source": "sources/org/telegram/tgnet/tl/TL_wallet.java"
     },
     {
       "id": -1739084537,
@@ -31199,6 +31714,14 @@
       "source": "sources/org/telegram/tgnet/tl/TL_stars.java"
     },
     {
+      "id": -749108248,
+      "kind": "method",
+      "name": "getCurrencyRates",
+      "params": [],
+      "result": "currencyRates",
+      "source": "sources/org/telegram/tgnet/tl/TL_wallet.java"
+    },
+    {
       "id": -1509246514,
       "kind": "method",
       "name": "getDefaultBackgroundEmojis",
@@ -31229,6 +31752,22 @@
       "params": [],
       "result": "EmojiList",
       "source": "sources/org/telegram/tgnet/tl/TL_account.java"
+    },
+    {
+      "id": 1763656544,
+      "kind": "method",
+      "name": "getExistingWaltBalance",
+      "params": [],
+      "result": "existingBalance",
+      "source": "sources/org/telegram/tgnet/tl/TL_wallet.java"
+    },
+    {
+      "id": 1949167777,
+      "kind": "method",
+      "name": "getGaslessInfo",
+      "params": [],
+      "result": "Updates",
+      "source": "sources/org/telegram/tgnet/tl/TL_wallet.java"
     },
     {
       "id": -349483786,
@@ -31319,6 +31858,14 @@
       "source": "sources/org/telegram/tgnet/tl/TL_stats.java"
     },
     {
+      "id": -1944915036,
+      "kind": "method",
+      "name": "getNfts",
+      "params": [],
+      "result": "nftItems",
+      "source": "sources/org/telegram/tgnet/tl/TL_wallet.java"
+    },
+    {
       "id": 1398240377,
       "kind": "method",
       "name": "getNotifyExceptions",
@@ -31333,6 +31880,38 @@
       "params": [],
       "result": "PeerNotifySettings",
       "source": "sources/org/telegram/tgnet/tl/TL_account.java"
+    },
+    {
+      "id": 784505169,
+      "kind": "method",
+      "name": "getOnrampAvailability",
+      "params": [],
+      "result": "onrampAvailability",
+      "source": "sources/org/telegram/tgnet/tl/TL_toncenter.java"
+    },
+    {
+      "id": 478932467,
+      "kind": "method",
+      "name": "getOnrampBaseCurrencies",
+      "params": [],
+      "result": "onrampBaseCurrencies",
+      "source": "sources/org/telegram/tgnet/tl/TL_toncenter.java"
+    },
+    {
+      "id": -2132258307,
+      "kind": "method",
+      "name": "getOnrampLimits",
+      "params": [],
+      "result": "onrampLimits",
+      "source": "sources/org/telegram/tgnet/tl/TL_toncenter.java"
+    },
+    {
+      "id": -530168326,
+      "kind": "method",
+      "name": "getOnrampQuote",
+      "params": [],
+      "result": "onrampQuote",
+      "source": "sources/org/telegram/tgnet/tl/TL_toncenter.java"
     },
     {
       "id": 431639143,
@@ -31389,6 +31968,14 @@
       "params": [],
       "result": "privacyRules",
       "source": "sources/org/telegram/tgnet/tl/TL_account.java"
+    },
+    {
+      "id": 539354775,
+      "kind": "method",
+      "name": "getProofChallenge",
+      "params": [],
+      "result": "proofChallenge",
+      "source": "sources/org/telegram/tgnet/tl/TL_wallet.java"
     },
     {
       "id": 115172684,
@@ -31551,6 +32138,14 @@
       "source": "sources/org/telegram/tgnet/tl/TL_stars.java"
     },
     {
+      "id": -1417432262,
+      "kind": "method",
+      "name": "getState",
+      "params": [],
+      "result": "WalletState",
+      "source": "sources/org/telegram/tgnet/tl/TL_wallet.java"
+    },
+    {
       "id": -1505526026,
       "kind": "method",
       "name": "getStoryPublicForwards",
@@ -31565,6 +32160,14 @@
       "params": [],
       "result": "storyReactionsList",
       "source": "sources/org/telegram/tgnet/tl/TL_stories.java"
+    },
+    {
+      "id": -844143673,
+      "kind": "method",
+      "name": "getStreamingUrl",
+      "params": [],
+      "result": "streamingUrl",
+      "source": "sources/org/telegram/tgnet/tl/TL_toncenter.java"
     },
     {
       "id": 225134839,
@@ -31623,6 +32226,30 @@
       "source": "sources/org/telegram/tgnet/tl/TL_aicompose.java"
     },
     {
+      "id": -1467807101,
+      "kind": "method",
+      "name": "getTransactions",
+      "params": [],
+      "result": "walletTransactions",
+      "source": "sources/org/telegram/tgnet/tl/TL_wallet.java"
+    },
+    {
+      "id": -2128811338,
+      "kind": "method",
+      "name": "getTransactionsByIDs",
+      "params": [],
+      "result": "walletTransactions",
+      "source": "sources/org/telegram/tgnet/tl/TL_wallet.java"
+    },
+    {
+      "id": -1497663139,
+      "kind": "method",
+      "name": "getTransactionsByMsgHash",
+      "params": [],
+      "result": "walletTransactions",
+      "source": "sources/org/telegram/tgnet/tl/TL_wallet.java"
+    },
+    {
       "id": -1583919758,
       "kind": "method",
       "name": "getUniqueStarGift",
@@ -31637,6 +32264,14 @@
       "params": [],
       "result": "UniqueStarGiftValueInfo",
       "source": "sources/org/telegram/tgnet/tl/TL_stars.java"
+    },
+    {
+      "id": 1383456733,
+      "kind": "method",
+      "name": "getUserAddresses",
+      "params": [],
+      "result": "userAddresses",
+      "source": "sources/org/telegram/tgnet/tl/TL_wallet.java"
     },
     {
       "id": -57811990,
@@ -32301,12 +32936,53 @@
       "source": "sources/org/telegram/tgnet/TLRPC.java"
     },
     {
-      "id": 1738797278,
+      "id": 417156754,
       "kind": "method",
       "name": "messages.acceptUrlAuth",
       "params": [],
       "result": "UrlAuthResult",
       "source": "sources/org/telegram/tgnet/TLRPC.java"
+    },
+    {
+      "id": 1738797278,
+      "kind": "method",
+      "name": "messages.acceptUrlAuth",
+      "params": [
+        {
+          "name": "flags",
+          "type": "#"
+        },
+        {
+          "name": "write_allowed",
+          "type": "flags.0?true"
+        },
+        {
+          "name": "share_phone_number",
+          "type": "flags.3?true"
+        },
+        {
+          "name": "peer",
+          "type": "flags.1?InputPeer"
+        },
+        {
+          "name": "msg_id",
+          "type": "flags.1?int"
+        },
+        {
+          "name": "button_id",
+          "type": "flags.1?int"
+        },
+        {
+          "name": "url",
+          "type": "flags.2?string"
+        },
+        {
+          "name": "match_code",
+          "type": "flags.4?string"
+        }
+      ],
+      "result": "UrlAuthResult",
+      "source": "core.telegram.org/schema/json"
     },
     {
       "id": -876162809,
@@ -36210,6 +36886,14 @@
       "source": "sources/org/telegram/tgnet/TLRPC.java"
     },
     {
+      "id": -1921262239,
+      "kind": "method",
+      "name": "performApiRequest",
+      "params": [],
+      "result": "apiResponse",
+      "source": "sources/org/telegram/tgnet/tl/TL_toncenter.java"
+    },
+    {
       "id": 1003664544,
       "kind": "method",
       "name": "phone.acceptCall",
@@ -37322,6 +38006,14 @@
       "source": "sources/org/telegram/tgnet/tl/TL_bots.java"
     },
     {
+      "id": -658034964,
+      "kind": "method",
+      "name": "replaceWallet",
+      "params": [],
+      "result": "WalletState",
+      "source": "sources/org/telegram/tgnet/tl/TL_wallet.java"
+    },
+    {
       "id": -2029718849,
       "kind": "method",
       "name": "reportMessage",
@@ -37584,6 +38276,14 @@
       "params": [],
       "result": "Updates",
       "source": "sources/org/telegram/tgnet/tl/TL_payments.java"
+    },
+    {
+      "id": -639247902,
+      "kind": "method",
+      "name": "sendTransfer",
+      "params": [],
+      "result": "Updates",
+      "source": "sources/org/telegram/tgnet/tl/TL_wallet.java"
     },
     {
       "id": -1730136133,
@@ -38617,6 +39317,78 @@
       "source": "sources/org/telegram/tgnet/tl/TL_account.java"
     },
     {
+      "id": 1723169601,
+      "kind": "method",
+      "name": "tonConnectClaimRequest",
+      "params": [],
+      "result": "Bool",
+      "source": "sources/org/telegram/tgnet/tl/TL_wallet.java"
+    },
+    {
+      "id": -700489266,
+      "kind": "method",
+      "name": "tonConnectCloseSession",
+      "params": [],
+      "result": "Bool",
+      "source": "sources/org/telegram/tgnet/tl/TL_wallet.java"
+    },
+    {
+      "id": -862777274,
+      "kind": "method",
+      "name": "tonConnectCreateSession",
+      "params": [],
+      "result": "tonConnectSession",
+      "source": "sources/org/telegram/tgnet/tl/TL_wallet.java"
+    },
+    {
+      "id": 2002612804,
+      "kind": "method",
+      "name": "tonConnectGetNextEventId",
+      "params": [],
+      "result": "tonConnectNextEventId",
+      "source": "sources/org/telegram/tgnet/tl/TL_wallet.java"
+    },
+    {
+      "id": 296673381,
+      "kind": "method",
+      "name": "tonConnectGetPending",
+      "params": [],
+      "result": "tonConnectPending",
+      "source": "sources/org/telegram/tgnet/tl/TL_wallet.java"
+    },
+    {
+      "id": -1476414098,
+      "kind": "method",
+      "name": "tonConnectGetSessions",
+      "params": [],
+      "result": "tonConnectSessions",
+      "source": "sources/org/telegram/tgnet/tl/TL_wallet.java"
+    },
+    {
+      "id": 864800540,
+      "kind": "method",
+      "name": "tonConnectRegisterKey",
+      "params": [],
+      "result": "tonConnectChallenge",
+      "source": "sources/org/telegram/tgnet/tl/TL_wallet.java"
+    },
+    {
+      "id": -1027602567,
+      "kind": "method",
+      "name": "tonConnectSubmitConnectResult",
+      "params": [],
+      "result": "Bool",
+      "source": "sources/org/telegram/tgnet/tl/TL_wallet.java"
+    },
+    {
+      "id": -87655108,
+      "kind": "method",
+      "name": "tonConnectSubmitResponse",
+      "params": [],
+      "result": "Bool",
+      "source": "sources/org/telegram/tgnet/tl/TL_wallet.java"
+    },
+    {
       "id": 2132285290,
       "kind": "method",
       "name": "transferStarGift",
@@ -39138,14 +39910,14 @@
     "max_definition_removal_ratio": 0.1
   },
   "sha256": {
-    "tl": "eb722c122721f6a6bbd38a04d4e095813c461c96159f596bc05feadb0ab17792"
+    "tl": "bc9fd4d026b53119832efb83ae4ddbd390c6af84b94251425c5cacf2bd251a3b"
   },
   "source": {
     "apk": "https://cdn4.telesco.pe/file/Telegram-Beta.apk",
-    "apk_sha256": "5f1d8e90fa4c03e58e3dc0c96ab6905295ead62bec81b6d5d9a0a52d01779500",
+    "apk_sha256": "b656981fd4908ced8f01b4743cc9b43d1a3849239e3b39c79a739cda8e65b114",
     "jadx": "https://github.com/skylot/jadx/releases/download/v1.5.6/jadx-1.5.6.zip",
     "package": "org.telegram.messenger.beta",
-    "version_code": 71239,
-    "version_name": "12.10.7"
+    "version_code": 71669,
+    "version_name": "13.0.1"
   }
 }
