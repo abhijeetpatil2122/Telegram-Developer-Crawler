@@ -1,7 +1,7 @@
 {
   "branch": "dev",
-  "commit": "22b352e866d0402505c07fa4ed21d75d7e4fb3db",
-  "commit_url": "https://github.com/telegramdesktop/tdesktop/commit/22b352e866d0402505c07fa4ed21d75d7e4fb3db",
+  "commit": "42f8a36d43b8c805bc821905bea4cfeb3af1d41d",
+  "commit_url": "https://github.com/telegramdesktop/tdesktop/commit/42f8a36d43b8c805bc821905bea4cfeb3af1d41d",
   "schemas": {
     "api": {
       "json": "api.json",
