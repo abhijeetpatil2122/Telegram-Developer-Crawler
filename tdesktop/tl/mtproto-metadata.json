@@ -16,8 +16,8 @@
   "source_repository": "https://github.com/telegramdesktop/tdesktop",
   "upstream": {
     "branch": "dev",
-    "commit": "863cf10d9f34fb0b1b35b35da1bda75acfc58d2e",
-    "commit_url": "https://github.com/telegramdesktop/tdesktop/commit/863cf10d9f34fb0b1b35b35da1bda75acfc58d2e",
-    "message": "Added animated shrinking of bot menu button while typing."
+    "commit": "cf478d37c8f57df831cdedb5621e1cf2ef069a0f",
+    "commit_url": "https://github.com/telegramdesktop/tdesktop/commit/cf478d37c8f57df831cdedb5621e1cf2ef069a0f",
+    "message": "[ai] Print helper numbers in the telemetry format on request"
   }
 }
