@@ -16,8 +16,8 @@
   "source_repository": "https://github.com/telegramdesktop/tdesktop",
   "upstream": {
     "branch": "dev",
-    "commit": "65e23ba7137ea4129b6bc1b2616104a1f59495ef",
-    "commit_url": "https://github.com/telegramdesktop/tdesktop/commit/65e23ba7137ea4129b6bc1b2616104a1f59495ef",
-    "message": "[ai] Hold an App Nap opt-out for the whole macOS test run"
+    "commit": "3f406f09a7fea066c5670bc52e9cfd3649e209b8",
+    "commit_url": "https://github.com/telegramdesktop/tdesktop/commit/3f406f09a7fea066c5670bc52e9cfd3649e209b8",
+    "message": "Hide the expanded copied toast after the full duration"
   }
 }

@@ -4,17 +4,17 @@
       "metadata": "beta/metadata.json",
       "package": "org.telegram.messenger.beta",
       "resources": "beta/resources/",
-      "sha256": "b656981fd4908ced8f01b4743cc9b43d1a3849239e3b39c79a739cda8e65b114",
-      "version_code": 71669,
-      "version_name": "13.0.1"
+      "sha256": "88e4d637d0af2d7556d170216122e5ad52e64dd2751614bb9320b75330fc12c1",
+      "version_code": 71809,
+      "version_name": "13.0.2"
     },
     "stable": {
       "metadata": "stable/metadata.json",
       "package": "org.telegram.messenger.web",
       "resources": "stable/resources/",
-      "sha256": "ebb52bf7b94e59d3e5a1a7b27116081bbe97d818898aae8296f8096a5bf1040e",
-      "version_code": 71589,
-      "version_name": "13.0.0"
+      "sha256": "a995a057e655be77907f9ceec52953edd213c05050102e2924f29bf903e91e64",
+      "version_code": 71759,
+      "version_name": "13.0.2"
     }
   },
   "sources": {

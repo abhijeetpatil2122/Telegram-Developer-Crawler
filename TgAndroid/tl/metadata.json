@@ -3,28 +3,28 @@
     "beta": {
       "counts": {
         "constructors": 1804,
-        "methods": 1119,
-        "total": 2923
+        "methods": 1121,
+        "total": 2925
       },
       "e2e_json": "beta/e2e.json",
       "e2e_tl": "beta/e2e.tl",
       "layer": 231,
       "main_api_json": "beta/main_api.json",
       "main_api_tl": "beta/main_api.tl",
-      "sha256": "bc9fd4d026b53119832efb83ae4ddbd390c6af84b94251425c5cacf2bd251a3b"
+      "sha256": "5f17f6cb0052825e39813b473d244f1730ea3ff858db8c7eaf3fb46653f7674b"
     },
     "stable": {
       "counts": {
         "constructors": 1804,
-        "methods": 1119,
-        "total": 2923
+        "methods": 1121,
+        "total": 2925
       },
       "e2e_json": "stable/e2e.json",
       "e2e_tl": "stable/e2e.tl",
       "layer": 231,
       "main_api_json": "stable/main_api.json",
       "main_api_tl": "stable/main_api.tl",
-      "sha256": "b7a79913fd2aa4c756c4205e2542d626917e99684392174bea69964d472bb208"
+      "sha256": "6b4702fb7188252a6aad779fed3240697c7b8c5772aaf5c56f0ebab7755dfae4"
     }
   },
   "safety": {

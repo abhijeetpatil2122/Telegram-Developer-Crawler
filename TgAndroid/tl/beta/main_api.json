@@ -8500,7 +8500,7 @@
       "name": "inputChatPhoto",
       "params": [
         {
-          "name": "f20098id",
+          "name": "f19276id",
           "type": "InputPhoto"
         }
       ],
@@ -9306,7 +9306,7 @@
       "name": "inputMediaDocument",
       "params": [
         {
-          "name": "f20099id",
+          "name": "f19277id",
           "type": "InputDocument"
         },
         {
@@ -9344,7 +9344,7 @@
       "name": "inputMediaGame",
       "params": [
         {
-          "name": "f20100id",
+          "name": "f19278id",
           "type": "InputGame"
         }
       ],
@@ -9416,7 +9416,7 @@
       "name": "inputMediaPhoto",
       "params": [
         {
-          "name": "f20101id",
+          "name": "f19279id",
           "type": "InputPhoto"
         },
         {
@@ -10887,7 +10887,7 @@
       "name": "inputStickeredMediaDocument",
       "params": [
         {
-          "name": "f20107id",
+          "name": "f19285id",
           "type": "InputDocument"
         }
       ],
@@ -10900,7 +10900,7 @@
       "name": "inputStickeredMediaPhoto",
       "params": [
         {
-          "name": "f20108id",
+          "name": "f19286id",
           "type": "InputPhoto"
         }
       ],
@@ -26868,8 +26868,8 @@
   ],
   "counts": {
     "constructors": 1804,
-    "methods": 1119,
-    "total": 2923
+    "methods": 1121,
+    "total": 2925
   },
   "layer": 231,
   "methods": [
@@ -29343,6 +29343,14 @@
       "source": "core.telegram.org/schema/json"
     },
     {
+      "id": 889307274,
+      "kind": "method",
+      "name": "bots.addUsername",
+      "params": [],
+      "result": "Bool",
+      "source": "sources/org/telegram/tgnet/tl/TL_bots.java"
+    },
+    {
       "id": -248323089,
       "kind": "method",
       "name": "bots.allowSendMessage",
@@ -29705,6 +29713,14 @@
       ],
       "result": "DataJSON",
       "source": "core.telegram.org/schema/json"
+    },
+    {
+      "id": -956033923,
+      "kind": "method",
+      "name": "bots.removeUsername",
+      "params": [],
+      "result": "Bool",
+      "source": "sources/org/telegram/tgnet/tl/TL_bots.java"
     },
     {
       "id": -1238895702,
@@ -39910,14 +39926,14 @@
     "max_definition_removal_ratio": 0.1
   },
   "sha256": {
-    "tl": "bc9fd4d026b53119832efb83ae4ddbd390c6af84b94251425c5cacf2bd251a3b"
+    "tl": "5f17f6cb0052825e39813b473d244f1730ea3ff858db8c7eaf3fb46653f7674b"
   },
   "source": {
     "apk": "https://cdn4.telesco.pe/file/Telegram-Beta.apk",
-    "apk_sha256": "b656981fd4908ced8f01b4743cc9b43d1a3849239e3b39c79a739cda8e65b114",
+    "apk_sha256": "88e4d637d0af2d7556d170216122e5ad52e64dd2751614bb9320b75330fc12c1",
     "jadx": "https://github.com/skylot/jadx/releases/download/v1.5.6/jadx-1.5.6.zip",
     "package": "org.telegram.messenger.beta",
-    "version_code": 71669,
-    "version_name": "13.0.1"
+    "version_code": 71809,
+    "version_name": "13.0.2"
   }
 }
