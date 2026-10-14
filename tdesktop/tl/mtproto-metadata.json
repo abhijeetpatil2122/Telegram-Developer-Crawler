@@ -16,8 +16,8 @@
   "source_repository": "https://github.com/telegramdesktop/tdesktop",
   "upstream": {
     "branch": "dev",
-    "commit": "fad667c6d71c5e965a9da71e48dc1ab82ba0568d",
-    "commit_url": "https://github.com/telegramdesktop/tdesktop/commit/fad667c6d71c5e965a9da71e48dc1ab82ba0568d",
-    "message": "[ai] Require a batch specification for continue"
+    "commit": "c317da960b2664962aeb17892adbd6dda59c98fe",
+    "commit_url": "https://github.com/telegramdesktop/tdesktop/commit/c317da960b2664962aeb17892adbd6dda59c98fe",
+    "message": "Use whitelisted domains from API."
   }
 }
