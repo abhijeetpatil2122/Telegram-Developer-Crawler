@@ -16,8 +16,8 @@
   "source_repository": "https://github.com/telegramdesktop/tdesktop",
   "upstream": {
     "branch": "dev",
-    "commit": "3f406f09a7fea066c5670bc52e9cfd3649e209b8",
-    "commit_url": "https://github.com/telegramdesktop/tdesktop/commit/3f406f09a7fea066c5670bc52e9cfd3649e209b8",
-    "message": "Hide the expanded copied toast after the full duration"
+    "commit": "fad667c6d71c5e965a9da71e48dc1ab82ba0568d",
+    "commit_url": "https://github.com/telegramdesktop/tdesktop/commit/fad667c6d71c5e965a9da71e48dc1ab82ba0568d",
+    "message": "[ai] Require a batch specification for continue"
   }
 }

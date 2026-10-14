@@ -1247,7 +1247,7 @@
         "key": "ton_blockchain_explorer_url",
         "value": {
           "_": "JsonString",
-          "value": "https://tonscan.org/"
+          "value": "https://gram.org/"
         }
       },
       {
@@ -1463,7 +1463,7 @@
         "key": "ton_usd_rate",
         "value": {
           "_": "JsonNumber",
-          "value": 1.3797228190723176
+          "value": 1.360339233431786
         }
       },
       {
