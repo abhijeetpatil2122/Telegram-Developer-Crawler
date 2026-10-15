@@ -16,8 +16,8 @@
   "source_repository": "https://github.com/telegramdesktop/tdesktop",
   "upstream": {
     "branch": "dev",
-    "commit": "c317da960b2664962aeb17892adbd6dda59c98fe",
-    "commit_url": "https://github.com/telegramdesktop/tdesktop/commit/c317da960b2664962aeb17892adbd6dda59c98fe",
-    "message": "Use whitelisted domains from API."
+    "commit": "b16daff6df63e8a812bc2b52a04ff243f67a7d3f",
+    "commit_url": "https://github.com/telegramdesktop/tdesktop/commit/b16daff6df63e8a812bc2b52a04ff243f67a7d3f",
+    "message": "[ai] Give the macOS full recompile its own AGENTS.md section"
   }
 }
