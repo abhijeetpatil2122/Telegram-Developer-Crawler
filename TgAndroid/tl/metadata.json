@@ -2,16 +2,16 @@
   "channels": {
     "beta": {
       "counts": {
-        "constructors": 1804,
+        "constructors": 1805,
         "methods": 1121,
-        "total": 2925
+        "total": 2926
       },
       "e2e_json": "beta/e2e.json",
       "e2e_tl": "beta/e2e.tl",
       "layer": 231,
       "main_api_json": "beta/main_api.json",
       "main_api_tl": "beta/main_api.tl",
-      "sha256": "5f17f6cb0052825e39813b473d244f1730ea3ff858db8c7eaf3fb46653f7674b"
+      "sha256": "3558b6635d77d2375fe726ec7dab676890ff5ad39dd3971968ab51d798bf69b1"
     },
     "stable": {
       "counts": {
