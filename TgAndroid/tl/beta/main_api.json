@@ -8529,7 +8529,7 @@
       "name": "inputChatPhoto",
       "params": [
         {
-          "name": "f20332id",
+          "name": "f20339id",
           "type": "InputPhoto"
         }
       ],
@@ -9335,7 +9335,7 @@
       "name": "inputMediaDocument",
       "params": [
         {
-          "name": "f20333id",
+          "name": "f20340id",
           "type": "InputDocument"
         },
         {
@@ -9373,7 +9373,7 @@
       "name": "inputMediaGame",
       "params": [
         {
-          "name": "f20334id",
+          "name": "f20341id",
           "type": "InputGame"
         }
       ],
@@ -9445,7 +9445,7 @@
       "name": "inputMediaPhoto",
       "params": [
         {
-          "name": "f20335id",
+          "name": "f20342id",
           "type": "InputPhoto"
         },
         {
@@ -10978,7 +10978,7 @@
       "name": "inputStickeredMediaDocument",
       "params": [
         {
-          "name": "f20341id",
+          "name": "f20348id",
           "type": "InputDocument"
         }
       ],
@@ -10991,7 +10991,7 @@
       "name": "inputStickeredMediaPhoto",
       "params": [
         {
-          "name": "f20342id",
+          "name": "f20349id",
           "type": "InputPhoto"
         }
       ],
@@ -20199,14 +20199,6 @@
       "type": "SendMessageAction"
     },
     {
-      "id": -43844655,
-      "kind": "constructor",
-      "name": "shareThemeBackdrop",
-      "params": [],
-      "source": "sources/org/telegram/tgnet/TLRPC.java",
-      "type": "ShareTheme"
-    },
-    {
       "id": -1427448608,
       "kind": "constructor",
       "name": "shareThemeBackdrops",
@@ -20223,14 +20215,6 @@
       "type": "ShareThemeBackdrops"
     },
     {
-      "id": 524860448,
-      "kind": "constructor",
-      "name": "shareThemeColor",
-      "params": [],
-      "source": "sources/org/telegram/tgnet/TLRPC.java",
-      "type": "ShareTheme"
-    },
-    {
       "id": -1783830449,
       "kind": "constructor",
       "name": "shareThemeDefault",
@@ -20239,9 +20223,9 @@
       "type": "ShareTheme"
     },
     {
-      "id": 984892170,
+      "id": 1689466081,
       "kind": "constructor",
-      "name": "shareThemeEmoji",
+      "name": "shareThemeEmojiBackdrop",
       "params": [],
       "source": "sources/org/telegram/tgnet/TLRPC.java",
       "type": "ShareTheme"
@@ -27116,9 +27100,9 @@
     }
   ],
   "counts": {
-    "constructors": 1820,
+    "constructors": 1818,
     "methods": 1131,
-    "total": 2951
+    "total": 2949
   },
   "layer": 232,
   "methods": [
@@ -32424,7 +32408,7 @@
       "source": "sources/org/telegram/tgnet/tl/TL_stars.java"
     },
     {
-      "id": -884036341,
+      "id": -926252677,
       "kind": "method",
       "name": "getStarGiftWithdrawalUrl",
       "params": [],
@@ -40248,7 +40232,7 @@
       "source": "sources/org/telegram/tgnet/tl/TL_account.java"
     },
     {
-      "id": 537959603,
+      "id": -333434706,
       "kind": "method",
       "name": "withdrawStarGift",
       "params": [],
@@ -40260,14 +40244,14 @@
     "max_definition_removal_ratio": 0.1
   },
   "sha256": {
-    "tl": "c38aa650980d0a8f6a335c051cd49e0c843f9015d6fa49e38fdf51cded9d3db1"
+    "tl": "bee804c9e954555fe951d93899a48742b73b7aa5616efba2e3214b5e6d69abd6"
   },
   "source": {
     "apk": "https://cdn4.telesco.pe/file/Telegram-Beta.apk",
-    "apk_sha256": "14e62d80876d1de89302f5ffc32835624f9fed0a1058721e550777442f4dbbbe",
+    "apk_sha256": "8ab134c35f99d372b22f224ad959164e7183d71f69b17f52f857e80eb51e9334",
     "jadx": "https://github.com/skylot/jadx/releases/download/v1.5.6/jadx-1.5.6.zip",
     "package": "org.telegram.messenger.beta",
-    "version_code": 72139,
+    "version_code": 72159,
     "version_name": "13.1.0"
   }
 }
