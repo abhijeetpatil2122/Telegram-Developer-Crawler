@@ -1,23 +1,23 @@
 {
   "counts": {
-    "constructors": 1704,
+    "constructors": 1705,
     "functions": 850,
-    "total": 2554
+    "total": 2555
   },
   "safety": {
     "max_definition_removal_ratio": 0.1
   },
   "sha256": {
-    "json": "fb55b7581e5a82d9df04fb9fa282d83e2618d88df8debc4430371823dcbed3ef",
-    "tl": "fb99a69d92bac2e91033bd81c6d16b006ae926ee24bc2501c866a52ce5921274"
+    "json": "f0a09a62d0dd5490707b6cd60301444c6751bc7cce7ea736d3c278a8363c0c57",
+    "tl": "e050d45b6abebee386ddeba96af3b14378714fc87be79fc4a2f84297d8af1577"
   },
   "source": "https://raw.githubusercontent.com/telegramdesktop/tdesktop/dev/Telegram/SourceFiles/mtproto/scheme/api.tl",
   "source_path": "Telegram/SourceFiles/mtproto/scheme/api.tl",
   "source_repository": "https://github.com/telegramdesktop/tdesktop",
   "upstream": {
     "branch": "dev",
-    "commit": "b16daff6df63e8a812bc2b52a04ff243f67a7d3f",
-    "commit_url": "https://github.com/telegramdesktop/tdesktop/commit/b16daff6df63e8a812bc2b52a04ff243f67a7d3f",
-    "message": "[ai] Give the macOS full recompile its own AGENTS.md section"
+    "commit": "0a11537c220df35fe59a96aebe413b1e52bc6e47",
+    "commit_url": "https://github.com/telegramdesktop/tdesktop/commit/0a11537c220df35fe59a96aebe413b1e52bc6e47",
+    "message": "Fixed rename of archive row dropping zip extension."
   }
 }

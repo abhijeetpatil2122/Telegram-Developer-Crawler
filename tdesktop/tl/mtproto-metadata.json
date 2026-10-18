@@ -16,8 +16,8 @@
   "source_repository": "https://github.com/telegramdesktop/tdesktop",
   "upstream": {
     "branch": "dev",
-    "commit": "b16daff6df63e8a812bc2b52a04ff243f67a7d3f",
-    "commit_url": "https://github.com/telegramdesktop/tdesktop/commit/b16daff6df63e8a812bc2b52a04ff243f67a7d3f",
-    "message": "[ai] Give the macOS full recompile its own AGENTS.md section"
+    "commit": "0a11537c220df35fe59a96aebe413b1e52bc6e47",
+    "commit_url": "https://github.com/telegramdesktop/tdesktop/commit/0a11537c220df35fe59a96aebe413b1e52bc6e47",
+    "message": "Fixed rename of archive row dropping zip extension."
   }
 }
