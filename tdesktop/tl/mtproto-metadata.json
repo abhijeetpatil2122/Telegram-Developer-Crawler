@@ -16,8 +16,8 @@
   "source_repository": "https://github.com/telegramdesktop/tdesktop",
   "upstream": {
     "branch": "dev",
-    "commit": "1e18da644e37856c9b1d87434bfcd6a2e3d11c57",
-    "commit_url": "https://github.com/telegramdesktop/tdesktop/commit/1e18da644e37856c9b1d87434bfcd6a2e3d11c57",
-    "message": "Added keyboard shortcuts legend layer."
+    "commit": "351204f3695b4a39bc3f4d2f230c061b9a01fe2a",
+    "commit_url": "https://github.com/telegramdesktop/tdesktop/commit/351204f3695b4a39bc3f4d2f230c061b9a01fe2a",
+    "message": "Have same Qt prepare cache key in sibling checkouts."
   }
 }

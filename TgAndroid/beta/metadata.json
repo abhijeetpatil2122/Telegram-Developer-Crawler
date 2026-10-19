@@ -1,13 +1,13 @@
 {
   "android": {
     "package": "org.telegram.messenger.beta",
-    "version_code": 72209,
+    "version_code": 72299,
     "version_name": "13.1.0"
   },
   "artifact": {
     "filename": "beta.apk",
-    "sha256": "174077741f09f0adc19bac7c37bcbb3ab4e2514de3dd0f3c40662a01888867db",
-    "size": 70621728
+    "sha256": "56a22b11a19dbd16a5826c993433945560d157dae81b75e195ed9e5898453351",
+    "size": 70694838
   },
   "channel": "beta",
   "extractor": {
@@ -25,8 +25,8 @@
   "tl_extraction": {
     "counts": {
       "constructors": 1818,
-      "methods": 1131,
-      "total": 2949
+      "methods": 1132,
+      "total": 2950
     },
     "e2e_json": "e2e.json",
     "e2e_tl": "e2e.tl",
@@ -34,7 +34,7 @@
     "layer": 232,
     "main_api_json": "main_api.json",
     "main_api_tl": "main_api.tl",
-    "sha256": "603f9ce3e2007cdf643e53bb0e2764515397b73dda595cf97e79bf2bed02b3af",
+    "sha256": "18c0cba5537aed23b10cda96e5c721580a6f3bb647b2ef94041a8ad62068cd2f",
     "stage": "5B",
     "target_package": "org.telegram.tgnet"
   }

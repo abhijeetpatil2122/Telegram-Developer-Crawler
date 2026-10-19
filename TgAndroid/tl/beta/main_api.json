@@ -3706,7 +3706,7 @@
       "type": "Chat"
     },
     {
-      "id": -1605464774,
+      "id": -993731264,
       "kind": "constructor",
       "name": "channelFull",
       "params": [
@@ -3765,6 +3765,10 @@
         {
           "name": "main_tab",
           "type": "ProfileTab"
+        },
+        {
+          "name": "share_theme",
+          "type": "ShareTheme"
         }
       ],
       "source": "sources/org/telegram/tgnet/TLRPC.java",
@@ -8529,7 +8533,7 @@
       "name": "inputChatPhoto",
       "params": [
         {
-          "name": "f20332id",
+          "name": "f20333id",
           "type": "InputPhoto"
         }
       ],
@@ -9335,7 +9339,7 @@
       "name": "inputMediaDocument",
       "params": [
         {
-          "name": "f20333id",
+          "name": "f20334id",
           "type": "InputDocument"
         },
         {
@@ -9373,7 +9377,7 @@
       "name": "inputMediaGame",
       "params": [
         {
-          "name": "f20334id",
+          "name": "f20335id",
           "type": "InputGame"
         }
       ],
@@ -9445,7 +9449,7 @@
       "name": "inputMediaPhoto",
       "params": [
         {
-          "name": "f20335id",
+          "name": "f20336id",
           "type": "InputPhoto"
         },
         {
@@ -10978,7 +10982,7 @@
       "name": "inputStickeredMediaDocument",
       "params": [
         {
-          "name": "f20341id",
+          "name": "f20342id",
           "type": "InputDocument"
         }
       ],
@@ -10991,7 +10995,7 @@
       "name": "inputStickeredMediaPhoto",
       "params": [
         {
-          "name": "f20342id",
+          "name": "f20343id",
           "type": "InputPhoto"
         }
       ],
@@ -26103,6 +26107,123 @@
       "type": "User"
     },
     {
+      "id": -1190384899,
+      "kind": "constructor",
+      "name": "userFull",
+      "params": [
+        {
+          "name": "settings",
+          "type": "PeerSettings"
+        },
+        {
+          "name": "personal_photo",
+          "type": "Photo"
+        },
+        {
+          "name": "profile_photo",
+          "type": "Photo"
+        },
+        {
+          "name": "fallback_photo",
+          "type": "Photo"
+        },
+        {
+          "name": "notify_settings",
+          "type": "PeerNotifySettings"
+        },
+        {
+          "name": "bot_info",
+          "type": "BotInfo"
+        },
+        {
+          "name": "theme",
+          "type": "ChatTheme"
+        },
+        {
+          "name": "bot_group_admin_rights",
+          "type": "chatAdminRights"
+        },
+        {
+          "name": "bot_broadcast_admin_rights",
+          "type": "chatAdminRights"
+        },
+        {
+          "name": "wallpaper",
+          "type": "WallPaper"
+        },
+        {
+          "name": "stories",
+          "type": "PeerStories"
+        },
+        {
+          "name": "business_work_hours",
+          "type": "businessWorkHours"
+        },
+        {
+          "name": "business_location",
+          "type": "businessLocation"
+        },
+        {
+          "name": "business_greeting_message",
+          "type": "businessGreetingMessage"
+        },
+        {
+          "name": "business_away_message",
+          "type": "businessAwayMessage"
+        },
+        {
+          "name": "business_intro",
+          "type": "businessIntro"
+        },
+        {
+          "name": "birthday",
+          "type": "birthday"
+        },
+        {
+          "name": "starref_program",
+          "type": "starRefProgram"
+        },
+        {
+          "name": "bot_verification",
+          "type": "BotVerification"
+        },
+        {
+          "name": "disallowed_stargifts",
+          "type": "DisallowedGiftsSettings"
+        },
+        {
+          "name": "stars_rating",
+          "type": "tl.starsRating"
+        },
+        {
+          "name": "stars_my_pending_rating",
+          "type": "tl.starsRating"
+        },
+        {
+          "name": "main_tab",
+          "type": "ProfileTab"
+        },
+        {
+          "name": "saved_music",
+          "type": "Document"
+        },
+        {
+          "name": "note",
+          "type": "textWithEntities"
+        },
+        {
+          "name": "wallet_card",
+          "type": "card"
+        },
+        {
+          "name": "share_theme",
+          "type": "ShareTheme"
+        }
+      ],
+      "source": "sources/org/telegram/tgnet/TLRPC.java",
+      "type": "UserFull"
+    },
+    {
       "id": 114026053,
       "kind": "constructor",
       "name": "userFull",
@@ -26349,119 +26470,6 @@
         }
       ],
       "source": "core.telegram.org/schema/json",
-      "type": "UserFull"
-    },
-    {
-      "id": 1532300998,
-      "kind": "constructor",
-      "name": "userFull",
-      "params": [
-        {
-          "name": "settings",
-          "type": "PeerSettings"
-        },
-        {
-          "name": "personal_photo",
-          "type": "Photo"
-        },
-        {
-          "name": "profile_photo",
-          "type": "Photo"
-        },
-        {
-          "name": "fallback_photo",
-          "type": "Photo"
-        },
-        {
-          "name": "notify_settings",
-          "type": "PeerNotifySettings"
-        },
-        {
-          "name": "bot_info",
-          "type": "BotInfo"
-        },
-        {
-          "name": "theme",
-          "type": "ChatTheme"
-        },
-        {
-          "name": "bot_group_admin_rights",
-          "type": "chatAdminRights"
-        },
-        {
-          "name": "bot_broadcast_admin_rights",
-          "type": "chatAdminRights"
-        },
-        {
-          "name": "wallpaper",
-          "type": "WallPaper"
-        },
-        {
-          "name": "stories",
-          "type": "PeerStories"
-        },
-        {
-          "name": "business_work_hours",
-          "type": "businessWorkHours"
-        },
-        {
-          "name": "business_location",
-          "type": "businessLocation"
-        },
-        {
-          "name": "business_greeting_message",
-          "type": "businessGreetingMessage"
-        },
-        {
-          "name": "business_away_message",
-          "type": "businessAwayMessage"
-        },
-        {
-          "name": "business_intro",
-          "type": "businessIntro"
-        },
-        {
-          "name": "birthday",
-          "type": "birthday"
-        },
-        {
-          "name": "starref_program",
-          "type": "starRefProgram"
-        },
-        {
-          "name": "bot_verification",
-          "type": "BotVerification"
-        },
-        {
-          "name": "disallowed_stargifts",
-          "type": "DisallowedGiftsSettings"
-        },
-        {
-          "name": "stars_rating",
-          "type": "tl.starsRating"
-        },
-        {
-          "name": "stars_my_pending_rating",
-          "type": "tl.starsRating"
-        },
-        {
-          "name": "main_tab",
-          "type": "ProfileTab"
-        },
-        {
-          "name": "saved_music",
-          "type": "Document"
-        },
-        {
-          "name": "note",
-          "type": "textWithEntities"
-        },
-        {
-          "name": "wallet_card",
-          "type": "card"
-        }
-      ],
-      "source": "sources/org/telegram/tgnet/TLRPC.java",
       "type": "UserFull"
     },
     {
@@ -27101,8 +27109,8 @@
   ],
   "counts": {
     "constructors": 1818,
-    "methods": 1131,
-    "total": 2949
+    "methods": 1132,
+    "total": 2950
   },
   "layer": 232,
   "methods": [
@@ -31601,6 +31609,14 @@
       "params": [],
       "result": "Bool",
       "source": "sources/org/telegram/tgnet/tl/TL_account.java"
+    },
+    {
+      "id": 1020983466,
+      "kind": "method",
+      "name": "deleteStarGift",
+      "params": [],
+      "result": "Bool",
+      "source": "sources/org/telegram/tgnet/tl/TL_stars.java"
     },
     {
       "id": -1386854168,
@@ -40244,14 +40260,14 @@
     "max_definition_removal_ratio": 0.1
   },
   "sha256": {
-    "tl": "603f9ce3e2007cdf643e53bb0e2764515397b73dda595cf97e79bf2bed02b3af"
+    "tl": "18c0cba5537aed23b10cda96e5c721580a6f3bb647b2ef94041a8ad62068cd2f"
   },
   "source": {
     "apk": "https://cdn4.telesco.pe/file/Telegram-Beta.apk",
-    "apk_sha256": "174077741f09f0adc19bac7c37bcbb3ab4e2514de3dd0f3c40662a01888867db",
+    "apk_sha256": "56a22b11a19dbd16a5826c993433945560d157dae81b75e195ed9e5898453351",
     "jadx": "https://github.com/skylot/jadx/releases/download/v1.5.6/jadx-1.5.6.zip",
     "package": "org.telegram.messenger.beta",
-    "version_code": 72209,
+    "version_code": 72299,
     "version_name": "13.1.0"
   }
 }
