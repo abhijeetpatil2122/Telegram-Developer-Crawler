@@ -9,15 +9,15 @@
   },
   "sha256": {
     "json": "dafb7005392c9ba25d053b814c00113b46732dc263b3dd42ab7d36bb9b39d554",
-    "tl": "3f1a27b459e3fa5d3e24c2a8a8864a70f927bde92dc293f1d610aef92b5f2746"
+    "tl": "be088026a614aa9bc95fbc50226392146339b9d5b12e1bed9415c3ca20128df7"
   },
   "source": "https://raw.githubusercontent.com/tdlib/td/master/td/generate/scheme/td_api.tl",
   "source_path": "td/generate/scheme/td_api.tl",
   "source_repository": "https://github.com/tdlib/td",
   "upstream": {
     "branch": "master",
-    "commit": "a94b83d67ab4c8397c6245e541b31a4131ea2f79",
-    "commit_url": "https://github.com/tdlib/td/commit/a94b83d67ab4c8397c6245e541b31a4131ea2f79",
-    "message": "Always send updateFile for merged files"
+    "commit": "631edce27b702691e9a603059c78550b6b533a64",
+    "commit_url": "https://github.com/tdlib/td/commit/631edce27b702691e9a603059c78550b6b533a64",
+    "message": "Send updates for merged files only if they have pinned file identifiers"
   }
 }
