@@ -16,8 +16,8 @@
   "source_repository": "https://github.com/telegramdesktop/tdesktop",
   "upstream": {
     "branch": "dev",
-    "commit": "78ceaa548ae0e055aa56b53fde22064d13f250ef",
-    "commit_url": "https://github.com/telegramdesktop/tdesktop/commit/78ceaa548ae0e055aa56b53fde22064d13f250ef",
-    "message": "Edit Folders above Mark all chats as read."
+    "commit": "0eca52223cceed229932add1cc80792763120844",
+    "commit_url": "https://github.com/telegramdesktop/tdesktop/commit/0eca52223cceed229932add1cc80792763120844",
+    "message": "Version 7.3.2."
   }
 }

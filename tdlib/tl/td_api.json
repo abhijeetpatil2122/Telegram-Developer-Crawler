@@ -1595,6 +1595,14 @@
     {
       "id": null,
       "kind": "constructors",
+      "name": "areaPosition",
+      "params": "x_percentage:double y_percentage:double width_percentage:double height_percentage:double rotation_angle:double corner_radius_percentage:double",
+      "result": "AreaPosition",
+      "source": "areaPosition x_percentage:double y_percentage:double width_percentage:double height_percentage:double rotation_angle:double corner_radius_percentage:double = AreaPosition;"
+    },
+    {
+      "id": null,
+      "kind": "constructors",
       "name": "giftResalePriceStar",
       "params": "star_count:int53",
       "result": "GiftResalePrice",
@@ -2196,9 +2204,9 @@
       "id": null,
       "kind": "constructors",
       "name": "upgradedGift",
-      "params": "id:int64 regular_gift_id:int64 publisher_chat_id:int53 title:string name:string number:int32 total_upgraded_count:int32 max_upgraded_count:int32 is_burned:Bool is_crafted:Bool is_premium:Bool is_theme_available:Bool used_theme_chat_id:int53 host_id:MessageSender owner_id:MessageSender owner_address:string owner_name:string gift_address:string model:upgradedGiftModel symbol:upgradedGiftSymbol backdrop:upgradedGiftBackdrop original_details:upgradedGiftOriginalDetails colors:upgradedGiftColors resale_parameters:giftResaleParameters can_send_purchase_offer:Bool craft_probability_per_mille:int32 value_currency:string value_amount:int53 value_usd_amount:int53",
+      "params": "id:int64 regular_gift_id:int64 publisher_chat_id:int53 title:string name:string number:int32 total_upgraded_count:int32 max_upgraded_count:int32 is_burned:Bool is_crafted:Bool is_premium:Bool is_theme_available:Bool used_theme_chat_id:int53 host_id:MessageSender owner_id:MessageSender owner_address:string owner_name:string gift_address:string can_be_ton_wallet_card_background:Bool model:upgradedGiftModel symbol:upgradedGiftSymbol backdrop:upgradedGiftBackdrop original_details:upgradedGiftOriginalDetails colors:upgradedGiftColors resale_parameters:giftResaleParameters can_send_purchase_offer:Bool craft_probability_per_mille:int32 value_currency:string value_amount:int53 value_usd_amount:int53",
       "result": "UpgradedGift",
-      "source": "upgradedGift id:int64 regular_gift_id:int64 publisher_chat_id:int53 title:string name:string number:int32 total_upgraded_count:int32 max_upgraded_count:int32 is_burned:Bool is_crafted:Bool is_premium:Bool is_theme_available:Bool used_theme_chat_id:int53 host_id:MessageSender owner_id:MessageSender owner_address:string owner_name:string gift_address:string model:upgradedGiftModel symbol:upgradedGiftSymbol backdrop:upgradedGiftBackdrop original_details:upgradedGiftOriginalDetails colors:upgradedGiftColors resale_parameters:giftResaleParameters can_send_purchase_offer:Bool craft_probability_per_mille:int32 value_currency:string value_amount:int53 value_usd_amount:int53 = UpgradedGift;"
+      "source": "upgradedGift id:int64 regular_gift_id:int64 publisher_chat_id:int53 title:string name:string number:int32 total_upgraded_count:int32 max_upgraded_count:int32 is_burned:Bool is_crafted:Bool is_premium:Bool is_theme_available:Bool used_theme_chat_id:int53 host_id:MessageSender owner_id:MessageSender owner_address:string owner_name:string gift_address:string can_be_ton_wallet_card_background:Bool model:upgradedGiftModel symbol:upgradedGiftSymbol backdrop:upgradedGiftBackdrop original_details:upgradedGiftOriginalDetails colors:upgradedGiftColors resale_parameters:giftResaleParameters can_send_purchase_offer:Bool craft_probability_per_mille:int32 value_currency:string value_amount:int53 value_usd_amount:int53 = UpgradedGift;"
     },
     {
       "id": null,
@@ -2207,6 +2215,14 @@
       "params": "currency:string value:int53 is_value_average:Bool initial_sale_date:int32 initial_sale_star_count:int53 initial_sale_price:int53 last_sale_date:int32 last_sale_price:int53 is_last_sale_on_fragment:Bool minimum_price:int53 average_sale_price:int53 telegram_listed_gift_count:int32 fragment_listed_gift_count:int32 fragment_url:string",
       "result": "UpgradedGiftValueInfo",
       "source": "upgradedGiftValueInfo currency:string value:int53 is_value_average:Bool initial_sale_date:int32 initial_sale_star_count:int53 initial_sale_price:int53 last_sale_date:int32 last_sale_price:int53 is_last_sale_on_fragment:Bool minimum_price:int53 average_sale_price:int53 telegram_listed_gift_count:int32 fragment_listed_gift_count:int32 fragment_url:string = UpgradedGiftValueInfo;"
+    },
+    {
+      "id": null,
+      "kind": "constructors",
+      "name": "upgradedGiftDepositInfo",
+      "params": "nft_address:string payload:bytes gram_amount:int53",
+      "result": "UpgradedGiftDepositInfo",
+      "source": "upgradedGiftDepositInfo nft_address:string payload:bytes gram_amount:int53 = UpgradedGiftDepositInfo;"
     },
     {
       "id": null,
@@ -2396,9 +2412,9 @@
       "id": null,
       "kind": "constructors",
       "name": "receivedGift",
-      "params": "received_gift_id:string sender_id:MessageSender text:formattedText unique_gift_number:int32 is_private:Bool is_saved:Bool is_pinned:Bool can_be_upgraded:Bool can_be_transferred:Bool was_refunded:Bool date:int32 gift:SentGift collection_ids:vector<int32> sell_star_count:int53 prepaid_upgrade_star_count:int53 is_upgrade_separate:Bool transfer_star_count:int53 drop_original_details_star_count:int53 next_transfer_date:int32 next_resale_date:int32 export_date:int32 prepaid_upgrade_hash:string craft_date:int32",
+      "params": "received_gift_id:string sender_id:MessageSender text:formattedText unique_gift_number:int32 is_private:Bool is_saved:Bool is_pinned:Bool can_be_upgraded:Bool can_be_transferred:Bool can_be_deleted:Bool was_refunded:Bool date:int32 gift:SentGift collection_ids:vector<int32> sell_star_count:int53 prepaid_upgrade_star_count:int53 is_upgrade_separate:Bool transfer_star_count:int53 drop_original_details_star_count:int53 next_transfer_date:int32 next_resale_date:int32 export_date:int32 prepaid_upgrade_hash:string craft_date:int32",
       "result": "ReceivedGift",
-      "source": "receivedGift received_gift_id:string sender_id:MessageSender text:formattedText unique_gift_number:int32 is_private:Bool is_saved:Bool is_pinned:Bool can_be_upgraded:Bool can_be_transferred:Bool was_refunded:Bool date:int32 gift:SentGift collection_ids:vector<int32> sell_star_count:int53 prepaid_upgrade_star_count:int53 is_upgrade_separate:Bool transfer_star_count:int53 drop_original_details_star_count:int53 next_transfer_date:int32 next_resale_date:int32 export_date:int32 prepaid_upgrade_hash:string craft_date:int32 = ReceivedGift;"
+      "source": "receivedGift received_gift_id:string sender_id:MessageSender text:formattedText unique_gift_number:int32 is_private:Bool is_saved:Bool is_pinned:Bool can_be_upgraded:Bool can_be_transferred:Bool can_be_deleted:Bool was_refunded:Bool date:int32 gift:SentGift collection_ids:vector<int32> sell_star_count:int53 prepaid_upgrade_star_count:int53 is_upgrade_separate:Bool transfer_star_count:int53 drop_original_details_star_count:int53 next_transfer_date:int32 next_resale_date:int32 export_date:int32 prepaid_upgrade_hash:string craft_date:int32 = ReceivedGift;"
     },
     {
       "id": null,
@@ -3067,6 +3083,14 @@
     {
       "id": null,
       "kind": "constructors",
+      "name": "tonWalletSecretPhrase",
+      "params": "secret_phrase:string",
+      "result": "TonWalletSecretPhrase",
+      "source": "tonWalletSecretPhrase secret_phrase:string = TonWalletSecretPhrase;"
+    },
+    {
+      "id": null,
+      "kind": "constructors",
       "name": "tonWalletGaslessTransfersInfo",
       "params": "left_count:int32 reset_date:int32 relayer_address:string",
       "result": "TonWalletGaslessTransfersInfo",
@@ -3172,9 +3196,9 @@
       "id": null,
       "kind": "constructors",
       "name": "tonNft",
-      "params": "collection_address:string address:string owner_address:string index:string name:string description:string image:photoSize thumbnail:photoSize content:document sticker:sticker attributes:vector<tonNftAttribute> extra:JsonValue",
+      "params": "collection_address:string address:string owner_address:string index:string name:string description:string image:photoSize thumbnail:photoSize content:document sticker:sticker attributes:vector<tonNftAttribute> extra:JsonValue gift:upgradedGift",
       "result": "TonNft",
-      "source": "tonNft collection_address:string address:string owner_address:string index:string name:string description:string image:photoSize thumbnail:photoSize content:document sticker:sticker attributes:vector<tonNftAttribute> extra:JsonValue = TonNft;"
+      "source": "tonNft collection_address:string address:string owner_address:string index:string name:string description:string image:photoSize thumbnail:photoSize content:document sticker:sticker attributes:vector<tonNftAttribute> extra:JsonValue gift:upgradedGift = TonNft;"
     },
     {
       "id": null,
@@ -3183,6 +3207,38 @@
       "params": "nfts:vector<tonNft> next_offset:string",
       "result": "TonNfts",
       "source": "tonNfts nfts:vector<tonNft> next_offset:string = TonNfts;"
+    },
+    {
+      "id": null,
+      "kind": "constructors",
+      "name": "tonWalletCardSticker",
+      "params": "position:areaPosition nft:tonNft",
+      "result": "TonWalletCardSticker",
+      "source": "tonWalletCardSticker position:areaPosition nft:tonNft = TonWalletCardSticker;"
+    },
+    {
+      "id": null,
+      "kind": "constructors",
+      "name": "tonWalletCard",
+      "params": "address:string gram_amount:int53 stickers:vector<tonWalletCardSticker> background_nft_address:string",
+      "result": "TonWalletCard",
+      "source": "tonWalletCard address:string gram_amount:int53 stickers:vector<tonWalletCardSticker> background_nft_address:string = TonWalletCard;"
+    },
+    {
+      "id": null,
+      "kind": "constructors",
+      "name": "inputTonWalletCardSticker",
+      "params": "position:areaPosition nft_address:string",
+      "result": "InputTonWalletCardSticker",
+      "source": "inputTonWalletCardSticker position:areaPosition nft_address:string = InputTonWalletCardSticker;"
+    },
+    {
+      "id": null,
+      "kind": "constructors",
+      "name": "upgradedGiftCollectionNames",
+      "params": "names:vector<string>",
+      "result": "UpgradedGiftCollectionNames",
+      "source": "upgradedGiftCollectionNames names:vector<string> = UpgradedGiftCollectionNames;"
     },
     {
       "id": null,
@@ -3223,6 +3279,14 @@
       "params": "nft:tonNft is_outgoing:Bool comment:string is_comment_encrypted:Bool",
       "result": "TonWalletTransactionType",
       "source": "tonWalletTransactionTypeNftTransfer nft:tonNft is_outgoing:Bool comment:string is_comment_encrypted:Bool = TonWalletTransactionType;"
+    },
+    {
+      "id": null,
+      "kind": "constructors",
+      "name": "tonWalletTransactionTypeTelegramGiftTransfer",
+      "params": "nft:tonNft is_outgoing:Bool is_saved:Bool",
+      "result": "TonWalletTransactionType",
+      "source": "tonWalletTransactionTypeTelegramGiftTransfer nft:tonNft is_outgoing:Bool is_saved:Bool = TonWalletTransactionType;"
     },
     {
       "id": null,
@@ -3359,6 +3423,14 @@
       "params": "manifest_url:string items:vector<TonConnectConnectItem>",
       "result": "TonConnectConnectRequest",
       "source": "tonConnectConnectRequest manifest_url:string items:vector<TonConnectConnectItem> = TonConnectConnectRequest;"
+    },
+    {
+      "id": null,
+      "kind": "constructors",
+      "name": "tonConnectConnectData",
+      "params": "session_id:int64 challenge_answer:bytes body:bytes proof:tonWalletOwnershipProof",
+      "result": "TonConnectConnectData",
+      "source": "tonConnectConnectData session_id:int64 challenge_answer:bytes body:bytes proof:tonWalletOwnershipProof = TonConnectConnectData;"
     },
     {
       "id": null,
@@ -3716,9 +3788,9 @@
       "id": null,
       "kind": "constructors",
       "name": "userFullInfo",
-      "params": "personal_photo:chatPhoto photo:chatPhoto public_photo:chatPhoto community_id:int53 block_list:BlockList can_be_called:Bool supports_video_calls:Bool has_private_calls:Bool has_private_forwards:Bool has_restricted_voice_and_video_note_messages:Bool has_posted_to_profile_stories:Bool has_sponsored_messages_enabled:Bool need_phone_number_privacy_exception:Bool set_chat_background:Bool uses_unofficial_app:Bool bio:formattedText birthdate:birthdate personal_chat_id:int53 gift_count:int32 group_in_common_count:int32 incoming_paid_message_star_count:int53 outgoing_paid_message_star_count:int53 gift_settings:giftSettings bot_verification:botVerification main_profile_tab:ProfileTab first_profile_audio:audio rating:userRating pending_rating:userRating pending_rating_date:int32 note:formattedText business_info:businessInfo bot_info:botInfo",
+      "params": "personal_photo:chatPhoto photo:chatPhoto public_photo:chatPhoto community_id:int53 block_list:BlockList can_be_called:Bool supports_video_calls:Bool has_private_calls:Bool has_private_forwards:Bool has_restricted_voice_and_video_note_messages:Bool has_posted_to_profile_stories:Bool has_sponsored_messages_enabled:Bool need_phone_number_privacy_exception:Bool set_chat_background:Bool uses_unofficial_app:Bool bio:formattedText birthdate:birthdate personal_chat_id:int53 gift_count:int32 group_in_common_count:int32 incoming_paid_message_star_count:int53 outgoing_paid_message_star_count:int53 gift_settings:giftSettings bot_verification:botVerification main_profile_tab:ProfileTab first_profile_audio:audio rating:userRating pending_rating:userRating pending_rating_date:int32 note:formattedText ton_wallet_card:tonWalletCard share_theme:ProfileShareTheme business_info:businessInfo bot_info:botInfo",
       "result": "UserFullInfo",
-      "source": "userFullInfo personal_photo:chatPhoto photo:chatPhoto public_photo:chatPhoto community_id:int53 block_list:BlockList can_be_called:Bool supports_video_calls:Bool has_private_calls:Bool has_private_forwards:Bool has_restricted_voice_and_video_note_messages:Bool has_posted_to_profile_stories:Bool has_sponsored_messages_enabled:Bool need_phone_number_privacy_exception:Bool set_chat_background:Bool uses_unofficial_app:Bool bio:formattedText birthdate:birthdate personal_chat_id:int53 gift_count:int32 group_in_common_count:int32 incoming_paid_message_star_count:int53 outgoing_paid_message_star_count:int53 gift_settings:giftSettings bot_verification:botVerification main_profile_tab:ProfileTab first_profile_audio:audio rating:userRating pending_rating:userRating pending_rating_date:int32 note:formattedText business_info:businessInfo bot_info:botInfo = UserFullInfo;"
+      "source": "userFullInfo personal_photo:chatPhoto photo:chatPhoto public_photo:chatPhoto community_id:int53 block_list:BlockList can_be_called:Bool supports_video_calls:Bool has_private_calls:Bool has_private_forwards:Bool has_restricted_voice_and_video_note_messages:Bool has_posted_to_profile_stories:Bool has_sponsored_messages_enabled:Bool need_phone_number_privacy_exception:Bool set_chat_background:Bool uses_unofficial_app:Bool bio:formattedText birthdate:birthdate personal_chat_id:int53 gift_count:int32 group_in_common_count:int32 incoming_paid_message_star_count:int53 outgoing_paid_message_star_count:int53 gift_settings:giftSettings bot_verification:botVerification main_profile_tab:ProfileTab first_profile_audio:audio rating:userRating pending_rating:userRating pending_rating_date:int32 note:formattedText ton_wallet_card:tonWalletCard share_theme:ProfileShareTheme business_info:businessInfo bot_info:botInfo = UserFullInfo;"
     },
     {
       "id": null,
@@ -4132,9 +4204,9 @@
       "id": null,
       "kind": "constructors",
       "name": "supergroupFullInfo",
-      "params": "photo:chatPhoto community_id:int53 description:string member_count:int32 administrator_count:int32 restricted_count:int32 banned_count:int32 linked_chat_id:int53 direct_messages_chat_id:int53 slow_mode_delay:int32 slow_mode_delay_expires_in:double can_enable_paid_messages:Bool can_enable_paid_reaction:Bool can_get_members:Bool has_hidden_members:Bool can_hide_members:Bool can_set_sticker_set:Bool can_set_location:Bool can_get_statistics:Bool can_get_revenue_statistics:Bool can_get_star_revenue_statistics:Bool can_send_gift:Bool can_toggle_aggressive_anti_spam:Bool is_all_history_available:Bool can_have_sponsored_messages:Bool has_aggressive_anti_spam_enabled:Bool has_paid_media_allowed:Bool has_pinned_stories:Bool gift_count:int32 my_boost_count:int32 unrestrict_boost_count:int32 outgoing_paid_message_star_count:int53 sticker_set_id:int64 custom_emoji_sticker_set_id:int64 location:chatLocation invite_link:chatInviteLink guard_bot_user_id:int53 bot_commands:vector<botCommands> bot_verification:botVerification main_profile_tab:ProfileTab upgraded_from_basic_group_id:int53 upgraded_from_max_message_id:int53",
+      "params": "photo:chatPhoto community_id:int53 description:string member_count:int32 administrator_count:int32 restricted_count:int32 banned_count:int32 linked_chat_id:int53 direct_messages_chat_id:int53 slow_mode_delay:int32 slow_mode_delay_expires_in:double can_enable_paid_messages:Bool can_enable_paid_reaction:Bool can_get_members:Bool has_hidden_members:Bool can_hide_members:Bool can_set_sticker_set:Bool can_set_location:Bool can_get_statistics:Bool can_get_revenue_statistics:Bool can_get_star_revenue_statistics:Bool can_send_gift:Bool can_toggle_aggressive_anti_spam:Bool is_all_history_available:Bool can_have_sponsored_messages:Bool has_aggressive_anti_spam_enabled:Bool has_paid_media_allowed:Bool has_pinned_stories:Bool gift_count:int32 my_boost_count:int32 unrestrict_boost_count:int32 outgoing_paid_message_star_count:int53 sticker_set_id:int64 custom_emoji_sticker_set_id:int64 location:chatLocation invite_link:chatInviteLink guard_bot_user_id:int53 bot_commands:vector<botCommands> bot_verification:botVerification main_profile_tab:ProfileTab share_theme:ProfileShareTheme upgraded_from_basic_group_id:int53 upgraded_from_max_message_id:int53",
       "result": "SupergroupFullInfo",
-      "source": "supergroupFullInfo photo:chatPhoto community_id:int53 description:string member_count:int32 administrator_count:int32 restricted_count:int32 banned_count:int32 linked_chat_id:int53 direct_messages_chat_id:int53 slow_mode_delay:int32 slow_mode_delay_expires_in:double can_enable_paid_messages:Bool can_enable_paid_reaction:Bool can_get_members:Bool has_hidden_members:Bool can_hide_members:Bool can_set_sticker_set:Bool can_set_location:Bool can_get_statistics:Bool can_get_revenue_statistics:Bool can_get_star_revenue_statistics:Bool can_send_gift:Bool can_toggle_aggressive_anti_spam:Bool is_all_history_available:Bool can_have_sponsored_messages:Bool has_aggressive_anti_spam_enabled:Bool has_paid_media_allowed:Bool has_pinned_stories:Bool gift_count:int32 my_boost_count:int32 unrestrict_boost_count:int32 outgoing_paid_message_star_count:int53 sticker_set_id:int64 custom_emoji_sticker_set_id:int64 location:chatLocation invite_link:chatInviteLink guard_bot_user_id:int53 bot_commands:vector<botCommands> bot_verification:botVerification main_profile_tab:ProfileTab upgraded_from_basic_group_id:int53 upgraded_from_max_message_id:int53 = SupergroupFullInfo;"
+      "source": "supergroupFullInfo photo:chatPhoto community_id:int53 description:string member_count:int32 administrator_count:int32 restricted_count:int32 banned_count:int32 linked_chat_id:int53 direct_messages_chat_id:int53 slow_mode_delay:int32 slow_mode_delay_expires_in:double can_enable_paid_messages:Bool can_enable_paid_reaction:Bool can_get_members:Bool has_hidden_members:Bool can_hide_members:Bool can_set_sticker_set:Bool can_set_location:Bool can_get_statistics:Bool can_get_revenue_statistics:Bool can_get_star_revenue_statistics:Bool can_send_gift:Bool can_toggle_aggressive_anti_spam:Bool is_all_history_available:Bool can_have_sponsored_messages:Bool has_aggressive_anti_spam_enabled:Bool has_paid_media_allowed:Bool has_pinned_stories:Bool gift_count:int32 my_boost_count:int32 unrestrict_boost_count:int32 outgoing_paid_message_star_count:int53 sticker_set_id:int64 custom_emoji_sticker_set_id:int64 location:chatLocation invite_link:chatInviteLink guard_bot_user_id:int53 bot_commands:vector<botCommands> bot_verification:botVerification main_profile_tab:ProfileTab share_theme:ProfileShareTheme upgraded_from_basic_group_id:int53 upgraded_from_max_message_id:int53 = SupergroupFullInfo;"
     },
     {
       "id": null,
@@ -4524,17 +4596,17 @@
       "id": null,
       "kind": "constructors",
       "name": "textQuote",
-      "params": "text:formattedText position:int32 is_manual:Bool",
+      "params": "text:formattedText rich_texts:vector<RichText> position:int32 is_manual:Bool",
       "result": "TextQuote",
-      "source": "textQuote text:formattedText position:int32 is_manual:Bool = TextQuote;"
+      "source": "textQuote text:formattedText rich_texts:vector<RichText> position:int32 is_manual:Bool = TextQuote;"
     },
     {
       "id": null,
       "kind": "constructors",
       "name": "inputTextQuote",
-      "params": "text:formattedText position:int32",
+      "params": "text:formattedText rich_texts:vector<RichText> position:int32",
       "result": "InputTextQuote",
-      "source": "inputTextQuote text:formattedText position:int32 = InputTextQuote;"
+      "source": "inputTextQuote text:formattedText rich_texts:vector<RichText> position:int32 = InputTextQuote;"
     },
     {
       "id": null,
@@ -5628,9 +5700,9 @@
       "id": null,
       "kind": "constructors",
       "name": "oauthLinkInfo",
-      "params": "user_id:int53 url:string domain:string from_app:Bool verified_app_name:string bot_user_id:int53 request_write_access:Bool request_phone_number_access:Bool browser:string platform:string ip_address:string location:string match_code_first:Bool match_codes:vector<string>",
+      "params": "user_id:int53 url:string domain:string from_app:Bool verified_app_name:string bot_user_id:int53 request_write_access:Bool request_phone_number_access:Bool request_ton_wallet_access:Bool dapp_client_id:string ton_connect_manifest_url:string ton_proof_payload:string browser:string platform:string ip_address:string location:string match_code_first:Bool match_codes:vector<string>",
       "result": "OauthLinkInfo",
-      "source": "oauthLinkInfo user_id:int53 url:string domain:string from_app:Bool verified_app_name:string bot_user_id:int53 request_write_access:Bool request_phone_number_access:Bool browser:string platform:string ip_address:string location:string match_code_first:Bool match_codes:vector<string> = OauthLinkInfo;"
+      "source": "oauthLinkInfo user_id:int53 url:string domain:string from_app:Bool verified_app_name:string bot_user_id:int53 request_write_access:Bool request_phone_number_access:Bool request_ton_wallet_access:Bool dapp_client_id:string ton_connect_manifest_url:string ton_proof_payload:string browser:string platform:string ip_address:string location:string match_code_first:Bool match_codes:vector<string> = OauthLinkInfo;"
     },
     {
       "id": null,
@@ -5775,6 +5847,70 @@
       "params": "base_theme:BuiltInTheme accent_color:int32 background:background outgoing_message_fill:BackgroundFill animate_outgoing_message_fill:Bool has_outgoing_message_accent_color:Bool outgoing_message_accent_color:int32",
       "result": "ThemeSettings",
       "source": "themeSettings base_theme:BuiltInTheme accent_color:int32 background:background outgoing_message_fill:BackgroundFill animate_outgoing_message_fill:Bool has_outgoing_message_accent_color:Bool outgoing_message_accent_color:int32 = ThemeSettings;"
+    },
+    {
+      "id": null,
+      "kind": "constructors",
+      "name": "profileShareThemeBackdrop",
+      "params": "id:int32 name:string colors:upgradedGiftBackdropColors",
+      "result": "ProfileShareThemeBackdrop",
+      "source": "profileShareThemeBackdrop id:int32 name:string colors:upgradedGiftBackdropColors = ProfileShareThemeBackdrop;"
+    },
+    {
+      "id": null,
+      "kind": "constructors",
+      "name": "profileShareThemeBackdrops",
+      "params": "backdrops:vector<profileShareThemeBackdrop>",
+      "result": "ProfileShareThemeBackdrops",
+      "source": "profileShareThemeBackdrops backdrops:vector<profileShareThemeBackdrop> = ProfileShareThemeBackdrops;"
+    },
+    {
+      "id": null,
+      "kind": "constructors",
+      "name": "emojiTypeRegular",
+      "params": "emoji:string",
+      "result": "EmojiType",
+      "source": "emojiTypeRegular emoji:string = EmojiType;"
+    },
+    {
+      "id": null,
+      "kind": "constructors",
+      "name": "emojiTypeCustomEmoji",
+      "params": "custom_emoji_id:int64",
+      "result": "EmojiType",
+      "source": "emojiTypeCustomEmoji custom_emoji_id:int64 = EmojiType;"
+    },
+    {
+      "id": null,
+      "kind": "constructors",
+      "name": "profileShareThemeEmoji",
+      "params": "emojis:vector<EmojiType> use_default_background:Bool background_backdrop_id:int32",
+      "result": "ProfileShareTheme",
+      "source": "profileShareThemeEmoji emojis:vector<EmojiType> use_default_background:Bool background_backdrop_id:int32 = ProfileShareTheme;"
+    },
+    {
+      "id": null,
+      "kind": "constructors",
+      "name": "profileShareThemeUpgradedGift",
+      "params": "gift:upgradedGift",
+      "result": "ProfileShareTheme",
+      "source": "profileShareThemeUpgradedGift gift:upgradedGift = ProfileShareTheme;"
+    },
+    {
+      "id": null,
+      "kind": "constructors",
+      "name": "inputProfileShareThemeEmoji",
+      "params": "emojis:vector<EmojiType> use_default_background:Bool background_backdrop_id:int32",
+      "result": "InputProfileShareTheme",
+      "source": "inputProfileShareThemeEmoji emojis:vector<EmojiType> use_default_background:Bool background_backdrop_id:int32 = InputProfileShareTheme;"
+    },
+    {
+      "id": null,
+      "kind": "constructors",
+      "name": "inputProfileShareThemeUpgradedGift",
+      "params": "received_gift_id:string",
+      "result": "InputProfileShareTheme",
+      "source": "inputProfileShareThemeUpgradedGift received_gift_id:string = InputProfileShareTheme;"
     },
     {
       "id": null,
@@ -8396,9 +8532,9 @@
       "id": null,
       "kind": "constructors",
       "name": "messageGift",
-      "params": "gift:gift sender_id:MessageSender receiver_id:MessageSender received_gift_id:string text:formattedText unique_gift_number:int32 sell_star_count:int53 prepaid_upgrade_star_count:int53 is_upgrade_separate:Bool is_from_auction:Bool is_private:Bool is_saved:Bool is_prepaid_upgrade:Bool can_be_upgraded:Bool was_converted:Bool was_upgraded:Bool was_refunded:Bool upgraded_received_gift_id:string prepaid_upgrade_hash:string",
+      "params": "gift:gift sender_id:MessageSender receiver_id:MessageSender received_gift_id:string text:formattedText unique_gift_number:int32 sell_star_count:int53 prepaid_upgrade_star_count:int53 is_upgrade_separate:Bool is_from_auction:Bool is_private:Bool is_saved:Bool is_prepaid_upgrade:Bool can_be_upgraded:Bool can_be_deleted:Bool was_converted:Bool was_upgraded:Bool was_refunded:Bool upgraded_received_gift_id:string prepaid_upgrade_hash:string",
       "result": "MessageContent",
-      "source": "messageGift gift:gift sender_id:MessageSender receiver_id:MessageSender received_gift_id:string text:formattedText unique_gift_number:int32 sell_star_count:int53 prepaid_upgrade_star_count:int53 is_upgrade_separate:Bool is_from_auction:Bool is_private:Bool is_saved:Bool is_prepaid_upgrade:Bool can_be_upgraded:Bool was_converted:Bool was_upgraded:Bool was_refunded:Bool upgraded_received_gift_id:string prepaid_upgrade_hash:string = MessageContent;"
+      "source": "messageGift gift:gift sender_id:MessageSender receiver_id:MessageSender received_gift_id:string text:formattedText unique_gift_number:int32 sell_star_count:int53 prepaid_upgrade_star_count:int53 is_upgrade_separate:Bool is_from_auction:Bool is_private:Bool is_saved:Bool is_prepaid_upgrade:Bool can_be_upgraded:Bool can_be_deleted:Bool was_converted:Bool was_upgraded:Bool was_refunded:Bool upgraded_received_gift_id:string prepaid_upgrade_hash:string = MessageContent;"
     },
     {
       "id": null,
@@ -8455,6 +8591,14 @@
       "params": "is_enabled:Bool paid_message_star_count:int53",
       "result": "MessageContent",
       "source": "messageDirectMessagePriceChanged is_enabled:Bool paid_message_star_count:int53 = MessageContent;"
+    },
+    {
+      "id": null,
+      "kind": "constructors",
+      "name": "messageUnpaidMessagesAllowedByLink",
+      "params": "",
+      "result": "MessageContent",
+      "source": "messageUnpaidMessagesAllowedByLink = MessageContent;"
     },
     {
       "id": null,
@@ -9971,14 +10115,6 @@
     {
       "id": null,
       "kind": "constructors",
-      "name": "storyAreaPosition",
-      "params": "x_percentage:double y_percentage:double width_percentage:double height_percentage:double rotation_angle:double corner_radius_percentage:double",
-      "result": "StoryAreaPosition",
-      "source": "storyAreaPosition x_percentage:double y_percentage:double width_percentage:double height_percentage:double rotation_angle:double corner_radius_percentage:double = StoryAreaPosition;"
-    },
-    {
-      "id": null,
-      "kind": "constructors",
       "name": "storyAreaTypeLocation",
       "params": "location:location address:locationAddress",
       "result": "StoryAreaType",
@@ -10036,9 +10172,9 @@
       "id": null,
       "kind": "constructors",
       "name": "storyArea",
-      "params": "position:storyAreaPosition type:StoryAreaType",
+      "params": "position:areaPosition type:StoryAreaType",
       "result": "StoryArea",
-      "source": "storyArea position:storyAreaPosition type:StoryAreaType = StoryArea;"
+      "source": "storyArea position:areaPosition type:StoryAreaType = StoryArea;"
     },
     {
       "id": null,
@@ -10108,9 +10244,9 @@
       "id": null,
       "kind": "constructors",
       "name": "inputStoryArea",
-      "params": "position:storyAreaPosition type:InputStoryAreaType",
+      "params": "position:areaPosition type:InputStoryAreaType",
       "result": "InputStoryArea",
-      "source": "inputStoryArea position:storyAreaPosition type:InputStoryAreaType = InputStoryArea;"
+      "source": "inputStoryArea position:areaPosition type:InputStoryAreaType = InputStoryArea;"
     },
     {
       "id": null,
@@ -11196,9 +11332,9 @@
       "id": null,
       "kind": "constructors",
       "name": "userLink",
-      "params": "url:string expires_in:int32",
+      "params": "url:string expires_in:int32 can_get_permanent_link:Bool",
       "result": "UserLink",
-      "source": "userLink url:string expires_in:int32 = UserLink;"
+      "source": "userLink url:string expires_in:int32 can_get_permanent_link:Bool = UserLink;"
     },
     {
       "id": null,
@@ -14988,9 +15124,9 @@
       "id": null,
       "kind": "constructors",
       "name": "internalLinkTypePublicChat",
-      "params": "chat_username:string draft_text:string open_profile:Bool",
+      "params": "chat_username:string draft_text:string open_profile:Bool unpaid_messages_token:string",
       "result": "InternalLinkType",
-      "source": "internalLinkTypePublicChat chat_username:string draft_text:string open_profile:Bool = InternalLinkType;"
+      "source": "internalLinkTypePublicChat chat_username:string draft_text:string open_profile:Bool unpaid_messages_token:string = InternalLinkType;"
     },
     {
       "id": null,
@@ -15124,17 +15260,17 @@
       "id": null,
       "kind": "constructors",
       "name": "internalLinkTypeUserPhoneNumber",
-      "params": "phone_number:string draft_text:string open_profile:Bool",
+      "params": "phone_number:string draft_text:string open_profile:Bool unpaid_messages_token:string",
       "result": "InternalLinkType",
-      "source": "internalLinkTypeUserPhoneNumber phone_number:string draft_text:string open_profile:Bool = InternalLinkType;"
+      "source": "internalLinkTypeUserPhoneNumber phone_number:string draft_text:string open_profile:Bool unpaid_messages_token:string = InternalLinkType;"
     },
     {
       "id": null,
       "kind": "constructors",
       "name": "internalLinkTypeUserToken",
-      "params": "token:string",
+      "params": "token:string unpaid_messages_token:string",
       "result": "InternalLinkType",
-      "source": "internalLinkTypeUserToken token:string = InternalLinkType;"
+      "source": "internalLinkTypeUserToken token:string unpaid_messages_token:string = InternalLinkType;"
     },
     {
       "id": null,
@@ -16035,6 +16171,14 @@
     {
       "id": null,
       "kind": "constructors",
+      "name": "proxyTypeWeb",
+      "params": "path:string secret:string",
+      "result": "ProxyType",
+      "source": "proxyTypeWeb path:string secret:string = ProxyType;"
+    },
+    {
+      "id": null,
+      "kind": "constructors",
       "name": "addedProxy",
       "params": "id:int32 last_used_date:int32 is_enabled:Bool comment:string proxy:proxy",
       "result": "AddedProxy",
@@ -16047,6 +16191,70 @@
       "params": "proxies:vector<addedProxy>",
       "result": "AddedProxies",
       "source": "addedProxies proxies:vector<addedProxy> = AddedProxies;"
+    },
+    {
+      "id": null,
+      "kind": "constructors",
+      "name": "webProxyCarrier",
+      "params": "id:int32 proxy_id:int32 url:string origin:string path_prefix:string bridge_object_name:string is_temporary:Bool",
+      "result": "WebProxyCarrier",
+      "source": "webProxyCarrier id:int32 proxy_id:int32 url:string origin:string path_prefix:string bridge_object_name:string is_temporary:Bool = WebProxyCarrier;"
+    },
+    {
+      "id": null,
+      "kind": "constructors",
+      "name": "webProxyCarrierMessageText",
+      "params": "text:string",
+      "result": "WebProxyCarrierMessage",
+      "source": "webProxyCarrierMessageText text:string = WebProxyCarrierMessage;"
+    },
+    {
+      "id": null,
+      "kind": "constructors",
+      "name": "webProxyCarrierMessageBinary",
+      "params": "data:bytes",
+      "result": "WebProxyCarrierMessage",
+      "source": "webProxyCarrierMessageBinary data:bytes = WebProxyCarrierMessage;"
+    },
+    {
+      "id": null,
+      "kind": "constructors",
+      "name": "webProxyCarrierErrorUnsupported",
+      "params": "",
+      "result": "WebProxyCarrierError",
+      "source": "webProxyCarrierErrorUnsupported = WebProxyCarrierError;"
+    },
+    {
+      "id": null,
+      "kind": "constructors",
+      "name": "webProxyCarrierErrorPaused",
+      "params": "",
+      "result": "WebProxyCarrierError",
+      "source": "webProxyCarrierErrorPaused = WebProxyCarrierError;"
+    },
+    {
+      "id": null,
+      "kind": "constructors",
+      "name": "webProxyCarrierErrorLoadFailed",
+      "params": "message:string",
+      "result": "WebProxyCarrierError",
+      "source": "webProxyCarrierErrorLoadFailed message:string = WebProxyCarrierError;"
+    },
+    {
+      "id": null,
+      "kind": "constructors",
+      "name": "webProxyCarrierErrorTerminated",
+      "params": "",
+      "result": "WebProxyCarrierError",
+      "source": "webProxyCarrierErrorTerminated = WebProxyCarrierError;"
+    },
+    {
+      "id": null,
+      "kind": "constructors",
+      "name": "webProxyCarrierErrorRefused",
+      "params": "",
+      "result": "WebProxyCarrierError",
+      "source": "webProxyCarrierErrorRefused = WebProxyCarrierError;"
     },
     {
       "id": null,
@@ -17519,6 +17727,30 @@
       "params": "state:ConnectionState",
       "result": "Update",
       "source": "updateConnectionState state:ConnectionState = Update;"
+    },
+    {
+      "id": null,
+      "kind": "constructors",
+      "name": "updateWebProxyCarrierOpened",
+      "params": "carrier:webProxyCarrier",
+      "result": "Update",
+      "source": "updateWebProxyCarrierOpened carrier:webProxyCarrier = Update;"
+    },
+    {
+      "id": null,
+      "kind": "constructors",
+      "name": "updateWebProxyCarrierData",
+      "params": "carrier_id:int32 data:bytes",
+      "result": "Update",
+      "source": "updateWebProxyCarrierData carrier_id:int32 data:bytes = Update;"
+    },
+    {
+      "id": null,
+      "kind": "constructors",
+      "name": "updateWebProxyCarrierClosed",
+      "params": "carrier_id:int32",
+      "result": "Update",
+      "source": "updateWebProxyCarrierClosed carrier_id:int32 = Update;"
     },
     {
       "id": null,
@@ -21028,9 +21260,9 @@
       "id": null,
       "kind": "functions",
       "name": "acceptOauthRequest",
-      "params": "url:string match_code:string allow_write_access:Bool allow_phone_number_access:Bool",
+      "params": "url:string match_code:string allow_write_access:Bool allow_phone_number_access:Bool ton_connect_connect_data:tonConnectConnectData",
       "result": "HttpUrl",
-      "source": "acceptOauthRequest url:string match_code:string allow_write_access:Bool allow_phone_number_access:Bool = HttpUrl;"
+      "source": "acceptOauthRequest url:string match_code:string allow_write_access:Bool allow_phone_number_access:Bool ton_connect_connect_data:tonConnectConnectData = HttpUrl;"
     },
     {
       "id": null,
@@ -23884,9 +24116,9 @@
       "id": null,
       "kind": "functions",
       "name": "getUserLink",
-      "params": "",
+      "params": "remove_messages_fee:Bool return_permanent_link:Bool revoke_previous_links:Bool",
       "result": "UserLink",
-      "source": "getUserLink = UserLink;"
+      "source": "getUserLink remove_messages_fee:Bool return_permanent_link:Bool revoke_previous_links:Bool = UserLink;"
     },
     {
       "id": null,
@@ -23895,6 +24127,14 @@
       "params": "token:string",
       "result": "User",
       "source": "searchUserByToken token:string = User;"
+    },
+    {
+      "id": null,
+      "kind": "functions",
+      "name": "applyUnpaidMessagesToken",
+      "params": "user_id:int53 token:string",
+      "result": "Ok",
+      "source": "applyUnpaidMessagesToken user_id:int53 token:string = Ok;"
     },
     {
       "id": null,
@@ -24587,6 +24827,14 @@
     {
       "id": null,
       "kind": "functions",
+      "name": "deleteGift",
+      "params": "business_connection_id:string received_gift_id:string",
+      "result": "Ok",
+      "source": "deleteGift business_connection_id:string received_gift_id:string = Ok;"
+    },
+    {
+      "id": null,
+      "kind": "functions",
       "name": "toggleGiftIsSaved",
       "params": "received_gift_id:string is_saved:Bool",
       "result": "Ok",
@@ -24732,9 +24980,33 @@
       "id": null,
       "kind": "functions",
       "name": "getUpgradedGiftWithdrawalUrl",
-      "params": "received_gift_id:string password:string",
+      "params": "received_gift_id:string",
       "result": "HttpUrl",
-      "source": "getUpgradedGiftWithdrawalUrl received_gift_id:string password:string = HttpUrl;"
+      "source": "getUpgradedGiftWithdrawalUrl received_gift_id:string = HttpUrl;"
+    },
+    {
+      "id": null,
+      "kind": "functions",
+      "name": "withdrawUpgradedGift",
+      "params": "received_gift_id:string keep_on_profile:Bool",
+      "result": "Ok",
+      "source": "withdrawUpgradedGift received_gift_id:string keep_on_profile:Bool = Ok;"
+    },
+    {
+      "id": null,
+      "kind": "functions",
+      "name": "getUpgradedGiftDepositInfo",
+      "params": "owner_id:MessageSender name:string hide_sender:Bool",
+      "result": "UpgradedGiftDepositInfo",
+      "source": "getUpgradedGiftDepositInfo owner_id:MessageSender name:string hide_sender:Bool = UpgradedGiftDepositInfo;"
+    },
+    {
+      "id": null,
+      "kind": "functions",
+      "name": "displayUpgradedGift",
+      "params": "owner_id:MessageSender name:string",
+      "result": "Ok",
+      "source": "displayUpgradedGift owner_id:MessageSender name:string = Ok;"
     },
     {
       "id": null,
@@ -24903,6 +25175,22 @@
       "params": "",
       "result": "Ok",
       "source": "resetInstalledBackgrounds = Ok;"
+    },
+    {
+      "id": null,
+      "kind": "functions",
+      "name": "getProfileShareThemeBackdrops",
+      "params": "",
+      "result": "ProfileShareThemeBackdrops",
+      "source": "getProfileShareThemeBackdrops = ProfileShareThemeBackdrops;"
+    },
+    {
+      "id": null,
+      "kind": "functions",
+      "name": "setProfileShareTheme",
+      "params": "chat_id:int53 theme:InputProfileShareTheme",
+      "result": "Ok",
+      "source": "setProfileShareTheme chat_id:int53 theme:InputProfileShareTheme = Ok;"
     },
     {
       "id": null,
@@ -25285,8 +25573,8 @@
       "kind": "functions",
       "name": "getTonWalletSecretPhrase",
       "params": "password:string",
-      "result": "Text",
-      "source": "getTonWalletSecretPhrase password:string = Text;"
+      "result": "TonWalletSecretPhrase",
+      "source": "getTonWalletSecretPhrase password:string = TonWalletSecretPhrase;"
     },
     {
       "id": null,
@@ -25359,6 +25647,22 @@
       "params": "offset:string limit:int32",
       "result": "TonNfts",
       "source": "getTonWalletNfts offset:string limit:int32 = TonNfts;"
+    },
+    {
+      "id": null,
+      "kind": "functions",
+      "name": "getTonWalletCardBackgroundGiftCollectionNames",
+      "params": "",
+      "result": "UpgradedGiftCollectionNames",
+      "source": "getTonWalletCardBackgroundGiftCollectionNames = UpgradedGiftCollectionNames;"
+    },
+    {
+      "id": null,
+      "kind": "functions",
+      "name": "setTonWalletCardStickers",
+      "params": "stickers:vector<inputTonWalletCardSticker> background_nft_address:string",
+      "result": "TonWalletCard",
+      "source": "setTonWalletCardStickers stickers:vector<inputTonWalletCardSticker> background_nft_address:string = TonWalletCard;"
     },
     {
       "id": null,
@@ -26407,6 +26711,22 @@
       "params": "proxy:proxy",
       "result": "Seconds",
       "source": "pingProxy proxy:proxy = Seconds;"
+    },
+    {
+      "id": null,
+      "kind": "functions",
+      "name": "processWebProxyCarrierMessage",
+      "params": "carrier_id:int32 message:WebProxyCarrierMessage",
+      "result": "Ok",
+      "source": "processWebProxyCarrierMessage carrier_id:int32 message:WebProxyCarrierMessage = Ok;"
+    },
+    {
+      "id": null,
+      "kind": "functions",
+      "name": "reportWebProxyCarrierError",
+      "params": "carrier_id:int32 error:WebProxyCarrierError",
+      "result": "Ok",
+      "source": "reportWebProxyCarrierError carrier_id:int32 error:WebProxyCarrierError = Ok;"
     },
     {
       "id": null,

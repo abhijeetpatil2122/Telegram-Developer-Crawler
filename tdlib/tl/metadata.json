@@ -1,23 +1,23 @@
 {
   "counts": {
-    "constructors": 2260,
-    "functions": 1065,
-    "total": 3325
+    "constructors": 2289,
+    "functions": 1076,
+    "total": 3365
   },
   "safety": {
     "max_definition_removal_ratio": 0.1
   },
   "sha256": {
-    "json": "dafb7005392c9ba25d053b814c00113b46732dc263b3dd42ab7d36bb9b39d554",
-    "tl": "1024699780cf80b61bf20022fb94fcd3a9881d270a83140c11b9fcb386e959e1"
+    "json": "c2dab65b68465ff9205a72c26f016005a5b820f69623a182974dca716713c672",
+    "tl": "6ef8d16166fd333982b042ddaa7c3b51442528597e8163a323a3622b708e0463"
   },
   "source": "https://raw.githubusercontent.com/tdlib/td/master/td/generate/scheme/td_api.tl",
   "source_path": "td/generate/scheme/td_api.tl",
   "source_repository": "https://github.com/tdlib/td",
   "upstream": {
     "branch": "master",
-    "commit": "175048b69616ebc81b59ce71aa42abedbab9fe54",
-    "commit_url": "https://github.com/tdlib/td/commit/175048b69616ebc81b59ce71aa42abedbab9fe54",
-    "message": "Send updates for merged files only if they have unsent changes"
+    "commit": "0e88653dcbf4e44c73cb655a05b58cd749a91169",
+    "commit_url": "https://github.com/tdlib/td/commit/0e88653dcbf4e44c73cb655a05b58cd749a91169",
+    "message": "Update version to 1.8.69."
   }
 }

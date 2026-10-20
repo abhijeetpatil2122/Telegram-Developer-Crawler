@@ -1,23 +1,23 @@
 {
   "counts": {
-    "constructors": 1705,
-    "functions": 850,
-    "total": 2555
+    "constructors": 1720,
+    "functions": 859,
+    "total": 2579
   },
   "safety": {
     "max_definition_removal_ratio": 0.1
   },
   "sha256": {
-    "json": "f0a09a62d0dd5490707b6cd60301444c6751bc7cce7ea736d3c278a8363c0c57",
-    "tl": "e050d45b6abebee386ddeba96af3b14378714fc87be79fc4a2f84297d8af1577"
+    "json": "b0f0619d8b1b94021442b1dc3575f88244c944591535a2e65b9f94530b0bd78a",
+    "tl": "5e88ac6ac3c05ddd8b81c585a372ee8e31ff03ddf359e2e648de50dc736c48cc"
   },
   "source": "https://raw.githubusercontent.com/telegramdesktop/tdesktop/dev/Telegram/SourceFiles/mtproto/scheme/api.tl",
   "source_path": "Telegram/SourceFiles/mtproto/scheme/api.tl",
   "source_repository": "https://github.com/telegramdesktop/tdesktop",
   "upstream": {
     "branch": "dev",
-    "commit": "78ceaa548ae0e055aa56b53fde22064d13f250ef",
-    "commit_url": "https://github.com/telegramdesktop/tdesktop/commit/78ceaa548ae0e055aa56b53fde22064d13f250ef",
-    "message": "Edit Folders above Mark all chats as read."
+    "commit": "0eca52223cceed229932add1cc80792763120844",
+    "commit_url": "https://github.com/telegramdesktop/tdesktop/commit/0eca52223cceed229932add1cc80792763120844",
+    "message": "Version 7.3.2."
   }
 }
