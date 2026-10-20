@@ -16,8 +16,8 @@
   "source_repository": "https://github.com/telegramdesktop/tdesktop",
   "upstream": {
     "branch": "dev",
-    "commit": "351204f3695b4a39bc3f4d2f230c061b9a01fe2a",
-    "commit_url": "https://github.com/telegramdesktop/tdesktop/commit/351204f3695b4a39bc3f4d2f230c061b9a01fe2a",
-    "message": "Have same Qt prepare cache key in sibling checkouts."
+    "commit": "f0aa39cb1c5e48c7a0dc5283150d4975f556b582",
+    "commit_url": "https://github.com/telegramdesktop/tdesktop/commit/f0aa39cb1c5e48c7a0dc5283150d4975f556b582",
+    "message": "[thanos] Fixed history items collapse animating after effect failure."
   }
 }
