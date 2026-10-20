@@ -15,16 +15,16 @@
     },
     "stable": {
       "counts": {
-        "constructors": 1805,
-        "methods": 1121,
-        "total": 2926
+        "constructors": 1818,
+        "methods": 1132,
+        "total": 2950
       },
       "e2e_json": "stable/e2e.json",
       "e2e_tl": "stable/e2e.tl",
-      "layer": 231,
+      "layer": 232,
       "main_api_json": "stable/main_api.json",
       "main_api_tl": "stable/main_api.tl",
-      "sha256": "615f08eb232c2c1d33e28464dac94e22ccf33df7019e62fc129790d938922001"
+      "sha256": "fbba63dad8d8deab9a6fcdceb5ed067c782992855739d362c144cde55c05defe"
     }
   },
   "safety": {

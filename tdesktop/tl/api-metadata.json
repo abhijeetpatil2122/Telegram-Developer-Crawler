@@ -16,8 +16,8 @@
   "source_repository": "https://github.com/telegramdesktop/tdesktop",
   "upstream": {
     "branch": "dev",
-    "commit": "6c2ee90618bf69683a1c466e3b0550260b82e129",
-    "commit_url": "https://github.com/telegramdesktop/tdesktop/commit/6c2ee90618bf69683a1c466e3b0550260b82e129",
-    "message": "Update cmake_helpers to fix builds outside Linux."
+    "commit": "78ceaa548ae0e055aa56b53fde22064d13f250ef",
+    "commit_url": "https://github.com/telegramdesktop/tdesktop/commit/78ceaa548ae0e055aa56b53fde22064d13f250ef",
+    "message": "Edit Folders above Mark all chats as read."
   }
 }
