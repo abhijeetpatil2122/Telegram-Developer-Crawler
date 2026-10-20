@@ -16,8 +16,8 @@
   "source_repository": "https://github.com/telegramdesktop/tdesktop",
   "upstream": {
     "branch": "dev",
-    "commit": "f0aa39cb1c5e48c7a0dc5283150d4975f556b582",
-    "commit_url": "https://github.com/telegramdesktop/tdesktop/commit/f0aa39cb1c5e48c7a0dc5283150d4975f556b582",
-    "message": "[thanos] Fixed history items collapse animating after effect failure."
+    "commit": "6c2ee90618bf69683a1c466e3b0550260b82e129",
+    "commit_url": "https://github.com/telegramdesktop/tdesktop/commit/6c2ee90618bf69683a1c466e3b0550260b82e129",
+    "message": "Update cmake_helpers to fix builds outside Linux."
   }
 }
