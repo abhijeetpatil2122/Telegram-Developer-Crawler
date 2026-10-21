@@ -16,8 +16,8 @@
   "source_repository": "https://github.com/telegramdesktop/tdesktop",
   "upstream": {
     "branch": "dev",
-    "commit": "8e5578ae4f8f8b0e44c3ec742da25ef46f88b01d",
-    "commit_url": "https://github.com/telegramdesktop/tdesktop/commit/8e5578ae4f8f8b0e44c3ec742da25ef46f88b01d",
-    "message": "Fix Backspace moving a Details body line above the whole block"
+    "commit": "c9b6abf1f477185b790c4772fa61aa4afd58c3cf",
+    "commit_url": "https://github.com/telegramdesktop/tdesktop/commit/c9b6abf1f477185b790c4772fa61aa4afd58c3cf",
+    "message": "Remove unused media playback and canvas helpers."
   }
 }
