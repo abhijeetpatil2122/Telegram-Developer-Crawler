@@ -16,8 +16,8 @@
   "source_repository": "https://github.com/telegramdesktop/tdesktop",
   "upstream": {
     "branch": "dev",
-    "commit": "0eca52223cceed229932add1cc80792763120844",
-    "commit_url": "https://github.com/telegramdesktop/tdesktop/commit/0eca52223cceed229932add1cc80792763120844",
-    "message": "Version 7.3.2."
+    "commit": "8e5578ae4f8f8b0e44c3ec742da25ef46f88b01d",
+    "commit_url": "https://github.com/telegramdesktop/tdesktop/commit/8e5578ae4f8f8b0e44c3ec742da25ef46f88b01d",
+    "message": "Fix Backspace moving a Details body line above the whole block"
   }
 }
