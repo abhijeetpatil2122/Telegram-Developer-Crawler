@@ -16,8 +16,8 @@
   "source_repository": "https://github.com/telegramdesktop/tdesktop",
   "upstream": {
     "branch": "dev",
-    "commit": "c9b6abf1f477185b790c4772fa61aa4afd58c3cf",
-    "commit_url": "https://github.com/telegramdesktop/tdesktop/commit/c9b6abf1f477185b790c4772fa61aa4afd58c3cf",
-    "message": "Remove unused media playback and canvas helpers."
+    "commit": "5c674f1f6a0f6ace55b67f8bc295138680fe588b",
+    "commit_url": "https://github.com/telegramdesktop/tdesktop/commit/5c674f1f6a0f6ace55b67f8bc295138680fe588b",
+    "message": "Version 7.3.3."
   }
 }
