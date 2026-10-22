@@ -16,8 +16,8 @@
   "source_repository": "https://github.com/tdlib/td",
   "upstream": {
     "branch": "master",
-    "commit": "9d92b49bc5d0d2e29fe518239af647a88f8680e6",
-    "commit_url": "https://github.com/tdlib/td/commit/9d92b49bc5d0d2e29fe518239af647a88f8680e6",
-    "message": "Simplify IPv6 reserved ranges."
+    "commit": "6e7fcda8fb6936ef25e76e53436bd8854ebbcfc1",
+    "commit_url": "https://github.com/tdlib/td/commit/6e7fcda8fb6936ef25e76e53436bd8854ebbcfc1",
+    "message": "Allow to call getProfileShareThemeBackdrops for bots."
   }
 }

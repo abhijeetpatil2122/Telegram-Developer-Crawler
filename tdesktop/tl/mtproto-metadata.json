@@ -16,8 +16,8 @@
   "source_repository": "https://github.com/telegramdesktop/tdesktop",
   "upstream": {
     "branch": "dev",
-    "commit": "42e2af80cdd20a99edecb4255470f0aa6bae6bcb",
-    "commit_url": "https://github.com/telegramdesktop/tdesktop/commit/42e2af80cdd20a99edecb4255470f0aa6bae6bcb",
-    "message": "Fix scroll animation direction in modern chat view."
+    "commit": "52a47639d9aa38713098974dd2ce07e631cb3381",
+    "commit_url": "https://github.com/telegramdesktop/tdesktop/commit/52a47639d9aa38713098974dd2ce07e631cb3381",
+    "message": "Bump Qt patches for safe RHI widget cleanup."
   }
 }
