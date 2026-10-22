@@ -16,8 +16,8 @@
   "source_repository": "https://github.com/tdlib/td",
   "upstream": {
     "branch": "master",
-    "commit": "6e7fcda8fb6936ef25e76e53436bd8854ebbcfc1",
-    "commit_url": "https://github.com/tdlib/td/commit/6e7fcda8fb6936ef25e76e53436bd8854ebbcfc1",
-    "message": "Allow to call getProfileShareThemeBackdrops for bots."
+    "commit": "ea3f69ce11aef458bfbb09869b809ede4447486f",
+    "commit_url": "https://github.com/tdlib/td/commit/ea3f69ce11aef458bfbb09869b809ede4447486f",
+    "message": "Add tests for pinned topics in OrderedTopics."
   }
 }

@@ -16,8 +16,8 @@
   "source_repository": "https://github.com/telegramdesktop/tdesktop",
   "upstream": {
     "branch": "dev",
-    "commit": "52a47639d9aa38713098974dd2ce07e631cb3381",
-    "commit_url": "https://github.com/telegramdesktop/tdesktop/commit/52a47639d9aa38713098974dd2ce07e631cb3381",
-    "message": "Bump Qt patches for safe RHI widget cleanup."
+    "commit": "83f9f56347cc3421c1e3ef537c7bb6dd06ce7cd0",
+    "commit_url": "https://github.com/telegramdesktop/tdesktop/commit/83f9f56347cc3421c1e3ef537c7bb6dd06ce7cd0",
+    "message": "Don't run postponed calls inside paint events on macOS."
   }
 }
