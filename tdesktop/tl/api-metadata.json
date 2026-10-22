@@ -16,8 +16,8 @@
   "source_repository": "https://github.com/telegramdesktop/tdesktop",
   "upstream": {
     "branch": "dev",
-    "commit": "5c674f1f6a0f6ace55b67f8bc295138680fe588b",
-    "commit_url": "https://github.com/telegramdesktop/tdesktop/commit/5c674f1f6a0f6ace55b67f8bc295138680fe588b",
-    "message": "Version 7.3.3."
+    "commit": "42e2af80cdd20a99edecb4255470f0aa6bae6bcb",
+    "commit_url": "https://github.com/telegramdesktop/tdesktop/commit/42e2af80cdd20a99edecb4255470f0aa6bae6bcb",
+    "message": "Fix scroll animation direction in modern chat view."
   }
 }
