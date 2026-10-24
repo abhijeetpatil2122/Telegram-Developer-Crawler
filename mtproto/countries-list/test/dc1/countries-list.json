@@ -783,6 +783,21 @@
       "country_codes": [
         {
           "_": "CountryCode",
+          "country_code": "1",
+          "patterns": [],
+          "prefixes": []
+        }
+      ],
+      "default_name": "CanadaVoIP",
+      "hidden": true,
+      "iso2": "CP",
+      "name": null
+    },
+    {
+      "_": "Country",
+      "country_codes": [
+        {
+          "_": "CountryCode",
           "country_code": "506",
           "patterns": [
             "XXXX XXXX"
@@ -4011,5 +4026,5 @@
       "name": null
     }
   ],
-  "hash": -1208773110
+  "hash": 687989829
 }
