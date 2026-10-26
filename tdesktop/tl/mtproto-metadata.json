@@ -16,8 +16,8 @@
   "source_repository": "https://github.com/telegramdesktop/tdesktop",
   "upstream": {
     "branch": "dev",
-    "commit": "a7f453612f4896ac04d0007a36ab0d377e5bcbcf",
-    "commit_url": "https://github.com/telegramdesktop/tdesktop/commit/a7f453612f4896ac04d0007a36ab0d377e5bcbcf",
-    "message": "Bounce and pull to the next chat by touch."
+    "commit": "dd2a96c356971a0781f142826fcc212273f90098",
+    "commit_url": "https://github.com/telegramdesktop/tdesktop/commit/dd2a96c356971a0781f142826fcc212273f90098",
+    "message": "Fix search keeping focus after opening a chat from its results"
   }
 }
