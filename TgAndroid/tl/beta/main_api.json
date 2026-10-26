@@ -1965,6 +1965,19 @@
       "type": "BotInlineMessage"
     },
     {
+      "id": -242934658,
+      "kind": "constructor",
+      "name": "botInlineMessageWidget",
+      "params": [
+        {
+          "name": "reply_markup",
+          "type": "ReplyMarkup"
+        }
+      ],
+      "source": "sources/org/telegram/tgnet/TLRPC.java",
+      "type": "BotInlineMessage"
+    },
+    {
       "id": 295067450,
       "kind": "constructor",
       "name": "botInlineResult",
@@ -6624,14 +6637,6 @@
       "type": "ExportedMessageLink"
     },
     {
-      "id": -816773698,
-      "kind": "constructor",
-      "name": "exportedNoPaidMessagesToken",
-      "params": [],
-      "source": "sources/org/telegram/tgnet/TLRPC.java",
-      "type": "exportedNoPaidMessagesToken"
-    },
-    {
       "id": 1070138683,
       "kind": "constructor",
       "name": "exportedStoryLink",
@@ -6680,6 +6685,64 @@
       ],
       "source": "core.telegram.org/schema/json",
       "type": "FactCheck"
+    },
+    {
+      "id": 1810307195,
+      "kind": "constructor",
+      "name": "feedItemInterestCategories",
+      "params": [],
+      "source": "sources/org/telegram/tgnet/tl/TL_feed.java",
+      "type": "FeedItem"
+    },
+    {
+      "id": 2121511845,
+      "kind": "constructor",
+      "name": "feedItemMessage",
+      "params": [
+        {
+          "name": "message",
+          "type": "Message"
+        }
+      ],
+      "source": "sources/org/telegram/tgnet/tl/TL_feed.java",
+      "type": "FeedItem"
+    },
+    {
+      "id": 1697598577,
+      "kind": "constructor",
+      "name": "feedItemMessageGroup",
+      "params": [],
+      "source": "sources/org/telegram/tgnet/tl/TL_feed.java",
+      "type": "FeedItem"
+    },
+    {
+      "id": -587770695,
+      "kind": "constructor",
+      "name": "feedMessages",
+      "params": [
+        {
+          "name": "max_position",
+          "type": "FeedPosition"
+        },
+        {
+          "name": "min_position",
+          "type": "FeedPosition"
+        },
+        {
+          "name": "read_max_position",
+          "type": "FeedPosition"
+        }
+      ],
+      "source": "sources/org/telegram/tgnet/tl/TL_feed.java",
+      "type": "FeedMessages"
+    },
+    {
+      "id": -619039485,
+      "kind": "constructor",
+      "name": "feedMessagesNotModified",
+      "params": [],
+      "source": "sources/org/telegram/tgnet/tl/TL_feed.java",
+      "type": "FeedMessages"
     },
     {
       "id": 1431655764,
@@ -8533,7 +8596,7 @@
       "name": "inputChatPhoto",
       "params": [
         {
-          "name": "f20403id",
+          "name": "f22087id",
           "type": "InputPhoto"
         }
       ],
@@ -9339,7 +9402,7 @@
       "name": "inputMediaDocument",
       "params": [
         {
-          "name": "f20404id",
+          "name": "f22088id",
           "type": "InputDocument"
         },
         {
@@ -9377,7 +9440,7 @@
       "name": "inputMediaGame",
       "params": [
         {
-          "name": "f20405id",
+          "name": "f22089id",
           "type": "InputGame"
         }
       ],
@@ -9449,7 +9512,7 @@
       "name": "inputMediaPhoto",
       "params": [
         {
-          "name": "f20406id",
+          "name": "f22090id",
           "type": "InputPhoto"
         },
         {
@@ -9578,6 +9641,22 @@
       "id": -1038383031,
       "kind": "constructor",
       "name": "inputMediaWebPage",
+      "params": [],
+      "source": "sources/org/telegram/tgnet/TLRPC.java",
+      "type": "InputMedia"
+    },
+    {
+      "id": 1389944197,
+      "kind": "constructor",
+      "name": "inputMediaWidget",
+      "params": [],
+      "source": "sources/org/telegram/tgnet/TLRPC.java",
+      "type": "InputMedia"
+    },
+    {
+      "id": 2089114805,
+      "kind": "constructor",
+      "name": "inputMediaWidgetId",
       "params": [],
       "source": "sources/org/telegram/tgnet/TLRPC.java",
       "type": "InputMedia"
@@ -10982,7 +11061,7 @@
       "name": "inputStickeredMediaDocument",
       "params": [
         {
-          "name": "f20412id",
+          "name": "f22096id",
           "type": "InputDocument"
         }
       ],
@@ -10995,7 +11074,7 @@
       "name": "inputStickeredMediaPhoto",
       "params": [
         {
-          "name": "f20413id",
+          "name": "f22097id",
           "type": "InputPhoto"
         }
       ],
@@ -11321,6 +11400,22 @@
       "params": [],
       "source": "sources/org/telegram/tgnet/TLRPC.java",
       "type": "InputWebFileLocation"
+    },
+    {
+      "id": -323604576,
+      "kind": "constructor",
+      "name": "interestCategories",
+      "params": [],
+      "source": "sources/org/telegram/tgnet/tl/TL_feed.java",
+      "type": "InterestCategories"
+    },
+    {
+      "id": 2043617685,
+      "kind": "constructor",
+      "name": "interestCategoriesNotModified",
+      "params": [],
+      "source": "sources/org/telegram/tgnet/tl/TL_feed.java",
+      "type": "InterestCategories"
     },
     {
       "id": 77522308,
@@ -13996,6 +14091,14 @@
       "type": "MessageMedia"
     },
     {
+      "id": -1473134793,
+      "kind": "constructor",
+      "name": "messageMediaWidget",
+      "params": [],
+      "source": "sources/org/telegram/tgnet/TLRPC.java",
+      "type": "MessageMedia"
+    },
+    {
       "id": -1938180548,
       "kind": "constructor",
       "name": "messagePeerReaction",
@@ -15717,6 +15820,22 @@
       ],
       "source": "core.telegram.org/schema/json",
       "type": "messages.WebPagePreview"
+    },
+    {
+      "id": 71908351,
+      "kind": "constructor",
+      "name": "messages.widgetPublicData",
+      "params": [],
+      "source": "sources/org/telegram/tgnet/TLRPC.java",
+      "type": "messages.WidgetPublicData"
+    },
+    {
+      "id": -1189515689,
+      "kind": "constructor",
+      "name": "messages.widgetPublicDataNotModified",
+      "params": [],
+      "source": "sources/org/telegram/tgnet/TLRPC.java",
+      "type": "messages.WidgetPublicData"
     },
     {
       "id": 1653379620,
@@ -18771,6 +18890,22 @@
       "params": [],
       "source": "sources/org/telegram/tgnet/TLRPC.java",
       "type": "ProfileTab"
+    },
+    {
+      "id": -2027776014,
+      "kind": "constructor",
+      "name": "providers",
+      "params": [],
+      "source": "sources/org/telegram/tgnet/tl/TL_agent.java",
+      "type": "Providers"
+    },
+    {
+      "id": 1140283053,
+      "kind": "constructor",
+      "name": "providersNotModified",
+      "params": [],
+      "source": "sources/org/telegram/tgnet/tl/TL_agent.java",
+      "type": "Providers"
     },
     {
       "id": 32685898,
@@ -23169,6 +23304,14 @@
       "type": "True"
     },
     {
+      "id": -1808471667,
+      "kind": "constructor",
+      "name": "updateAgentSettings",
+      "params": [],
+      "source": "sources/org/telegram/tgnet/tl/TL_agent.java",
+      "type": "Update"
+    },
+    {
       "id": -1945136645,
       "kind": "constructor",
       "name": "updateAiComposeTones",
@@ -23717,6 +23860,27 @@
         }
       ],
       "source": "core.telegram.org/schema/json",
+      "type": "Update"
+    },
+    {
+      "id": -1288552616,
+      "kind": "constructor",
+      "name": "updateBotWidgetCopyQuery",
+      "params": [],
+      "source": "sources/org/telegram/tgnet/tl/TL_update.java",
+      "type": "Update"
+    },
+    {
+      "id": 646015238,
+      "kind": "constructor",
+      "name": "updateBotWidgetQuery",
+      "params": [
+        {
+          "name": "peer",
+          "type": "Peer"
+        }
+      ],
+      "source": "sources/org/telegram/tgnet/tl/TL_update.java",
       "type": "Update"
     },
     {
@@ -24434,6 +24598,19 @@
       "type": "Update"
     },
     {
+      "id": -1418742197,
+      "kind": "constructor",
+      "name": "updateInlineBotWidgetQuery",
+      "params": [
+        {
+          "name": "inline_message_id",
+          "type": "inputBotInlineMessageID"
+        }
+      ],
+      "source": "sources/org/telegram/tgnet/tl/TL_update.java",
+      "type": "Update"
+    },
+    {
       "id": -1112768912,
       "kind": "constructor",
       "name": "updateJoinChatWebViewDecision",
@@ -24558,6 +24735,19 @@
         {
           "name": "reactions",
           "type": "MessageReactions"
+        }
+      ],
+      "source": "sources/org/telegram/tgnet/tl/TL_update.java",
+      "type": "Update"
+    },
+    {
+      "id": 939566996,
+      "kind": "constructor",
+      "name": "updateMessageWidgetData",
+      "params": [
+        {
+          "name": "peer",
+          "type": "Peer"
         }
       ],
       "source": "sources/org/telegram/tgnet/tl/TL_update.java",
@@ -24990,6 +25180,19 @@
       "kind": "constructor",
       "name": "updateReadFeaturedStickers",
       "params": [],
+      "source": "sources/org/telegram/tgnet/tl/TL_update.java",
+      "type": "Update"
+    },
+    {
+      "id": 1951948721,
+      "kind": "constructor",
+      "name": "updateReadFeed",
+      "params": [
+        {
+          "name": "max_position",
+          "type": "FeedPosition"
+        }
+      ],
       "source": "sources/org/telegram/tgnet/tl/TL_update.java",
       "type": "Update"
     },
@@ -27108,11 +27311,11 @@
     }
   ],
   "counts": {
-    "constructors": 1818,
-    "methods": 1132,
-    "total": 2950
+    "constructors": 1838,
+    "methods": 1149,
+    "total": 2987
   },
-  "layer": 232,
+  "layer": 233,
   "methods": [
     {
       "id": -202552205,
@@ -30387,6 +30590,14 @@
       "source": "sources/org/telegram/tgnet/TLRPC.java"
     },
     {
+      "id": -687539835,
+      "kind": "method",
+      "name": "channels.editChannelNews",
+      "params": [],
+      "result": "Updates",
+      "source": "sources/org/telegram/tgnet/TLRPC.java"
+    },
+    {
       "id": -1892102881,
       "kind": "method",
       "name": "channels.editCreator",
@@ -30599,7 +30810,7 @@
       "source": "core.telegram.org/schema/json"
     },
     {
-      "id": 2137660962,
+      "id": 1097643276,
       "kind": "method",
       "name": "channels.joinChannel",
       "params": [],
@@ -31100,6 +31311,14 @@
       "params": [],
       "result": "Bool",
       "source": "sources/org/telegram/tgnet/tl/TL_account.java"
+    },
+    {
+      "id": -14388756,
+      "kind": "method",
+      "name": "connect",
+      "params": [],
+      "result": "settings",
+      "source": "sources/org/telegram/tgnet/tl/TL_agent.java"
     },
     {
       "id": 2127901834,
@@ -31691,6 +31910,14 @@
       "source": "sources/org/telegram/tgnet/tl/TL_phone.java"
     },
     {
+      "id": -1698892007,
+      "kind": "method",
+      "name": "disconnect",
+      "params": [],
+      "result": "settings",
+      "source": "sources/org/telegram/tgnet/tl/TL_agent.java"
+    },
+    {
       "id": 1252389118,
       "kind": "method",
       "name": "displayStarGift",
@@ -31785,6 +32012,46 @@
       "params": [],
       "result": "secretPhraseParts",
       "source": "sources/org/telegram/tgnet/tl/TL_wallet.java"
+    },
+    {
+      "id": 2121717715,
+      "kind": "method",
+      "name": "feed.getFeed",
+      "params": [],
+      "result": "FeedMessages",
+      "source": "sources/org/telegram/tgnet/tl/TL_feed.java"
+    },
+    {
+      "id": 867755499,
+      "kind": "method",
+      "name": "feed.getForYou",
+      "params": [],
+      "result": "ForYouFeed",
+      "source": "sources/org/telegram/tgnet/tl/TL_feed.java"
+    },
+    {
+      "id": -1166402118,
+      "kind": "method",
+      "name": "feed.getInterestCategories",
+      "params": [],
+      "result": "InterestCategories",
+      "source": "sources/org/telegram/tgnet/tl/TL_feed.java"
+    },
+    {
+      "id": -1271479809,
+      "kind": "method",
+      "name": "feed.readFeed",
+      "params": [],
+      "result": "Updates",
+      "source": "sources/org/telegram/tgnet/tl/TL_feed.java"
+    },
+    {
+      "id": -1624680228,
+      "kind": "method",
+      "name": "feed.setInterestCategories",
+      "params": [],
+      "result": "Bool",
+      "source": "sources/org/telegram/tgnet/tl/TL_feed.java"
     },
     {
       "id": -180804145,
@@ -32288,6 +32555,14 @@
       "source": "sources/org/telegram/tgnet/tl/TL_wallet.java"
     },
     {
+      "id": -837913581,
+      "kind": "method",
+      "name": "getProviders",
+      "params": [],
+      "result": "Providers",
+      "source": "sources/org/telegram/tgnet/tl/TL_agent.java"
+    },
+    {
       "id": 115172684,
       "kind": "method",
       "name": "getReactionsNotifySettings",
@@ -32374,6 +32649,14 @@
       "params": [],
       "result": "payments.savedStarGifts",
       "source": "sources/org/telegram/tgnet/tl/TL_stars.java"
+    },
+    {
+      "id": -82864297,
+      "kind": "method",
+      "name": "getSettings",
+      "params": [],
+      "result": "settings",
+      "source": "sources/org/telegram/tgnet/tl/TL_agent.java"
     },
     {
       "id": -1513074355,
@@ -33777,6 +34060,14 @@
       "source": "sources/org/telegram/tgnet/TLRPC.java"
     },
     {
+      "id": 1670827563,
+      "kind": "method",
+      "name": "messages.editInlineBotMessageWidgetData",
+      "params": [],
+      "result": "Bool",
+      "source": "sources/org/telegram/tgnet/TLRPC.java"
+    },
+    {
       "id": -1324947860,
       "kind": "method",
       "name": "messages.editMessage",
@@ -33842,9 +34133,25 @@
       "source": "core.telegram.org/schema/json"
     },
     {
+      "id": -165364706,
+      "kind": "method",
+      "name": "messages.editMessageWidgetData",
+      "params": [],
+      "result": "Updates",
+      "source": "sources/org/telegram/tgnet/TLRPC.java"
+    },
+    {
       "id": 1543519471,
       "kind": "method",
       "name": "messages.editQuickReplyShortcut",
+      "params": [],
+      "result": "Bool",
+      "source": "sources/org/telegram/tgnet/TLRPC.java"
+    },
+    {
+      "id": -356301888,
+      "kind": "method",
+      "name": "messages.editWidgetData",
       "params": [],
       "result": "Bool",
       "source": "sources/org/telegram/tgnet/TLRPC.java"
@@ -33980,6 +34287,14 @@
       "name": "messages.getBotCallbackAnswer",
       "params": [],
       "result": "messages.botCallbackAnswer",
+      "source": "sources/org/telegram/tgnet/TLRPC.java"
+    },
+    {
+      "id": -678577638,
+      "kind": "method",
+      "name": "messages.getBotWidgetQueryAnswer",
+      "params": [],
+      "result": "messages.botWidgetQueryAnswer",
       "source": "sources/org/telegram/tgnet/TLRPC.java"
     },
     {
@@ -34815,6 +35130,14 @@
       "name": "messages.getWebViewResult",
       "params": [],
       "result": "messages.webViewResult",
+      "source": "sources/org/telegram/tgnet/TLRPC.java"
+    },
+    {
+      "id": 1875194241,
+      "kind": "method",
+      "name": "messages.getWidgetPublicData",
+      "params": [],
+      "result": "messages.WidgetPublicData",
       "source": "sources/org/telegram/tgnet/TLRPC.java"
     },
     {
@@ -35753,6 +36076,14 @@
       ],
       "result": "Bool",
       "source": "core.telegram.org/schema/json"
+    },
+    {
+      "id": -120722326,
+      "kind": "method",
+      "name": "messages.setBotWidgetQueryAnswer",
+      "params": [],
+      "result": "Bool",
+      "source": "sources/org/telegram/tgnet/TLRPC.java"
     },
     {
       "id": -2041895551,
@@ -38644,6 +38975,14 @@
       "source": "sources/org/telegram/tgnet/tl/TL_account.java"
     },
     {
+      "id": -1129164408,
+      "kind": "method",
+      "name": "setActiveProvider",
+      "params": [],
+      "result": "settings",
+      "source": "sources/org/telegram/tgnet/tl/TL_agent.java"
+    },
+    {
       "id": -1081501024,
       "kind": "method",
       "name": "setAuthorizationTTL",
@@ -40260,14 +40599,14 @@
     "max_definition_removal_ratio": 0.1
   },
   "sha256": {
-    "tl": "ca7de7c4ca67fd558dc35fb855eb557d67491da280d63019d8e33259a615c882"
+    "tl": "b9f1e9845a03a5b003cfd327d4dec139999032e21c01835fbd30678b9eb4b54c"
   },
   "source": {
     "apk": "https://cdn4.telesco.pe/file/Telegram-Beta.apk",
-    "apk_sha256": "23fd0b46d6d89c4c0e96b4f401c012766006e07b681e557de2a157739d6963a6",
+    "apk_sha256": "90deb9ca390a4dab838de4ea4d1e41ac8833ab125c5ce9e3370bc91da896fe7f",
     "jadx": "https://github.com/skylot/jadx/releases/download/v1.5.6/jadx-1.5.6.zip",
     "package": "org.telegram.messenger.beta",
-    "version_code": 72509,
-    "version_name": "13.1.2"
+    "version_code": 72569,
+    "version_name": "13.2.0"
   }
 }

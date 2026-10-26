@@ -1,13 +1,13 @@
 {
   "android": {
     "package": "org.telegram.messenger.beta",
-    "version_code": 72509,
-    "version_name": "13.1.2"
+    "version_code": 72569,
+    "version_name": "13.2.0"
   },
   "artifact": {
     "filename": "beta.apk",
-    "sha256": "23fd0b46d6d89c4c0e96b4f401c012766006e07b681e557de2a157739d6963a6",
-    "size": 70737137
+    "sha256": "90deb9ca390a4dab838de4ea4d1e41ac8833ab125c5ce9e3370bc91da896fe7f",
+    "size": 80267321
   },
   "channel": "beta",
   "extractor": {
@@ -24,17 +24,17 @@
   "source_url": "https://telegram.org/dl/android/apk-public-beta",
   "tl_extraction": {
     "counts": {
-      "constructors": 1818,
-      "methods": 1132,
-      "total": 2950
+      "constructors": 1838,
+      "methods": 1149,
+      "total": 2987
     },
     "e2e_json": "e2e.json",
     "e2e_tl": "e2e.tl",
     "jadx": "https://github.com/skylot/jadx/releases/download/v1.5.6/jadx-1.5.6.zip",
-    "layer": 232,
+    "layer": 233,
     "main_api_json": "main_api.json",
     "main_api_tl": "main_api.tl",
-    "sha256": "ca7de7c4ca67fd558dc35fb855eb557d67491da280d63019d8e33259a615c882",
+    "sha256": "b9f1e9845a03a5b003cfd327d4dec139999032e21c01835fbd30678b9eb4b54c",
     "stage": "5B",
     "target_package": "org.telegram.tgnet"
   }
