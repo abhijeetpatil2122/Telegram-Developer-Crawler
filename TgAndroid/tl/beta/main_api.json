@@ -1965,7 +1965,7 @@
       "type": "BotInlineMessage"
     },
     {
-      "id": -242934658,
+      "id": -1163823052,
       "kind": "constructor",
       "name": "botInlineMessageWidget",
       "params": [
@@ -8596,7 +8596,7 @@
       "name": "inputChatPhoto",
       "params": [
         {
-          "name": "f22087id",
+          "name": "f22088id",
           "type": "InputPhoto"
         }
       ],
@@ -9402,7 +9402,7 @@
       "name": "inputMediaDocument",
       "params": [
         {
-          "name": "f22088id",
+          "name": "f22089id",
           "type": "InputDocument"
         },
         {
@@ -9440,7 +9440,7 @@
       "name": "inputMediaGame",
       "params": [
         {
-          "name": "f22089id",
+          "name": "f22090id",
           "type": "InputGame"
         }
       ],
@@ -9512,7 +9512,7 @@
       "name": "inputMediaPhoto",
       "params": [
         {
-          "name": "f22090id",
+          "name": "f22091id",
           "type": "InputPhoto"
         },
         {
@@ -9646,7 +9646,7 @@
       "type": "InputMedia"
     },
     {
-      "id": 1389944197,
+      "id": 1157021774,
       "kind": "constructor",
       "name": "inputMediaWidget",
       "params": [],
@@ -11061,7 +11061,7 @@
       "name": "inputStickeredMediaDocument",
       "params": [
         {
-          "name": "f22096id",
+          "name": "f22097id",
           "type": "InputDocument"
         }
       ],
@@ -11074,7 +11074,7 @@
       "name": "inputStickeredMediaPhoto",
       "params": [
         {
-          "name": "f22097id",
+          "name": "f22098id",
           "type": "InputPhoto"
         }
       ],
@@ -14091,7 +14091,7 @@
       "type": "MessageMedia"
     },
     {
-      "id": -1473134793,
+      "id": 574157332,
       "kind": "constructor",
       "name": "messageMediaWidget",
       "params": [],
@@ -24741,7 +24741,7 @@
       "type": "Update"
     },
     {
-      "id": 939566996,
+      "id": -1146062627,
       "kind": "constructor",
       "name": "updateMessageWidgetData",
       "params": [
@@ -40599,14 +40599,14 @@
     "max_definition_removal_ratio": 0.1
   },
   "sha256": {
-    "tl": "b9f1e9845a03a5b003cfd327d4dec139999032e21c01835fbd30678b9eb4b54c"
+    "tl": "2e8fac2bf1fcb9cf7ad56f145931e11788e57914f57e91c933c248f361ba4d86"
   },
   "source": {
     "apk": "https://cdn4.telesco.pe/file/Telegram-Beta.apk",
-    "apk_sha256": "90deb9ca390a4dab838de4ea4d1e41ac8833ab125c5ce9e3370bc91da896fe7f",
+    "apk_sha256": "5a4836fb3ca28f76962bbf7a68dc9b91f7564e6e9226e8eec11394252b8ef139",
     "jadx": "https://github.com/skylot/jadx/releases/download/v1.5.6/jadx-1.5.6.zip",
     "package": "org.telegram.messenger.beta",
-    "version_code": 72569,
+    "version_code": 72609,
     "version_name": "13.2.0"
   }
 }

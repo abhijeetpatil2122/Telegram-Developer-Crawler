@@ -16,8 +16,8 @@
   "source_repository": "https://github.com/tdlib/td",
   "upstream": {
     "branch": "master",
-    "commit": "ea3f69ce11aef458bfbb09869b809ede4447486f",
-    "commit_url": "https://github.com/tdlib/td/commit/ea3f69ce11aef458bfbb09869b809ede4447486f",
-    "message": "Add tests for pinned topics in OrderedTopics."
+    "commit": "4c6377aa7386c39217878a9a56d581922ad37ca4",
+    "commit_url": "https://github.com/tdlib/td/commit/4c6377aa7386c39217878a9a56d581922ad37ca4",
+    "message": "Preserve removal of already displayed edited notifications"
   }
 }
