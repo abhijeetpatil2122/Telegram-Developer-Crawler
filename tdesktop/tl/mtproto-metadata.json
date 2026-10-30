@@ -16,8 +16,8 @@
   "source_repository": "https://github.com/telegramdesktop/tdesktop",
   "upstream": {
     "branch": "dev",
-    "commit": "29fb24ee8ec2f22c163a053c7cccd3ba234862b4",
-    "commit_url": "https://github.com/telegramdesktop/tdesktop/commit/29fb24ee8ec2f22c163a053c7cccd3ba234862b4",
-    "message": "Allow choosing a primary for exported gift crafting"
+    "commit": "2de685f1a367bdf149838786e9c49343f1d82d53",
+    "commit_url": "https://github.com/telegramdesktop/tdesktop/commit/2de685f1a367bdf149838786e9c49343f1d82d53",
+    "message": "Show press ripples on rich buttons of part rich pages"
   }
 }
