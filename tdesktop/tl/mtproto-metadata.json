@@ -16,8 +16,8 @@
   "source_repository": "https://github.com/telegramdesktop/tdesktop",
   "upstream": {
     "branch": "dev",
-    "commit": "2de685f1a367bdf149838786e9c49343f1d82d53",
-    "commit_url": "https://github.com/telegramdesktop/tdesktop/commit/2de685f1a367bdf149838786e9c49343f1d82d53",
-    "message": "Show press ripples on rich buttons of part rich pages"
+    "commit": "5ff615713d2178b8458e201778d23d7abe78db9b",
+    "commit_url": "https://github.com/telegramdesktop/tdesktop/commit/5ff615713d2178b8458e201778d23d7abe78db9b",
+    "message": "Don't wait for spam bar state unnecessary."
   }
 }
