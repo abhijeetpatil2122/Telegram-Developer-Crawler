@@ -12,9 +12,9 @@
       "metadata": "stable/metadata.json",
       "package": "org.telegram.messenger.web",
       "resources": "stable/resources/",
-      "sha256": "4c122bca5edb997e38fc65360c33e6e726e6f1b31ba23987df0adad0e323a9d8",
-      "version_code": 72299,
-      "version_name": "13.1.0"
+      "sha256": "148f1aa51b0a76c8168e4ad0eb121a66b78c2b8f50e4dc44e7a667668cf8823b",
+      "version_code": 72379,
+      "version_name": "13.1.1"
     }
   },
   "sources": {
