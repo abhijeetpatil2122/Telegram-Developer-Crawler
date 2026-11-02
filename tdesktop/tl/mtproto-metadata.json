@@ -16,8 +16,8 @@
   "source_repository": "https://github.com/telegramdesktop/tdesktop",
   "upstream": {
     "branch": "dev",
-    "commit": "5ff615713d2178b8458e201778d23d7abe78db9b",
-    "commit_url": "https://github.com/telegramdesktop/tdesktop/commit/5ff615713d2178b8458e201778d23d7abe78db9b",
-    "message": "Don't wait for spam bar state unnecessary."
+    "commit": "a8de5f928ba68197195e6e752293af39d4db8e6c",
+    "commit_url": "https://github.com/telegramdesktop/tdesktop/commit/a8de5f928ba68197195e6e752293af39d4db8e6c",
+    "message": "Update brotli to 1.2.1"
   }
 }
