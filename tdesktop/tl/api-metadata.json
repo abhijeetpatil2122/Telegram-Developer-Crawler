@@ -16,8 +16,8 @@
   "source_repository": "https://github.com/telegramdesktop/tdesktop",
   "upstream": {
     "branch": "dev",
-    "commit": "a8de5f928ba68197195e6e752293af39d4db8e6c",
-    "commit_url": "https://github.com/telegramdesktop/tdesktop/commit/a8de5f928ba68197195e6e752293af39d4db8e6c",
-    "message": "Update brotli to 1.2.1"
+    "commit": "3a2a9a34e833d3243a13787215b8a7cdcf5dc3c3",
+    "commit_url": "https://github.com/telegramdesktop/tdesktop/commit/3a2a9a34e833d3243a13787215b8a7cdcf5dc3c3",
+    "message": "Version 7.3.5."
   }
 }
