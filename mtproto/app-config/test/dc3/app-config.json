@@ -1355,7 +1355,7 @@
         "key": "ton_usd_rate",
         "value": {
           "_": "JsonNumber",
-          "value": 1.173864280430923
+          "value": 1.1531268354616904
         }
       },
       {
@@ -2063,6 +2063,14 @@
               ]
             }
           ]
+        }
+      },
+      {
+        "_": "JsonObjectValue",
+        "key": "stargifts_craft_minted_first_source",
+        "value": {
+          "_": "JsonBool",
+          "value": true
         }
       },
       {
