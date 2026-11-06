@@ -8538,7 +8538,7 @@
       "name": "inputChatPhoto",
       "params": [
         {
-          "name": "f27061id",
+          "name": "f27013id",
           "type": "InputPhoto"
         }
       ],
@@ -9344,7 +9344,7 @@
       "name": "inputMediaDocument",
       "params": [
         {
-          "name": "f27062id",
+          "name": "f27014id",
           "type": "InputDocument"
         },
         {
@@ -9382,7 +9382,7 @@
       "name": "inputMediaGame",
       "params": [
         {
-          "name": "f27063id",
+          "name": "f27015id",
           "type": "InputGame"
         }
       ],
@@ -9454,7 +9454,7 @@
       "name": "inputMediaPhoto",
       "params": [
         {
-          "name": "f27064id",
+          "name": "f27016id",
           "type": "InputPhoto"
         },
         {
@@ -11003,7 +11003,7 @@
       "name": "inputStickeredMediaDocument",
       "params": [
         {
-          "name": "f27070id",
+          "name": "f27022id",
           "type": "InputDocument"
         }
       ],
@@ -11016,7 +11016,7 @@
       "name": "inputStickeredMediaPhoto",
       "params": [
         {
-          "name": "f27071id",
+          "name": "f27023id",
           "type": "InputPhoto"
         }
       ],
@@ -27285,8 +27285,8 @@
   ],
   "counts": {
     "constructors": 1832,
-    "methods": 1139,
-    "total": 2971
+    "methods": 1141,
+    "total": 2973
   },
   "layer": 233,
   "methods": [
@@ -29506,6 +29506,14 @@
       "source": "sources/org/telegram/tgnet/TLRPC.java"
     },
     {
+      "id": 746916172,
+      "kind": "method",
+      "name": "auth.finishFirebasePnvLogin",
+      "params": [],
+      "result": "auth.Authorization",
+      "source": "sources/org/telegram/tgnet/TLRPC.java"
+    },
+    {
       "id": -1739084537,
       "kind": "method",
       "name": "auth.finishPasskeyLogin",
@@ -29529,6 +29537,14 @@
       ],
       "result": "auth.Authorization",
       "source": "core.telegram.org/schema/json"
+    },
+    {
+      "id": 2017422166,
+      "kind": "method",
+      "name": "auth.firebasePnvSignUp",
+      "params": [],
+      "result": "auth.Authorization",
+      "source": "sources/org/telegram/tgnet/TLRPC.java"
     },
     {
       "id": -1518699091,
@@ -29591,6 +29607,14 @@
       ],
       "result": "auth.Authorization",
       "source": "core.telegram.org/schema/json"
+    },
+    {
+      "id": 1682904512,
+      "kind": "method",
+      "name": "auth.initFirebasePnvLogin",
+      "params": [],
+      "result": "auth.firebasePnvIntent",
+      "source": "sources/org/telegram/tgnet/TLRPC.java"
     },
     {
       "id": 1368051895,
@@ -29698,45 +29722,12 @@
       "source": "sources/org/telegram/tgnet/TLRPC.java"
     },
     {
-      "id": -2131827673,
+      "id": -1429752041,
       "kind": "method",
       "name": "auth.signUp",
       "params": [],
       "result": "auth.Authorization",
       "source": "sources/org/telegram/tgnet/TLRPC.java"
-    },
-    {
-      "id": -1429752041,
-      "kind": "method",
-      "name": "auth.signUp",
-      "params": [
-        {
-          "name": "flags",
-          "type": "#"
-        },
-        {
-          "name": "no_joined_notifications",
-          "type": "flags.0?true"
-        },
-        {
-          "name": "phone_number",
-          "type": "string"
-        },
-        {
-          "name": "phone_code_hash",
-          "type": "string"
-        },
-        {
-          "name": "first_name",
-          "type": "string"
-        },
-        {
-          "name": "last_name",
-          "type": "string"
-        }
-      ],
-      "result": "auth.Authorization",
-      "source": "core.telegram.org/schema/json"
     },
     {
       "id": 397326170,
@@ -40505,14 +40496,14 @@
     "max_definition_removal_ratio": 0.1
   },
   "sha256": {
-    "tl": "a978f62e7803bd82537257ed6ca2d5581fdb91ed8395a757bcbf7fbc27ed54db"
+    "tl": "2a4be008e4f3fd2bf8fd06ab0a25b014efd543e2ecee546528519b0f4accaea0"
   },
   "source": {
     "apk": "https://cdn4.telesco.pe/file/Telegram-Beta.apk",
-    "apk_sha256": "c276f0eee3b4c8c1696f87080fb3d5eef116690aedda5ae8cbd1ae8985cedffa",
+    "apk_sha256": "518881e00de28256726dcd5b3274111bd1e7820088ab628fa54ef0526001db0a",
     "jadx": "https://github.com/skylot/jadx/releases/download/v1.5.6/jadx-1.5.6.zip",
     "package": "org.telegram.messenger.beta",
-    "version_code": 72879,
-    "version_name": "13.2.0"
+    "version_code": 72909,
+    "version_name": "13.2.1"
   }
 }

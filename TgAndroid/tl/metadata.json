@@ -3,15 +3,15 @@
     "beta": {
       "counts": {
         "constructors": 1832,
-        "methods": 1139,
-        "total": 2971
+        "methods": 1141,
+        "total": 2973
       },
       "e2e_json": "beta/e2e.json",
       "e2e_tl": "beta/e2e.tl",
       "layer": 233,
       "main_api_json": "beta/main_api.json",
       "main_api_tl": "beta/main_api.tl",
-      "sha256": "a978f62e7803bd82537257ed6ca2d5581fdb91ed8395a757bcbf7fbc27ed54db"
+      "sha256": "2a4be008e4f3fd2bf8fd06ab0a25b014efd543e2ecee546528519b0f4accaea0"
     },
     "stable": {
       "counts": {
