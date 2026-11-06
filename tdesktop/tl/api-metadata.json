@@ -1,23 +1,23 @@
 {
   "counts": {
-    "constructors": 1720,
-    "functions": 859,
-    "total": 2579
+    "constructors": 1739,
+    "functions": 867,
+    "total": 2606
   },
   "safety": {
     "max_definition_removal_ratio": 0.1
   },
   "sha256": {
-    "json": "b0f0619d8b1b94021442b1dc3575f88244c944591535a2e65b9f94530b0bd78a",
-    "tl": "5e88ac6ac3c05ddd8b81c585a372ee8e31ff03ddf359e2e648de50dc736c48cc"
+    "json": "e87c0fe6ccdca5a4b8b5f761788079332d8538420c67f8eec49c0632b8bd9ba8",
+    "tl": "e7992757e3d650d2a50d7b495de565487af979a39e34f43dfd66e911f4355964"
   },
   "source": "https://raw.githubusercontent.com/telegramdesktop/tdesktop/dev/Telegram/SourceFiles/mtproto/scheme/api.tl",
   "source_path": "Telegram/SourceFiles/mtproto/scheme/api.tl",
   "source_repository": "https://github.com/telegramdesktop/tdesktop",
   "upstream": {
     "branch": "dev",
-    "commit": "3a2a9a34e833d3243a13787215b8a7cdcf5dc3c3",
-    "commit_url": "https://github.com/telegramdesktop/tdesktop/commit/3a2a9a34e833d3243a13787215b8a7cdcf5dc3c3",
-    "message": "Version 7.3.5."
+    "commit": "6d7e0ab348cb2a5520776de442e215833f4573c0",
+    "commit_url": "https://github.com/telegramdesktop/tdesktop/commit/6d7e0ab348cb2a5520776de442e215833f4573c0",
+    "message": "Version 7.4."
   }
 }

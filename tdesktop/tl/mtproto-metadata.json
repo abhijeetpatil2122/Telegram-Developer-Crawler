@@ -16,8 +16,8 @@
   "source_repository": "https://github.com/telegramdesktop/tdesktop",
   "upstream": {
     "branch": "dev",
-    "commit": "3a2a9a34e833d3243a13787215b8a7cdcf5dc3c3",
-    "commit_url": "https://github.com/telegramdesktop/tdesktop/commit/3a2a9a34e833d3243a13787215b8a7cdcf5dc3c3",
-    "message": "Version 7.3.5."
+    "commit": "6d7e0ab348cb2a5520776de442e215833f4573c0",
+    "commit_url": "https://github.com/telegramdesktop/tdesktop/commit/6d7e0ab348cb2a5520776de442e215833f4573c0",
+    "message": "Version 7.4."
   }
 }
