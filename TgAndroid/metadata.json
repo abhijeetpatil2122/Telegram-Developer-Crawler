@@ -4,8 +4,8 @@
       "metadata": "beta/metadata.json",
       "package": "org.telegram.messenger.beta",
       "resources": "beta/resources/",
-      "sha256": "518881e00de28256726dcd5b3274111bd1e7820088ab628fa54ef0526001db0a",
-      "version_code": 72909,
+      "sha256": "2d236aeb60d987e823fb31af97838e025c5ae0c039ce9152fc152862dceef419",
+      "version_code": 72919,
       "version_name": "13.2.1"
     },
     "stable": {
