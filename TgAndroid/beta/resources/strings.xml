@@ -38,11 +38,11 @@
     <string name="cast_skip_next">Skip to next item</string>
     <string name="cast_skip_prev">Skip to previous item</string>
     <string name="cast_stop_live_stream">Stop live stream</string>
-    <string name="com.google.firebase.crashlytics.mapping_file_id">3b69ca58df324ea89e80e83fc205639c</string>
+    <string name="com.google.firebase.crashlytics.mapping_file_id">804a9ea2f19a42368682f81079e7afa5</string>
     <string name="com.google.firebase.crashlytics.version_control_info">"repositories {
   system: GIT
   local_root_path: \"$PROJECT_DIR\"
-  revision: \"3b887b06772d731a9641fa4de0748e80d4625c35\"
+  revision: \"c522e494c16f47e8eb825fb1a0c4d6d0cf9a37c9\"
 }
 "</string>
     <string name="common_google_play_services_enable_button">Enable</string>
