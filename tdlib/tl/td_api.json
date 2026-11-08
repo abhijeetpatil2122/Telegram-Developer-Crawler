@@ -243,6 +243,22 @@
     {
       "id": null,
       "kind": "constructors",
+      "name": "textRange",
+      "params": "offset:int32 length:int32",
+      "result": "TextRange",
+      "source": "textRange offset:int32 length:int32 = TextRange;"
+    },
+    {
+      "id": null,
+      "kind": "constructors",
+      "name": "textRanges",
+      "params": "ranges:vector<textRange>",
+      "result": "TextRanges",
+      "source": "textRanges ranges:vector<textRange> = TextRanges;"
+    },
+    {
+      "id": null,
+      "kind": "constructors",
       "name": "formattedText",
       "params": "text:string entities:vector<textEntity>",
       "result": "FormattedText",
@@ -1180,9 +1196,9 @@
       "id": null,
       "kind": "constructors",
       "name": "userTypeBot",
-      "params": "can_be_edited:Bool can_join_groups:Bool can_read_all_group_messages:Bool has_main_web_app:Bool has_topics:Bool allows_users_to_create_topics:Bool can_manage_bots:Bool is_inline:Bool inline_query_placeholder:string supports_guest_queries:Bool is_guard:Bool need_location:Bool can_connect_to_business:Bool can_be_added_to_attachment_menu:Bool active_user_count:int32",
+      "params": "can_be_edited:Bool can_join_groups:Bool can_read_all_group_messages:Bool has_main_web_app:Bool has_topics:Bool has_topic_sidebar:Bool allows_users_to_create_topics:Bool can_manage_bots:Bool is_inline:Bool inline_query_placeholder:string supports_guest_queries:Bool is_guard:Bool need_location:Bool can_connect_to_business:Bool can_be_added_to_attachment_menu:Bool active_user_count:int32",
       "result": "UserType",
-      "source": "userTypeBot can_be_edited:Bool can_join_groups:Bool can_read_all_group_messages:Bool has_main_web_app:Bool has_topics:Bool allows_users_to_create_topics:Bool can_manage_bots:Bool is_inline:Bool inline_query_placeholder:string supports_guest_queries:Bool is_guard:Bool need_location:Bool can_connect_to_business:Bool can_be_added_to_attachment_menu:Bool active_user_count:int32 = UserType;"
+      "source": "userTypeBot can_be_edited:Bool can_join_groups:Bool can_read_all_group_messages:Bool has_main_web_app:Bool has_topics:Bool has_topic_sidebar:Bool allows_users_to_create_topics:Bool can_manage_bots:Bool is_inline:Bool inline_query_placeholder:string supports_guest_queries:Bool is_guard:Bool need_location:Bool can_connect_to_business:Bool can_be_added_to_attachment_menu:Bool active_user_count:int32 = UserType;"
     },
     {
       "id": null,
@@ -2220,9 +2236,9 @@
       "id": null,
       "kind": "constructors",
       "name": "upgradedGiftDepositInfo",
-      "params": "nft_address:string payload:bytes gram_amount:int53",
+      "params": "nft_address:string payload:bytes gram_amount:int64",
       "result": "UpgradedGiftDepositInfo",
-      "source": "upgradedGiftDepositInfo nft_address:string payload:bytes gram_amount:int53 = UpgradedGiftDepositInfo;"
+      "source": "upgradedGiftDepositInfo nft_address:string payload:bytes gram_amount:int64 = UpgradedGiftDepositInfo;"
     },
     {
       "id": null,
@@ -3180,9 +3196,9 @@
       "id": null,
       "kind": "constructors",
       "name": "tonWalletState",
-      "params": "address:string public_key:bytes gram_amount:int53 is_being_created:Bool is_backup_enabled:Bool can_enable_backup:Bool can_export_phrase:Bool",
+      "params": "address:string public_key:bytes gram_amount:int64 is_being_created:Bool is_backup_enabled:Bool can_enable_backup:Bool can_export_phrase:Bool",
       "result": "TonWalletState",
-      "source": "tonWalletState address:string public_key:bytes gram_amount:int53 is_being_created:Bool is_backup_enabled:Bool can_enable_backup:Bool can_export_phrase:Bool = TonWalletState;"
+      "source": "tonWalletState address:string public_key:bytes gram_amount:int64 is_being_created:Bool is_backup_enabled:Bool can_enable_backup:Bool can_export_phrase:Bool = TonWalletState;"
     },
     {
       "id": null,
@@ -3220,9 +3236,9 @@
       "id": null,
       "kind": "constructors",
       "name": "tonWalletCard",
-      "params": "address:string gram_amount:int53 stickers:vector<tonWalletCardSticker> background_nft_address:string",
+      "params": "address:string gram_amount:int64 stickers:vector<tonWalletCardSticker> background_nft_address:string",
       "result": "TonWalletCard",
-      "source": "tonWalletCard address:string gram_amount:int53 stickers:vector<tonWalletCardSticker> background_nft_address:string = TonWalletCard;"
+      "source": "tonWalletCard address:string gram_amount:int64 stickers:vector<tonWalletCardSticker> background_nft_address:string = TonWalletCard;"
     },
     {
       "id": null,
@@ -3260,17 +3276,17 @@
       "id": null,
       "kind": "constructors",
       "name": "tonWalletTransactionTypeOnRampDeposit",
-      "params": "amount:int53 provider_name:string",
+      "params": "amount:int64 provider_name:string",
       "result": "TonWalletTransactionType",
-      "source": "tonWalletTransactionTypeOnRampDeposit amount:int53 provider_name:string = TonWalletTransactionType;"
+      "source": "tonWalletTransactionTypeOnRampDeposit amount:int64 provider_name:string = TonWalletTransactionType;"
     },
     {
       "id": null,
       "kind": "constructors",
       "name": "tonWalletTransactionTypeTransfer",
-      "params": "amount:int53 is_gasless:Bool comment:string is_comment_encrypted:Bool",
+      "params": "amount:int64 is_gasless:Bool comment:string is_comment_encrypted:Bool",
       "result": "TonWalletTransactionType",
-      "source": "tonWalletTransactionTypeTransfer amount:int53 is_gasless:Bool comment:string is_comment_encrypted:Bool = TonWalletTransactionType;"
+      "source": "tonWalletTransactionTypeTransfer amount:int64 is_gasless:Bool comment:string is_comment_encrypted:Bool = TonWalletTransactionType;"
     },
     {
       "id": null,
@@ -3300,17 +3316,17 @@
       "id": null,
       "kind": "constructors",
       "name": "tonWalletTransaction",
-      "params": "id:string peer_address:string peer_user_id:int53 peer_domain:string date:int32 fee_amount:int53 state:TonWalletTransactionState type:TonWalletTransactionType",
+      "params": "id:string peer_address:string peer_user_id:int53 peer_domain:string date:int32 fee_amount:int64 state:TonWalletTransactionState type:TonWalletTransactionType",
       "result": "TonWalletTransaction",
-      "source": "tonWalletTransaction id:string peer_address:string peer_user_id:int53 peer_domain:string date:int32 fee_amount:int53 state:TonWalletTransactionState type:TonWalletTransactionType = TonWalletTransaction;"
+      "source": "tonWalletTransaction id:string peer_address:string peer_user_id:int53 peer_domain:string date:int32 fee_amount:int64 state:TonWalletTransactionState type:TonWalletTransactionType = TonWalletTransaction;"
     },
     {
       "id": null,
       "kind": "constructors",
       "name": "tonWalletTransactions",
-      "params": "gram_amount:int53 transactions:vector<tonWalletTransaction> next_offset:string",
+      "params": "gram_amount:int64 transactions:vector<tonWalletTransaction> next_offset:string",
       "result": "TonWalletTransactions",
-      "source": "tonWalletTransactions gram_amount:int53 transactions:vector<tonWalletTransaction> next_offset:string = TonWalletTransactions;"
+      "source": "tonWalletTransactions gram_amount:int64 transactions:vector<tonWalletTransaction> next_offset:string = TonWalletTransactions;"
     },
     {
       "id": null,
@@ -3619,6 +3635,78 @@
     {
       "id": null,
       "kind": "constructors",
+      "name": "notificationSettingsScopePrivateChats",
+      "params": "",
+      "result": "NotificationSettingsScope",
+      "source": "notificationSettingsScopePrivateChats = NotificationSettingsScope;"
+    },
+    {
+      "id": null,
+      "kind": "constructors",
+      "name": "notificationSettingsScopeGroupChats",
+      "params": "",
+      "result": "NotificationSettingsScope",
+      "source": "notificationSettingsScopeGroupChats = NotificationSettingsScope;"
+    },
+    {
+      "id": null,
+      "kind": "constructors",
+      "name": "notificationSettingsScopeChannelChats",
+      "params": "",
+      "result": "NotificationSettingsScope",
+      "source": "notificationSettingsScopeChannelChats = NotificationSettingsScope;"
+    },
+    {
+      "id": null,
+      "kind": "constructors",
+      "name": "chatNotificationSettings",
+      "params": "use_default_mute_for:Bool mute_for:int32 use_default_sound:Bool sound_id:int64 use_default_show_preview:Bool show_preview:Bool use_default_mute_stories:Bool mute_stories:Bool use_default_story_sound:Bool story_sound_id:int64 use_default_show_story_poster:Bool show_story_poster:Bool use_default_disable_pinned_message_notifications:Bool disable_pinned_message_notifications:Bool use_default_disable_mention_notifications:Bool disable_mention_notifications:Bool",
+      "result": "ChatNotificationSettings",
+      "source": "chatNotificationSettings use_default_mute_for:Bool mute_for:int32 use_default_sound:Bool sound_id:int64 use_default_show_preview:Bool show_preview:Bool use_default_mute_stories:Bool mute_stories:Bool use_default_story_sound:Bool story_sound_id:int64 use_default_show_story_poster:Bool show_story_poster:Bool use_default_disable_pinned_message_notifications:Bool disable_pinned_message_notifications:Bool use_default_disable_mention_notifications:Bool disable_mention_notifications:Bool = ChatNotificationSettings;"
+    },
+    {
+      "id": null,
+      "kind": "constructors",
+      "name": "scopeNotificationSettings",
+      "params": "mute_for:int32 sound_id:int64 show_preview:Bool use_default_mute_stories:Bool mute_stories:Bool story_sound_id:int64 show_story_poster:Bool disable_pinned_message_notifications:Bool disable_mention_notifications:Bool",
+      "result": "ScopeNotificationSettings",
+      "source": "scopeNotificationSettings mute_for:int32 sound_id:int64 show_preview:Bool use_default_mute_stories:Bool mute_stories:Bool story_sound_id:int64 show_story_poster:Bool disable_pinned_message_notifications:Bool disable_mention_notifications:Bool = ScopeNotificationSettings;"
+    },
+    {
+      "id": null,
+      "kind": "constructors",
+      "name": "reactionNotificationSourceNone",
+      "params": "",
+      "result": "ReactionNotificationSource",
+      "source": "reactionNotificationSourceNone = ReactionNotificationSource;"
+    },
+    {
+      "id": null,
+      "kind": "constructors",
+      "name": "reactionNotificationSourceContacts",
+      "params": "",
+      "result": "ReactionNotificationSource",
+      "source": "reactionNotificationSourceContacts = ReactionNotificationSource;"
+    },
+    {
+      "id": null,
+      "kind": "constructors",
+      "name": "reactionNotificationSourceAll",
+      "params": "",
+      "result": "ReactionNotificationSource",
+      "source": "reactionNotificationSourceAll = ReactionNotificationSource;"
+    },
+    {
+      "id": null,
+      "kind": "constructors",
+      "name": "reactionNotificationSettings",
+      "params": "message_reaction_source:ReactionNotificationSource story_reaction_source:ReactionNotificationSource poll_vote_source:ReactionNotificationSource sound_id:int64 show_preview:Bool",
+      "result": "ReactionNotificationSettings",
+      "source": "reactionNotificationSettings message_reaction_source:ReactionNotificationSource story_reaction_source:ReactionNotificationSource poll_vote_source:ReactionNotificationSource sound_id:int64 show_preview:Bool = ReactionNotificationSettings;"
+    },
+    {
+      "id": null,
+      "kind": "constructors",
       "name": "communityId",
       "params": "id:int53",
       "result": "CommunityId",
@@ -3684,9 +3772,9 @@
       "id": null,
       "kind": "constructors",
       "name": "community",
-      "params": "id:int53 have_access:Bool name:string photo:chatPhotoInfo date:int32 status:CommunityMemberStatus permissions:communityPermissions",
+      "params": "id:int53 have_access:Bool name:string photo:chatPhotoInfo date:int32 status:CommunityMemberStatus permissions:communityPermissions are_chats_collapsed:Bool",
       "result": "Community",
-      "source": "community id:int53 have_access:Bool name:string photo:chatPhotoInfo date:int32 status:CommunityMemberStatus permissions:communityPermissions = Community;"
+      "source": "community id:int53 have_access:Bool name:string photo:chatPhotoInfo date:int32 status:CommunityMemberStatus permissions:communityPermissions are_chats_collapsed:Bool = Community;"
     },
     {
       "id": null,
@@ -3700,9 +3788,41 @@
       "id": null,
       "kind": "constructors",
       "name": "communityFullInfo",
-      "params": "photo:chatPhoto chats:vector<communityChat> administrator_count:int32 banned_count:int32 add_chat_request_count:int32",
+      "params": "photo:chatPhoto chats:vector<communityChat> administrator_count:int32 banned_count:int32 add_chat_request_count:int32 notification_settings:chatNotificationSettings",
       "result": "CommunityFullInfo",
-      "source": "communityFullInfo photo:chatPhoto chats:vector<communityChat> administrator_count:int32 banned_count:int32 add_chat_request_count:int32 = CommunityFullInfo;"
+      "source": "communityFullInfo photo:chatPhoto chats:vector<communityChat> administrator_count:int32 banned_count:int32 add_chat_request_count:int32 notification_settings:chatNotificationSettings = CommunityFullInfo;"
+    },
+    {
+      "id": null,
+      "kind": "constructors",
+      "name": "communities",
+      "params": "community_ids:vector<int53>",
+      "result": "Communities",
+      "source": "communities community_ids:vector<int53> = Communities;"
+    },
+    {
+      "id": null,
+      "kind": "constructors",
+      "name": "communityAddChatRequest",
+      "params": "chat_id:int53 is_hidden:Bool sender_user_id:int53 date:int32",
+      "result": "CommunityAddChatRequest",
+      "source": "communityAddChatRequest chat_id:int53 is_hidden:Bool sender_user_id:int53 date:int32 = CommunityAddChatRequest;"
+    },
+    {
+      "id": null,
+      "kind": "constructors",
+      "name": "communityAddChatRequests",
+      "params": "total_count:int32 requests:vector<communityAddChatRequest> next_offset:string",
+      "result": "CommunityAddChatRequests",
+      "source": "communityAddChatRequests total_count:int32 requests:vector<communityAddChatRequest> next_offset:string = CommunityAddChatRequests;"
+    },
+    {
+      "id": null,
+      "kind": "constructors",
+      "name": "communityMemberChats",
+      "params": "owned_chat_ids:vector<int53> joined_chat_ids:vector<int53>",
+      "result": "CommunityMemberChats",
+      "source": "communityMemberChats owned_chat_ids:vector<int53> joined_chat_ids:vector<int53> = CommunityMemberChats;"
     },
     {
       "id": null,
@@ -4196,9 +4316,9 @@
       "id": null,
       "kind": "constructors",
       "name": "supergroup",
-      "params": "id:int53 usernames:usernames date:int32 status:ChatMemberStatus member_count:int32 boost_level:int32 has_automatic_translation:Bool has_linked_chat:Bool has_location:Bool sign_messages:Bool show_message_sender:Bool join_to_send_messages:Bool join_by_request:Bool is_slow_mode_enabled:Bool is_channel:Bool is_broadcast_group:Bool is_forum:Bool is_direct_messages_group:Bool is_administered_direct_messages_group:Bool verification_status:verificationStatus has_direct_messages_group:Bool has_forum_tabs:Bool restriction_info:restrictionInfo paid_message_star_count:int53 active_story_state:ActiveStoryState",
+      "params": "id:int53 usernames:usernames date:int32 status:ChatMemberStatus member_count:int32 boost_level:int32 has_automatic_translation:Bool has_linked_chat:Bool has_location:Bool sign_messages:Bool show_message_sender:Bool join_to_send_messages:Bool join_by_request:Bool is_slow_mode_enabled:Bool is_channel:Bool is_broadcast_group:Bool is_forum:Bool is_direct_messages_group:Bool is_administered_direct_messages_group:Bool verification_status:verificationStatus has_direct_messages_group:Bool has_forum_tabs:Bool has_forum_sidebar:Bool restriction_info:restrictionInfo paid_message_star_count:int53 active_story_state:ActiveStoryState",
       "result": "Supergroup",
-      "source": "supergroup id:int53 usernames:usernames date:int32 status:ChatMemberStatus member_count:int32 boost_level:int32 has_automatic_translation:Bool has_linked_chat:Bool has_location:Bool sign_messages:Bool show_message_sender:Bool join_to_send_messages:Bool join_by_request:Bool is_slow_mode_enabled:Bool is_channel:Bool is_broadcast_group:Bool is_forum:Bool is_direct_messages_group:Bool is_administered_direct_messages_group:Bool verification_status:verificationStatus has_direct_messages_group:Bool has_forum_tabs:Bool restriction_info:restrictionInfo paid_message_star_count:int53 active_story_state:ActiveStoryState = Supergroup;"
+      "source": "supergroup id:int53 usernames:usernames date:int32 status:ChatMemberStatus member_count:int32 boost_level:int32 has_automatic_translation:Bool has_linked_chat:Bool has_location:Bool sign_messages:Bool show_message_sender:Bool join_to_send_messages:Bool join_by_request:Bool is_slow_mode_enabled:Bool is_channel:Bool is_broadcast_group:Bool is_forum:Bool is_direct_messages_group:Bool is_administered_direct_messages_group:Bool verification_status:verificationStatus has_direct_messages_group:Bool has_forum_tabs:Bool has_forum_sidebar:Bool restriction_info:restrictionInfo paid_message_star_count:int53 active_story_state:ActiveStoryState = Supergroup;"
     },
     {
       "id": null,
@@ -4975,78 +5095,6 @@
       "params": "total_counts:downloadedFileCounts files:vector<fileDownload> next_offset:string",
       "result": "FoundFileDownloads",
       "source": "foundFileDownloads total_counts:downloadedFileCounts files:vector<fileDownload> next_offset:string = FoundFileDownloads;"
-    },
-    {
-      "id": null,
-      "kind": "constructors",
-      "name": "notificationSettingsScopePrivateChats",
-      "params": "",
-      "result": "NotificationSettingsScope",
-      "source": "notificationSettingsScopePrivateChats = NotificationSettingsScope;"
-    },
-    {
-      "id": null,
-      "kind": "constructors",
-      "name": "notificationSettingsScopeGroupChats",
-      "params": "",
-      "result": "NotificationSettingsScope",
-      "source": "notificationSettingsScopeGroupChats = NotificationSettingsScope;"
-    },
-    {
-      "id": null,
-      "kind": "constructors",
-      "name": "notificationSettingsScopeChannelChats",
-      "params": "",
-      "result": "NotificationSettingsScope",
-      "source": "notificationSettingsScopeChannelChats = NotificationSettingsScope;"
-    },
-    {
-      "id": null,
-      "kind": "constructors",
-      "name": "chatNotificationSettings",
-      "params": "use_default_mute_for:Bool mute_for:int32 use_default_sound:Bool sound_id:int64 use_default_show_preview:Bool show_preview:Bool use_default_mute_stories:Bool mute_stories:Bool use_default_story_sound:Bool story_sound_id:int64 use_default_show_story_poster:Bool show_story_poster:Bool use_default_disable_pinned_message_notifications:Bool disable_pinned_message_notifications:Bool use_default_disable_mention_notifications:Bool disable_mention_notifications:Bool",
-      "result": "ChatNotificationSettings",
-      "source": "chatNotificationSettings use_default_mute_for:Bool mute_for:int32 use_default_sound:Bool sound_id:int64 use_default_show_preview:Bool show_preview:Bool use_default_mute_stories:Bool mute_stories:Bool use_default_story_sound:Bool story_sound_id:int64 use_default_show_story_poster:Bool show_story_poster:Bool use_default_disable_pinned_message_notifications:Bool disable_pinned_message_notifications:Bool use_default_disable_mention_notifications:Bool disable_mention_notifications:Bool = ChatNotificationSettings;"
-    },
-    {
-      "id": null,
-      "kind": "constructors",
-      "name": "scopeNotificationSettings",
-      "params": "mute_for:int32 sound_id:int64 show_preview:Bool use_default_mute_stories:Bool mute_stories:Bool story_sound_id:int64 show_story_poster:Bool disable_pinned_message_notifications:Bool disable_mention_notifications:Bool",
-      "result": "ScopeNotificationSettings",
-      "source": "scopeNotificationSettings mute_for:int32 sound_id:int64 show_preview:Bool use_default_mute_stories:Bool mute_stories:Bool story_sound_id:int64 show_story_poster:Bool disable_pinned_message_notifications:Bool disable_mention_notifications:Bool = ScopeNotificationSettings;"
-    },
-    {
-      "id": null,
-      "kind": "constructors",
-      "name": "reactionNotificationSourceNone",
-      "params": "",
-      "result": "ReactionNotificationSource",
-      "source": "reactionNotificationSourceNone = ReactionNotificationSource;"
-    },
-    {
-      "id": null,
-      "kind": "constructors",
-      "name": "reactionNotificationSourceContacts",
-      "params": "",
-      "result": "ReactionNotificationSource",
-      "source": "reactionNotificationSourceContacts = ReactionNotificationSource;"
-    },
-    {
-      "id": null,
-      "kind": "constructors",
-      "name": "reactionNotificationSourceAll",
-      "params": "",
-      "result": "ReactionNotificationSource",
-      "source": "reactionNotificationSourceAll = ReactionNotificationSource;"
-    },
-    {
-      "id": null,
-      "kind": "constructors",
-      "name": "reactionNotificationSettings",
-      "params": "message_reaction_source:ReactionNotificationSource story_reaction_source:ReactionNotificationSource poll_vote_source:ReactionNotificationSource sound_id:int64 show_preview:Bool",
-      "result": "ReactionNotificationSettings",
-      "source": "reactionNotificationSettings message_reaction_source:ReactionNotificationSource story_reaction_source:ReactionNotificationSource poll_vote_source:ReactionNotificationSource sound_id:int64 show_preview:Bool = ReactionNotificationSettings;"
     },
     {
       "id": null,
@@ -8075,6 +8123,14 @@
     {
       "id": null,
       "kind": "constructors",
+      "name": "messageWidget",
+      "params": "width:int32 height:int32 html:string public_data:string chat_data:string widget_id:int64 caption:formattedText show_caption_above_media:Bool is_copy:Bool can_send_queries:Bool can_send_background_queries:Bool",
+      "result": "MessageContent",
+      "source": "messageWidget width:int32 height:int32 html:string public_data:string chat_data:string widget_id:int64 caption:formattedText show_caption_above_media:Bool is_copy:Bool can_send_queries:Bool can_send_background_queries:Bool = MessageContent;"
+    },
+    {
+      "id": null,
+      "kind": "constructors",
       "name": "messageChecklist",
       "params": "list:checklist",
       "result": "MessageContent",
@@ -8516,9 +8572,9 @@
       "id": null,
       "kind": "constructors",
       "name": "messageTonWalletTransfer",
-      "params": "sender_user_id:int53 transaction_id:string peer_address:string amount:int53 comment:string is_comment_encrypted:Bool",
+      "params": "sender_user_id:int53 transaction_id:string peer_address:string amount:int64 comment:string is_comment_encrypted:Bool",
       "result": "MessageContent",
-      "source": "messageTonWalletTransfer sender_user_id:int53 transaction_id:string peer_address:string amount:int53 comment:string is_comment_encrypted:Bool = MessageContent;"
+      "source": "messageTonWalletTransfer sender_user_id:int53 transaction_id:string peer_address:string amount:int64 comment:string is_comment_encrypted:Bool = MessageContent;"
     },
     {
       "id": null,
@@ -9587,6 +9643,22 @@
     {
       "id": null,
       "kind": "constructors",
+      "name": "inputMessageWidget",
+      "params": "width:int32 height:int32 html:string public_data:string chat_data:string caption:formattedText show_caption_above_media:Bool allow_queries:Bool is_shared:Bool",
+      "result": "InputMessageContent",
+      "source": "inputMessageWidget width:int32 height:int32 html:string public_data:string chat_data:string caption:formattedText show_caption_above_media:Bool allow_queries:Bool is_shared:Bool = InputMessageContent;"
+    },
+    {
+      "id": null,
+      "kind": "constructors",
+      "name": "inputMessageSharedWidget",
+      "params": "widget_id:int64 chat_data:string caption:formattedText show_caption_above_media:Bool",
+      "result": "InputMessageContent",
+      "source": "inputMessageSharedWidget widget_id:int64 chat_data:string caption:formattedText show_caption_above_media:Bool = InputMessageContent;"
+    },
+    {
+      "id": null,
+      "kind": "constructors",
       "name": "inputMessageForwarded",
       "params": "from_chat_id:int53 message_id:int53 in_game_share:Bool replace_video_start_timestamp:Bool new_video_start_timestamp:int32 copy_options:messageCopyOptions",
       "result": "InputMessageContent",
@@ -10187,14 +10259,6 @@
     {
       "id": null,
       "kind": "constructors",
-      "name": "inputStoryAreaTypeFoundVenue",
-      "params": "query_id:int64 result_id:string",
-      "result": "InputStoryAreaType",
-      "source": "inputStoryAreaTypeFoundVenue query_id:int64 result_id:string = InputStoryAreaType;"
-    },
-    {
-      "id": null,
-      "kind": "constructors",
       "name": "inputStoryAreaTypePreviousVenue",
       "params": "venue_provider:string venue_id:string",
       "result": "InputStoryAreaType",
@@ -10396,9 +10460,9 @@
       "id": null,
       "kind": "constructors",
       "name": "story",
-      "params": "id:int32 poster_chat_id:int53 poster_id:MessageSender date:int32 is_being_posted:Bool is_being_edited:Bool is_edited:Bool is_posted_to_chat_page:Bool is_visible_only_for_self:Bool can_be_added_to_album:Bool can_be_deleted:Bool can_be_edited:Bool can_be_forwarded:Bool can_be_replied:Bool can_set_privacy_settings:Bool can_toggle_is_posted_to_chat_page:Bool can_get_statistics:Bool can_get_interactions:Bool has_expired_viewers:Bool repost_info:storyRepostInfo interaction_info:storyInteractionInfo chosen_reaction_type:ReactionType privacy_settings:StoryPrivacySettings content:StoryContent areas:vector<storyArea> caption:formattedText album_ids:vector<int32>",
+      "params": "id:int32 poster_chat_id:int53 poster_id:MessageSender date:int32 is_being_posted:Bool is_being_edited:Bool is_edited:Bool is_posted_to_chat_page:Bool is_visible_only_for_self:Bool can_be_added_to_album:Bool can_be_deleted:Bool can_be_edited:Bool can_be_forwarded:Bool can_be_replied:Bool can_set_privacy_settings:Bool can_toggle_is_posted_to_chat_page:Bool can_get_statistics:Bool can_get_interactions:Bool has_expired_viewers:Bool repost_info:storyRepostInfo interaction_info:storyInteractionInfo chosen_reaction_type:ReactionType privacy_settings:StoryPrivacySettings content:StoryContent areas:vector<storyArea> caption:formattedText music:audio album_ids:vector<int32>",
       "result": "Story",
-      "source": "story id:int32 poster_chat_id:int53 poster_id:MessageSender date:int32 is_being_posted:Bool is_being_edited:Bool is_edited:Bool is_posted_to_chat_page:Bool is_visible_only_for_self:Bool can_be_added_to_album:Bool can_be_deleted:Bool can_be_edited:Bool can_be_forwarded:Bool can_be_replied:Bool can_set_privacy_settings:Bool can_toggle_is_posted_to_chat_page:Bool can_get_statistics:Bool can_get_interactions:Bool has_expired_viewers:Bool repost_info:storyRepostInfo interaction_info:storyInteractionInfo chosen_reaction_type:ReactionType privacy_settings:StoryPrivacySettings content:StoryContent areas:vector<storyArea> caption:formattedText album_ids:vector<int32> = Story;"
+      "source": "story id:int32 poster_chat_id:int53 poster_id:MessageSender date:int32 is_being_posted:Bool is_being_edited:Bool is_edited:Bool is_posted_to_chat_page:Bool is_visible_only_for_self:Bool can_be_added_to_album:Bool can_be_deleted:Bool can_be_edited:Bool can_be_forwarded:Bool can_be_replied:Bool can_set_privacy_settings:Bool can_toggle_is_posted_to_chat_page:Bool can_get_statistics:Bool can_get_interactions:Bool has_expired_viewers:Bool repost_info:storyRepostInfo interaction_info:storyInteractionInfo chosen_reaction_type:ReactionType privacy_settings:StoryPrivacySettings content:StoryContent areas:vector<storyArea> caption:formattedText music:audio album_ids:vector<int32> = Story;"
     },
     {
       "id": null,
@@ -11267,6 +11331,14 @@
     {
       "id": null,
       "kind": "constructors",
+      "name": "speechRecognitionLanguages",
+      "params": "language_codes:vector<string>",
+      "result": "SpeechRecognitionLanguages",
+      "source": "speechRecognitionLanguages language_codes:vector<string> = SpeechRecognitionLanguages;"
+    },
+    {
+      "id": null,
+      "kind": "constructors",
       "name": "businessConnection",
       "params": "id:string user_id:int53 user_chat_id:int53 date:int32 rights:businessBotRights is_enabled:Bool",
       "result": "BusinessConnection",
@@ -11647,6 +11719,54 @@
       "params": "text:string show_alert:Bool url:string",
       "result": "CallbackQueryAnswer",
       "source": "callbackQueryAnswer text:string show_alert:Bool url:string = CallbackQueryAnswer;"
+    },
+    {
+      "id": null,
+      "kind": "constructors",
+      "name": "widgetQueryWallet",
+      "params": "address:string gram_amount:int64 public_key:bytes state_init:bytes",
+      "result": "WidgetQueryWallet",
+      "source": "widgetQueryWallet address:string gram_amount:int64 public_key:bytes state_init:bytes = WidgetQueryWallet;"
+    },
+    {
+      "id": null,
+      "kind": "constructors",
+      "name": "widgetQueryTypeData",
+      "params": "with_wallet:Bool",
+      "result": "WidgetQueryType",
+      "source": "widgetQueryTypeData with_wallet:Bool = WidgetQueryType;"
+    },
+    {
+      "id": null,
+      "kind": "constructors",
+      "name": "widgetQueryTypeSignData",
+      "params": "wallet:widgetQueryWallet sign_data:string",
+      "result": "WidgetQueryType",
+      "source": "widgetQueryTypeSignData wallet:widgetQueryWallet sign_data:string = WidgetQueryType;"
+    },
+    {
+      "id": null,
+      "kind": "constructors",
+      "name": "widgetQueryTypeSentTransaction",
+      "params": "wallet:widgetQueryWallet msg_hash:string",
+      "result": "WidgetQueryType",
+      "source": "widgetQueryTypeSentTransaction wallet:widgetQueryWallet msg_hash:string = WidgetQueryType;"
+    },
+    {
+      "id": null,
+      "kind": "constructors",
+      "name": "widgetQueryAnswer",
+      "params": "data:string",
+      "result": "WidgetQueryAnswer",
+      "source": "widgetQueryAnswer data:string = WidgetQueryAnswer;"
+    },
+    {
+      "id": null,
+      "kind": "constructors",
+      "name": "widgetPublicData",
+      "params": "data:string poll_period:int32",
+      "result": "WidgetPublicData",
+      "source": "widgetPublicData data:string poll_period:int32 = WidgetPublicData;"
     },
     {
       "id": null,
@@ -15236,9 +15356,9 @@
       "id": null,
       "kind": "constructors",
       "name": "internalLinkTypeTonWalletTransfer",
-      "params": "receiver:TonWalletTransferReceiver gram_amount:int53",
+      "params": "receiver:TonWalletTransferReceiver gram_amount:int64",
       "result": "InternalLinkType",
-      "source": "internalLinkTypeTonWalletTransfer receiver:TonWalletTransferReceiver gram_amount:int53 = InternalLinkType;"
+      "source": "internalLinkTypeTonWalletTransfer receiver:TonWalletTransferReceiver gram_amount:int64 = InternalLinkType;"
     },
     {
       "id": null,
@@ -17931,6 +18051,14 @@
     {
       "id": null,
       "kind": "constructors",
+      "name": "updateSpeechRecognitionInFile",
+      "params": "recognition_id:int64 partial_text:string",
+      "result": "Update",
+      "source": "updateSpeechRecognitionInFile recognition_id:int64 partial_text:string = Update;"
+    },
+    {
+      "id": null,
+      "kind": "constructors",
       "name": "updateGroupCallMessageLevels",
       "params": "levels:vector<groupCallMessageLevel>",
       "result": "Update",
@@ -18087,6 +18215,30 @@
       "params": "id:int64 sender_user_id:int53 connection_id:string message:businessMessage chat_instance:int64 payload:CallbackQueryPayload",
       "result": "Update",
       "source": "updateNewBusinessCallbackQuery id:int64 sender_user_id:int53 connection_id:string message:businessMessage chat_instance:int64 payload:CallbackQueryPayload = Update;"
+    },
+    {
+      "id": null,
+      "kind": "constructors",
+      "name": "updateNewWidgetQuery",
+      "params": "id:int64 sender_user_id:int53 chat_id:int53 message_id:int53 chat_instance:int64 chat_type:string query_type:WidgetQueryType data:bytes widget_id:int64 wallet_card:tonWalletCard",
+      "result": "Update",
+      "source": "updateNewWidgetQuery id:int64 sender_user_id:int53 chat_id:int53 message_id:int53 chat_instance:int64 chat_type:string query_type:WidgetQueryType data:bytes widget_id:int64 wallet_card:tonWalletCard = Update;"
+    },
+    {
+      "id": null,
+      "kind": "constructors",
+      "name": "updateNewInlineWidgetQuery",
+      "params": "id:int64 sender_user_id:int53 inline_message_id:string chat_instance:int64 chat_type:string query_type:WidgetQueryType data:bytes widget_id:int64 wallet_card:tonWalletCard",
+      "result": "Update",
+      "source": "updateNewInlineWidgetQuery id:int64 sender_user_id:int53 inline_message_id:string chat_instance:int64 chat_type:string query_type:WidgetQueryType data:bytes widget_id:int64 wallet_card:tonWalletCard = Update;"
+    },
+    {
+      "id": null,
+      "kind": "constructors",
+      "name": "updateNewWidgetCopyQuery",
+      "params": "id:int64 sender_user_id:int53 query_type:WidgetQueryType data:bytes widget_id:int64 wallet_card:tonWalletCard",
+      "result": "Update",
+      "source": "updateNewWidgetCopyQuery id:int64 sender_user_id:int53 query_type:WidgetQueryType data:bytes widget_id:int64 wallet_card:tonWalletCard = Update;"
     },
     {
       "id": null,
@@ -19083,6 +19235,14 @@
     {
       "id": null,
       "kind": "functions",
+      "name": "getSuitableCommunityChats",
+      "params": "",
+      "result": "Chats",
+      "source": "getSuitableCommunityChats = Chats;"
+    },
+    {
+      "id": null,
+      "kind": "functions",
       "name": "loadDirectMessagesChatTopics",
       "params": "chat_id:int53 limit:int32",
       "result": "Ok",
@@ -19235,6 +19395,14 @@
     {
       "id": null,
       "kind": "functions",
+      "name": "getJoinedCommunities",
+      "params": "",
+      "result": "Communities",
+      "source": "getJoinedCommunities = Communities;"
+    },
+    {
+      "id": null,
+      "kind": "functions",
       "name": "createCommunity",
       "params": "name:string chat_id:int53 is_chat_hidden:Bool",
       "result": "CommunityId",
@@ -19263,6 +19431,78 @@
       "params": "community_id:int53 permissions:communityPermissions",
       "result": "Ok",
       "source": "setCommunityPermissions community_id:int53 permissions:communityPermissions = Ok;"
+    },
+    {
+      "id": null,
+      "kind": "functions",
+      "name": "setCommunityNotificationSettings",
+      "params": "community_id:int53 notification_settings:chatNotificationSettings",
+      "result": "Ok",
+      "source": "setCommunityNotificationSettings community_id:int53 notification_settings:chatNotificationSettings = Ok;"
+    },
+    {
+      "id": null,
+      "kind": "functions",
+      "name": "addCommunityChat",
+      "params": "community_id:int53 chat_id:int53 is_hidden:Bool",
+      "result": "Ok",
+      "source": "addCommunityChat community_id:int53 chat_id:int53 is_hidden:Bool = Ok;"
+    },
+    {
+      "id": null,
+      "kind": "functions",
+      "name": "removeCommunityChat",
+      "params": "community_id:int53 chat_id:int53",
+      "result": "Ok",
+      "source": "removeCommunityChat community_id:int53 chat_id:int53 = Ok;"
+    },
+    {
+      "id": null,
+      "kind": "functions",
+      "name": "getCommunityAddChatRequests",
+      "params": "community_id:int53 offset:string limit:int32",
+      "result": "CommunityAddChatRequests",
+      "source": "getCommunityAddChatRequests community_id:int53 offset:string limit:int32 = CommunityAddChatRequests;"
+    },
+    {
+      "id": null,
+      "kind": "functions",
+      "name": "processCommunityAddChatRequest",
+      "params": "community_id:int53 chat_id:int53 approve:Bool",
+      "result": "Ok",
+      "source": "processCommunityAddChatRequest community_id:int53 chat_id:int53 approve:Bool = Ok;"
+    },
+    {
+      "id": null,
+      "kind": "functions",
+      "name": "processCommunityAddChatRequests",
+      "params": "community_id:int53 approve:Bool",
+      "result": "Ok",
+      "source": "processCommunityAddChatRequests community_id:int53 approve:Bool = Ok;"
+    },
+    {
+      "id": null,
+      "kind": "functions",
+      "name": "toggleCommunityAreChatsCollapsed",
+      "params": "community_id:int53 are_chats_collapsed:Bool",
+      "result": "Ok",
+      "source": "toggleCommunityAreChatsCollapsed community_id:int53 are_chats_collapsed:Bool = Ok;"
+    },
+    {
+      "id": null,
+      "kind": "functions",
+      "name": "toggleCommunityMemberIsBanned",
+      "params": "community_id:int53 member_id:MessageSender is_banned:Bool",
+      "result": "Ok",
+      "source": "toggleCommunityMemberIsBanned community_id:int53 member_id:MessageSender is_banned:Bool = Ok;"
+    },
+    {
+      "id": null,
+      "kind": "functions",
+      "name": "getCommunityMemberChats",
+      "params": "community_id:int53 member_id:MessageSender",
+      "result": "CommunityMemberChats",
+      "source": "getCommunityMemberChats community_id:int53 member_id:MessageSender = CommunityMemberChats;"
     },
     {
       "id": null,
@@ -19763,6 +20003,22 @@
     {
       "id": null,
       "kind": "functions",
+      "name": "fixRecognizedTextWithAi",
+      "params": "text:formattedText",
+      "result": "FormattedText",
+      "source": "fixRecognizedTextWithAi text:formattedText = FormattedText;"
+    },
+    {
+      "id": null,
+      "kind": "functions",
+      "name": "fixRecognizedRichMessageWithAi",
+      "params": "message:inputRichMessage",
+      "result": "RichMessage",
+      "source": "fixRecognizedRichMessageWithAi message:inputRichMessage = RichMessage;"
+    },
+    {
+      "id": null,
+      "kind": "functions",
       "name": "recognizeSpeech",
       "params": "chat_id:int53 message_id:int53",
       "result": "Ok",
@@ -19775,6 +20031,22 @@
       "params": "chat_id:int53 message_id:int53 is_good:Bool",
       "result": "Ok",
       "source": "rateSpeechRecognition chat_id:int53 message_id:int53 is_good:Bool = Ok;"
+    },
+    {
+      "id": null,
+      "kind": "functions",
+      "name": "recognizeSpeechInFile",
+      "params": "audio_file:InputFile recognition_id:int64",
+      "result": "Text",
+      "source": "recognizeSpeechInFile audio_file:InputFile recognition_id:int64 = Text;"
+    },
+    {
+      "id": null,
+      "kind": "functions",
+      "name": "getSpeechRecognitionLanguages",
+      "params": "chat_id:int53",
+      "result": "SpeechRecognitionLanguages",
+      "source": "getSpeechRecognitionLanguages chat_id:int53 = SpeechRecognitionLanguages;"
     },
     {
       "id": null,
@@ -19947,6 +20219,14 @@
     {
       "id": null,
       "kind": "functions",
+      "name": "editMessageWidgetData",
+      "params": "chat_id:int53 message_id:int53 edit_public_data:Bool public_data:string edit_chat_data:Bool chat_data:string",
+      "result": "Ok",
+      "source": "editMessageWidgetData chat_id:int53 message_id:int53 edit_public_data:Bool public_data:string edit_chat_data:Bool chat_data:string = Ok;"
+    },
+    {
+      "id": null,
+      "kind": "functions",
       "name": "editInlineMessageText",
       "params": "inline_message_id:string reply_markup:ReplyMarkup input_message_content:InputMessageContent",
       "result": "Ok",
@@ -19983,6 +20263,22 @@
       "params": "inline_message_id:string reply_markup:ReplyMarkup",
       "result": "Ok",
       "source": "editInlineMessageReplyMarkup inline_message_id:string reply_markup:ReplyMarkup = Ok;"
+    },
+    {
+      "id": null,
+      "kind": "functions",
+      "name": "editInlineMessageWidgetData",
+      "params": "inline_message_id:string edit_public_data:Bool public_data:string edit_chat_data:Bool chat_data:string",
+      "result": "Ok",
+      "source": "editInlineMessageWidgetData inline_message_id:string edit_public_data:Bool public_data:string edit_chat_data:Bool chat_data:string = Ok;"
+    },
+    {
+      "id": null,
+      "kind": "functions",
+      "name": "editWidgetData",
+      "params": "widget_id:int64 public_data:string cache_time:int32",
+      "result": "Ok",
+      "source": "editWidgetData widget_id:int64 public_data:string cache_time:int32 = Ok;"
     },
     {
       "id": null,
@@ -20675,6 +20971,14 @@
     {
       "id": null,
       "kind": "functions",
+      "name": "getTextEmojiRanges",
+      "params": "text:string",
+      "result": "TextRanges",
+      "source": "getTextEmojiRanges text:string = TextRanges;"
+    },
+    {
+      "id": null,
+      "kind": "functions",
       "name": "parseTextEntities",
       "params": "text:string parse_mode:TextParseMode",
       "result": "FormattedText",
@@ -21055,6 +21359,30 @@
       "params": "callback_query_id:int64 text:string show_alert:Bool url:string cache_time:int32",
       "result": "Ok",
       "source": "answerCallbackQuery callback_query_id:int64 text:string show_alert:Bool url:string cache_time:int32 = Ok;"
+    },
+    {
+      "id": null,
+      "kind": "functions",
+      "name": "answerWidgetQuery",
+      "params": "widget_query_id:int64 data:string",
+      "result": "Ok",
+      "source": "answerWidgetQuery widget_query_id:int64 data:string = Ok;"
+    },
+    {
+      "id": null,
+      "kind": "functions",
+      "name": "getWidgetQueryAnswer",
+      "params": "chat_id:int53 message_id:int53 query_type:WidgetQueryType data:bytes",
+      "result": "WidgetQueryAnswer",
+      "source": "getWidgetQueryAnswer chat_id:int53 message_id:int53 query_type:WidgetQueryType data:bytes = WidgetQueryAnswer;"
+    },
+    {
+      "id": null,
+      "kind": "functions",
+      "name": "getWidgetPublicData",
+      "params": "chat_id:int53 message_id:int53",
+      "result": "WidgetPublicData",
+      "source": "getWidgetPublicData chat_id:int53 message_id:int53 = WidgetPublicData;"
     },
     {
       "id": null,
@@ -22028,9 +22356,9 @@
       "id": null,
       "kind": "functions",
       "name": "postStory",
-      "params": "chat_id:int53 content:InputStoryContent areas:inputStoryAreas caption:formattedText privacy_settings:StoryPrivacySettings album_ids:vector<int32> active_period:int32 from_story_full_id:storyFullId is_posted_to_chat_page:Bool protect_content:Bool",
+      "params": "chat_id:int53 content:InputStoryContent areas:inputStoryAreas caption:formattedText music:inputAudio privacy_settings:StoryPrivacySettings album_ids:vector<int32> active_period:int32 from_story_full_id:storyFullId is_posted_to_chat_page:Bool protect_content:Bool",
       "result": "Story",
-      "source": "postStory chat_id:int53 content:InputStoryContent areas:inputStoryAreas caption:formattedText privacy_settings:StoryPrivacySettings album_ids:vector<int32> active_period:int32 from_story_full_id:storyFullId is_posted_to_chat_page:Bool protect_content:Bool = Story;"
+      "source": "postStory chat_id:int53 content:InputStoryContent areas:inputStoryAreas caption:formattedText music:inputAudio privacy_settings:StoryPrivacySettings album_ids:vector<int32> active_period:int32 from_story_full_id:storyFullId is_posted_to_chat_page:Bool protect_content:Bool = Story;"
     },
     {
       "id": null,
@@ -22055,6 +22383,14 @@
       "params": "story_poster_chat_id:int53 story_id:int32 cover_frame_timestamp:double",
       "result": "Ok",
       "source": "editStoryCover story_poster_chat_id:int53 story_id:int32 cover_frame_timestamp:double = Ok;"
+    },
+    {
+      "id": null,
+      "kind": "functions",
+      "name": "editStoryMusic",
+      "params": "story_poster_chat_id:int53 story_id:int32 music:inputAudio",
+      "result": "Ok",
+      "source": "editStoryMusic story_poster_chat_id:int53 story_id:int32 music:inputAudio = Ok;"
     },
     {
       "id": null,
@@ -24620,9 +24956,9 @@
       "id": null,
       "kind": "functions",
       "name": "toggleSupergroupIsForum",
-      "params": "supergroup_id:int53 is_forum:Bool has_forum_tabs:Bool",
+      "params": "supergroup_id:int53 is_forum:Bool has_forum_tabs:Bool has_forum_sidebar:Bool",
       "result": "Ok",
-      "source": "toggleSupergroupIsForum supergroup_id:int53 is_forum:Bool has_forum_tabs:Bool = Ok;"
+      "source": "toggleSupergroupIsForum supergroup_id:int53 is_forum:Bool has_forum_tabs:Bool has_forum_sidebar:Bool = Ok;"
     },
     {
       "id": null,
@@ -25612,9 +25948,9 @@
       "id": null,
       "kind": "functions",
       "name": "sendTonWalletTransfer",
-      "params": "user_id:int53 address:string amount:int53 comment:string is_comment_encrypted:Bool sending_id:int32 regular_transfer_data:bytes gasless_transfer_data:bytes",
+      "params": "user_id:int53 address:string amount:int64 comment:string is_comment_encrypted:Bool sending_id:int32 regular_transfer_data:bytes gasless_transfer_data:bytes",
       "result": "TonWalletTransferResult",
-      "source": "sendTonWalletTransfer user_id:int53 address:string amount:int53 comment:string is_comment_encrypted:Bool sending_id:int32 regular_transfer_data:bytes gasless_transfer_data:bytes = TonWalletTransferResult;"
+      "source": "sendTonWalletTransfer user_id:int53 address:string amount:int64 comment:string is_comment_encrypted:Bool sending_id:int32 regular_transfer_data:bytes gasless_transfer_data:bytes = TonWalletTransferResult;"
     },
     {
       "id": null,

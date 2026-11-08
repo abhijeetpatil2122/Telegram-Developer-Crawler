@@ -1,23 +1,23 @@
 {
   "counts": {
-    "constructors": 2289,
-    "functions": 1076,
-    "total": 3365
+    "constructors": 2308,
+    "functions": 1099,
+    "total": 3407
   },
   "safety": {
     "max_definition_removal_ratio": 0.1
   },
   "sha256": {
-    "json": "c2dab65b68465ff9205a72c26f016005a5b820f69623a182974dca716713c672",
-    "tl": "6ef8d16166fd333982b042ddaa7c3b51442528597e8163a323a3622b708e0463"
+    "json": "cb2a75ed43fec34621e0a4ad00287c7913bb8f251e6b78a0758200e854714d8d",
+    "tl": "323eef84e04d7b311eaf3c0c0de63ffaec56f44553ce54ea4c14fa25f2a92c08"
   },
   "source": "https://raw.githubusercontent.com/tdlib/td/master/td/generate/scheme/td_api.tl",
   "source_path": "td/generate/scheme/td_api.tl",
   "source_repository": "https://github.com/tdlib/td",
   "upstream": {
     "branch": "master",
-    "commit": "4c6377aa7386c39217878a9a56d581922ad37ca4",
-    "commit_url": "https://github.com/tdlib/td/commit/4c6377aa7386c39217878a9a56d581922ad37ca4",
-    "message": "Preserve removal of already displayed edited notifications"
+    "commit": "23383aef218a3123f02b744bfa91bde21056a814",
+    "commit_url": "https://github.com/tdlib/td/commit/23383aef218a3123f02b744bfa91bde21056a814",
+    "message": "Update version to 1.8.70."
   }
 }
