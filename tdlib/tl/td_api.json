@@ -20301,8 +20301,8 @@
       "kind": "functions",
       "name": "replyToCallbackQueryWithEphemeralMessage",
       "params": "callback_query_id:int64 replace_callback_query_message:Bool protect_content:Bool reply_markup:ReplyMarkup input_message_content:InputMessageContent",
-      "result": "Ok",
-      "source": "replyToCallbackQueryWithEphemeralMessage callback_query_id:int64 replace_callback_query_message:Bool protect_content:Bool reply_markup:ReplyMarkup input_message_content:InputMessageContent = Ok;"
+      "result": "Message",
+      "source": "replyToCallbackQueryWithEphemeralMessage callback_query_id:int64 replace_callback_query_message:Bool protect_content:Bool reply_markup:ReplyMarkup input_message_content:InputMessageContent = Message;"
     },
     {
       "id": null,

@@ -40500,10 +40500,10 @@
   },
   "source": {
     "apk": "https://cdn4.telesco.pe/file/Telegram-Beta.apk",
-    "apk_sha256": "63819c1c18b4346a3f0be36c5f238c7e69ea73c1bd31f8bacf144961daa40675",
+    "apk_sha256": "0e90936d9f23fef0c9594b0f017bddd5d53f616d7c6891018ececc99d20fe4ea",
     "jadx": "https://github.com/skylot/jadx/releases/download/v1.5.6/jadx-1.5.6.zip",
     "package": "org.telegram.messenger.beta",
-    "version_code": 72989,
+    "version_code": 73029,
     "version_name": "13.2.2"
   }
 }

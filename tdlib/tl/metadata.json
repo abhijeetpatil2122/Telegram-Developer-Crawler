@@ -8,16 +8,16 @@
     "max_definition_removal_ratio": 0.1
   },
   "sha256": {
-    "json": "cb2a75ed43fec34621e0a4ad00287c7913bb8f251e6b78a0758200e854714d8d",
-    "tl": "323eef84e04d7b311eaf3c0c0de63ffaec56f44553ce54ea4c14fa25f2a92c08"
+    "json": "ce0d469a9e47a5954be17ca876225bfa90b41c6cfc71d0381935005147eee83f",
+    "tl": "b474de4aae31e834b1971fcb01555d0cb531a8ad43a90b35607f19a7ca5dc8fc"
   },
   "source": "https://raw.githubusercontent.com/tdlib/td/master/td/generate/scheme/td_api.tl",
   "source_path": "td/generate/scheme/td_api.tl",
   "source_repository": "https://github.com/tdlib/td",
   "upstream": {
     "branch": "master",
-    "commit": "23383aef218a3123f02b744bfa91bde21056a814",
-    "commit_url": "https://github.com/tdlib/td/commit/23383aef218a3123f02b744bfa91bde21056a814",
-    "message": "Update version to 1.8.70."
+    "commit": "c8828d50f5eac2fc7089ce1089d7ce9095c61b5e",
+    "commit_url": "https://github.com/tdlib/td/commit/c8828d50f5eac2fc7089ce1089d7ce9095c61b5e",
+    "message": "Improve replyToCallbackQueryWithEphemeralMessage."
   }
 }

@@ -16,8 +16,8 @@
   "source_repository": "https://github.com/telegramdesktop/tdesktop",
   "upstream": {
     "branch": "dev",
-    "commit": "7381fb1df75d863eb3463fdddef57a2ac51f1d56",
-    "commit_url": "https://github.com/telegramdesktop/tdesktop/commit/7381fb1df75d863eb3463fdddef57a2ac51f1d56",
-    "message": "[ai] Track widget dependencies and QuickJS upstream fixes"
+    "commit": "87ff45f49cf8dce70b157949eed35d659a52cf7a",
+    "commit_url": "https://github.com/telegramdesktop/tdesktop/commit/87ff45f49cf8dce70b157949eed35d659a52cf7a",
+    "message": "Fix crash on quit with story views menu open"
   }
 }
