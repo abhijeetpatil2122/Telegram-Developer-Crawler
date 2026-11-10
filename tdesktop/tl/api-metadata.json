@@ -16,8 +16,8 @@
   "source_repository": "https://github.com/telegramdesktop/tdesktop",
   "upstream": {
     "branch": "dev",
-    "commit": "87ff45f49cf8dce70b157949eed35d659a52cf7a",
-    "commit_url": "https://github.com/telegramdesktop/tdesktop/commit/87ff45f49cf8dce70b157949eed35d659a52cf7a",
-    "message": "Fix crash on quit with story views menu open"
+    "commit": "c4bd064bcc84a359179e191fa6dfd216acda504f",
+    "commit_url": "https://github.com/telegramdesktop/tdesktop/commit/c4bd064bcc84a359179e191fa6dfd216acda504f",
+    "message": "Keep planned focus and row-spanning cells in editor removals"
   }
 }
