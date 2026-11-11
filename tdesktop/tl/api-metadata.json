@@ -16,8 +16,8 @@
   "source_repository": "https://github.com/telegramdesktop/tdesktop",
   "upstream": {
     "branch": "dev",
-    "commit": "0128eeb40f2c969913eaf3c9eb741097b607f3b0",
-    "commit_url": "https://github.com/telegramdesktop/tdesktop/commit/0128eeb40f2c969913eaf3c9eb741097b607f3b0",
-    "message": "Show send actions in chat previews"
+    "commit": "1924801c147371267b4cb8696767bc0d4d8f39c7",
+    "commit_url": "https://github.com/telegramdesktop/tdesktop/commit/1924801c147371267b4cb8696767bc0d4d8f39c7",
+    "message": "Fixed round video encoder frame rate for libx264."
   }
 }
