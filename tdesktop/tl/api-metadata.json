@@ -16,8 +16,8 @@
   "source_repository": "https://github.com/telegramdesktop/tdesktop",
   "upstream": {
     "branch": "dev",
-    "commit": "2b502b26e1b85b502df70c4c048f44f02657af75",
-    "commit_url": "https://github.com/telegramdesktop/tdesktop/commit/2b502b26e1b85b502df70c4c048f44f02657af75",
-    "message": "Version 7.4.2."
+    "commit": "0128eeb40f2c969913eaf3c9eb741097b607f3b0",
+    "commit_url": "https://github.com/telegramdesktop/tdesktop/commit/0128eeb40f2c969913eaf3c9eb741097b607f3b0",
+    "message": "Show send actions in chat previews"
   }
 }
