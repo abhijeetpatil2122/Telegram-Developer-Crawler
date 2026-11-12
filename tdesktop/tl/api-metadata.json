@@ -16,8 +16,8 @@
   "source_repository": "https://github.com/telegramdesktop/tdesktop",
   "upstream": {
     "branch": "dev",
-    "commit": "1924801c147371267b4cb8696767bc0d4d8f39c7",
-    "commit_url": "https://github.com/telegramdesktop/tdesktop/commit/1924801c147371267b4cb8696767bc0d4d8f39c7",
-    "message": "Fixed round video encoder frame rate for libx264."
+    "commit": "37a985ee25b055bda6aac1488faf878e6df27401",
+    "commit_url": "https://github.com/telegramdesktop/tdesktop/commit/37a985ee25b055bda6aac1488faf878e6df27401",
+    "message": "Show the compose AI and send-as-file tooltips in full"
   }
 }
