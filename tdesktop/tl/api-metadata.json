@@ -16,8 +16,8 @@
   "source_repository": "https://github.com/telegramdesktop/tdesktop",
   "upstream": {
     "branch": "dev",
-    "commit": "346f10fde53c499ad50de8708a99e3c003bc1cf3",
-    "commit_url": "https://github.com/telegramdesktop/tdesktop/commit/346f10fde53c499ad50de8708a99e3c003bc1cf3",
-    "message": "Version 7.4.3."
+    "commit": "74491149c708040139ed1969fcbbac4aa73a4615",
+    "commit_url": "https://github.com/telegramdesktop/tdesktop/commit/74491149c708040139ed1969fcbbac4aa73a4615",
+    "message": "Remove twenty unimplemented declarations from headers"
   }
 }
