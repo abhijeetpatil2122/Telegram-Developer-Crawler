@@ -9,15 +9,15 @@
   },
   "sha256": {
     "json": "ce0d469a9e47a5954be17ca876225bfa90b41c6cfc71d0381935005147eee83f",
-    "tl": "b474de4aae31e834b1971fcb01555d0cb531a8ad43a90b35607f19a7ca5dc8fc"
+    "tl": "44edbd169bbd5c66577b827b8e5dc68d17fd7026bf2377109f963f0acd88c758"
   },
   "source": "https://raw.githubusercontent.com/tdlib/td/master/td/generate/scheme/td_api.tl",
   "source_path": "td/generate/scheme/td_api.tl",
   "source_repository": "https://github.com/tdlib/td",
   "upstream": {
     "branch": "master",
-    "commit": "4327c262d60118caad289724b18cfbb1b47c352c",
-    "commit_url": "https://github.com/tdlib/td/commit/4327c262d60118caad289724b18cfbb1b47c352c",
-    "message": "Fix and enable (Secret,go) test"
+    "commit": "03220f6b3043c6fd7785fbf0901d63f19ad19974",
+    "commit_url": "https://github.com/tdlib/td/commit/03220f6b3043c6fd7785fbf0901d63f19ad19974",
+    "message": "Document the option \"gift_sell_period\" and fix gift.can_be_deleted."
   }
 }
