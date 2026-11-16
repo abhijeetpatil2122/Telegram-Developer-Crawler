@@ -16,8 +16,8 @@
   "source_repository": "https://github.com/tdlib/td",
   "upstream": {
     "branch": "master",
-    "commit": "c8828d50f5eac2fc7089ce1089d7ce9095c61b5e",
-    "commit_url": "https://github.com/tdlib/td/commit/c8828d50f5eac2fc7089ce1089d7ce9095c61b5e",
-    "message": "Improve replyToCallbackQueryWithEphemeralMessage."
+    "commit": "4327c262d60118caad289724b18cfbb1b47c352c",
+    "commit_url": "https://github.com/tdlib/td/commit/4327c262d60118caad289724b18cfbb1b47c352c",
+    "message": "Fix and enable (Secret,go) test"
   }
 }
