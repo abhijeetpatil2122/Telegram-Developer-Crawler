@@ -16,8 +16,8 @@
   "source_repository": "https://github.com/telegramdesktop/tdesktop",
   "upstream": {
     "branch": "dev",
-    "commit": "bf4f714036f21c750d535dab199c811b3f9bfdd4",
-    "commit_url": "https://github.com/telegramdesktop/tdesktop/commit/bf4f714036f21c750d535dab199c811b3f9bfdd4",
-    "message": "Version 7.4.4."
+    "commit": "9918118a04f4e7f26649516980f789e89161179d",
+    "commit_url": "https://github.com/telegramdesktop/tdesktop/commit/9918118a04f4e7f26649516980f789e89161179d",
+    "message": "Free up disk space for the Windows cold builds."
   }
 }
