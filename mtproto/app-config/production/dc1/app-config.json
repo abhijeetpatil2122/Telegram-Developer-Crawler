@@ -1463,7 +1463,7 @@
         "key": "ton_usd_rate",
         "value": {
           "_": "JsonNumber",
-          "value": 1.0253375381797467
+          "value": 1.0507002646463344
         }
       },
       {
@@ -2323,6 +2323,75 @@
         "value": {
           "_": "JsonString",
           "value": "disabled"
+        }
+      },
+      {
+        "_": "JsonObjectValue",
+        "key": "wallet_transfer_min_nanos",
+        "value": {
+          "_": "JsonNumber",
+          "value": 100000000.0
+        }
+      },
+      {
+        "_": "JsonObjectValue",
+        "key": "wallet_gasless_min_nanos",
+        "value": {
+          "_": "JsonNumber",
+          "value": 100000000.0
+        }
+      },
+      {
+        "_": "JsonObjectValue",
+        "key": "wallet_gasless_daily_transfers",
+        "value": {
+          "_": "JsonNumber",
+          "value": 5.0
+        }
+      },
+      {
+        "_": "JsonObjectValue",
+        "key": "bot_allowed_suffixes",
+        "value": {
+          "_": "JsonArray",
+          "value": [
+            {
+              "_": "JsonString",
+              "value": "agent"
+            },
+            {
+              "_": "JsonString",
+              "value": "ai"
+            },
+            {
+              "_": "JsonString",
+              "value": "app"
+            },
+            {
+              "_": "JsonString",
+              "value": "game"
+            },
+            {
+              "_": "JsonString",
+              "value": "gay"
+            }
+          ]
+        }
+      },
+      {
+        "_": "JsonObjectValue",
+        "key": "bot_additional_usernames_limit",
+        "value": {
+          "_": "JsonNumber",
+          "value": 2.0
+        }
+      },
+      {
+        "_": "JsonObjectValue",
+        "key": "round_video_recorder_2_allowed",
+        "value": {
+          "_": "JsonBool",
+          "value": false
         }
       }
     ]
