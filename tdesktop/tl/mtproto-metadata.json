@@ -16,8 +16,8 @@
   "source_repository": "https://github.com/telegramdesktop/tdesktop",
   "upstream": {
     "branch": "dev",
-    "commit": "9918118a04f4e7f26649516980f789e89161179d",
-    "commit_url": "https://github.com/telegramdesktop/tdesktop/commit/9918118a04f4e7f26649516980f789e89161179d",
-    "message": "Free up disk space for the Windows cold builds."
+    "commit": "a532622be61ffb811c34311583c9fd4828786833",
+    "commit_url": "https://github.com/telegramdesktop/tdesktop/commit/a532622be61ffb811c34311583c9fd4828786833",
+    "message": "Keep media viewer screenshot protection up to date"
   }
 }
