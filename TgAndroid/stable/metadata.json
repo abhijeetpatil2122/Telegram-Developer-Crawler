@@ -1,13 +1,13 @@
 {
   "android": {
     "package": "org.telegram.messenger.web",
-    "version_code": 73419,
-    "version_name": "13.3.0"
+    "version_code": 73469,
+    "version_name": "13.3.1"
   },
   "artifact": {
     "filename": "stable.apk",
-    "sha256": "b69222dff5b9b152bb184330e3588d03ee28218555b0995c3f25b81b21abe729",
-    "size": 81596565
+    "sha256": "402d44cdf7b73bc93fde403e11b43e0b469e290ae168055067eb8a7c1629b394",
+    "size": 81653599
   },
   "channel": "stable",
   "extractor": {
@@ -34,7 +34,7 @@
     "layer": 234,
     "main_api_json": "main_api.json",
     "main_api_tl": "main_api.tl",
-    "sha256": "5686ac310977aa2ac49922068b4c1a17334404c536d5a61099af5252d296fb74",
+    "sha256": "d13902deef87478c76b5baa8fd155ae461122ff0a9f3886e99d8e69ec925af67",
     "stage": "5B",
     "target_package": "org.telegram.tgnet"
   }
