@@ -355,6 +355,14 @@
     {
       "id": null,
       "kind": "constructors",
+      "name": "textCompositionParameters",
+      "params": "translate_to_language_code:string style_name:string add_emojis:Bool fix_text:Bool",
+      "result": "TextCompositionParameters",
+      "source": "textCompositionParameters translate_to_language_code:string style_name:string add_emojis:Bool fix_text:Bool = TextCompositionParameters;"
+    },
+    {
+      "id": null,
+      "kind": "constructors",
       "name": "termsOfService",
       "params": "text:formattedText min_user_age:int32 show_popup:Bool",
       "result": "TermsOfService",
@@ -1243,6 +1251,150 @@
     {
       "id": null,
       "kind": "constructors",
+      "name": "botCallbackQueryModeDefault",
+      "params": "",
+      "result": "BotCallbackQueryMode",
+      "source": "botCallbackQueryModeDefault = BotCallbackQueryMode;"
+    },
+    {
+      "id": null,
+      "kind": "constructors",
+      "name": "botCallbackQueryModeAuto",
+      "params": "",
+      "result": "BotCallbackQueryMode",
+      "source": "botCallbackQueryModeAuto = BotCallbackQueryMode;"
+    },
+    {
+      "id": null,
+      "kind": "constructors",
+      "name": "botCallbackQueryModeInline",
+      "params": "",
+      "result": "BotCallbackQueryMode",
+      "source": "botCallbackQueryModeInline = BotCallbackQueryMode;"
+    },
+    {
+      "id": null,
+      "kind": "constructors",
+      "name": "botSettingIsInline",
+      "params": "is_inline:Bool",
+      "result": "BotSetting",
+      "source": "botSettingIsInline is_inline:Bool = BotSetting;"
+    },
+    {
+      "id": null,
+      "kind": "constructors",
+      "name": "botSettingInlineQueryPlaceholder",
+      "params": "placeholder:string",
+      "result": "BotSetting",
+      "source": "botSettingInlineQueryPlaceholder placeholder:string = BotSetting;"
+    },
+    {
+      "id": null,
+      "kind": "constructors",
+      "name": "botSettingNeedLocation",
+      "params": "need_location:Bool",
+      "result": "BotSetting",
+      "source": "botSettingNeedLocation need_location:Bool = BotSetting;"
+    },
+    {
+      "id": null,
+      "kind": "constructors",
+      "name": "botSettingInlineFeedback",
+      "params": "share_denominator:int32",
+      "result": "BotSetting",
+      "source": "botSettingInlineFeedback share_denominator:int32 = BotSetting;"
+    },
+    {
+      "id": null,
+      "kind": "constructors",
+      "name": "botSettingCanJoinGroups",
+      "params": "can_join_groups:Bool",
+      "result": "BotSetting",
+      "source": "botSettingCanJoinGroups can_join_groups:Bool = BotSetting;"
+    },
+    {
+      "id": null,
+      "kind": "constructors",
+      "name": "botSettingCanReadAllGroupMessages",
+      "params": "can_read_all_group_messages:Bool",
+      "result": "BotSetting",
+      "source": "botSettingCanReadAllGroupMessages can_read_all_group_messages:Bool = BotSetting;"
+    },
+    {
+      "id": null,
+      "kind": "constructors",
+      "name": "botSettingCanConnectToBusiness",
+      "params": "can_connect_to_business:Bool",
+      "result": "BotSetting",
+      "source": "botSettingCanConnectToBusiness can_connect_to_business:Bool = BotSetting;"
+    },
+    {
+      "id": null,
+      "kind": "constructors",
+      "name": "botSettingCanManageBots",
+      "params": "can_manage_bots:Bool",
+      "result": "BotSetting",
+      "source": "botSettingCanManageBots can_manage_bots:Bool = BotSetting;"
+    },
+    {
+      "id": null,
+      "kind": "constructors",
+      "name": "botSettingSupportsGuestQueries",
+      "params": "supports_guest_queries:Bool",
+      "result": "BotSetting",
+      "source": "botSettingSupportsGuestQueries supports_guest_queries:Bool = BotSetting;"
+    },
+    {
+      "id": null,
+      "kind": "constructors",
+      "name": "botSettingIsGuard",
+      "params": "is_guard:Bool",
+      "result": "BotSetting",
+      "source": "botSettingIsGuard is_guard:Bool = BotSetting;"
+    },
+    {
+      "id": null,
+      "kind": "constructors",
+      "name": "botSettingHasTopics",
+      "params": "has_topics:Bool",
+      "result": "BotSetting",
+      "source": "botSettingHasTopics has_topics:Bool = BotSetting;"
+    },
+    {
+      "id": null,
+      "kind": "constructors",
+      "name": "botSettingAllowsUsersToCreateTopics",
+      "params": "allows_users_to_create_topics:Bool",
+      "result": "BotSetting",
+      "source": "botSettingAllowsUsersToCreateTopics allows_users_to_create_topics:Bool = BotSetting;"
+    },
+    {
+      "id": null,
+      "kind": "constructors",
+      "name": "botSettingHasTopicSidebar",
+      "params": "has_topic_sidebar:Bool",
+      "result": "BotSetting",
+      "source": "botSettingHasTopicSidebar has_topic_sidebar:Bool = BotSetting;"
+    },
+    {
+      "id": null,
+      "kind": "constructors",
+      "name": "botSettingCanCommunicateWithBots",
+      "params": "can_communicate_with_bots:Bool",
+      "result": "BotSetting",
+      "source": "botSettingCanCommunicateWithBots can_communicate_with_bots:Bool = BotSetting;"
+    },
+    {
+      "id": null,
+      "kind": "constructors",
+      "name": "botSettingCallbackQueryMode",
+      "params": "mode:BotCallbackQueryMode",
+      "result": "BotSetting",
+      "source": "botSettingCallbackQueryMode mode:BotCallbackQueryMode = BotSetting;"
+    },
+    {
+      "id": null,
+      "kind": "constructors",
       "name": "botVerificationParameters",
       "params": "icon_custom_emoji_id:int64 organization_name:string default_custom_description:formattedText can_set_custom_description:Bool",
       "result": "BotVerificationParameters",
@@ -1659,6 +1811,62 @@
     {
       "id": null,
       "kind": "constructors",
+      "name": "giftOnChainPurchaseOfferStatePending",
+      "params": "",
+      "result": "GiftOnChainPurchaseOfferState",
+      "source": "giftOnChainPurchaseOfferStatePending = GiftOnChainPurchaseOfferState;"
+    },
+    {
+      "id": null,
+      "kind": "constructors",
+      "name": "giftOnChainPurchaseOfferStateSettled",
+      "params": "",
+      "result": "GiftOnChainPurchaseOfferState",
+      "source": "giftOnChainPurchaseOfferStateSettled = GiftOnChainPurchaseOfferState;"
+    },
+    {
+      "id": null,
+      "kind": "constructors",
+      "name": "giftOnChainPurchaseOfferStateAccepted",
+      "params": "",
+      "result": "GiftOnChainPurchaseOfferState",
+      "source": "giftOnChainPurchaseOfferStateAccepted = GiftOnChainPurchaseOfferState;"
+    },
+    {
+      "id": null,
+      "kind": "constructors",
+      "name": "giftOnChainPurchaseOfferStateCanceling",
+      "params": "",
+      "result": "GiftOnChainPurchaseOfferState",
+      "source": "giftOnChainPurchaseOfferStateCanceling = GiftOnChainPurchaseOfferState;"
+    },
+    {
+      "id": null,
+      "kind": "constructors",
+      "name": "giftOnChainPurchaseOfferStateDeclined",
+      "params": "refund_amount:int64",
+      "result": "GiftOnChainPurchaseOfferState",
+      "source": "giftOnChainPurchaseOfferStateDeclined refund_amount:int64 = GiftOnChainPurchaseOfferState;"
+    },
+    {
+      "id": null,
+      "kind": "constructors",
+      "name": "giftOnChainPurchaseOfferStateCanceled",
+      "params": "refund_amount:int64 fine_amount:int64",
+      "result": "GiftOnChainPurchaseOfferState",
+      "source": "giftOnChainPurchaseOfferStateCanceled refund_amount:int64 fine_amount:int64 = GiftOnChainPurchaseOfferState;"
+    },
+    {
+      "id": null,
+      "kind": "constructors",
+      "name": "giftOnChainPurchaseOfferStateExpired",
+      "params": "refund_amount:int64",
+      "result": "GiftOnChainPurchaseOfferState",
+      "source": "giftOnChainPurchaseOfferStateExpired refund_amount:int64 = GiftOnChainPurchaseOfferState;"
+    },
+    {
+      "id": null,
+      "kind": "constructors",
       "name": "suggestedPostPriceStar",
       "params": "star_count:int53",
       "result": "SuggestedPostPrice",
@@ -2028,9 +2236,9 @@
       "id": null,
       "kind": "constructors",
       "name": "giftResaleParameters",
-      "params": "star_count:int53 gram_cent_count:int53 gram_only:Bool",
+      "params": "star_count:int53 gram_cent_count:int53 gram_amount:int64 gram_only:Bool is_fixed_on_chain:Bool can_be_managed:Bool",
       "result": "GiftResaleParameters",
-      "source": "giftResaleParameters star_count:int53 gram_cent_count:int53 gram_only:Bool = GiftResaleParameters;"
+      "source": "giftResaleParameters star_count:int53 gram_cent_count:int53 gram_amount:int64 gram_only:Bool is_fixed_on_chain:Bool can_be_managed:Bool = GiftResaleParameters;"
     },
     {
       "id": null,
@@ -2119,6 +2327,22 @@
       "params": "",
       "result": "UpgradedGiftOrigin",
       "source": "upgradedGiftOriginCraft = UpgradedGiftOrigin;"
+    },
+    {
+      "id": null,
+      "kind": "constructors",
+      "name": "upgradedGiftOriginOnChainResale",
+      "params": "gram_amount:int64",
+      "result": "UpgradedGiftOrigin",
+      "source": "upgradedGiftOriginOnChainResale gram_amount:int64 = UpgradedGiftOrigin;"
+    },
+    {
+      "id": null,
+      "kind": "constructors",
+      "name": "upgradedGiftOriginOnChainOffer",
+      "params": "gram_amount:int64",
+      "result": "UpgradedGiftOrigin",
+      "source": "upgradedGiftOriginOnChainOffer gram_amount:int64 = UpgradedGiftOrigin;"
     },
     {
       "id": null,
@@ -2220,17 +2444,17 @@
       "id": null,
       "kind": "constructors",
       "name": "upgradedGift",
-      "params": "id:int64 regular_gift_id:int64 publisher_chat_id:int53 title:string name:string number:int32 total_upgraded_count:int32 max_upgraded_count:int32 is_burned:Bool is_crafted:Bool is_premium:Bool is_theme_available:Bool used_theme_chat_id:int53 host_id:MessageSender owner_id:MessageSender owner_address:string owner_name:string gift_address:string can_be_ton_wallet_card_background:Bool model:upgradedGiftModel symbol:upgradedGiftSymbol backdrop:upgradedGiftBackdrop original_details:upgradedGiftOriginalDetails colors:upgradedGiftColors resale_parameters:giftResaleParameters can_send_purchase_offer:Bool craft_probability_per_mille:int32 value_currency:string value_amount:int53 value_usd_amount:int53",
+      "params": "id:int64 regular_gift_id:int64 publisher_chat_id:int53 title:string name:string number:int32 total_upgraded_count:int32 max_upgraded_count:int32 is_burned:Bool is_crafted:Bool is_premium:Bool is_theme_available:Bool used_theme_chat_id:int53 host_id:MessageSender owner_id:MessageSender owner_address:string owner_name:string gift_address:string can_be_ton_wallet_card_background:Bool model:upgradedGiftModel symbol:upgradedGiftSymbol backdrop:upgradedGiftBackdrop original_details:upgradedGiftOriginalDetails colors:upgradedGiftColors uses_on_chain_resale:Bool resale_parameters:giftResaleParameters fee_basis_points:int32 can_send_purchase_offer:Bool min_on_chain_purchase_offer_gram_amount:int64 craft_probability_per_mille:int32 value_currency:string value_amount:int53 value_usd_amount:int53",
       "result": "UpgradedGift",
-      "source": "upgradedGift id:int64 regular_gift_id:int64 publisher_chat_id:int53 title:string name:string number:int32 total_upgraded_count:int32 max_upgraded_count:int32 is_burned:Bool is_crafted:Bool is_premium:Bool is_theme_available:Bool used_theme_chat_id:int53 host_id:MessageSender owner_id:MessageSender owner_address:string owner_name:string gift_address:string can_be_ton_wallet_card_background:Bool model:upgradedGiftModel symbol:upgradedGiftSymbol backdrop:upgradedGiftBackdrop original_details:upgradedGiftOriginalDetails colors:upgradedGiftColors resale_parameters:giftResaleParameters can_send_purchase_offer:Bool craft_probability_per_mille:int32 value_currency:string value_amount:int53 value_usd_amount:int53 = UpgradedGift;"
+      "source": "upgradedGift id:int64 regular_gift_id:int64 publisher_chat_id:int53 title:string name:string number:int32 total_upgraded_count:int32 max_upgraded_count:int32 is_burned:Bool is_crafted:Bool is_premium:Bool is_theme_available:Bool used_theme_chat_id:int53 host_id:MessageSender owner_id:MessageSender owner_address:string owner_name:string gift_address:string can_be_ton_wallet_card_background:Bool model:upgradedGiftModel symbol:upgradedGiftSymbol backdrop:upgradedGiftBackdrop original_details:upgradedGiftOriginalDetails colors:upgradedGiftColors uses_on_chain_resale:Bool resale_parameters:giftResaleParameters fee_basis_points:int32 can_send_purchase_offer:Bool min_on_chain_purchase_offer_gram_amount:int64 craft_probability_per_mille:int32 value_currency:string value_amount:int53 value_usd_amount:int53 = UpgradedGift;"
     },
     {
       "id": null,
       "kind": "constructors",
       "name": "upgradedGiftValueInfo",
-      "params": "currency:string value:int53 is_value_average:Bool initial_sale_date:int32 initial_sale_star_count:int53 initial_sale_price:int53 last_sale_date:int32 last_sale_price:int53 is_last_sale_on_fragment:Bool minimum_price:int53 average_sale_price:int53 telegram_listed_gift_count:int32 fragment_listed_gift_count:int32 fragment_url:string",
+      "params": "currency:string value:int53 is_value_average:Bool initial_sale_date:int32 initial_sale_star_count:int53 initial_sale_price:int53 last_sale_date:int32 last_sale_price:int53 is_last_sale_on_fragment:Bool min_price:int53 average_sale_price:int53 telegram_listed_gift_count:int32 fragment_listed_gift_count:int32 fragment_url:string",
       "result": "UpgradedGiftValueInfo",
-      "source": "upgradedGiftValueInfo currency:string value:int53 is_value_average:Bool initial_sale_date:int32 initial_sale_star_count:int53 initial_sale_price:int53 last_sale_date:int32 last_sale_price:int53 is_last_sale_on_fragment:Bool minimum_price:int53 average_sale_price:int53 telegram_listed_gift_count:int32 fragment_listed_gift_count:int32 fragment_url:string = UpgradedGiftValueInfo;"
+      "source": "upgradedGiftValueInfo currency:string value:int53 is_value_average:Bool initial_sale_date:int32 initial_sale_star_count:int53 initial_sale_price:int53 last_sale_date:int32 last_sale_price:int53 is_last_sale_on_fragment:Bool min_price:int53 average_sale_price:int53 telegram_listed_gift_count:int32 fragment_listed_gift_count:int32 fragment_url:string = UpgradedGiftValueInfo;"
     },
     {
       "id": null,
@@ -2243,10 +2467,50 @@
     {
       "id": null,
       "kind": "constructors",
+      "name": "tonSmartContractInitialState",
+      "params": "code:bytes data:bytes",
+      "result": "TonSmartContractInitialState",
+      "source": "tonSmartContractInitialState code:bytes data:bytes = TonSmartContractInitialState;"
+    },
+    {
+      "id": null,
+      "kind": "constructors",
+      "name": "tonWalletMessage",
+      "params": "destination_address:string gram_amount:int64 send_mode:int32 body:bytes initial_state:tonSmartContractInitialState",
+      "result": "TonWalletMessage",
+      "source": "tonWalletMessage destination_address:string gram_amount:int64 send_mode:int32 body:bytes initial_state:tonSmartContractInitialState = TonWalletMessage;"
+    },
+    {
+      "id": null,
+      "kind": "constructors",
+      "name": "giftOnChainPurchaseOfferTransaction",
+      "params": "offer_address:string expiration_date:int32 message:tonWalletMessage gasless_message:tonWalletMessage rent_budget_amount:int64 execution_allowance_amount:int64 forward_amount:int64 fine_amount:int64",
+      "result": "GiftOnChainPurchaseOfferTransaction",
+      "source": "giftOnChainPurchaseOfferTransaction offer_address:string expiration_date:int32 message:tonWalletMessage gasless_message:tonWalletMessage rent_budget_amount:int64 execution_allowance_amount:int64 forward_amount:int64 fine_amount:int64 = GiftOnChainPurchaseOfferTransaction;"
+    },
+    {
+      "id": null,
+      "kind": "constructors",
+      "name": "giftOnChainSaleTransactionFragment",
+      "params": "nft_address:string payload:bytes gram_amount:int64 is_gasless_transfer_available:Bool",
+      "result": "GiftOnChainSaleTransaction",
+      "source": "giftOnChainSaleTransactionFragment nft_address:string payload:bytes gram_amount:int64 is_gasless_transfer_available:Bool = GiftOnChainSaleTransaction;"
+    },
+    {
+      "id": null,
+      "kind": "constructors",
+      "name": "giftOnChainSaleTransactionFixedPrice",
+      "params": "sale_address:string messages:vector<tonWalletMessage> gasless_messages:vector<tonWalletMessage>",
+      "result": "GiftOnChainSaleTransaction",
+      "source": "giftOnChainSaleTransactionFixedPrice sale_address:string messages:vector<tonWalletMessage> gasless_messages:vector<tonWalletMessage> = GiftOnChainSaleTransaction;"
+    },
+    {
+      "id": null,
+      "kind": "constructors",
       "name": "upgradeGiftResult",
-      "params": "gift:upgradedGift received_gift_id:string is_saved:Bool can_be_transferred:Bool transfer_star_count:int53 drop_original_details_star_count:int53 next_transfer_date:int32 next_resale_date:int32 export_date:int32",
+      "params": "gift:upgradedGift received_gift_id:string is_saved:Bool can_be_transferred:Bool transfer_star_count:int53 drop_original_details_star_count:int53 next_transfer_date:int32 next_resale_date:int32 mint_date:int32",
       "result": "UpgradeGiftResult",
-      "source": "upgradeGiftResult gift:upgradedGift received_gift_id:string is_saved:Bool can_be_transferred:Bool transfer_star_count:int53 drop_original_details_star_count:int53 next_transfer_date:int32 next_resale_date:int32 export_date:int32 = UpgradeGiftResult;"
+      "source": "upgradeGiftResult gift:upgradedGift received_gift_id:string is_saved:Bool can_be_transferred:Bool transfer_star_count:int53 drop_original_details_star_count:int53 next_transfer_date:int32 next_resale_date:int32 mint_date:int32 = UpgradeGiftResult;"
     },
     {
       "id": null,
@@ -2428,9 +2692,9 @@
       "id": null,
       "kind": "constructors",
       "name": "receivedGift",
-      "params": "received_gift_id:string sender_id:MessageSender text:formattedText unique_gift_number:int32 is_private:Bool is_saved:Bool is_pinned:Bool can_be_upgraded:Bool can_be_transferred:Bool can_be_deleted:Bool was_refunded:Bool date:int32 gift:SentGift collection_ids:vector<int32> sell_star_count:int53 prepaid_upgrade_star_count:int53 is_upgrade_separate:Bool transfer_star_count:int53 drop_original_details_star_count:int53 next_transfer_date:int32 next_resale_date:int32 export_date:int32 prepaid_upgrade_hash:string craft_date:int32",
+      "params": "received_gift_id:string sender_id:MessageSender text:formattedText unique_gift_number:int32 is_private:Bool is_saved:Bool is_pinned:Bool can_be_upgraded:Bool can_be_transferred:Bool can_be_deleted:Bool was_refunded:Bool date:int32 gift:SentGift collection_ids:vector<int32> sell_star_count:int53 prepaid_upgrade_star_count:int53 is_upgrade_separate:Bool transfer_star_count:int53 drop_original_details_star_count:int53 next_transfer_date:int32 next_resale_date:int32 mint_date:int32 prepaid_upgrade_hash:string craft_date:int32",
       "result": "ReceivedGift",
-      "source": "receivedGift received_gift_id:string sender_id:MessageSender text:formattedText unique_gift_number:int32 is_private:Bool is_saved:Bool is_pinned:Bool can_be_upgraded:Bool can_be_transferred:Bool can_be_deleted:Bool was_refunded:Bool date:int32 gift:SentGift collection_ids:vector<int32> sell_star_count:int53 prepaid_upgrade_star_count:int53 is_upgrade_separate:Bool transfer_star_count:int53 drop_original_details_star_count:int53 next_transfer_date:int32 next_resale_date:int32 export_date:int32 prepaid_upgrade_hash:string craft_date:int32 = ReceivedGift;"
+      "source": "receivedGift received_gift_id:string sender_id:MessageSender text:formattedText unique_gift_number:int32 is_private:Bool is_saved:Bool is_pinned:Bool can_be_upgraded:Bool can_be_transferred:Bool can_be_deleted:Bool was_refunded:Bool date:int32 gift:SentGift collection_ids:vector<int32> sell_star_count:int53 prepaid_upgrade_star_count:int53 is_upgrade_separate:Bool transfer_star_count:int53 drop_original_details_star_count:int53 next_transfer_date:int32 next_resale_date:int32 mint_date:int32 prepaid_upgrade_hash:string craft_date:int32 = ReceivedGift;"
     },
     {
       "id": null,
@@ -3307,6 +3571,78 @@
     {
       "id": null,
       "kind": "constructors",
+      "name": "tonWalletTransactionTypeTelegramGiftPurchase",
+      "params": "nft:tonNft amount:int64",
+      "result": "TonWalletTransactionType",
+      "source": "tonWalletTransactionTypeTelegramGiftPurchase nft:tonNft amount:int64 = TonWalletTransactionType;"
+    },
+    {
+      "id": null,
+      "kind": "constructors",
+      "name": "tonWalletTransactionTypeTelegramGiftSale",
+      "params": "nft:tonNft amount:int64",
+      "result": "TonWalletTransactionType",
+      "source": "tonWalletTransactionTypeTelegramGiftSale nft:tonNft amount:int64 = TonWalletTransactionType;"
+    },
+    {
+      "id": null,
+      "kind": "constructors",
+      "name": "tonWalletTransactionTypeTelegramGiftListing",
+      "params": "nft:tonNft old_price:int64 price:int64 amount:int64",
+      "result": "TonWalletTransactionType",
+      "source": "tonWalletTransactionTypeTelegramGiftListing nft:tonNft old_price:int64 price:int64 amount:int64 = TonWalletTransactionType;"
+    },
+    {
+      "id": null,
+      "kind": "constructors",
+      "name": "tonWalletTransactionTypeTelegramGiftDelisting",
+      "params": "nft:tonNft amount:int64",
+      "result": "TonWalletTransactionType",
+      "source": "tonWalletTransactionTypeTelegramGiftDelisting nft:tonNft amount:int64 = TonWalletTransactionType;"
+    },
+    {
+      "id": null,
+      "kind": "constructors",
+      "name": "tonWalletTransactionTypeTelegramGiftOfferCreation",
+      "params": "nft:tonNft offer_address:string counterparty_address:string price:int64 amount:int64 service_fee_amount:int64 expiration_date:int32",
+      "result": "TonWalletTransactionType",
+      "source": "tonWalletTransactionTypeTelegramGiftOfferCreation nft:tonNft offer_address:string counterparty_address:string price:int64 amount:int64 service_fee_amount:int64 expiration_date:int32 = TonWalletTransactionType;"
+    },
+    {
+      "id": null,
+      "kind": "constructors",
+      "name": "tonWalletTransactionTypeTelegramGiftOfferAcceptance",
+      "params": "nft:tonNft is_buyer:Bool offer_address:string counterparty_address:string price:int64 service_fee_amount:int64",
+      "result": "TonWalletTransactionType",
+      "source": "tonWalletTransactionTypeTelegramGiftOfferAcceptance nft:tonNft is_buyer:Bool offer_address:string counterparty_address:string price:int64 service_fee_amount:int64 = TonWalletTransactionType;"
+    },
+    {
+      "id": null,
+      "kind": "constructors",
+      "name": "tonWalletTransactionTypeTelegramGiftOfferCancellation",
+      "params": "nft:tonNft offer_address:string counterparty_address:string price:int64 refund_amount:int64 fine_amount:int64",
+      "result": "TonWalletTransactionType",
+      "source": "tonWalletTransactionTypeTelegramGiftOfferCancellation nft:tonNft offer_address:string counterparty_address:string price:int64 refund_amount:int64 fine_amount:int64 = TonWalletTransactionType;"
+    },
+    {
+      "id": null,
+      "kind": "constructors",
+      "name": "tonWalletTransactionTypeTelegramGiftOfferDecline",
+      "params": "nft:tonNft offer_address:string counterparty_address:string price:int64 refund_amount:int64",
+      "result": "TonWalletTransactionType",
+      "source": "tonWalletTransactionTypeTelegramGiftOfferDecline nft:tonNft offer_address:string counterparty_address:string price:int64 refund_amount:int64 = TonWalletTransactionType;"
+    },
+    {
+      "id": null,
+      "kind": "constructors",
+      "name": "tonWalletTransactionTypeTelegramGiftOfferExpiration",
+      "params": "nft:tonNft offer_address:string counterparty_address:string price:int64 refund_amount:int64",
+      "result": "TonWalletTransactionType",
+      "source": "tonWalletTransactionTypeTelegramGiftOfferExpiration nft:tonNft offer_address:string counterparty_address:string price:int64 refund_amount:int64 = TonWalletTransactionType;"
+    },
+    {
+      "id": null,
+      "kind": "constructors",
       "name": "tonWalletTransactionTypeKeyChange",
       "params": "",
       "result": "TonWalletTransactionType",
@@ -3316,9 +3652,9 @@
       "id": null,
       "kind": "constructors",
       "name": "tonWalletTransaction",
-      "params": "id:string peer_address:string peer_user_id:int53 peer_domain:string date:int32 fee_amount:int64 state:TonWalletTransactionState type:TonWalletTransactionType",
+      "params": "id:string peer_address:string peer_user_id:int53 peer_domain:string date:int32 fee_amount:int64 is_suspected_spam:Bool state:TonWalletTransactionState type:TonWalletTransactionType",
       "result": "TonWalletTransaction",
-      "source": "tonWalletTransaction id:string peer_address:string peer_user_id:int53 peer_domain:string date:int32 fee_amount:int64 state:TonWalletTransactionState type:TonWalletTransactionType = TonWalletTransaction;"
+      "source": "tonWalletTransaction id:string peer_address:string peer_user_id:int53 peer_domain:string date:int32 fee_amount:int64 is_suspected_spam:Bool state:TonWalletTransactionState type:TonWalletTransactionType = TonWalletTransaction;"
     },
     {
       "id": null,
@@ -4867,6 +5203,14 @@
     {
       "id": null,
       "kind": "constructors",
+      "name": "chatMessageCounts",
+      "params": "counts:vector<int32>",
+      "result": "ChatMessageCounts",
+      "source": "chatMessageCounts counts:vector<int32> = ChatMessageCounts;"
+    },
+    {
+      "id": null,
+      "kind": "constructors",
       "name": "businessMessage",
       "params": "message:message reply_to_message:message",
       "result": "BusinessMessage",
@@ -5364,9 +5708,9 @@
       "id": null,
       "kind": "constructors",
       "name": "chat",
-      "params": "id:int53 type:ChatType title:string photo:chatPhotoInfo accent_color_id:int32 background_custom_emoji_id:int64 upgraded_gift_colors:upgradedGiftColors profile_accent_color_id:int32 profile_background_custom_emoji_id:int64 permissions:chatPermissions last_message:message positions:vector<chatPosition> chat_lists:vector<ChatList> message_sender_id:MessageSender block_list:BlockList has_protected_content:Bool is_translatable:Bool is_marked_as_unread:Bool view_as_topics:Bool has_scheduled_messages:Bool has_welcome_messages:Bool can_be_deleted_only_for_self:Bool can_be_deleted_for_all_users:Bool can_be_reported:Bool default_disable_notification:Bool unread_count:int32 last_read_inbox_message_id:int53 last_read_outbox_message_id:int53 unread_mention_count:int32 unread_reaction_count:int32 unread_poll_vote_count:int32 notification_settings:chatNotificationSettings available_reactions:ChatAvailableReactions message_auto_delete_time:int32 emoji_status:emojiStatus background:chatBackground theme:ChatTheme action_bar:ChatActionBar business_bot_manage_bar:businessBotManageBar video_chat:videoChat pending_join_requests:chatJoinRequestsInfo reply_markup_message_id:int53 draft_message:draftMessage client_data:string",
+      "params": "id:int53 type:ChatType title:string photo:chatPhotoInfo accent_color_id:int32 background_custom_emoji_id:int64 upgraded_gift_colors:upgradedGiftColors profile_accent_color_id:int32 profile_background_custom_emoji_id:int64 permissions:chatPermissions last_message:message positions:vector<chatPosition> chat_lists:vector<ChatList> message_sender_id:MessageSender block_list:BlockList has_protected_content:Bool is_translatable:Bool is_marked_as_unread:Bool view_as_topics:Bool has_scheduled_messages:Bool has_welcome_messages:Bool can_be_deleted_only_for_self:Bool can_be_deleted_for_all_users:Bool can_be_reported:Bool default_disable_notification:Bool unread_count:int32 last_read_inbox_message_id:int53 last_read_outbox_message_id:int53 unread_mention_count:int32 unread_reaction_count:int32 unread_poll_vote_count:int32 notification_settings:chatNotificationSettings available_reactions:ChatAvailableReactions message_auto_delete_time:int32 emoji_status:emojiStatus background:chatBackground theme:ChatTheme action_bar:ChatActionBar business_bot_manage_bar:businessBotManageBar video_chat:videoChat pending_join_requests:chatJoinRequestsInfo reply_markup_message_id:int53 draft_message:draftMessage text_composition_parameters:textCompositionParameters client_data:string",
       "result": "Chat",
-      "source": "chat id:int53 type:ChatType title:string photo:chatPhotoInfo accent_color_id:int32 background_custom_emoji_id:int64 upgraded_gift_colors:upgradedGiftColors profile_accent_color_id:int32 profile_background_custom_emoji_id:int64 permissions:chatPermissions last_message:message positions:vector<chatPosition> chat_lists:vector<ChatList> message_sender_id:MessageSender block_list:BlockList has_protected_content:Bool is_translatable:Bool is_marked_as_unread:Bool view_as_topics:Bool has_scheduled_messages:Bool has_welcome_messages:Bool can_be_deleted_only_for_self:Bool can_be_deleted_for_all_users:Bool can_be_reported:Bool default_disable_notification:Bool unread_count:int32 last_read_inbox_message_id:int53 last_read_outbox_message_id:int53 unread_mention_count:int32 unread_reaction_count:int32 unread_poll_vote_count:int32 notification_settings:chatNotificationSettings available_reactions:ChatAvailableReactions message_auto_delete_time:int32 emoji_status:emojiStatus background:chatBackground theme:ChatTheme action_bar:ChatActionBar business_bot_manage_bar:businessBotManageBar video_chat:videoChat pending_join_requests:chatJoinRequestsInfo reply_markup_message_id:int53 draft_message:draftMessage client_data:string = Chat;"
+      "source": "chat id:int53 type:ChatType title:string photo:chatPhotoInfo accent_color_id:int32 background_custom_emoji_id:int64 upgraded_gift_colors:upgradedGiftColors profile_accent_color_id:int32 profile_background_custom_emoji_id:int64 permissions:chatPermissions last_message:message positions:vector<chatPosition> chat_lists:vector<ChatList> message_sender_id:MessageSender block_list:BlockList has_protected_content:Bool is_translatable:Bool is_marked_as_unread:Bool view_as_topics:Bool has_scheduled_messages:Bool has_welcome_messages:Bool can_be_deleted_only_for_self:Bool can_be_deleted_for_all_users:Bool can_be_reported:Bool default_disable_notification:Bool unread_count:int32 last_read_inbox_message_id:int53 last_read_outbox_message_id:int53 unread_mention_count:int32 unread_reaction_count:int32 unread_poll_vote_count:int32 notification_settings:chatNotificationSettings available_reactions:ChatAvailableReactions message_auto_delete_time:int32 emoji_status:emojiStatus background:chatBackground theme:ChatTheme action_bar:ChatActionBar business_bot_manage_bar:businessBotManageBar video_chat:videoChat pending_join_requests:chatJoinRequestsInfo reply_markup_message_id:int53 draft_message:draftMessage text_composition_parameters:textCompositionParameters client_data:string = Chat;"
     },
     {
       "id": null,
@@ -5471,6 +5815,14 @@
       "params": "title:string is_channel:Bool request_date:int32",
       "result": "ChatActionBar",
       "source": "chatActionBarJoinRequest title:string is_channel:Bool request_date:int32 = ChatActionBar;"
+    },
+    {
+      "id": null,
+      "kind": "constructors",
+      "name": "chatActionBarBotInvite",
+      "params": "can_unarchive:Bool inviter_user_id:int53 owner_user_id:int53",
+      "result": "ChatActionBar",
+      "source": "chatActionBarBotInvite can_unarchive:Bool inviter_user_id:int53 owner_user_id:int53 = ChatActionBar;"
     },
     {
       "id": null,
@@ -6436,9 +6788,9 @@
       "id": null,
       "kind": "constructors",
       "name": "pageBlockExpandableBlockQuote",
-      "params": "text:RichText credit:RichText",
+      "params": "blocks:vector<PageBlock> credit:RichText",
       "result": "PageBlock",
-      "source": "pageBlockExpandableBlockQuote text:RichText credit:RichText = PageBlock;"
+      "source": "pageBlockExpandableBlockQuote blocks:vector<PageBlock> credit:RichText = PageBlock;"
     },
     {
       "id": null,
@@ -6663,6 +7015,14 @@
       "params": "document:document background_type:BackgroundType",
       "result": "LinkPreviewType",
       "source": "linkPreviewTypeBackground document:document background_type:BackgroundType = LinkPreviewType;"
+    },
+    {
+      "id": null,
+      "kind": "constructors",
+      "name": "linkPreviewTypeBotInvite",
+      "params": "",
+      "result": "LinkPreviewType",
+      "source": "linkPreviewTypeBotInvite = LinkPreviewType;"
     },
     {
       "id": null,
@@ -8475,6 +8835,14 @@
     {
       "id": null,
       "kind": "constructors",
+      "name": "messageBotInvite",
+      "params": "inviter_user_id:int53",
+      "result": "MessageContent",
+      "source": "messageBotInvite inviter_user_id:int53 = MessageContent;"
+    },
+    {
+      "id": null,
+      "kind": "constructors",
       "name": "messagePaymentSuccessful",
       "params": "invoice_chat_id:int53 invoice_message_id:int53 currency:string total_amount:int53 subscription_until_date:int32 is_recurring:Bool is_first_recurring:Bool invoice_name:string",
       "result": "MessageContent",
@@ -8572,9 +8940,9 @@
       "id": null,
       "kind": "constructors",
       "name": "messageTonWalletTransfer",
-      "params": "sender_user_id:int53 transaction_id:string peer_address:string amount:int64 comment:string is_comment_encrypted:Bool",
+      "params": "sender_user_id:int53 transaction_id:string peer_address:string amount:int64 comment:string is_comment_encrypted:Bool on_ramp_provider_name:string",
       "result": "MessageContent",
-      "source": "messageTonWalletTransfer sender_user_id:int53 transaction_id:string peer_address:string amount:int64 comment:string is_comment_encrypted:Bool = MessageContent;"
+      "source": "messageTonWalletTransfer sender_user_id:int53 transaction_id:string peer_address:string amount:int64 comment:string is_comment_encrypted:Bool on_ramp_provider_name:string = MessageContent;"
     },
     {
       "id": null,
@@ -8596,9 +8964,9 @@
       "id": null,
       "kind": "constructors",
       "name": "messageUpgradedGift",
-      "params": "gift:upgradedGift sender_id:MessageSender receiver_id:MessageSender origin:UpgradedGiftOrigin received_gift_id:string text:formattedText is_private:Bool is_saved:Bool can_be_transferred:Bool was_transferred:Bool transfer_star_count:int53 drop_original_details_star_count:int53 next_transfer_date:int32 next_resale_date:int32 export_date:int32 craft_date:int32",
+      "params": "gift:upgradedGift sender_id:MessageSender receiver_id:MessageSender origin:UpgradedGiftOrigin received_gift_id:string text:formattedText is_private:Bool is_saved:Bool can_be_transferred:Bool was_transferred:Bool transfer_star_count:int53 drop_original_details_star_count:int53 next_transfer_date:int32 next_resale_date:int32 mint_date:int32 craft_date:int32",
       "result": "MessageContent",
-      "source": "messageUpgradedGift gift:upgradedGift sender_id:MessageSender receiver_id:MessageSender origin:UpgradedGiftOrigin received_gift_id:string text:formattedText is_private:Bool is_saved:Bool can_be_transferred:Bool was_transferred:Bool transfer_star_count:int53 drop_original_details_star_count:int53 next_transfer_date:int32 next_resale_date:int32 export_date:int32 craft_date:int32 = MessageContent;"
+      "source": "messageUpgradedGift gift:upgradedGift sender_id:MessageSender receiver_id:MessageSender origin:UpgradedGiftOrigin received_gift_id:string text:formattedText is_private:Bool is_saved:Bool can_be_transferred:Bool was_transferred:Bool transfer_star_count:int53 drop_original_details_star_count:int53 next_transfer_date:int32 next_resale_date:int32 mint_date:int32 craft_date:int32 = MessageContent;"
     },
     {
       "id": null,
@@ -8623,6 +8991,14 @@
       "params": "gift:upgradedGift price:GiftResalePrice offer_message_id:int53 was_expired:Bool",
       "result": "MessageContent",
       "source": "messageUpgradedGiftPurchaseOfferRejected gift:upgradedGift price:GiftResalePrice offer_message_id:int53 was_expired:Bool = MessageContent;"
+    },
+    {
+      "id": null,
+      "kind": "constructors",
+      "name": "messageUpgradedGiftOnChainPurchaseOffer",
+      "params": "gift:upgradedGift is_buyer:Bool state:GiftOnChainPurchaseOfferState offer_address:string gram_amount:int64 fee_basis_points:int32 expiration_date:int32 offer_message_id:int53",
+      "result": "MessageContent",
+      "source": "messageUpgradedGiftOnChainPurchaseOffer gift:upgradedGift is_buyer:Bool state:GiftOnChainPurchaseOfferState offer_address:string gram_amount:int64 fee_basis_points:int32 expiration_date:int32 offer_message_id:int53 = MessageContent;"
     },
     {
       "id": null,
@@ -9356,9 +9732,9 @@
       "id": null,
       "kind": "constructors",
       "name": "inputPageBlockExpandableBlockQuote",
-      "params": "text:RichText credit:RichText",
+      "params": "blocks:vector<InputPageBlock> credit:RichText",
       "result": "InputPageBlock",
-      "source": "inputPageBlockExpandableBlockQuote text:RichText credit:RichText = InputPageBlock;"
+      "source": "inputPageBlockExpandableBlockQuote blocks:vector<InputPageBlock> credit:RichText = InputPageBlock;"
     },
     {
       "id": null,
@@ -11335,6 +11711,22 @@
       "params": "language_codes:vector<string>",
       "result": "SpeechRecognitionLanguages",
       "source": "speechRecognitionLanguages language_codes:vector<string> = SpeechRecognitionLanguages;"
+    },
+    {
+      "id": null,
+      "kind": "constructors",
+      "name": "speechRecognitionModel",
+      "params": "document:document language_codes:vector<string> version:int32",
+      "result": "SpeechRecognitionModel",
+      "source": "speechRecognitionModel document:document language_codes:vector<string> version:int32 = SpeechRecognitionModel;"
+    },
+    {
+      "id": null,
+      "kind": "constructors",
+      "name": "speechRecognitionModels",
+      "params": "models:vector<speechRecognitionModel> language_detection_model:document voice_activity_detection_model:document",
+      "result": "SpeechRecognitionModels",
+      "source": "speechRecognitionModels models:vector<speechRecognitionModel> language_detection_model:document voice_activity_detection_model:document = SpeechRecognitionModels;"
     },
     {
       "id": null,
@@ -14971,6 +15363,14 @@
     {
       "id": null,
       "kind": "constructors",
+      "name": "internalLinkTypeBotInvite",
+      "params": "bot_username:string",
+      "result": "InternalLinkType",
+      "source": "internalLinkTypeBotInvite bot_username:string = InternalLinkType;"
+    },
+    {
+      "id": null,
+      "kind": "constructors",
       "name": "internalLinkTypeBotStart",
       "params": "bot_username:string start_parameter:string autostart:Bool",
       "result": "InternalLinkType",
@@ -17007,6 +17407,14 @@
       "params": "chat_id:int53 draft_message:draftMessage positions:vector<chatPosition>",
       "result": "Update",
       "source": "updateChatDraftMessage chat_id:int53 draft_message:draftMessage positions:vector<chatPosition> = Update;"
+    },
+    {
+      "id": null,
+      "kind": "constructors",
+      "name": "updateChatTextCompositionParameters",
+      "params": "chat_id:int53 text_composition_parameters:textCompositionParameters",
+      "result": "Update",
+      "source": "updateChatTextCompositionParameters chat_id:int53 text_composition_parameters:textCompositionParameters = Update;"
     },
     {
       "id": null,
@@ -19723,6 +20131,14 @@
     {
       "id": null,
       "kind": "functions",
+      "name": "getChatMessageCounts",
+      "params": "chat_id:int53 topic_id:MessageTopic filters:vector<SearchMessagesFilter> return_local:Bool",
+      "result": "ChatMessageCounts",
+      "source": "getChatMessageCounts chat_id:int53 topic_id:MessageTopic filters:vector<SearchMessagesFilter> return_local:Bool = ChatMessageCounts;"
+    },
+    {
+      "id": null,
+      "kind": "functions",
       "name": "getChatMessagePosition",
       "params": "chat_id:int53 topic_id:MessageTopic filter:SearchMessagesFilter message_id:int53",
       "result": "Count",
@@ -20047,6 +20463,14 @@
       "params": "chat_id:int53",
       "result": "SpeechRecognitionLanguages",
       "source": "getSpeechRecognitionLanguages chat_id:int53 = SpeechRecognitionLanguages;"
+    },
+    {
+      "id": null,
+      "kind": "functions",
+      "name": "getSpeechRecognitionModels",
+      "params": "version:int32",
+      "result": "SpeechRecognitionModels",
+      "source": "getSpeechRecognitionModels version:int32 = SpeechRecognitionModels;"
     },
     {
       "id": null,
@@ -20684,9 +21108,17 @@
       "id": null,
       "kind": "functions",
       "name": "getForumTopics",
-      "params": "chat_id:int53 query:string offset_date:int32 offset_message_id:int53 offset_forum_topic_id:int32 limit:int32",
+      "params": "chat_id:int53 query:string icon_custom_emoji_id:int64 exclude_open:Bool exclude_closed:Bool offset_date:int32 offset_message_id:int53 offset_forum_topic_id:int32 limit:int32",
       "result": "ForumTopics",
-      "source": "getForumTopics chat_id:int53 query:string offset_date:int32 offset_message_id:int53 offset_forum_topic_id:int32 limit:int32 = ForumTopics;"
+      "source": "getForumTopics chat_id:int53 query:string icon_custom_emoji_id:int64 exclude_open:Bool exclude_closed:Bool offset_date:int32 offset_message_id:int53 offset_forum_topic_id:int32 limit:int32 = ForumTopics;"
+    },
+    {
+      "id": null,
+      "kind": "functions",
+      "name": "getForumTopicPopularIcons",
+      "params": "chat_id:int53",
+      "result": "Stickers",
+      "source": "getForumTopicPopularIcons chat_id:int53 = Stickers;"
     },
     {
       "id": null,
@@ -21967,6 +22399,14 @@
       "params": "chat_id:int53 topic_id:MessageTopic draft_message:draftMessage",
       "result": "Ok",
       "source": "setChatDraftMessage chat_id:int53 topic_id:MessageTopic draft_message:draftMessage = Ok;"
+    },
+    {
+      "id": null,
+      "kind": "functions",
+      "name": "setChatTextCompositionParameters",
+      "params": "chat_id:int53 text_composition_parameters:textCompositionParameters",
+      "result": "Ok",
+      "source": "setChatTextCompositionParameters chat_id:int53 text_composition_parameters:textCompositionParameters = Ok;"
     },
     {
       "id": null,
@@ -24643,6 +25083,22 @@
     {
       "id": null,
       "kind": "functions",
+      "name": "inviteUsersToBot",
+      "params": "bot_user_id:int53 user_ids:vector<int53>",
+      "result": "Ok",
+      "source": "inviteUsersToBot bot_user_id:int53 user_ids:vector<int53> = Ok;"
+    },
+    {
+      "id": null,
+      "kind": "functions",
+      "name": "setBotSettings",
+      "params": "bot_user_id:int53 settings:vector<BotSetting>",
+      "result": "Ok",
+      "source": "setBotSettings bot_user_id:int53 settings:vector<BotSetting> = Ok;"
+    },
+    {
+      "id": null,
+      "kind": "functions",
       "name": "setBotName",
       "params": "bot_user_id:int53 language_code:string name:string",
       "result": "Ok",
@@ -25275,6 +25731,62 @@
     {
       "id": null,
       "kind": "functions",
+      "name": "sendGiftOnChainPurchaseOffer",
+      "params": "gift_name:string gram_amount:int64 duration:int32",
+      "result": "GiftOnChainPurchaseOfferTransaction",
+      "source": "sendGiftOnChainPurchaseOffer gift_name:string gram_amount:int64 duration:int32 = GiftOnChainPurchaseOfferTransaction;"
+    },
+    {
+      "id": null,
+      "kind": "functions",
+      "name": "cancelGiftOnChainPurchaseOffer",
+      "params": "message_id:int53",
+      "result": "GiftOnChainPurchaseOfferTransaction",
+      "source": "cancelGiftOnChainPurchaseOffer message_id:int53 = GiftOnChainPurchaseOfferTransaction;"
+    },
+    {
+      "id": null,
+      "kind": "functions",
+      "name": "acceptGiftOnChainPurchaseOffer",
+      "params": "message_id:int53",
+      "result": "GiftOnChainPurchaseOfferTransaction",
+      "source": "acceptGiftOnChainPurchaseOffer message_id:int53 = GiftOnChainPurchaseOfferTransaction;"
+    },
+    {
+      "id": null,
+      "kind": "functions",
+      "name": "declineGiftOnChainPurchaseOffer",
+      "params": "message_id:int53",
+      "result": "Ok",
+      "source": "declineGiftOnChainPurchaseOffer message_id:int53 = Ok;"
+    },
+    {
+      "id": null,
+      "kind": "functions",
+      "name": "getGiftOnChainPurchaseTransaction",
+      "params": "gift_name:string owner_id:MessageSender gram_amount:int64 text:formattedText is_private:Bool",
+      "result": "GiftOnChainSaleTransaction",
+      "source": "getGiftOnChainPurchaseTransaction gift_name:string owner_id:MessageSender gram_amount:int64 text:formattedText is_private:Bool = GiftOnChainSaleTransaction;"
+    },
+    {
+      "id": null,
+      "kind": "functions",
+      "name": "getGiftOnChainListingTransaction",
+      "params": "gift_name:string gram_amount:int64",
+      "result": "GiftOnChainSaleTransaction",
+      "source": "getGiftOnChainListingTransaction gift_name:string gram_amount:int64 = GiftOnChainSaleTransaction;"
+    },
+    {
+      "id": null,
+      "kind": "functions",
+      "name": "getGiftOnChainDelistingTransaction",
+      "params": "gift_name:string",
+      "result": "GiftOnChainSaleTransaction",
+      "source": "getGiftOnChainDelistingTransaction gift_name:string = GiftOnChainSaleTransaction;"
+    },
+    {
+      "id": null,
+      "kind": "functions",
       "name": "getReceivedGifts",
       "params": "business_connection_id:string owner_id:MessageSender collection_id:int32 exclude_unsaved:Bool exclude_saved:Bool exclude_unlimited:Bool exclude_upgradable:Bool exclude_non_upgradable:Bool exclude_upgraded:Bool exclude_without_colors:Bool exclude_hosted:Bool sort_by_price:Bool offset:string limit:int32",
       "result": "ReceivedGifts",
@@ -25315,18 +25827,18 @@
     {
       "id": null,
       "kind": "functions",
-      "name": "getUpgradedGiftWithdrawalUrl",
+      "name": "getGiftMintingUrl",
       "params": "received_gift_id:string",
       "result": "HttpUrl",
-      "source": "getUpgradedGiftWithdrawalUrl received_gift_id:string = HttpUrl;"
+      "source": "getGiftMintingUrl received_gift_id:string = HttpUrl;"
     },
     {
       "id": null,
       "kind": "functions",
-      "name": "withdrawUpgradedGift",
+      "name": "mintGift",
       "params": "received_gift_id:string keep_on_profile:Bool",
       "result": "Ok",
-      "source": "withdrawUpgradedGift received_gift_id:string keep_on_profile:Bool = Ok;"
+      "source": "mintGift received_gift_id:string keep_on_profile:Bool = Ok;"
     },
     {
       "id": null,
@@ -25364,9 +25876,9 @@
       "id": null,
       "kind": "functions",
       "name": "searchGiftsForResale",
-      "params": "gift_id:int64 order:GiftForResaleOrder for_crafting:Bool for_stars:Bool attributes:vector<UpgradedGiftAttributeId> offset:string limit:int32",
+      "params": "gift_id:int64 order:GiftForResaleOrder for_crafting:Bool for_stars:Bool for_grams:Bool for_fragment:Bool attributes:vector<UpgradedGiftAttributeId> offset:string limit:int32",
       "result": "GiftsForResale",
-      "source": "searchGiftsForResale gift_id:int64 order:GiftForResaleOrder for_crafting:Bool for_stars:Bool attributes:vector<UpgradedGiftAttributeId> offset:string limit:int32 = GiftsForResale;"
+      "source": "searchGiftsForResale gift_id:int64 order:GiftForResaleOrder for_crafting:Bool for_stars:Bool for_grams:Bool for_fragment:Bool attributes:vector<UpgradedGiftAttributeId> offset:string limit:int32 = GiftsForResale;"
     },
     {
       "id": null,
@@ -25955,6 +26467,14 @@
     {
       "id": null,
       "kind": "functions",
+      "name": "sendTonWalletTransaction",
+      "params": "regular_transaction_data:bytes gasless_transaction_data:bytes",
+      "result": "TonWalletTransferResult",
+      "source": "sendTonWalletTransaction regular_transaction_data:bytes gasless_transaction_data:bytes = TonWalletTransferResult;"
+    },
+    {
+      "id": null,
+      "kind": "functions",
       "name": "deleteTonWallet",
       "params": "password:string",
       "result": "Ok",
@@ -26183,6 +26703,14 @@
       "params": "password:string",
       "result": "HttpUrl",
       "source": "getGramWithdrawalUrl password:string = HttpUrl;"
+    },
+    {
+      "id": null,
+      "kind": "functions",
+      "name": "withdrawGrams",
+      "params": "",
+      "result": "Ok",
+      "source": "withdrawGrams = Ok;"
     },
     {
       "id": null,

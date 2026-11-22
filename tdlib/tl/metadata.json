@@ -1,23 +1,23 @@
 {
   "counts": {
-    "constructors": 2308,
-    "functions": 1099,
-    "total": 3407
+    "constructors": 2359,
+    "functions": 1114,
+    "total": 3473
   },
   "safety": {
     "max_definition_removal_ratio": 0.1
   },
   "sha256": {
-    "json": "ce0d469a9e47a5954be17ca876225bfa90b41c6cfc71d0381935005147eee83f",
-    "tl": "44edbd169bbd5c66577b827b8e5dc68d17fd7026bf2377109f963f0acd88c758"
+    "json": "106deab49287add929ce188e00e5214f9992e0ecc7d704b53ad986659c1f55d1",
+    "tl": "7d172a9c9439e8b57df849a7bd4c60c7357c5d48c1c6e038c4e735082bd9a58d"
   },
   "source": "https://raw.githubusercontent.com/tdlib/td/master/td/generate/scheme/td_api.tl",
   "source_path": "td/generate/scheme/td_api.tl",
   "source_repository": "https://github.com/tdlib/td",
   "upstream": {
     "branch": "master",
-    "commit": "03220f6b3043c6fd7785fbf0901d63f19ad19974",
-    "commit_url": "https://github.com/tdlib/td/commit/03220f6b3043c6fd7785fbf0901d63f19ad19974",
-    "message": "Document the option \"gift_sell_period\" and fix gift.can_be_deleted."
+    "commit": "f10611ee1f03f91ddae8185483a1ccfd3d664668",
+    "commit_url": "https://github.com/tdlib/td/commit/f10611ee1f03f91ddae8185483a1ccfd3d664668",
+    "message": "Update version to 1.8.71."
   }
 }
