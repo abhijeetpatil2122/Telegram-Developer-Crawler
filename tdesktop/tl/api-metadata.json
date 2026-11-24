@@ -1,23 +1,23 @@
 {
   "counts": {
-    "constructors": 1739,
-    "functions": 867,
-    "total": 2606
+    "constructors": 1757,
+    "functions": 878,
+    "total": 2635
   },
   "safety": {
     "max_definition_removal_ratio": 0.1
   },
   "sha256": {
-    "json": "e87c0fe6ccdca5a4b8b5f761788079332d8538420c67f8eec49c0632b8bd9ba8",
-    "tl": "e7992757e3d650d2a50d7b495de565487af979a39e34f43dfd66e911f4355964"
+    "json": "eefb16474a4946ea5d0ac83db54e2ebf9ed9cc4c37ea3a488608e7d5f925c274",
+    "tl": "3c19b380acc5e255f90360d7528f058f90d5f133fecf6ba44e85b2ff867bc2f0"
   },
   "source": "https://raw.githubusercontent.com/telegramdesktop/tdesktop/dev/Telegram/SourceFiles/mtproto/scheme/api.tl",
   "source_path": "Telegram/SourceFiles/mtproto/scheme/api.tl",
   "source_repository": "https://github.com/telegramdesktop/tdesktop",
   "upstream": {
     "branch": "dev",
-    "commit": "c2d0ad92432f6cde7504e8571ac2fcac9bbc42c7",
-    "commit_url": "https://github.com/telegramdesktop/tdesktop/commit/c2d0ad92432f6cde7504e8571ac2fcac9bbc42c7",
-    "message": "Retry hdiutil calls."
+    "commit": "070dbc645c543ce8b9bbbb7b72ef842ffd7671da",
+    "commit_url": "https://github.com/telegramdesktop/tdesktop/commit/070dbc645c543ce8b9bbbb7b72ef842ffd7671da",
+    "message": "Allow minted gifts as the first craft source when the server allows"
   }
 }

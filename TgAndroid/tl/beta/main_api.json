@@ -8568,7 +8568,7 @@
       "name": "inputChatPhoto",
       "params": [
         {
-          "name": "f28491id",
+          "name": "f28552id",
           "type": "InputPhoto"
         }
       ],
@@ -9374,7 +9374,7 @@
       "name": "inputMediaDocument",
       "params": [
         {
-          "name": "f28492id",
+          "name": "f28553id",
           "type": "InputDocument"
         },
         {
@@ -9412,7 +9412,7 @@
       "name": "inputMediaGame",
       "params": [
         {
-          "name": "f28493id",
+          "name": "f28554id",
           "type": "InputGame"
         }
       ],
@@ -9484,7 +9484,7 @@
       "name": "inputMediaPhoto",
       "params": [
         {
-          "name": "f28494id",
+          "name": "f28555id",
           "type": "InputPhoto"
         },
         {
@@ -11033,7 +11033,7 @@
       "name": "inputStickeredMediaDocument",
       "params": [
         {
-          "name": "f28500id",
+          "name": "f28561id",
           "type": "InputDocument"
         }
       ],
@@ -11046,7 +11046,7 @@
       "name": "inputStickeredMediaPhoto",
       "params": [
         {
-          "name": "f28501id",
+          "name": "f28562id",
           "type": "InputPhoto"
         }
       ],
@@ -41173,14 +41173,14 @@
     "max_definition_removal_ratio": 0.1
   },
   "sha256": {
-    "tl": "41cccc963f926254bd42dc5886d3c725b89ff1632f561077404a42381ac5d35a"
+    "tl": "c82bc95c933ad6467b096fce843573c9ea67fae46b9ca4111f15f551add824fc"
   },
   "source": {
     "apk": "https://cdn4.telesco.pe/file/Telegram-Beta.apk",
-    "apk_sha256": "418ffa55b7afa8154d8c2a80a72822fabe14f74e2a2e3ec1bfe304c5381efdd8",
+    "apk_sha256": "f48a0ab952fcd0c35f0f3bda84ed73c4736f7218ed367d7349d477c28992d9dd",
     "jadx": "https://github.com/skylot/jadx/releases/download/v1.5.6/jadx-1.5.6.zip",
     "package": "org.telegram.messenger.beta",
-    "version_code": 73459,
-    "version_name": "13.3.1"
+    "version_code": 73519,
+    "version_name": "13.3.2"
   }
 }

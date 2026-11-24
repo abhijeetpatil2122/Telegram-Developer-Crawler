@@ -16,8 +16,8 @@
   "source_repository": "https://github.com/tdlib/td",
   "upstream": {
     "branch": "master",
-    "commit": "f10611ee1f03f91ddae8185483a1ccfd3d664668",
-    "commit_url": "https://github.com/tdlib/td/commit/f10611ee1f03f91ddae8185483a1ccfd3d664668",
-    "message": "Update version to 1.8.71."
+    "commit": "1b9efe84d6e9a2e2f6eadeeea32b0726d2b8c25d",
+    "commit_url": "https://github.com/tdlib/td/commit/1b9efe84d6e9a2e2f6eadeeea32b0726d2b8c25d",
+    "message": "Improve secret chats test."
   }
 }

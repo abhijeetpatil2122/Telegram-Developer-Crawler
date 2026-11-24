@@ -16,8 +16,8 @@
   "source_repository": "https://github.com/telegramdesktop/tdesktop",
   "upstream": {
     "branch": "dev",
-    "commit": "c2d0ad92432f6cde7504e8571ac2fcac9bbc42c7",
-    "commit_url": "https://github.com/telegramdesktop/tdesktop/commit/c2d0ad92432f6cde7504e8571ac2fcac9bbc42c7",
-    "message": "Retry hdiutil calls."
+    "commit": "070dbc645c543ce8b9bbbb7b72ef842ffd7671da",
+    "commit_url": "https://github.com/telegramdesktop/tdesktop/commit/070dbc645c543ce8b9bbbb7b72ef842ffd7671da",
+    "message": "Allow minted gifts as the first craft source when the server allows"
   }
 }

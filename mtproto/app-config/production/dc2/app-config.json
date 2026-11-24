@@ -1463,7 +1463,7 @@
         "key": "ton_usd_rate",
         "value": {
           "_": "JsonNumber",
-          "value": 1.0131100190947322
+          "value": 0.9909256302409046
         }
       },
       {
@@ -1472,14 +1472,6 @@
         "value": {
           "_": "JsonNumber",
           "value": 25000000.0
-        }
-      },
-      {
-        "_": "JsonObjectValue",
-        "key": "ton_topup_url",
-        "value": {
-          "_": "JsonString",
-          "value": "https://fragment.com/ads/topup"
         }
       },
       {
