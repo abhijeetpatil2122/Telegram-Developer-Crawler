@@ -16,8 +16,8 @@
   "source_repository": "https://github.com/telegramdesktop/tdesktop",
   "upstream": {
     "branch": "dev",
-    "commit": "070dbc645c543ce8b9bbbb7b72ef842ffd7671da",
-    "commit_url": "https://github.com/telegramdesktop/tdesktop/commit/070dbc645c543ce8b9bbbb7b72ef842ffd7671da",
-    "message": "Allow minted gifts as the first craft source when the server allows"
+    "commit": "0e79d7a47c3e1876576e62d760d53e1f3f14c2dc",
+    "commit_url": "https://github.com/telegramdesktop/tdesktop/commit/0e79d7a47c3e1876576e62d760d53e1f3f14c2dc",
+    "message": "Moved out audio disc rendering to shared UI."
   }
 }

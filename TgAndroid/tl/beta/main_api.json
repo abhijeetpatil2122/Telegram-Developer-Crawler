@@ -4348,7 +4348,24 @@
       "id": 1103884886,
       "kind": "constructor",
       "name": "chat",
-      "params": [],
+      "params": [
+        {
+          "name": "photo",
+          "type": "ChatPhoto"
+        },
+        {
+          "name": "migrated_to",
+          "type": "InputChannel"
+        },
+        {
+          "name": "admin_rights",
+          "type": "chatAdminRights"
+        },
+        {
+          "name": "default_banned_rights",
+          "type": "chatBannedRights"
+        }
+      ],
       "source": "sources/org/telegram/tgnet/TLRPC.java",
       "type": "Chat"
     },
@@ -8568,7 +8585,7 @@
       "name": "inputChatPhoto",
       "params": [
         {
-          "name": "f28552id",
+          "name": "id",
           "type": "InputPhoto"
         }
       ],
@@ -9374,7 +9391,7 @@
       "name": "inputMediaDocument",
       "params": [
         {
-          "name": "f28553id",
+          "name": "id",
           "type": "InputDocument"
         },
         {
@@ -9412,7 +9429,7 @@
       "name": "inputMediaGame",
       "params": [
         {
-          "name": "f28554id",
+          "name": "id",
           "type": "InputGame"
         }
       ],
@@ -9484,7 +9501,7 @@
       "name": "inputMediaPhoto",
       "params": [
         {
-          "name": "f28555id",
+          "name": "id",
           "type": "InputPhoto"
         },
         {
@@ -11033,7 +11050,7 @@
       "name": "inputStickeredMediaDocument",
       "params": [
         {
-          "name": "f28561id",
+          "name": "id",
           "type": "InputDocument"
         }
       ],
@@ -11046,7 +11063,7 @@
       "name": "inputStickeredMediaPhoto",
       "params": [
         {
-          "name": "f28562id",
+          "name": "id",
           "type": "InputPhoto"
         }
       ],
@@ -41173,14 +41190,14 @@
     "max_definition_removal_ratio": 0.1
   },
   "sha256": {
-    "tl": "c82bc95c933ad6467b096fce843573c9ea67fae46b9ca4111f15f551add824fc"
+    "tl": "9654fc1601500b796574194986dc1dad425e580799cdb2f71222082b9504a7ca"
   },
   "source": {
     "apk": "https://cdn4.telesco.pe/file/Telegram-Beta.apk",
-    "apk_sha256": "f48a0ab952fcd0c35f0f3bda84ed73c4736f7218ed367d7349d477c28992d9dd",
+    "apk_sha256": "4a833dc7aafafb4047c282168902c494dfb39985ba2a377599307346f2546411",
     "jadx": "https://github.com/skylot/jadx/releases/download/v1.5.6/jadx-1.5.6.zip",
     "package": "org.telegram.messenger.beta",
-    "version_code": 73519,
+    "version_code": 73529,
     "version_name": "13.3.2"
   }
 }
