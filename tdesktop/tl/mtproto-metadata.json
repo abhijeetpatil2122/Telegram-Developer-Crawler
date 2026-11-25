@@ -16,8 +16,8 @@
   "source_repository": "https://github.com/telegramdesktop/tdesktop",
   "upstream": {
     "branch": "dev",
-    "commit": "0e79d7a47c3e1876576e62d760d53e1f3f14c2dc",
-    "commit_url": "https://github.com/telegramdesktop/tdesktop/commit/0e79d7a47c3e1876576e62d760d53e1f3f14c2dc",
-    "message": "Moved out audio disc rendering to shared UI."
+    "commit": "2600e13c7f1cd7d6afdc4bc3d2b04810f3d57662",
+    "commit_url": "https://github.com/telegramdesktop/tdesktop/commit/2600e13c7f1cd7d6afdc4bc3d2b04810f3d57662",
+    "message": "Implib GTK in snap"
   }
 }
