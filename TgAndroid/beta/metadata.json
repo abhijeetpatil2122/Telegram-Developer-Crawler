@@ -1,13 +1,13 @@
 {
   "android": {
     "package": "org.telegram.messenger.beta",
-    "version_code": 73529,
+    "version_code": 73579,
     "version_name": "13.3.2"
   },
   "artifact": {
     "filename": "beta.apk",
-    "sha256": "4a833dc7aafafb4047c282168902c494dfb39985ba2a377599307346f2546411",
-    "size": 94798540
+    "sha256": "bf9a95053874f11aa1be0c303bb750f69b3781b32f05bbeaad9c755e48de8168",
+    "size": 93127915
   },
   "channel": "beta",
   "extractor": {
