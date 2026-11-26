@@ -9,15 +9,15 @@
   },
   "sha256": {
     "json": "106deab49287add929ce188e00e5214f9992e0ecc7d704b53ad986659c1f55d1",
-    "tl": "7d172a9c9439e8b57df849a7bd4c60c7357c5d48c1c6e038c4e735082bd9a58d"
+    "tl": "bd6ae354f5bbea24675588c69e968fae1d2d4c2d16cb70fa700b04be1c4f190a"
   },
   "source": "https://raw.githubusercontent.com/tdlib/td/master/td/generate/scheme/td_api.tl",
   "source_path": "td/generate/scheme/td_api.tl",
   "source_repository": "https://github.com/tdlib/td",
   "upstream": {
     "branch": "master",
-    "commit": "1b9efe84d6e9a2e2f6eadeeea32b0726d2b8c25d",
-    "commit_url": "https://github.com/tdlib/td/commit/1b9efe84d6e9a2e2f6eadeeea32b0726d2b8c25d",
-    "message": "Improve secret chats test."
+    "commit": "e7ac61dd69409c31b3c8c7367b33b07eecce701f",
+    "commit_url": "https://github.com/tdlib/td/commit/e7ac61dd69409c31b3c8c7367b33b07eecce701f",
+    "message": "Add PqFactorizeBench."
   }
 }
