@@ -16,8 +16,8 @@
   "source_repository": "https://github.com/telegramdesktop/tdesktop",
   "upstream": {
     "branch": "dev",
-    "commit": "2600e13c7f1cd7d6afdc4bc3d2b04810f3d57662",
-    "commit_url": "https://github.com/telegramdesktop/tdesktop/commit/2600e13c7f1cd7d6afdc4bc3d2b04810f3d57662",
-    "message": "Implib GTK in snap"
+    "commit": "3fad5a7ff199a846922293cecd7d1e63c052adab",
+    "commit_url": "https://github.com/telegramdesktop/tdesktop/commit/3fad5a7ff199a846922293cecd7d1e63c052adab",
+    "message": "Move monoforum reply predicates into the chat section"
   }
 }
