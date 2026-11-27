@@ -6734,6 +6734,64 @@
       "type": "FactCheck"
     },
     {
+      "id": 1810307195,
+      "kind": "constructor",
+      "name": "feedItemInterestCategories",
+      "params": [],
+      "source": "sources/org/telegram/tgnet/tl/TL_feed.java",
+      "type": "FeedItem"
+    },
+    {
+      "id": 2121511845,
+      "kind": "constructor",
+      "name": "feedItemMessage",
+      "params": [
+        {
+          "name": "message",
+          "type": "Message"
+        }
+      ],
+      "source": "sources/org/telegram/tgnet/tl/TL_feed.java",
+      "type": "FeedItem"
+    },
+    {
+      "id": 1697598577,
+      "kind": "constructor",
+      "name": "feedItemMessageGroup",
+      "params": [],
+      "source": "sources/org/telegram/tgnet/tl/TL_feed.java",
+      "type": "FeedItem"
+    },
+    {
+      "id": -587770695,
+      "kind": "constructor",
+      "name": "feedMessages",
+      "params": [
+        {
+          "name": "max_position",
+          "type": "FeedPosition"
+        },
+        {
+          "name": "min_position",
+          "type": "FeedPosition"
+        },
+        {
+          "name": "read_max_position",
+          "type": "FeedPosition"
+        }
+      ],
+      "source": "sources/org/telegram/tgnet/tl/TL_feed.java",
+      "type": "FeedMessages"
+    },
+    {
+      "id": -619039485,
+      "kind": "constructor",
+      "name": "feedMessagesNotModified",
+      "params": [],
+      "source": "sources/org/telegram/tgnet/tl/TL_feed.java",
+      "type": "FeedMessages"
+    },
+    {
       "id": 1431655764,
       "kind": "constructor",
       "name": "fileEncryptedLocation",
@@ -11389,6 +11447,22 @@
       "params": [],
       "source": "sources/org/telegram/tgnet/TLRPC.java",
       "type": "InputWebFileLocation"
+    },
+    {
+      "id": -323604576,
+      "kind": "constructor",
+      "name": "interestCategories",
+      "params": [],
+      "source": "sources/org/telegram/tgnet/tl/TL_feed.java",
+      "type": "InterestCategories"
+    },
+    {
+      "id": 2043617685,
+      "kind": "constructor",
+      "name": "interestCategoriesNotModified",
+      "params": [],
+      "source": "sources/org/telegram/tgnet/tl/TL_feed.java",
+      "type": "InterestCategories"
     },
     {
       "id": 77522308,
@@ -16298,6 +16372,14 @@
           "type": "RichText"
         }
       ],
+      "source": "sources/org/telegram/tgnet/tl/TL_iv.java",
+      "type": "PageBlock"
+    },
+    {
+      "id": 864221827,
+      "kind": "constructor",
+      "name": "pageBlockGroup",
+      "params": [],
       "source": "sources/org/telegram/tgnet/tl/TL_iv.java",
       "type": "PageBlock"
     },
@@ -24021,6 +24103,44 @@
       "type": "Update"
     },
     {
+      "id": -1899234323,
+      "kind": "constructor",
+      "name": "updateBotProfileWidget",
+      "params": [
+        {
+          "name": "widget",
+          "type": "botProfileWidget"
+        }
+      ],
+      "source": "sources/org/telegram/tgnet/tl/TL_update.java",
+      "type": "Update"
+    },
+    {
+      "id": -389670232,
+      "kind": "constructor",
+      "name": "updateBotProfileWidgetData",
+      "params": [],
+      "source": "sources/org/telegram/tgnet/tl/TL_update.java",
+      "type": "Update"
+    },
+    {
+      "id": -1444874970,
+      "kind": "constructor",
+      "name": "updateBotProfileWidgetQuery",
+      "params": [
+        {
+          "name": "query_type",
+          "type": "WidgetQueryType"
+        },
+        {
+          "name": "wallet_card",
+          "type": "card"
+        }
+      ],
+      "source": "sources/org/telegram/tgnet/tl/TL_update.java",
+      "type": "Update"
+    },
+    {
       "id": 675009298,
       "kind": "constructor",
       "name": "updateBotPurchasedPaidMedia",
@@ -25501,6 +25621,19 @@
       "type": "Update"
     },
     {
+      "id": 1951948721,
+      "kind": "constructor",
+      "name": "updateReadFeed",
+      "params": [
+        {
+          "name": "max_position",
+          "type": "FeedPosition"
+        }
+      ],
+      "source": "sources/org/telegram/tgnet/tl/TL_update.java",
+      "type": "Update"
+    },
+    {
       "id": -1635468135,
       "kind": "constructor",
       "name": "updateReadHistoryInbox",
@@ -26766,123 +26899,6 @@
       "type": "User"
     },
     {
-      "id": -1190384899,
-      "kind": "constructor",
-      "name": "userFull",
-      "params": [
-        {
-          "name": "settings",
-          "type": "PeerSettings"
-        },
-        {
-          "name": "personal_photo",
-          "type": "Photo"
-        },
-        {
-          "name": "profile_photo",
-          "type": "Photo"
-        },
-        {
-          "name": "fallback_photo",
-          "type": "Photo"
-        },
-        {
-          "name": "notify_settings",
-          "type": "PeerNotifySettings"
-        },
-        {
-          "name": "bot_info",
-          "type": "BotInfo"
-        },
-        {
-          "name": "theme",
-          "type": "ChatTheme"
-        },
-        {
-          "name": "bot_group_admin_rights",
-          "type": "chatAdminRights"
-        },
-        {
-          "name": "bot_broadcast_admin_rights",
-          "type": "chatAdminRights"
-        },
-        {
-          "name": "wallpaper",
-          "type": "WallPaper"
-        },
-        {
-          "name": "stories",
-          "type": "PeerStories"
-        },
-        {
-          "name": "business_work_hours",
-          "type": "businessWorkHours"
-        },
-        {
-          "name": "business_location",
-          "type": "businessLocation"
-        },
-        {
-          "name": "business_greeting_message",
-          "type": "businessGreetingMessage"
-        },
-        {
-          "name": "business_away_message",
-          "type": "businessAwayMessage"
-        },
-        {
-          "name": "business_intro",
-          "type": "businessIntro"
-        },
-        {
-          "name": "birthday",
-          "type": "birthday"
-        },
-        {
-          "name": "starref_program",
-          "type": "starRefProgram"
-        },
-        {
-          "name": "bot_verification",
-          "type": "BotVerification"
-        },
-        {
-          "name": "disallowed_stargifts",
-          "type": "DisallowedGiftsSettings"
-        },
-        {
-          "name": "stars_rating",
-          "type": "tl.starsRating"
-        },
-        {
-          "name": "stars_my_pending_rating",
-          "type": "tl.starsRating"
-        },
-        {
-          "name": "main_tab",
-          "type": "ProfileTab"
-        },
-        {
-          "name": "saved_music",
-          "type": "Document"
-        },
-        {
-          "name": "note",
-          "type": "textWithEntities"
-        },
-        {
-          "name": "wallet_card",
-          "type": "card"
-        },
-        {
-          "name": "share_theme",
-          "type": "ShareTheme"
-        }
-      ],
-      "source": "sources/org/telegram/tgnet/TLRPC.java",
-      "type": "UserFull"
-    },
-    {
       "id": 114026053,
       "kind": "constructor",
       "name": "userFull",
@@ -27129,6 +27145,127 @@
         }
       ],
       "source": "core.telegram.org/schema/json",
+      "type": "UserFull"
+    },
+    {
+      "id": 315061421,
+      "kind": "constructor",
+      "name": "userFull",
+      "params": [
+        {
+          "name": "settings",
+          "type": "PeerSettings"
+        },
+        {
+          "name": "personal_photo",
+          "type": "Photo"
+        },
+        {
+          "name": "profile_photo",
+          "type": "Photo"
+        },
+        {
+          "name": "fallback_photo",
+          "type": "Photo"
+        },
+        {
+          "name": "notify_settings",
+          "type": "PeerNotifySettings"
+        },
+        {
+          "name": "bot_info",
+          "type": "BotInfo"
+        },
+        {
+          "name": "theme",
+          "type": "ChatTheme"
+        },
+        {
+          "name": "bot_group_admin_rights",
+          "type": "chatAdminRights"
+        },
+        {
+          "name": "bot_broadcast_admin_rights",
+          "type": "chatAdminRights"
+        },
+        {
+          "name": "wallpaper",
+          "type": "WallPaper"
+        },
+        {
+          "name": "stories",
+          "type": "PeerStories"
+        },
+        {
+          "name": "business_work_hours",
+          "type": "businessWorkHours"
+        },
+        {
+          "name": "business_location",
+          "type": "businessLocation"
+        },
+        {
+          "name": "business_greeting_message",
+          "type": "businessGreetingMessage"
+        },
+        {
+          "name": "business_away_message",
+          "type": "businessAwayMessage"
+        },
+        {
+          "name": "business_intro",
+          "type": "businessIntro"
+        },
+        {
+          "name": "birthday",
+          "type": "birthday"
+        },
+        {
+          "name": "starref_program",
+          "type": "starRefProgram"
+        },
+        {
+          "name": "bot_verification",
+          "type": "BotVerification"
+        },
+        {
+          "name": "disallowed_stargifts",
+          "type": "DisallowedGiftsSettings"
+        },
+        {
+          "name": "stars_rating",
+          "type": "tl.starsRating"
+        },
+        {
+          "name": "stars_my_pending_rating",
+          "type": "tl.starsRating"
+        },
+        {
+          "name": "main_tab",
+          "type": "ProfileTab"
+        },
+        {
+          "name": "saved_music",
+          "type": "Document"
+        },
+        {
+          "name": "note",
+          "type": "textWithEntities"
+        },
+        {
+          "name": "wallet_card",
+          "type": "card"
+        },
+        {
+          "name": "share_theme",
+          "type": "ShareTheme"
+        },
+        {
+          "name": "bot_profile_widget",
+          "type": "botProfileWidget"
+        }
+      ],
+      "source": "sources/org/telegram/tgnet/TLRPC.java",
       "type": "UserFull"
     },
     {
@@ -27494,6 +27631,30 @@
       "type": "WalletOnchainGiftAction"
     },
     {
+      "id": 1438248251,
+      "kind": "constructor",
+      "name": "walletStakingActionDeposit",
+      "params": [],
+      "source": "sources/org/telegram/tgnet/tl/TL_wallet.java",
+      "type": "WalletStakingAction"
+    },
+    {
+      "id": 253279603,
+      "kind": "constructor",
+      "name": "walletStakingActionWithdraw",
+      "params": [],
+      "source": "sources/org/telegram/tgnet/tl/TL_wallet.java",
+      "type": "WalletStakingAction"
+    },
+    {
+      "id": 887385256,
+      "kind": "constructor",
+      "name": "walletStakingActionWithdrawPending",
+      "params": [],
+      "source": "sources/org/telegram/tgnet/tl/TL_wallet.java",
+      "type": "WalletStakingAction"
+    },
+    {
       "id": -1782238101,
       "kind": "constructor",
       "name": "walletState",
@@ -27543,6 +27704,19 @@
       "kind": "constructor",
       "name": "walletTransactionPeerOnramp",
       "params": [],
+      "source": "sources/org/telegram/tgnet/tl/TL_wallet.java",
+      "type": "WalletTransactionPeer"
+    },
+    {
+      "id": -1619557385,
+      "kind": "constructor",
+      "name": "walletTransactionPeerStaking",
+      "params": [
+        {
+          "name": "action",
+          "type": "WalletStakingAction"
+        }
+      ],
       "source": "sources/org/telegram/tgnet/tl/TL_wallet.java",
       "type": "WalletTransactionPeer"
     },
@@ -27882,11 +28056,11 @@
     }
   ],
   "counts": {
-    "constructors": 1855,
-    "methods": 1150,
-    "total": 3005
+    "constructors": 1871,
+    "methods": 1170,
+    "total": 3041
   },
-  "layer": 234,
+  "layer": 235,
   "methods": [
     {
       "id": -202552205,
@@ -31184,6 +31358,14 @@
       "source": "sources/org/telegram/tgnet/TLRPC.java"
     },
     {
+      "id": -687539835,
+      "kind": "method",
+      "name": "channels.editChannelNews",
+      "params": [],
+      "result": "Updates",
+      "source": "sources/org/telegram/tgnet/TLRPC.java"
+    },
+    {
       "id": -1892102881,
       "kind": "method",
       "name": "channels.editCreator",
@@ -31261,6 +31443,14 @@
       "name": "channels.getFullChannel",
       "params": [],
       "result": "messages.chatFull",
+      "source": "sources/org/telegram/tgnet/TLRPC.java"
+    },
+    {
+      "id": -1610016593,
+      "kind": "method",
+      "name": "channels.getFutureCreatorAfterLeave",
+      "params": [],
+      "result": "User",
       "source": "sources/org/telegram/tgnet/TLRPC.java"
     },
     {
@@ -31388,7 +31578,7 @@
       "source": "core.telegram.org/schema/json"
     },
     {
-      "id": 2137660962,
+      "id": 1097643276,
       "kind": "method",
       "name": "channels.joinChannel",
       "params": [],
@@ -31792,7 +31982,7 @@
       "source": "sources/org/telegram/tgnet/TLRPC.java"
     },
     {
-      "id": -475247519,
+      "id": -2014174821,
       "kind": "method",
       "name": "checkUsername",
       "params": [],
@@ -32573,6 +32763,22 @@
       "source": "sources/org/telegram/tgnet/tl/TL_bots.java"
     },
     {
+      "id": -54385831,
+      "kind": "method",
+      "name": "editProfileWidgetChatData",
+      "params": [],
+      "result": "Bool",
+      "source": "sources/org/telegram/tgnet/tl/TL_bots.java"
+    },
+    {
+      "id": 905942386,
+      "kind": "method",
+      "name": "editProfileWidgetData",
+      "params": [],
+      "result": "Bool",
+      "source": "sources/org/telegram/tgnet/tl/TL_bots.java"
+    },
+    {
       "id": 1157678373,
       "kind": "method",
       "name": "enableBackup",
@@ -32581,7 +32787,7 @@
       "source": "sources/org/telegram/tgnet/tl/TL_wallet.java"
     },
     {
-      "id": -1123182101,
+      "id": 6533257,
       "kind": "method",
       "name": "exportBotToken",
       "params": [],
@@ -32603,6 +32809,62 @@
       "params": [],
       "result": "secretPhraseParts",
       "source": "sources/org/telegram/tgnet/tl/TL_wallet.java"
+    },
+    {
+      "id": 1299191644,
+      "kind": "method",
+      "name": "feed.dislikePost",
+      "params": [],
+      "result": "Bool",
+      "source": "sources/org/telegram/tgnet/tl/TL_feed.java"
+    },
+    {
+      "id": 2121717715,
+      "kind": "method",
+      "name": "feed.getFeed",
+      "params": [],
+      "result": "FeedMessages",
+      "source": "sources/org/telegram/tgnet/tl/TL_feed.java"
+    },
+    {
+      "id": 867755499,
+      "kind": "method",
+      "name": "feed.getForYou",
+      "params": [],
+      "result": "ForYouFeed",
+      "source": "sources/org/telegram/tgnet/tl/TL_feed.java"
+    },
+    {
+      "id": -1166402118,
+      "kind": "method",
+      "name": "feed.getInterestCategories",
+      "params": [],
+      "result": "InterestCategories",
+      "source": "sources/org/telegram/tgnet/tl/TL_feed.java"
+    },
+    {
+      "id": 457925246,
+      "kind": "method",
+      "name": "feed.likePost",
+      "params": [],
+      "result": "Bool",
+      "source": "sources/org/telegram/tgnet/tl/TL_feed.java"
+    },
+    {
+      "id": -1271479809,
+      "kind": "method",
+      "name": "feed.readFeed",
+      "params": [],
+      "result": "Updates",
+      "source": "sources/org/telegram/tgnet/tl/TL_feed.java"
+    },
+    {
+      "id": -1624680228,
+      "kind": "method",
+      "name": "feed.setInterestCategories",
+      "params": [],
+      "result": "Bool",
+      "source": "sources/org/telegram/tgnet/tl/TL_feed.java"
     },
     {
       "id": -180804145,
@@ -33098,6 +33360,22 @@
       "source": "sources/org/telegram/tgnet/tl/TL_account.java"
     },
     {
+      "id": 1923143539,
+      "kind": "method",
+      "name": "getProfileWidgetPublicData",
+      "params": [],
+      "result": "messages.WidgetPublicData",
+      "source": "sources/org/telegram/tgnet/tl/TL_bots.java"
+    },
+    {
+      "id": -2055962508,
+      "kind": "method",
+      "name": "getProfileWidgetQueryAnswer",
+      "params": [],
+      "result": "messages.botWidgetQueryAnswer",
+      "source": "sources/org/telegram/tgnet/tl/TL_bots.java"
+    },
+    {
       "id": 539354775,
       "kind": "method",
       "name": "getProofChallenge",
@@ -33133,6 +33411,14 @@
       "id": 2053087798,
       "kind": "method",
       "name": "getResaleStarGifts",
+      "params": [],
+      "result": "resaleStarGifts",
+      "source": "sources/org/telegram/tgnet/tl/TL_stars.java"
+    },
+    {
+      "id": 1831727789,
+      "kind": "method",
+      "name": "getResaleStarGiftsMerged",
       "params": [],
       "result": "resaleStarGifts",
       "source": "sources/org/telegram/tgnet/tl/TL_stars.java"
@@ -33192,6 +33478,14 @@
       "params": [],
       "result": "payments.savedStarGifts",
       "source": "sources/org/telegram/tgnet/tl/TL_stars.java"
+    },
+    {
+      "id": -1487040261,
+      "kind": "method",
+      "name": "getStakingInfo",
+      "params": [],
+      "result": "walletStakingInfo",
+      "source": "sources/org/telegram/tgnet/tl/TL_wallet.java"
     },
     {
       "id": -1513074355,
@@ -35178,9 +35472,14 @@
       "id": 998051494,
       "kind": "method",
       "name": "messages.getFutureChatCreatorAfterLeave",
-      "params": [],
+      "params": [
+        {
+          "name": "peer",
+          "type": "InputPeer"
+        }
+      ],
       "result": "User",
-      "source": "sources/org/telegram/tgnet/TLRPC.java"
+      "source": "core.telegram.org/schema/json"
     },
     {
       "id": -400399203,
@@ -35567,6 +35866,14 @@
       "source": "sources/org/telegram/tgnet/TLRPC.java"
     },
     {
+      "id": 1981488243,
+      "kind": "method",
+      "name": "messages.getShareTheme",
+      "params": [],
+      "result": "ShareTheme",
+      "source": "sources/org/telegram/tgnet/TLRPC.java"
+    },
+    {
       "id": -195453198,
       "kind": "method",
       "name": "messages.getShareThemeBackdrops",
@@ -35942,6 +36249,14 @@
       "source": "sources/org/telegram/tgnet/TLRPC.java"
     },
     {
+      "id": -459090480,
+      "kind": "method",
+      "name": "messages.reportFeedEvents",
+      "params": [],
+      "result": "Bool",
+      "source": "sources/org/telegram/tgnet/TLRPC.java"
+    },
+    {
       "id": 1517122453,
       "kind": "method",
       "name": "messages.reportMessagesDelivery",
@@ -35970,6 +36285,14 @@
       "id": -574826471,
       "kind": "method",
       "name": "messages.reportMusicListen",
+      "params": [],
+      "result": "Bool",
+      "source": "sources/org/telegram/tgnet/TLRPC.java"
+    },
+    {
+      "id": -876570693,
+      "kind": "method",
+      "name": "messages.reportNotSpam",
       "params": [],
       "result": "Bool",
       "source": "sources/org/telegram/tgnet/TLRPC.java"
@@ -39737,6 +40060,14 @@
       "source": "core.telegram.org/schema/json"
     },
     {
+      "id": 840788815,
+      "kind": "method",
+      "name": "stake",
+      "params": [],
+      "result": "walletStakingPrepared",
+      "source": "sources/org/telegram/tgnet/tl/TL_wallet.java"
+    },
+    {
       "id": -798372642,
       "kind": "method",
       "name": "startLive",
@@ -40669,6 +41000,14 @@
       "source": "sources/org/telegram/tgnet/tl/TL_account.java"
     },
     {
+      "id": -194034900,
+      "kind": "method",
+      "name": "unstake",
+      "params": [],
+      "result": "walletStakingPrepared",
+      "source": "sources/org/telegram/tgnet/tl/TL_wallet.java"
+    },
+    {
       "id": 1582455222,
       "kind": "method",
       "name": "updateAlbum",
@@ -41190,14 +41529,14 @@
     "max_definition_removal_ratio": 0.1
   },
   "sha256": {
-    "tl": "9654fc1601500b796574194986dc1dad425e580799cdb2f71222082b9504a7ca"
+    "tl": "1f921a78c8d07da1b5c7f0b60b2c78ab31916f3c2a75e87797b1792be6c5803f"
   },
   "source": {
     "apk": "https://cdn4.telesco.pe/file/Telegram-Beta.apk",
-    "apk_sha256": "bf9a95053874f11aa1be0c303bb750f69b3781b32f05bbeaad9c755e48de8168",
+    "apk_sha256": "a5d3c4520d0c7b9f079360d6bd346dae0de2df102b839df4ed44bff3b57bc373",
     "jadx": "https://github.com/skylot/jadx/releases/download/v1.5.6/jadx-1.5.6.zip",
     "package": "org.telegram.messenger.beta",
-    "version_code": 73579,
-    "version_name": "13.3.2"
+    "version_code": 73709,
+    "version_name": "13.4.0"
   }
 }

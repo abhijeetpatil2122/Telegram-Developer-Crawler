@@ -16,8 +16,8 @@
   "source_repository": "https://github.com/telegramdesktop/tdesktop",
   "upstream": {
     "branch": "dev",
-    "commit": "1fdd0ea143accc8b5d917e95144cfc5f73e06395",
-    "commit_url": "https://github.com/telegramdesktop/tdesktop/commit/1fdd0ea143accc8b5d917e95144cfc5f73e06395",
-    "message": "Copy stream parameters only when a software fallback needs them"
+    "commit": "85d55638476185e9af32aac888371ef9da06cfb9",
+    "commit_url": "https://github.com/telegramdesktop/tdesktop/commit/85d55638476185e9af32aac888371ef9da06cfb9",
+    "message": "Version 7.4.7."
   }
 }
