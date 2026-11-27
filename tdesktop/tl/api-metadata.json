@@ -16,8 +16,8 @@
   "source_repository": "https://github.com/telegramdesktop/tdesktop",
   "upstream": {
     "branch": "dev",
-    "commit": "85d55638476185e9af32aac888371ef9da06cfb9",
-    "commit_url": "https://github.com/telegramdesktop/tdesktop/commit/85d55638476185e9af32aac888371ef9da06cfb9",
-    "message": "Version 7.4.7."
+    "commit": "fca0d08b6852df2195e11db91f7a4e3be2cbc4a4",
+    "commit_url": "https://github.com/telegramdesktop/tdesktop/commit/fca0d08b6852df2195e11db91f7a4e3be2cbc4a4",
+    "message": "Fix crash on Escape while attach menu is open"
   }
 }
