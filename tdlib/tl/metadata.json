@@ -16,8 +16,8 @@
   "source_repository": "https://github.com/tdlib/td",
   "upstream": {
     "branch": "master",
-    "commit": "e7ac61dd69409c31b3c8c7367b33b07eecce701f",
-    "commit_url": "https://github.com/tdlib/td/commit/e7ac61dd69409c31b3c8c7367b33b07eecce701f",
-    "message": "Add PqFactorizeBench."
+    "commit": "fb93d53452290a7d3baa471e0e527e2a81e3411d",
+    "commit_url": "https://github.com/tdlib/td/commit/fb93d53452290a7d3baa471e0e527e2a81e3411d",
+    "message": "Don't use files_ iterator after register_file_info in add_file_info."
   }
 }

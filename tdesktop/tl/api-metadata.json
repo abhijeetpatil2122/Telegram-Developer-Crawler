@@ -16,8 +16,8 @@
   "source_repository": "https://github.com/telegramdesktop/tdesktop",
   "upstream": {
     "branch": "dev",
-    "commit": "fca0d08b6852df2195e11db91f7a4e3be2cbc4a4",
-    "commit_url": "https://github.com/telegramdesktop/tdesktop/commit/fca0d08b6852df2195e11db91f7a4e3be2cbc4a4",
-    "message": "Fix crash on Escape while attach menu is open"
+    "commit": "f799b4f5261d82b36e64f1984f9527d305ec0f79",
+    "commit_url": "https://github.com/telegramdesktop/tdesktop/commit/f799b4f5261d82b36e64f1984f9527d305ec0f79",
+    "message": "Handle missing video draft source when opening the editor"
   }
 }
